@@ -4,5 +4,8 @@
 .DS_Store
 21sh
 logs/*
-todo/*
-*.todo
+
+## To be Uncommented for 42 -> down
+#todo/*
+#*.todo
+#res/*
