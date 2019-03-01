@@ -1,0 +1,8 @@
+*.[ao]
+*~
+*.swp
+.DS_Store
+21sh
+logs/*
+todo/*
+*.todo
