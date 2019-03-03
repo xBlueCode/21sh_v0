@@ -1,5 +1,35 @@
 
 
+Abbreviation:
+===================
+Lexer
+	- x:		lex (prefix)
+	- tk:		token
+	- ts:		token_state (TS::prefix in enum)
+			- G:	greater '>'
+			- L:	less '<'
+			- E:	equal '='
+			- A:	and '&'
+			- O:	or '|'
+			- P:	plus '+'
+			- M:	minus(dash) '-'
+			- N:	not '!'
+			- D:	dollar sign '$'
+			- SC:	semi-colon ';'
+			- PL:	left parentheses '('
+			- PR:	right parenthese ')'
+			- CBL:	left parentheses '{'
+			- CBR:	right parenthese '}'
+			- BL:	left parentheses '['
+			- BR:	right parenthese ']'
+			- NL:	newline '\ni'
+			- SQ:	single quote '\''
+			- DQ:	double quote '\"'
+			- SH:	slash '/'
+			- BSH:	back-slach '\\'
+			- AES:	star (aestrick)
+			- 
+
 token:
 	- type: enum
 	- beg_i: int
