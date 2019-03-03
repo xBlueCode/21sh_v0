@@ -1,0 +1,8 @@
+cd
+echo Hello
+echo Hello world
+echo Hello > file
+echo Hello >>   file
+echo Hello | cat
+echo Hello && pwd
+echo Hello || pwd

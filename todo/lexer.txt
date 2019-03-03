@@ -1,0 +1,7 @@
+
+
+Tests (Tokenizer):
+
+echo Hello
+echo Hello > cat
+echo Hello >> cat

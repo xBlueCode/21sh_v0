@@ -6,7 +6,7 @@
 #    By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/27 14:30:39 by abbesbes          #+#    #+#              #
-#    Updated: 2019/03/03 13:21:15 by abbesbes         ###   ########.fr        #
+#    Updated: 2019/03/03 17:46:06 by abbesbes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ C_YLW = \033[33m
 C_BLU = \033[34m
 C_END = \033[0m
 
-LEXER := 
+LEX := 
 
-SRC_FILES := $(addprefix lexer/,  $(LEXER)) \
+SRC_FILES := $(addprefix lex/,  $(LEX)) \
 
 SRC_DIR := ./src/
 SRC := $(addprefix $(SRC_DIR), $(SRC_FILES))

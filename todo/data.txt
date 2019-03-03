@@ -28,7 +28,8 @@ Lexer
 			- SH:	slash '/'
 			- BSH:	back-slach '\\'
 			- AES:	star (aestrick)
-			- 
+			- T:	tilde '~'
+			- AT:	at-sign '@'
 
 token:
 	- type: enum

@@ -1,27 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   ft_lex.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/03 13:32:18 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/03 14:22:57 by abbesbes         ###   ########.fr       */
+/*   Created: 2019/03/03 17:48:25 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/03/03 21:04:48 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef FT_LEX_H
+# define FT_LEX_H
+
+# define XTK_START_GL		"><=!&|"
+# define XTK_START_ENAO		"><=!&|"
+# define XTK_START_ARITH	"+-*%/"
+# define XTK_START_PONCT	"\\$;\n"
+# define XTK_START_CLOSURE	"([{)]}"
+# define XTK_START_QUOTE	"\"\'`"
+
+# define XTK_ISWS(ch)		(ch == ' ' || ch == '\t')
 
 typedef enum		e_token_state
 {
+	TSSTART,
+	TSSTOP,
+	TSCONT,
+	TSSEP,
+	TSWS,
+
 	TSG,
 	TSL,
 	TSE,
+	TSN,
 	TSA,
 	TSO,
+	TSP,
 	TSM,
-	TSN,
+	TSAES,
+	TMOD,
+	TSSH,
+	TSBSH,
 	TSD,
 	TSSC,
 	TSPL,
@@ -33,33 +53,44 @@ typedef enum		e_token_state
 	TSNL,
 	TSSQ,
 	TSDQ,
-	TSSH,
-	TSBSH,
-	TSAES,
+	TSIQ,
 
 	TSG2,
 	TSG_E,
 	TSG_A,
 	TSG_O,
-		
+
 	TSL_G,
 	TSL2,
 	TSL2_M,
-	TSG_E,
-	TSG_A,
-	TSG_O,
+	TSL_E,
+	TSL_A,
+	TSL_O,
+
+	TSE2,
+
+	TSN_E,
 
 	TSA_G,
 	TSA2,
 
 	TSO2,
 
+	TSP2,
+	TSP_E,
+	TSM2,
+	TSM_E,
+
+	TSAES_E,
+	TSMOD_E,
+	TSSH_E,
+
 	TSMp,
 
 	TSD_PL,
 	TSD_PL2,
 	TSD_CBL,
-
+	
 	TSSC2,
 
 	TSPL2,
