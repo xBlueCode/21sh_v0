@@ -6,7 +6,7 @@
 #    By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/27 14:30:39 by abbesbes          #+#    #+#              #
-#    Updated: 2019/03/03 17:46:06 by abbesbes         ###   ########.fr        #
+#    Updated: 2019/03/04 16:49:54 by abbesbes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ C_YLW = \033[33m
 C_BLU = \033[34m
 C_END = \033[0m
 
-LEX := 
+LEX := lex_token_start_arith.c lex_token_start_closure.c \
+	lex_token_start_enao.c lex_token_start_gl.c lex_token_start_ponct.c \
+	lex_tokenizer.c
 
 SRC_FILES := $(addprefix lex/,  $(LEX)) \
 

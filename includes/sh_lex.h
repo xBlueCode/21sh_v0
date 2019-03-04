@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lex.h                                           :+:      :+:    :+:   */
+/*   sh_lex.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/03 17:48:25 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/03 21:04:48 by abbesbes         ###   ########.fr       */
+/*   Created: 2019/03/04 16:53:18 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/03/04 20:32:15 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,22 @@ typedef enum		e_token_state
 	TSP,
 	TSM,
 	TSAES,
-	TMOD,
+	TSMOD,
 	TSSH,
 	TSBSH,
 	TSD,
 	TSSC,
+	TSNL,
 	TSPL,
 	TSPR,
 	TSBL,
 	TSBR,
 	TSCBL,
 	TSCBR,
-	TSNL,
 	TSSQ,
 	TSDQ,
-	TSIQ,
+	TSBQ,
+	TSW,
 
 	TSG2,
 	TSG_E,
@@ -90,10 +91,16 @@ typedef enum		e_token_state
 	TSD_PL,
 	TSD_PL2,
 	TSD_CBL,
-	
-	TSSC2,
 
+	TSSC2,
+	
 	TSPL2,
+	TSPR2,
+
+	TSESC,
+	TSWSQ,
+	TSWDQ,
+	TSWBQ,
 }					t_token_state;
 
 typedef struct		s_token
@@ -101,5 +108,22 @@ typedef struct		s_token
 	int		ts;
 	char	*xme;
 }					t_token;
+
+t_list	*x_tokenize(char *in);
+int		xtk_recognize(char *in, int off, t_list	**tklist);
+int		xtk_add(t_list **tklist, int ts, char *xme);
+
+int		xtk_start_arith(char *in, int off, t_list **tklist);
+int		xtk_start_closure(char *in, int off, t_list **tklist);
+int		xtk_start_enao(char *in, int off, t_list **tklist);
+int		xtk_start_gl(char *in, int off, t_list **tklist);
+int		xtk_start_g(char *in, int off, t_list **tklist);
+int		xtk_start_l(char *in, int off, t_list **tklist);
+int		xtk_start_ponct(char *in, int off, t_list **tklist);
+int		xtk_start_esc(char *in, int off, t_list **tklist);
+
+int		xtk_start_quote(char *in, int off, t_list **tklist);
+int		xtk_start_squote(char *in, int off, t_list **tklist);
+int		xtk_start_dquote(char *in, int off, t_list **tklist);
 
 #endif
