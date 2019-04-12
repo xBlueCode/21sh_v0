@@ -5,6 +5,7 @@
 21sh
 logs/*
 *.zip
+.idea*
 
 ## To be Uncommented for 42 -> down
 #todo/*

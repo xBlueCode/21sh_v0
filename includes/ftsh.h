@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ftsh.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/15 18:50:44 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/27 16:47:08 by abbesbes         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FTSH_H
 # define FTSH_H
 
@@ -24,6 +12,7 @@
 # include "sh_term.h"
 # include "ft_rl.h"
 # include "sh_lex.h"
+# include "sh_glob.h"
 # include "sh_utils.h"
 
 # define TEST_LEAKS 0

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sh_readline.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/17 11:27:25 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/04/06 11:51:38 by abbesbes         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FT_RL_H
 # define FT_RL_H
 
@@ -126,6 +114,11 @@ int			rl_autoc_cxt_get(const char *line, ssize_t pos);
 int			rl_autoc_isdelim(int c);
 int			rl_autoc_cxt_isbin(int c);
 int			rl_autoc_get_cw(char *line, ssize_t pos, ssize_t *ilen);
+
+t_dastr		*rl_autoc_match(char *w, int cxt);
+t_dastr		*rl_autoc_match_glob(char *w);
+
+char		*rl_autoc_menu(t_dastr *res);
 
 int			rl_cur_fromto(int from, int to);
 

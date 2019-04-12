@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/27 14:30:39 by abbesbes          #+#    #+#              #
-#    Updated: 2019/04/08 14:01:02 by abbesbes         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = 21sh
 
 TEST_LOG = test_log
@@ -19,7 +7,7 @@ LIBFT := $(addprefix $(LIBFT_DIR), libft.a)
 INC_DIR = $(LIBFT_DIR)includes/ ./includes/
 
 CC = gcc
-CC_FLAGS = -W -Wall -Werror -Wextra
+CC_FLAGS = #-W -Wall -Werror -Wextra
 
 T_BLK = \033[5m
 T_NRM = \033[25m
@@ -46,9 +34,9 @@ READLINE := rl.c rl_scope.c  rl_scope_scan.c \
 	rl_utils.c \
 	rl_cur.c \
 	rl_put.c \
-	rl_autoc.c rl_autoc_utils.c
+	rl_autoc.c rl_autoc_utils.c rl_autoc_match.c rl_autoc_menu.c
 
-GLOB := rl_glob_match.c
+GLOB := sh_glob.c sh_glob_match.c
 
 #LEX := lex_token_start_arith.c lex_token_start_closure.c \
 	lex_token_start_enao.c lex_token_start_gl.c lex_token_start_ponct.c \
@@ -60,8 +48,8 @@ SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
 	$(addprefix term/,  $(TERM)) \
 	$(addprefix prompt/,  $(PROMPT)) \
 	$(addprefix readline/,  $(READLINE)) \
-	$(addprefix glob/,  $(GLOB)) \
 	$(addprefix utils/,  $(UTILS)) \
+	$(addprefix glob/,  $(GLOB)) \
 
 SRC_DIR := ./src/
 SRC := $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -79,7 +67,7 @@ $(NAME): $(LIBFT)
 	@make $(OBJ)
 	@echo "\033[1A$(T_CLR)$(C_LGRN)➜ [$(NAME)] Objects have been compiled successfully ! $(C_END)"
 	@$(CC) $(CC_FLAGS) $(OBJ) $(LIBFT) -ltermcap -o $(NAME)
-	@echo "$(C_LGRN)➜ [$(NAME)] The program $(C_LBLU)$(NAME)$(C_GRN)\
+	@echo "$(C_LGRN)➜ [$(NAME)] The program $(C_LBLU)$(NAME)$(C_LGRN)\
 	 has been Compiled Successfully !$(C_END)"
 
 $(OBJ): %.o: %.c  $(LIBFT)
