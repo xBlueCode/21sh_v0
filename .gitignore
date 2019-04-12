@@ -4,6 +4,7 @@
 .DS_Store
 21sh
 logs/*
+*.zip
 
 ## To be Uncommented for 42 -> down
 #todo/*

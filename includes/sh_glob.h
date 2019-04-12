@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_test.c                                         :+:      :+:    :+:   */
+/*   sh_glob.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 17:16:31 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/07 17:04:56 by abbesbes         ###   ########.fr       */
+/*   Created: 2019/04/08 14:03:57 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/04/08 14:07:17 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "sh_lex.h"
+#ifndef SH_GLOB_H
+# define SH_GLOB_H
 
-int		main(void)
-{
-	//ft_printf("Testing lex ... !\n");
-	if (!(x_tokenize("> \"Hello \\$ \\`ERR\\\">\\\"\"", 1)))
-		ft_printf("NULL TKLIST !!!\n");
-	return (0);
-}
+int     sh_glob_match(char *str, char *pat);
+int     sh_glob_match_range(int c, char *ran);
+
+#endif

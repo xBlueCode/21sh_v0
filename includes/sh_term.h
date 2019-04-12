@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_test.c                                         :+:      :+:    :+:   */
+/*   sh_term.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 17:16:31 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/07 17:04:56 by abbesbes         ###   ########.fr       */
+/*   Created: 2019/03/17 11:28:23 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/03/17 12:38:17 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "sh_lex.h"
+#ifndef SH_TERM_H
+# define SH_TERM_H
 
-int		main(void)
+# define TER_DEF "xterm-256color"
+
+typedef struct	s_term
 {
-	//ft_printf("Testing lex ... !\n");
-	if (!(x_tokenize("> \"Hello \\$ \\`ERR\\\">\\\"\"", 1)))
-		ft_printf("NULL TKLIST !!!\n");
-	return (0);
-}
+	int					winw;
+	int					winh;
+	int					prompt_len;
+	struct termios		tconfig_def;
+}				t_term;
+
+int				sh_termconfig_init(void);
+int				sh_termconfig_reset(void);
+
+#endif

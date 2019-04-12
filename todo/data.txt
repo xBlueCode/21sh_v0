@@ -43,7 +43,7 @@ dynamic str
 -----------------------------
 struct: dstr
 	char	*str;
-	ssize_t	max_len;
+	ssize_t	max;
 
 func:
 	ssize_t		get_maxlen
@@ -73,39 +73,42 @@ func:
 	int			ft_del
 
 -----------------------------
-dynamic text area
+dynamic array of strings
 -----------------------------
-struct: d_textarea :: t_dta
+struct: t_dastr :: t_dastr
 	t_dstr	**txt;
 	ssize_t	max_lines;
-	ssize_t	cc;
-	ssize_t	cl;
 
 func:
-	int			ft_dta_new(ssize_t max_lines)
-	t_dta		*ft_dta_dup(t_dta *dta)
-	t_dta		*ft_dta_dup_free(t_dta *dta)
+	int			ft_dastr_new(ssize_t max_lines)
+	t_dastr		*ft_dastr_dup(t_dastr *dastr)
+	t_dastr		*ft_dastr_dup_free(t_dastr *dastr)
 
-	t_dstr		*ft_dta_get_line(ssize_t il)
+	t_dstr		*ft_dastr_get_line(ssize_t il)
 		:: (il == -1)==> get last line
 		:: (il == -2)==> get current line
 		:: (il >= max_lines)=> NULL
 
-	int			ft_dta_ins_str(t_dta *dta, ssize_t i, char *str)
-	int			ft_dta_ins_str_free(t_dta *dta, ssize_t i, char **str)
+	int			ft_dastr_ins_str(t_dastr *dastr, ssize_t i, char *str)
+	int			ft_dastr_ins_str_free(t_dastr *dastr, ssize_t i, char **str)
 		:: affect on cc
 
-	int			ft_dta_ins_dstr(t_dta *dta, ssize_t i, t_dstr *dstr)
-	int			ft_dta_ins_dstr_free(t_dta *dta, ssize_t i, t_dstr **dstr)
-		:: affect on cl
-	
-	int			ft_dta_ins_dstrs(t_dta *dta, ssize_t i, t_dstr **dstrs, ssize_t n)
-	int			ft_dta_ins_dstrs_free(t_dta *dta, ssize_t i, t_dstr ***dstr, ssize_t n)
+	int			ft_dastr_ins_dstr(t_dastr *dastr, ssize_t i, t_dstr *dstr)
+	int			ft_dastr_ins_dstr_free(t_dastr *dastr, ssize_t i, t_dstr **dstr)
 		:: affect on cl
 
-	int			ft_dta_del_n(t_dta *dta, ssize_t i, ssize_t n)
+	int			ft_dastr_ins_dstrs(t_dastr *dastr, ssize_t i, t_dstr **dstrs, ssize_t n)
+	int			ft_dastr_ins_dstrs_free(t_dastr *dastr, ssize_t i, t_dstr ***dstr, ssize_t n)
+		:: affect on cl
+
+	int			ft_dastr_del_n(t_dastr *dastr, ssize_t i, ssize_t n)
 		:: affect on cl
 		:: deletes n line starting from i
 		:: re-arrange string if necessary
 
-	int			ft_dta_
+-----------------------------
+dynamic array of strings
+-----------------------------
+struct: t_dta :: t_dta
+	t_dstr	**txt;
+	ssize_t	max_lines;

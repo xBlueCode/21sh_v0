@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_test.c                                         :+:      :+:    :+:   */
+/*   sh_prompt.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 17:16:31 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/07 17:04:56 by abbesbes         ###   ########.fr       */
+/*   Created: 2019/03/17 11:27:48 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/03/17 14:16:58 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "sh_lex.h"
+#ifndef SH_PROMPT_H
+# define SH_PROMPT_H
 
-int		main(void)
-{
-	//ft_printf("Testing lex ... !\n");
-	if (!(x_tokenize("> \"Hello \\$ \\`ERR\\\">\\\"\"", 1)))
-		ft_printf("NULL TKLIST !!!\n");
-	return (0);
-}
+# define INSIZE 64
+# define PROMPT_CURSOR " $> "
+
+# define CHQ1 '\''
+# define CHQ2 '\"'
+
+# define PROMPT_FPATH 0
+# define PROMPT_LOGIN 1
+
+# define IS_QUOTE(c) (c == '\'' || c == '\"')
+
+void		prompt_display(void);
+
+#endif

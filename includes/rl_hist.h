@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_test.c                                         :+:      :+:    :+:   */
+/*   rl_hist.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 17:16:31 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/07 17:04:56 by abbesbes         ###   ########.fr       */
+/*   Created: 2019/04/02 17:09:26 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/04/02 17:10:59 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "sh_lex.h"
+#ifndef FT_RL_H
+# define FT_RL_H
 
-int		main(void)
+# include <libft.h>
+
+typedef struct		s_hist
 {
-	//ft_printf("Testing lex ... !\n");
-	if (!(x_tokenize("> \"Hello \\$ \\`ERR\\\">\\\"\"", 1)))
-		ft_printf("NULL TKLIST !!!\n");
-	return (0);
-}
+	t_dastr		*txt;
+}					t_hist;

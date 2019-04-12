@@ -82,3 +82,9 @@ echo $'HOME'
 echo $'HOME'$
 
 echo $"HOME"
+
+cd ~\ "GG `echo hello `"\ ~
+echo ~\ "GG `echo hello `"\ ~
+
+echo hello | cat -e < file1 < file2
+cat file1 | echo
