@@ -119,11 +119,18 @@ t_dastr		*rl_autoc_match(char *w, int cxt);
 t_dastr		*rl_autoc_match_glob(char *w);
 
 char		*rl_autoc_menu(t_dastr *res);
+int			rl_autoc_menu_clear(t_dstr **list, int nl);
+char		*rl_autoc_menu_select(t_dastr *res);
+int			rl_autoc_menu_putlist(t_dstr **list);
+int			rl_autoc_menu_move(t_dstr **list, int *curl, int action);
 
 int			rl_cur_fromto(int from, int to);
+int			rl_cur_move(int from, int to, int plen);
 
 int			rl_putstr_wrap(char *str, ssize_t cc);
 int			rl_putnchar_wrap(char c, int n, ssize_t cc);
+int			rl_putstr_wrapx(char *str, ssize_t cc, int plen);
+int			rl_putnchar_wrapx(char c, int n, ssize_t cc, int plen);
 
 int			rl_tputsn(char *param, int n);
 

@@ -16,8 +16,16 @@ int				rl_autoc(int c)
 	cw = ft_strndup(dline->str + ilen[0], ilen[1]);
 	cxt = rl_autoc_cxt_get(dline->str, ilen[0]);
 	if ((picked = rl_autoc_menu(rl_autoc_match(cw, cxt))))
-		ft_printf("Picked: %s\n", picked);
-	ft_printf("\nCW: _%s_\t\tCXT: %d\n", cw, cxt);
+	{
+		rl_cur_fromto(g_rl.cc, ilen[0]);
+		g_rl.cc = ilen[0];
+		ft_dstrdel_n(dline, g_rl.cc, ilen[1]);
+		ft_dstrins_str(dline, g_rl.cc, picked);
+		rl_putstr_wrap(dline->str, g_rl.cc);
+		g_rl.cc += ft_strlenz(picked);
+		rl_cur_fromto(ft_strlenz(dline->str), g_rl.cc);
+	}
+	//ft_printf("\nCW: _%s_\t\tCXT: %d\n", cw, cxt);
 	return (1);
 }
 
