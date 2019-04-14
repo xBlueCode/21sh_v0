@@ -30,11 +30,12 @@ READLINE := rl.c rl_scope.c  rl_scope_scan.c \
 	rl_scope_scan_q.c rl_scope_scan_s.c \
 	rl_ctrl.c rl_ctrl_move.c rl_ctrl_jump.c rl_ctrl_kill.c rl_ctrl_kill_w.c\
 	rl_ctrl_save.c rl_ctrl_paste.c rl_ctrl_reg.c\
-	rl_edit.c \
+	rl_edit.c rl_edit_utils.c\
 	rl_utils.c \
 	rl_cur.c \
 	rl_put.c \
-	rl_autoc.c rl_autoc_utils.c rl_autoc_match.c rl_autoc_menu.c
+	rl_autoc.c rl_autoc_utils.c rl_autoc_match.c \
+	rl_autoc_menu.c rl_autoc_xmenu.c rl_autoc_xmenu_move.c
 
 GLOB := sh_glob.c sh_glob_match.c
 

@@ -15,7 +15,7 @@ int				rl_autoc(int c)
 	rl_autoc_get_cw(dline->str, g_rl.cc, ilen);
 	cw = ft_strndup(dline->str + ilen[0], ilen[1]);
 	cxt = rl_autoc_cxt_get(dline->str, ilen[0]);
-	if ((picked = rl_autoc_menu(rl_autoc_match(cw, cxt))))
+	if ((picked = rl_autoc_xmenu(rl_autoc_match(cw, cxt))))
 	{
 		rl_cur_fromto(g_rl.cc, ilen[0]);
 		g_rl.cc = ilen[0];

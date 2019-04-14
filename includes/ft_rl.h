@@ -14,6 +14,8 @@
 # define RL_TPUTS(str) tputs(tgetstr(str, NULL), 1, rl_ter_putchar);
 # define RL_TPUTS_GO(str, x, y) tputs(tgoto(tgetstr(str, NULL), x, y), 1, rl_ter_putchar)
 
+# define RL_PUTSTR_STY(style, inst) {ft_putstr(style); inst; ft_putstr(T_END);}
+
 typedef enum	e_rl_scope
 {
 	RL_SCP_NONE = 0,
@@ -124,13 +126,24 @@ char		*rl_autoc_menu_select(t_dastr *res);
 int			rl_autoc_menu_putlist(t_dstr **list);
 int			rl_autoc_menu_move(t_dstr **list, int *curl, int action);
 
+char		*rl_autoc_xmenu(t_dastr *res);
+int			rl_autoc_xmenu_clear(int i);
+char		*rl_autoc_xmenu_select(t_dastr *res);
+int			rl_autoc_xmenu_putlist(t_dstr **list, int curl);
+int			rl_autoc_xmenu_move_do(t_dstr **list, int *curl, int nl);
+int			rl_autoc_xmenu_move_up(t_dstr **list, int *curl, int nl);
+
 int			rl_cur_fromto(int from, int to);
 int			rl_cur_move(int from, int to, int plen);
 
 int			rl_putstr_wrap(char *str, ssize_t cc);
 int			rl_putnchar_wrap(char c, int n, ssize_t cc);
 int			rl_putstr_wrapx(char *str, ssize_t cc, int plen);
+int			rl_putstr_nowrapx(char *str, ssize_t cc, int plen);
 int			rl_putnchar_wrapx(char c, int n, ssize_t cc, int plen);
+
+
+int			rl_get_header(void);
 
 int			rl_tputsn(char *param, int n);
 
