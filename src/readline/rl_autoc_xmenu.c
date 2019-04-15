@@ -6,11 +6,13 @@ char			*rl_autoc_xmenu(t_dastr *res)
 {
 	t_dstr	*dline;
 	char	*picked;
-//	int		i;
+//	int		nl;
 	int		slen;
 
 	//ft_printf("\nxmenu\n");
 	if (!res || !ft_arr_len((void**)res->a))
+		return (NULL);
+	if (g_rl.wl - rl_get_header() < 2)
 		return (NULL);
 	dline = g_rl.txt->a[g_rl.cl];
 	rl_cur_fromto(g_rl.cc, ft_strlenz(dline->str));
