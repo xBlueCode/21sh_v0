@@ -77,19 +77,16 @@ int				rl_autoc_xmenu_putlist(t_dstr **list, int curl)
 		return (1);
 	llen = ft_arr_len((void**)list);
 	nl = g_rl.wl - rl_get_header();
-	page = !curl || llen <= nl ? 0 : curl / nl + (curl % nl ? 1 : 0);
+	page = (curl + 1) / nl + ((curl + 1) % nl ? 1 : 0) - 1;
 	i = page * nl;
-	//curl = curl % nl;
-	//ft_printf("\nxmenu_putlist: nl<%d> page<%d> header<%d>\n", nl, page, rl_get_header());
 	while (i < ((page + 1) * nl) && list[i])
 	{
 		rl_putstr_nowrapx(list[i++]->str, 0, 0);
 		if (i < ((page + 1) * nl) && list[i])
 			ft_putchar('\n');
 	}
-	//sleep(1);
 	RL_TPUTS("cr");
-	if (curl + 1 < i)
+	if (curl + 1 < i && curl % nl == 0)
 		RL_TPUTS_GO("UP", (i - curl - 1) % nl, (i - curl - 1) % nl);
 	ft_putstr(T_REV);
 	rl_putstr_nowrapx(list[curl]->str, 0, 0);

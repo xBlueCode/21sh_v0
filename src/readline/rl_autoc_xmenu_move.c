@@ -17,7 +17,6 @@ int				rl_autoc_xmenu_move_do(t_dstr **list, int *curl, int nl)
 		rl_putstr_nowrapx(list[*curl]->str, 0, 0);
 		ft_putchar('\n');
 		RL_PUTSTR_STY(T_REV, rl_putstr_nowrapx(list[++(*curl)]->str, 0, 0));
-		//ft_putstr("DOWN");
 	}
 	else
 	{
@@ -44,12 +43,11 @@ int				rl_autoc_xmenu_move_up(t_dstr **list, int *curl, int nl)
 		RL_TPUTS("cr");
 		RL_TPUTS("up");
 		RL_PUTSTR_STY(T_REV, rl_putstr_nowrapx(list[--(*curl)]->str, 0, 0));
-		//ft_putstr("DOWN");
 	}
 	else
 	{
 		rl_autoc_xmenu_clear(0);
-		*curl = !*curl ? llen - 1 : (*curl - 1);
+		*curl = !(*curl) ? llen - 1 : (*curl - 1);
 		rl_autoc_xmenu_putlist(list, *curl);
 	}
 	return (0);
