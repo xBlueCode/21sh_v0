@@ -6,7 +6,7 @@ char			*rl_autoc_xmenu(t_dastr *res)
 {
 	t_dstr	*dline;
 	char	*picked;
-	int		i;
+//	int		i;
 	int		slen;
 
 	//ft_printf("\nxmenu\n");
@@ -24,7 +24,7 @@ char			*rl_autoc_xmenu(t_dastr *res)
 
 int				rl_autoc_xmenu_clear(int i)
 {
-	int		slen;
+//	int		slen;
 
 	if (i < 0)
 		return (0);

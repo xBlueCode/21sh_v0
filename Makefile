@@ -7,7 +7,7 @@ LIBFT := $(addprefix $(LIBFT_DIR), libft.a)
 INC_DIR = $(LIBFT_DIR)includes/ ./includes/
 
 CC = gcc
-CC_FLAGS = #-W -Wall -Werror -Wextra
+CC_FLAGS = -W -Wall -Werror -Wextra
 
 T_BLK = \033[5m
 T_NRM = \033[25m

@@ -56,6 +56,7 @@ int				rl_autoc_cxt_get(const char *line, ssize_t pos)
 
 t_dastr		*rl_autoc_match(char *w, int cxt) // replace by array
 {
+	(void)cxt;
     /*
 	if (cxt == RL_CXT_BIN)
 		return (rl_autoc_match_bin(w, cxt));

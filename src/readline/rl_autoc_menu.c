@@ -6,7 +6,7 @@ char			*rl_autoc_menu(t_dastr *res)
 {
 	t_dstr	*dline;
 	char	*picked;
-	int		i;
+//	int		i;
 
 	if (!res || !ft_arr_len((void**)res->a))
 		return (NULL);

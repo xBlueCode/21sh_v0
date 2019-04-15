@@ -31,7 +31,7 @@ int     sh_glob_match(char *str, char *pat)
 int     sh_glob_match_range(int c, char *ran)
 {
 	int i;
-	int class;
+//	int class;
 	int neg;
 
 	if (*ran != '[')
