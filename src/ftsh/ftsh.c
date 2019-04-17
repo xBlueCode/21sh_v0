@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ftsh.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/15 19:06:00 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/17 13:59:35 by abbesbes         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// header
 
 #include "ftsh.h"
 
@@ -31,7 +21,7 @@ int		sh_script_run(char *script)
 
 int		sh_inter_read(char **line)
 {
-	(void)line;
+	//(void)line;
 	//prompt_display();
 	//signal(SIGINT, sighand_parent);
 	//get_inline(line);
@@ -43,8 +33,11 @@ int		sh_inter_run(void)
 {
 	char	*line;
 
-	//sh_history_upload(g_hist.filename);
+	//init_hist
+	//rl_hist_init(".ftsh_history");
+	//rl_hist_upload();
 	sh_termconfig_init();
+	//line = "";
 	while (1)
 	{
 		sh_inter_read(&line);
@@ -57,6 +50,7 @@ int		sh_inter_run(void)
 		//}
 		//ft_memdel((void**)&line);
 	}
+	return (0);
 }
 
 int		main(int ac, char **av, char **envp)

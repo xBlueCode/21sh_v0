@@ -7,7 +7,7 @@ LIBFT := $(addprefix $(LIBFT_DIR), libft.a)
 INC_DIR = $(LIBFT_DIR)includes/ ./includes/
 
 CC = gcc
-CC_FLAGS = -W -Wall -Werror -Wextra
+CC_FLAGS = #-W -Wall -Werror -Wextra
 
 T_BLK = \033[5m
 T_NRM = \033[25m
@@ -35,7 +35,8 @@ READLINE := rl.c rl_scope.c  rl_scope_scan.c \
 	rl_cur.c \
 	rl_put.c \
 	rl_autoc.c rl_autoc_utils.c rl_autoc_match.c \
-	rl_autoc_menu.c rl_autoc_xmenu.c rl_autoc_xmenu_move.c
+	rl_autoc_menu.c rl_autoc_xmenu.c rl_autoc_xmenu_move.c \
+	rl_hist.c rl_hist_io.c
 
 GLOB := sh_glob.c sh_glob_match.c
 

@@ -1,16 +1,13 @@
 #ifndef FT_RL_H
 # define FT_RL_H
 
-# include <libft.h>
+# include "libft.h"
 
 # define RL_SCP_SIZE 1
 
 # define RL_MODE_INS 1
 # define RL_MODE_VIM 2
 
-# define RL_IS_CTRL(c) (c == KLEFT || c == KRIGHT || c == KUP || c == KDOWN || c == KCA || c == KCE)
-
-# define RL_TPUTS_N(str, n) tputs(tgetstr(str, NULL), n, rl_ter_putchar);
 # define RL_TPUTS(str) tputs(tgetstr(str, NULL), 1, rl_ter_putchar);
 # define RL_TPUTS_GO(str, x, y) tputs(tgoto(tgetstr(str, NULL), x, y), 1, rl_ter_putchar)
 
@@ -53,8 +50,6 @@ typedef enum	e_rl_context
 	RL_CXT_VAR, // 2
 	RL_CXT_GLOB // 3
 }				t_rl_context;
-
-void		get_inline(char **line);
 
 void		rl_start(void);
 void		rl_init(void);
