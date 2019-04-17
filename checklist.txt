@@ -1,0 +1,1 @@
+Check libft link & in .gitignore
