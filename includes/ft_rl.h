@@ -51,7 +51,7 @@ typedef enum	e_rl_context
 	RL_CXT_GLOB // 3
 }				t_rl_context;
 
-void		rl_start(void);
+char		*rl_start(void);
 void		rl_init(void);
 void		rl_read(void);
 

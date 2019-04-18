@@ -36,7 +36,7 @@ void		rl_read(void)
 	}
 }
 
-void			rl_start(void)
+char		*rl_start(void)
 {
 	rl_init();
 	while (*g_rl.scope->str)
@@ -54,6 +54,6 @@ void			rl_start(void)
 			ft_putendl("NULL line");
 		ft_putstr(g_rl.txt->a[g_rl.cl]->str);
 	}
-	//return (ft_dstrjoin_all(g_rl.txt->a, " ")->str); // check safety if return NULL
+	return (ft_dstrjoin_all(g_rl.txt->a, "")->str); // check safety if return NULL
 	//return ("no");
 }
