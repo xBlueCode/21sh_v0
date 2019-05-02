@@ -1,1 +1,4 @@
+v 0.06
+	- before rebuilding the structure to add history request
+======
 v 0.05
