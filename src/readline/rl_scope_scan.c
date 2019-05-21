@@ -13,6 +13,8 @@ int			rl_scope_scan(void)
 	{
 		//ft_printf("scope_scanner: %d\n", ft_dstrget_ch(g_rl.scope, -1));
 		g_rl_scope_scanner[ft_dstrget_ch(g_rl.scope, -1)](line, &i);
+		if (!line[i])
+			break;
 		//rl_heredoc_scan(linem &i);
 	}
 	return (0);
@@ -28,6 +30,7 @@ int			rl_scope_scan_none(char *line, ssize_t *pos)
 	while(line[i])
 	{
 		if (rl_scope_scan_escape(line, &i)
+			|| rl_scope_scan_hd(line, &i)
 			|| rl_scope_scan_join(line, &i)
 			|| rl_scope_scan_sq(line, &i)
 			|| rl_scope_scan_dq(line, &i)

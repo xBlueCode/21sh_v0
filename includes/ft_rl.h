@@ -27,6 +27,7 @@ typedef enum	e_rl_scope
 	RL_SCP_PARAM,
 	RL_SCP_SMATH,
 	RL_SCP_SCMD,
+	RL_SCP_HD,
 	RL_SCP_SSH,
 	RL_SCP_MATH
 }				t_rl_scope;
@@ -41,6 +42,7 @@ typedef	struct	s_rl
 	int			wc;
 	int			wl;
 	t_dstr		*scope;
+	t_dastr		*hd;
 	//int			ctx;
 	int			plen;
 	int			mode;
@@ -110,6 +112,7 @@ int			rl_scope_scan_bq(char *line, ssize_t *pos);
 int			rl_scope_scan_smath(char *line, ssize_t *pos);
 int			rl_scope_scan_scmd(char *line, ssize_t *pos);
 int			rl_scope_scan_param(char *line, ssize_t *pos);
+int 		rl_scope_scan_hd(char *line, ssize_t *pos);
 
 int			rl_autoc(int c);
 int			rl_autoc_cxt_get(const char *line, ssize_t pos);
@@ -165,7 +168,8 @@ static t_rl_scope_scanner *g_rl_scope_scanner[] =
 	&rl_scope_scan_bq,
 	&rl_scope_scan_param,
 	&rl_scope_scan_smath,
-	&rl_scope_scan_scmd
+	&rl_scope_scan_scmd,
+	&rl_scope_scan_hd,
 };
 
 static char *g_rl_scope_prompt[] =
@@ -179,7 +183,8 @@ static char *g_rl_scope_prompt[] =
 	"bquote",
 	"braceparam",
 	"mathsubst",
-	"cmdsubst"
+	"cmdsubst",
+	"heredoc"
 };
 
 static int	g_rl_ctrl_keymap[] =
