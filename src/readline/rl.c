@@ -15,6 +15,16 @@ void		rl_init()
 	ft_printf("win %dx%d\n", g_rl.wc, g_rl.wl);
 }
 
+void		rl_reset(t_dastr *txt)
+{
+	if (!txt)
+		return;
+	g_rl.txt = txt; //? ent; // : ft_dastrnew_max(1);
+	g_rl.cl = -1;
+	ft_dstrdel_n(g_rl.scope, 0, g_rl.scope->max);
+	ft_dstrins_ch(g_rl.scope, 0, RL_SCP_START);
+}
+
 void		rl_read(void)
 {
 	t_dstr	*line;
@@ -39,7 +49,7 @@ void		rl_read(void)
 char		*rl_start(void)
 {
 	rl_init();
-	while (*g_rl.scope->str)
+	while (*g_rl.scope->str) //
 	{
 		g_rl.mode = RL_MODE_INS;
 		g_rl.cl++;
@@ -56,4 +66,9 @@ char		*rl_start(void)
 	}
 	return (ft_dstrjoin_all(g_rl.txt->a, "")->str); // check safety if return NULL
 	//return ("no");
+}
+
+t_rl		rl_get(void)
+{
+	return (g_rl);
 }

@@ -9,9 +9,10 @@
 # include <term.h>
 
 # include "sh_prompt.h"
+# include "sh_var.h"
 # include "sh_term.h"
 # include "ft_rl.h"
-# include "rl_hist.h"
+//# include "rl_hist.h"
 # include "sh_lex.h"
 # include "sh_glob.h"
 # include "sh_utils.h"

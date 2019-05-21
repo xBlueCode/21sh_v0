@@ -6,11 +6,25 @@ extern t_rl		g_rl;
 t_dastr			*rl_autoc_match_bin(char *w)
 {
 }
-
+*/
 t_dastr			*rl_autoc_match_var(char *w)
 {
+	t_dastr	*res;
+	t_trow	trow;
+	t_table	*vars;
+	int 	i;
+
+	vars = sh_var();
+	res = ft_dastrnew_max(2);
+	i = -1;
+	while (++i < vars->len)
+	{
+		trow = ft_tabget_i(vars, i);
+		if (!ft_strncmp(trow.name, w, ft_strlenz(w)))
+			ft_dastrins_str(res, -1, trow.name);
+	}
+	return (res);
 }
-*/
 
 t_dastr			*rl_autoc_match_glob(char *w)
 {

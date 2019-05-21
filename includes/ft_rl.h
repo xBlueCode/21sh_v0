@@ -2,6 +2,8 @@
 # define FT_RL_H
 
 # include "libft.h"
+#include "ftsh.h"
+#include "rl_hist.h"
 
 # define RL_SCP_SIZE 1
 
@@ -51,8 +53,11 @@ typedef enum	e_rl_context
 	RL_CXT_GLOB // 3
 }				t_rl_context;
 
+t_rl		rl_get(void);
+
 char		*rl_start(void);
 void		rl_init(void);
+void		rl_reset(t_dastr *ent);
 void		rl_read(void);
 
 int			rl_ctrl_perform(int c);
@@ -93,7 +98,7 @@ int			rl_ctrl_x_lend(int c);
 int			rl_ctrl_x_lbeg(int c);
 
 int			rl_scope_update(void);
-int			rl_scope_prompt(char *);
+int			rl_scope_prompt(char *str);
 
 int			rl_scope_scan(void);
 int			rl_scope_scan_none(char *line, ssize_t *pos);
@@ -114,6 +119,7 @@ int			rl_autoc_get_cw(char *line, ssize_t pos, ssize_t *ilen);
 
 t_dastr		*rl_autoc_match(char *w, int cxt);
 t_dastr		*rl_autoc_match_glob(char *w);
+t_dastr		*rl_autoc_match_var(char *w);
 
 char		*rl_autoc_menu(t_dastr *res);
 int			rl_autoc_menu_clear(t_dstr **list, int nl);
@@ -224,6 +230,8 @@ static int	g_rl_vim_keymap[] =
 	'f',
 	'i',
 	'w',
+	'h',
+	'n',
 	('d' << 8) | ']', // 6
 	('d' << 8) | '[',
 	('d' << 8) | ')',
@@ -274,6 +282,8 @@ static t_rl_ctrl_action *g_rl_vim_action[] =
 	&rl_ctrl_jump_w_next_end,
 	&rl_mode_toggle,
 	&rl_ctrl_jump_w_next_beg,
+	&rl_hist_req_up,
+	&rl_hist_req_do,
 	&rl_ctrl_kill_before, // 06
 	&rl_ctrl_kill_after,
 	&rl_ctrl_kill_w_before,

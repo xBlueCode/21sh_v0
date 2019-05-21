@@ -22,6 +22,8 @@ C_END = \033[0m
 
 FTSH := ftsh.c
 
+VAR := sh_var.c sh_var_utils.c
+
 TERM := term_config.c
 
 PROMPT := prompt.c
@@ -36,17 +38,18 @@ READLINE := rl.c rl_scope.c  rl_scope_scan.c \
 	rl_put.c \
 	rl_autoc.c rl_autoc_utils.c rl_autoc_match.c \
 	rl_autoc_menu.c rl_autoc_xmenu.c rl_autoc_xmenu_move.c \
-	rl_hist.c rl_hist_io.c
+	rl_hist.c rl_hist_io.c rl_hist_request.c
 
 GLOB := sh_glob.c sh_glob_match.c
 
 #LEX := lex_token_start_arith.c lex_token_start_closure.c \
-	lex_token_start_enao.c lex_token_start_gl.c lex_token_start_ponct.c \
-	lex_tokenizer.c
+#	lex_token_start_enao.c lex_token_start_gl.c lex_token_start_ponct.c \
+#	lex_tokenizer.c
 
 UTILS := utils_str.c
 
 SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
+	$(addprefix var/,  $(VAR)) \
 	$(addprefix term/,  $(TERM)) \
 	$(addprefix prompt/,  $(PROMPT)) \
 	$(addprefix readline/,  $(READLINE)) \

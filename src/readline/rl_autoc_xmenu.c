@@ -70,14 +70,14 @@ int				rl_autoc_xmenu_putlist(t_dstr **list, int curl)
 {
 	int i;
 	int nl;
-	int llen;
+	//int llen;
 	int page;
 
 	//ft_printf("\nxmenu_putlist\n");
 	i = -1;
 	if (!list)
 		return (1);
-	llen = ft_arr_len((void**)list);
+	//llen = ft_arr_len((void**)list);
 	nl = g_rl.wl - rl_get_header();
 	page = (curl + 1) / nl + ((curl + 1) % nl ? 1 : 0) - 1;
 	i = page * nl;

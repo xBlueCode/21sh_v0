@@ -30,6 +30,7 @@ int				rl_insert_ch(int c)
 {
 	char	*line;
 
+	rl_hist_reset();
 	line = g_rl.txt->a[g_rl.cl]->str;
 	if (c == '\n')
 		return (rl_insert_nl(c));

@@ -34,7 +34,7 @@ int		sh_inter_run(void)
 	char	*line;
 
 	//init_hist
-	rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history");
+	rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
 	rl_hist_upload();
 	rl_hist_print();
 	sh_termconfig_init();
@@ -47,7 +47,7 @@ int		sh_inter_run(void)
 		//rl_cleanup();
 		//if (sh_script_run(line) == EXIT)
 		//{
-			//ft_memdel((void**)&line);
+		//	ft_memdel((void**)&line);
 		//	return (OK);
 		//}
 		//ft_memdel((void**)&line);
@@ -62,8 +62,12 @@ int		main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	(void)envp;
-	//sh_env_init(envp);
+	//(void)envp;
+	sh_var_start(envp);
+	//ft_tabdel_n(sh_env_get(), "LS_COLORS");
+	//ft_tabdel_i(sh_env_get(), 2);
+	ft_tabins(sh_var(), ft_tabrow_set(0, "NEW", "nvalue120", 0), 0);
+	ft_tabput(sh_var(), "=");
 	//sh_invar_init();
 	//sh_hash_init();
 	//if (ac > 1)
