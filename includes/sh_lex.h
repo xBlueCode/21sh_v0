@@ -108,10 +108,25 @@ typedef enum	e_token_state
 
 typedef struct	s_token
 {
-	int		ts;
+	int		t;
+	ssize_t p;
+	int 	l;
 	char	*xme;
 }				t_token;
 
+typedef struct	s_lex
+{
+	char 	*str;
+	ssize_t pos;
+	t_list	*tks;
+}				t_lex;
+
+
+int				sh_lex_init(t_lex *lex, char *input);
+int 			sh_lex_free(t_lex *lex);
+int 			sh_lex_start(t_lex *lex);
+
+/*
 t_list			*x_tokenize(char *in, int m);
 int				xtk_recognize(char *in, int off, t_list	**tklist, int m);
 int				xtk_add(t_list **tklist, int ts, char *xme, int mode);
@@ -128,5 +143,6 @@ int				xtk_start_esc(char *in, int off, t_list **tklist, int m);
 int				xtk_start_quote(char *in, int off, t_list **tklist, int m);
 int				xtk_start_squote(char *in, int off, t_list **tklist, int m);
 int				xtk_start_dquote(char *in, int off, t_list **tklist, int m);
+*/
 
 #endif
