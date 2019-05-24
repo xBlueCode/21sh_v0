@@ -117,8 +117,9 @@ typedef struct	s_token
 typedef struct	s_lex
 {
 	char 	*str;
-	ssize_t pos;
-	t_list	*tks;
+	ssize_t i;
+	t_list	*tlst;
+	t_list 	*toff;
 }				t_lex;
 
 
@@ -126,9 +127,13 @@ t_lex 			sh_lex(void);
 int				sh_lex_init(t_lex **plex, char *input);
 int 			sh_lex_free(t_lex **plex);
 int 			sh_lex_start(t_lex *lex);
-int 			sh_lex_add(t_lex *lex, t_token *tok);
+int 			sh_lex_tok_add(t_lex *lex, t_token *tok);
+t_token 		*sh_lex_tok_eat(t_lex *lex);
+t_token			*sh_lex_tok_get(t_lex *lex);
+int 			sh_lex_tok_next(t_lex *lex);
+int 			sh_lex_tok_setoff(t_lex *lex);
 
-t_token			*sh_lex_tok_set(int type, ssize_t pos, int len, char *xme);
+t_token			*sh_lex_tok_new(int type, ssize_t pos, int len, char *xme);
 int				sh_lex_tok_free(t_token **ptok);
 
 /*

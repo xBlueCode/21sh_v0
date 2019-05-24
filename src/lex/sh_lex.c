@@ -17,15 +17,16 @@ int 		sh_lex_init(t_lex **plex, char *input)
 	if (!input || !(*plex = (t_lex*)ft_memalloc(sizeof(t_lex))))
 		return (-1);
 	(*plex)->str = ft_strdup(input);
-	(*plex)->pos = 0;
-	(*plex)->tks = NULL;
+	(*plex)->i = 0;
+	(*plex)->tlst = NULL;
+	(*plex)->toff = NULL;
 	return (0);
 }
 
 int 		sh_lex_free(t_lex **plex)
 {
 	ft_memdel((void**)&(*plex)->str);
-	ft_lst_free(&(*plex)->tks, &sh_lex_tok_free);
+	ft_lst_free(&(*plex)->tlst, &sh_lex_tok_free);
 	return (0);
 }
 

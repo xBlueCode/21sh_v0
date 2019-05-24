@@ -5,7 +5,7 @@
 #include "libft.h"
 #include "sh_lex.h"
 
-t_token			*sh_lex_tok_set(int type, ssize_t pos, int len, char *xme)
+t_token			*sh_lex_tok_new(int type, ssize_t pos, int len, char *xme)
 {
 	t_token		*tok;
 
