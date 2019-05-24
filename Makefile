@@ -46,9 +46,12 @@ GLOB := sh_glob.c sh_glob_match.c
 #	lex_token_start_enao.c lex_token_start_gl.c lex_token_start_ponct.c \
 #	lex_tokenizer.c
 
+LEX := sh_lex.c sh_lex_tok.c
+
 UTILS := utils_str.c
 
 SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
+	$(addprefix lex/,  $(LEX)) \
 	$(addprefix var/,  $(VAR)) \
 	$(addprefix term/,  $(TERM)) \
 	$(addprefix prompt/,  $(PROMPT)) \
