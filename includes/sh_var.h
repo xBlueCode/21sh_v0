@@ -7,6 +7,8 @@
 
 # include "ftsh.h"
 
+# define SH_VAR_MAX 32
+
 # define SH_VN_FTSH "FTSH"
 # define SH_VV_FTSH "FTSH"
 # define SH_VN_SHLVL "SHLVL"

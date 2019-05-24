@@ -14,7 +14,7 @@ t_table		*sh_var(void)
 
 int 		sh_var_start(char **envp)
 {
-	if (!(g_var = ft_tabnew_max(33)))
+	if (!(g_var = ft_tabnew_max(SH_VAR_MAX)))
 		ft_printf("sh_var_init: Failed to create Env Table\n");
 	sh_var_inherit(envp);
 	sh_var_init();
