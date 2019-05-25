@@ -21,12 +21,17 @@
 # define XTK_START_QUOTE	"\"\'`"
 # define XTK_START_SUB		"`$"
 
-# define XTK_DQ_ESC			"$`\"\\\n"
+# define SH_LEX_SEPSET "'\"`<>!&|;\n"
+
+# define XTK_DQ_ESC			"`\"\n"
 
 # define XTK_ISWS(ch)		(ch == ' ' || ch == '\t')
 
+# define SH_LEX(lex, i) lex->in->str[i]
+
 typedef enum	e_token_state
 {
+	TSNONE = 0,
 	TSSTART,
 	TSSTOP,
 	TSCONT,
@@ -111,13 +116,17 @@ typedef struct	s_token
 	int		t;
 	ssize_t p;
 	int 	l;
-	char	*xme;
+	t_dstr	*val;
 }				t_token;
 
 typedef struct	s_lex
 {
-	char 	*str;
+	//char 	*str;
+	t_dstr	*buf;
+	t_dstr	*in;
 	ssize_t i;
+	t_dstr	*scope;
+	uint8_t state;
 	t_list	*tlst;
 	t_list 	*toff;
 }				t_lex;
@@ -135,6 +144,23 @@ int 			sh_lex_tok_setoff(t_lex *lex);
 
 t_token			*sh_lex_tok_new(int type, ssize_t pos, int len, char *xme);
 int				sh_lex_tok_free(t_token **ptok);
+
+int 			sh_lex_seek(t_lex *lex, int op);
+int 			sh_lex_seek_all(t_lex *lex, int op);
+int 			sh_lex_seek_space(t_lex *lex, int op);
+int 			sh_lex_seek_escape(t_lex *lex, int op);
+int 			sh_lex_seek_join(t_lex *lex, int op);
+
+int 			sh_lex_seek_op(t_lex *lex, int op);
+int 			sh_lex_seek_wo(t_lex *lex, int op);
+
+int 			sh_lex_seek_hd(t_lex *lex, int op);
+int 			sh_lex_seek_sq(t_lex *lex, int op);
+int 			sh_lex_seek_dq(t_lex *lex, int op);
+int 			sh_lex_seek_bq(t_lex *lex, int op);
+int 			sh_lex_seek_param(t_lex *lex, int op);
+int 			sh_lex_seek_smath(t_lex *lex, int op);
+int 			sh_lex_seek_scmd(t_lex *lex, int op);
 
 /*
 t_list			*x_tokenize(char *in, int m);

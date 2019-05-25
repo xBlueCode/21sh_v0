@@ -14,11 +14,10 @@ t_token			*sh_lex_tok_new(int type, ssize_t pos, int len, char *xme)
 	tok->t = type;
 	tok->p = pos;
 	tok->l = len;
-	tok->xme = xme;
+	tok->val = ft_dstrset_str(xme);
 }
 
 int				sh_lex_tok_free(t_token **ptok)
 {
-	ft_memdel((void**)&(*ptok)->xme);
 	ft_memdel((void**)ptok);
 }
