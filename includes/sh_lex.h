@@ -22,6 +22,7 @@
 # define XTK_START_SUB		"`$"
 
 # define SH_LEX_SEPSET "'\"`<>!&|;\n"
+# define SH_LEX_OPSET "<>!&|;"
 
 # define XTK_DQ_ESC			"`\"\n"
 
@@ -124,6 +125,7 @@ typedef struct	s_lex
 	//char 	*str;
 	t_dstr	*buf;
 	t_dstr	*in;
+	ssize_t	off;
 	ssize_t i;
 	t_dstr	*scope;
 	uint8_t st;
@@ -165,7 +167,7 @@ int 			sh_lex_seek_param(t_lex *lex, int op);
 int 			sh_lex_seek_smath(t_lex *lex, int op);
 int 			sh_lex_seek_scmd(t_lex *lex, int op);
 
-int				sh_lex_seek_add(t_lex *lex, ssize_t off);
+int				sh_lex_seek_add(t_lex *lex, int op);
 
 /*
 t_list			*x_tokenize(char *in, int m);
