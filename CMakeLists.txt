@@ -205,4 +205,15 @@ add_executable(ftsh
         src/utils/utils_str.c
         tests/test_keymapper.c
         tests/test_lex.c
-        Makefile libft/src/dstr/ft_dstr_join.c src/readline/rl_hist.c includes/rl_hist.h src/readline/rl_hist_io.c)
+        Makefile libft/src/dstr/ft_dstr_join.c
+        src/readline/rl_hist.c
+        includes/rl_hist.h
+        src/readline/rl_hist_io.c
+        src/readline/rl_hist_request.c
+        libft/src/dastr/ft_dastr_print.c
+        includes/sh_var.h
+        libft/includes/ft_table.h
+        libft/src/table/ft_table_basic.c libft/src/table/ft_tab_insert.c libft/src/table/ft_tab_get.c
+        libft/src/table/ft_tab_del.c libft/src/table/ft_tab_put.c libft/src/dastr/ft_dastr_replace.c
+        src/var/sh_var.c libft/src/table/ft_tab_to.c
+        src/var/sh_var_utils.c libft/includes/ft_hasht.h src/readline/rl_scope_scan_h.c src/lex/sh_lex.c src/lex/sh_lex_tok.c src/lex/sh_lex_manip.c src/lex/sh_lex_seek.c src/lex/sh_lex_seek_q.c src/lex/sh_lex_seek_bs.c src/lex/sh_lex_seek_add.c)
