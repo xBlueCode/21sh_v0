@@ -47,7 +47,7 @@ GLOB := sh_glob.c sh_glob_match.c
 #	lex_tokenizer.c
 
 LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c \
-	sh_lex_seek.c sh_lex_seek_bs.c \
+	sh_lex_seek.c sh_lex_seek_bs.c sh_lex_seek_q.c \
 	sh_lex_seek_add.c
 
 UTILS := utils_str.c

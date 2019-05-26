@@ -14,7 +14,7 @@ int		sh_lex_seek_add(t_lex *lex, ssize_t off)
 	if (lex->st == TSNONE)
 		return (0);
 	l = lex->i - off;
-	if (lex->st == TSW)
+	if (lex->st == TSW || lex->st == TSSQ)
 		tok = sh_lex_tok_new(lex->st, off, l,
 			ft_strndup(lex->in->str + off, l));
 	else
