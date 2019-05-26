@@ -10,6 +10,7 @@ int		sh_lex_seek_add(t_lex *lex, ssize_t off)
 	int		l;
 	t_token	*tok;
 
+	//ft_printf("seek_add:: ST: <%d>  off: <%d>  i: <%d>\n", lex->st, off, lex->i);
 	if (lex->st == TSNONE)
 		return (0);
 	l = lex->i - off;
@@ -20,6 +21,6 @@ int		sh_lex_seek_add(t_lex *lex, ssize_t off)
 		tok = sh_lex_tok_new(lex->st, off, l, NULL);
 	sh_lex_tok_add(lex, tok);
 	lex->st = TSNONE;
-	ft_printf("Tok: %-2d - %s", tok->t, tok->val->str);
+	ft_printf("Tok: %-4d - %s\n", tok->t, tok->val->str);
 	return (1);
 }

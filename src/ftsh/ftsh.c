@@ -32,6 +32,7 @@ int		sh_inter_read(char **line)
 int		sh_inter_run(void)
 {
 	char	*line;
+	t_lex	*lex;
 
 	//init_hist
 	rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
@@ -44,6 +45,8 @@ int		sh_inter_run(void)
 		sh_inter_read(&line);
 	//	ft_printf("in run: line: <%s>\n", line);
 		rl_hist_add(line);
+		sh_lex_init(&lex, line);
+		sh_lex_start(lex);
 		//rl_cleanup();
 		//if (sh_script_run(line) == EXIT)
 		//{

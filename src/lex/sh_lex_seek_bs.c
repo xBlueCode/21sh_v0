@@ -27,3 +27,12 @@ int 		sh_lex_seek_join(t_lex *lex, int op)
 	}
 	return (0);
 }
+
+int 		sh_lex_seek_nl(t_lex *lex, int op)
+{
+	if (lex->in->str[lex->i] != '\n')
+		return (0);
+	lex->st = TSNL;
+	lex->i++;
+	return (1);
+}

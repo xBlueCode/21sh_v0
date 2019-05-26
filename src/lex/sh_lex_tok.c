@@ -19,5 +19,6 @@ t_token			*sh_lex_tok_new(int type, ssize_t pos, int len, char *xme)
 
 int				sh_lex_tok_free(t_token **ptok)
 {
+	ft_dstrfree(&(*ptok)->val);
 	ft_memdel((void**)ptok);
 }

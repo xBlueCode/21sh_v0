@@ -126,7 +126,8 @@ typedef struct	s_lex
 	t_dstr	*in;
 	ssize_t i;
 	t_dstr	*scope;
-	uint8_t state;
+	uint8_t st;
+	uint8_t err;
 	t_list	*tlst;
 	t_list 	*toff;
 }				t_lex;
@@ -151,6 +152,8 @@ int 			sh_lex_seek_space(t_lex *lex, int op);
 int 			sh_lex_seek_escape(t_lex *lex, int op);
 int 			sh_lex_seek_join(t_lex *lex, int op);
 
+
+int 			sh_lex_seek_nl(t_lex *lex, int op);
 int 			sh_lex_seek_op(t_lex *lex, int op);
 int 			sh_lex_seek_wo(t_lex *lex, int op);
 
@@ -161,6 +164,8 @@ int 			sh_lex_seek_bq(t_lex *lex, int op);
 int 			sh_lex_seek_param(t_lex *lex, int op);
 int 			sh_lex_seek_smath(t_lex *lex, int op);
 int 			sh_lex_seek_scmd(t_lex *lex, int op);
+
+int				sh_lex_seek_add(t_lex *lex, ssize_t off);
 
 /*
 t_list			*x_tokenize(char *in, int m);
