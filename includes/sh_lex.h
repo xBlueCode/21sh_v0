@@ -156,7 +156,14 @@ int 			sh_lex_seek_join(t_lex *lex, int op);
 
 
 int 			sh_lex_seek_nl(t_lex *lex, int op);
+
 int 			sh_lex_seek_op(t_lex *lex, int op);
+int 			sh_lex_seek_op_sc(t_lex *lex, int op);
+int 			sh_lex_seek_op_a(t_lex *lex, int op);
+int 			sh_lex_seek_op_o(t_lex *lex, int op);
+int 			sh_lex_seek_op_g(t_lex *lex, int op);
+int 			sh_lex_seek_op_l(t_lex *lex, int op);
+
 int 			sh_lex_seek_wo(t_lex *lex, int op);
 
 int 			sh_lex_seek_hd(t_lex *lex, int op);
