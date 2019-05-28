@@ -46,7 +46,7 @@ GLOB := sh_glob.c sh_glob_match.c
 #	lex_token_start_enao.c lex_token_start_gl.c lex_token_start_ponct.c \
 #	lex_tokenizer.c
 
-LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c \
+LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c sh_lex_print.c \
 	sh_lex_seek.c sh_lex_seek_bs.c sh_lex_seek_q.c sh_lex_seek_op.c\
 	sh_lex_seek_op_gl.c \
 	sh_lex_seek_add.c

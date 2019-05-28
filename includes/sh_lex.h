@@ -176,6 +176,8 @@ int 			sh_lex_seek_scmd(t_lex *lex, int op);
 
 int				sh_lex_seek_add(t_lex *lex, int op);
 
+int				sh_lex_print(t_lex *lex);
+
 /*
 t_list			*x_tokenize(char *in, int m);
 int				xtk_recognize(char *in, int off, t_list	**tklist, int m);
