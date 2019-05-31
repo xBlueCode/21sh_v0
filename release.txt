@@ -1,3 +1,7 @@
+v 0.07
+    - complete history management
+    - initial lexer
+======
 v 0.06
 	- before rebuilding the structure to add history request
 ======
