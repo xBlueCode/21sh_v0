@@ -22,6 +22,8 @@ C_END = \033[0m
 
 FTSH := ftsh.c
 
+ALIAS := sh_als.c
+
 VAR := sh_var.c sh_var_utils.c
 
 TERM := term_config.c
@@ -55,6 +57,7 @@ UTILS := utils_str.c
 
 SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
 	$(addprefix lex/,  $(LEX)) \
+	$(addprefix alias/,  $(ALIAS)) \
 	$(addprefix var/,  $(VAR)) \
 	$(addprefix term/,  $(TERM)) \
 	$(addprefix prompt/,  $(PROMPT)) \
