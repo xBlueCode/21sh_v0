@@ -16,9 +16,11 @@
 
 # define SH_VN_SHPID "$"
 # define SH_VV_SHPID 0x00
+# define SH_VO_SHPID 0x00
 
 # define SH_VN_ESTAT "?"
 # define SH_VV_ESTAT 0x00
+# define SH_VO_ESTAT 0x00
 
 # define SH_VO_LOC 0x0
 # define SH_VO_GLO 0x1
