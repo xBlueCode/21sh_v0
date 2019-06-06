@@ -17,7 +17,8 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 		return (0);
 	}
 	l = lex->i - lex->off;
-	if (lex->st == TSW || lex->st == TSSQ || lex->st == TSDQ || lex->st == TSBQ)
+	if (lex->st == TSW || lex->st == TSSQ || lex->st == TSDQ || lex->st == TSBQ
+		|| lex->st == TSCBR)
 		tok = sh_lex_tok_new(lex->st, lex->off, l,
 			ft_strndup(lex->in->str + lex->off, l));
 	else
