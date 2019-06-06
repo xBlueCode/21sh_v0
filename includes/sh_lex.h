@@ -28,6 +28,8 @@
 
 # define XTK_ISWS(ch)		(ch == ' ' || ch == '\t')
 
+# define SH_LEX_RETERR(lex, error) {lex->err = error; return (-1);}
+
 # define SH_LEX(lex, i) lex->in->str[i]
 
 typedef enum	e_token_state
