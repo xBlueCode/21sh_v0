@@ -168,13 +168,14 @@ int 			sh_lex_seek_op_l(t_lex *lex, int op);
 
 int 			sh_lex_seek_wo(t_lex *lex, int op);
 
-int 			sh_lex_seek_hd(t_lex *lex, int op);
 int 			sh_lex_seek_sq(t_lex *lex, int op);
 int 			sh_lex_seek_dq(t_lex *lex, int op);
 int 			sh_lex_seek_bq(t_lex *lex, int op);
 int 			sh_lex_seek_param(t_lex *lex, int op);
 int 			sh_lex_seek_smath(t_lex *lex, int op);
 int 			sh_lex_seek_scmd(t_lex *lex, int op);
+
+int				sh_lex_seek_hd(t_lex *lex, int op);
 
 int				sh_lex_seek_add(t_lex *lex, int op);
 
