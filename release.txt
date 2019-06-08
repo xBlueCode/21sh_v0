@@ -1,3 +1,6 @@
+v 0.08
+    - Complete lexer fonctionality
+======
 v 0.07
     - complete history management
     - initial lexer
