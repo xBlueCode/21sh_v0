@@ -134,6 +134,8 @@ typedef struct	s_lex
 	uint8_t err;
 	t_list	*tlst;
 	t_list 	*toff;
+	t_dastr	*hd_key;
+	t_dastr *hd_val;
 }				t_lex;
 
 
@@ -176,6 +178,7 @@ int 			sh_lex_seek_smath(t_lex *lex, int op);
 int 			sh_lex_seek_scmd(t_lex *lex, int op);
 
 int				sh_lex_seek_hd(t_lex *lex, int op);
+char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
 
 int				sh_lex_seek_add(t_lex *lex, int op);
 
