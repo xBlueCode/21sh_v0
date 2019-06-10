@@ -134,7 +134,6 @@ typedef struct	s_lex
 	uint8_t err;
 	t_list	*tlst;
 	t_list 	*toff;
-	t_dastr	*hd_key;
 	t_dastr *hd_val;
 }				t_lex;
 

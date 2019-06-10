@@ -22,6 +22,7 @@ int 		sh_lex_init(t_lex **plex, char *input)
 	(*plex)->st = TSNONE;
 	(*plex)->tlst = NULL;
 	(*plex)->toff = NULL;
+	(*plex)->hd_val = ft_dastrnew_max(1);
 	return (0);
 }
 
@@ -30,6 +31,7 @@ int 		sh_lex_free(t_lex **plex)
 	ft_dstrfree(&(*plex)->in);
 	ft_dstrfree(&(*plex)->scope);
 	ft_lst_free(&(*plex)->tlst, (void(*)(void**))(&sh_lex_tok_free));
+	ft_dastrfree(&(*plex)->hd_val);
 	return (0);
 }
 
