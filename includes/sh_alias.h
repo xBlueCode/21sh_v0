@@ -10,4 +10,7 @@
 t_table		*sh_als(void);
 int 		sh_als_init(void);
 
+int 		sh_als_print(void);
+int 		sh_als_print_trow(t_trow trow);
+
 #endif //FTSH_SH_ALIAS_H
