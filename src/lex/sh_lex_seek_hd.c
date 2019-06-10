@@ -43,6 +43,6 @@ char 		*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off)
 		else
 			hd_vlen += i + 1;
 	hd_val = ft_strndup(lex->in->str + off, hd_vlen);
-	ft_dstrdel_n(lex->in, off, hd_val);
+	ft_dstrdel_n(lex->in, off, hd_vlen);
 	return (hd_val);
 }
