@@ -13,24 +13,10 @@
 #ifndef SH_LEX_H
 # define SH_LEX_H
 
-# define XTK_START_GL		"><=!&|"
-# define XTK_START_ENAO		"><=!&|"
-# define XTK_START_ARITH	"+-*%/"
-# define XTK_START_PONCT	"\\$;\n"
-# define XTK_START_CLOSURE	"([{)]}"
-# define XTK_START_QUOTE	"\"\'`"
-# define XTK_START_SUB		"`$"
-
 # define SH_LEX_SEPSET "'\"`<>!&|;\n"
 # define SH_LEX_OPSET "<>!&|;"
 
-# define XTK_DQ_ESC			"`\"\n"
-
-# define XTK_ISWS(ch)		(ch == ' ' || ch == '\t')
-
 # define SH_LEX_RETERR(lex, error) {lex->err = error; return (-1);}
-
-# define SH_LEX(lex, i) lex->in->str[i]
 
 typedef enum	e_token_state
 {
@@ -124,7 +110,6 @@ typedef struct	s_token
 
 typedef struct	s_lex
 {
-	//char 	*str;
 	t_dstr	*buf;
 	t_dstr	*in;
 	ssize_t	off;
@@ -182,24 +167,5 @@ char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
 int				sh_lex_seek_add(t_lex *lex, int op);
 
 int				sh_lex_print(t_lex *lex);
-
-/*
-t_list			*x_tokenize(char *in, int m);
-int				xtk_recognize(char *in, int off, t_list	**tklist, int m);
-int				xtk_add(t_list **tklist, int ts, char *xme, int mode);
-
-int				xtk_start_arith(char *in, int off, t_list **tklist, int m);
-int				xtk_start_closure(char *in, int off, t_list **tklist, int m);
-int				xtk_start_enao(char *in, int off, t_list **tklist, int m);
-int				xtk_start_gl(char *in, int off, t_list **tklist, int m);
-int				xtk_start_g(char *in, int off, t_list **tklist, int m);
-int				xtk_start_l(char *in, int off, t_list **tklist, int m);
-int				xtk_start_ponct(char *in, int off, t_list **tklist, int m);
-int				xtk_start_esc(char *in, int off, t_list **tklist, int m);
-
-int				xtk_start_quote(char *in, int off, t_list **tklist, int m);
-int				xtk_start_squote(char *in, int off, t_list **tklist, int m);
-int				xtk_start_dquote(char *in, int off, t_list **tklist, int m);
-*/
 
 #endif

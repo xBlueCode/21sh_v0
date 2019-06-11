@@ -166,13 +166,6 @@ add_executable(ftsh
         src/glob/sh_glob_match.c
         src/glob/sh_glob_scandir.c
         src/lex/lex_test.c
-        src/lex/lex_token_start_arith.c
-        src/lex/lex_token_start_closure.c
-        src/lex/lex_token_start_enao.c
-        src/lex/lex_token_start_gl.c
-        src/lex/lex_token_start_ponct.c
-        src/lex/lex_token_start_quote.c
-        src/lex/lex_tokenizer.c
         src/prompt/prompt.c
         src/readline/rl.c
         src/readline/rl_autoc.c
