@@ -18,10 +18,9 @@ int			sh_lex_seek_hd(t_lex *lex, int op)
 	hd_klen = ft_strlenz(hd_key);
 	hd_val = sh_lex_seek_hd_getval(lex, hd_key,
 		lex->i + ft_strichr(lex->in->str + lex->i, '\n') + 1);
-	ft_printf("----\nHEREDOC:\nKEY:\n%s\nVAL:\n%s\n------\n", hd_key, hd_val); // needs to be stored !!!
-	ft_dstrdel_n(lex->in, (lex->i -= 2), hd_klen + 2); // Not sure
+	ft_dstrdel_n(lex->in, (lex->i -= 2), hd_klen + 2);
 	ft_dastrins_str_free(lex->hd_val, -1, &hd_val);
-	//lex->i += hd_klen;
+	ft_memdel((void**)&hd_key);
 	lex->st = TSL2;
 	return (1);
 }
