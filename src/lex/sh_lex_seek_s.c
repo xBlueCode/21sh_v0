@@ -65,7 +65,7 @@ int 			sh_lex_seek_smath(t_lex *lex, int op)
 	if (ft_strncmp(lex->in->str + lex->i, "$((", 3))
 		return (0);
 	lex->i += 3;
-	while (lex->in->str[lex->i] && lex->in->str[lex->i] != ')')
+	while (lex->in->str[lex->i] && ft_strncmp(lex->in->str + lex->i, "))", 2))
 	{
 		if (sh_lex_seek_join(lex, op)
 			//|| sh_lex_seek_space(lex, op)
@@ -84,7 +84,7 @@ int 			sh_lex_seek_smath(t_lex *lex, int op)
 	}
 	if (!lex->in->str[lex->i])
 		SH_LEX_RETERR(lex, TSD_PL2)
-	lex->i++;
+	lex->i += 2;
 	lex->st = TSD_PL2;
 	return (1);
 }
