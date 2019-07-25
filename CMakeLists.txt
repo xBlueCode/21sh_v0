@@ -163,7 +163,6 @@ add_executable(ftsh
         src/glob/sh_glob.c
         src/glob/sh_glob_match.c
         src/glob/sh_glob_scandir.c
-        src/lex/lex_test.c
         src/prompt/prompt.c
         src/readline/rl.c
         src/readline/rl_autoc.c
@@ -207,4 +206,4 @@ add_executable(ftsh
         libft/src/table/ft_tab_insert.c libft/src/table/ft_tab_get.c
         libft/src/table/ft_tab_del.c libft/src/table/ft_tab_put.c libft/src/dastr/ft_dastr_replace.c
         src/var/sh_var.c libft/src/table/ft_tab_to.c
-        src/var/sh_var_utils.c src/readline/rl_scope_scan_h.c src/lex/sh_lex.c src/lex/sh_lex_tok.c src/lex/sh_lex_manip.c src/lex/sh_lex_seek.c src/lex/sh_lex_seek_q.c src/lex/sh_lex_seek_bs.c src/lex/sh_lex_seek_add.c src/lex/sh_lex_seek_op.c src/lex/sh_lex_seek_op_gl.c src/lex/sh_lex_print.c includes/sh_alias.h src/alias/sh_als.c src/lex/sh_lex_seek_s.c src/lex/sh_lex_seek_hd.c libft/src/table/ft_tab_iter.c)
+        src/var/sh_var_utils.c src/readline/rl_scope_scan_h.c src/lex/sh_lex.c src/lex/sh_lex_tok.c src/lex/sh_lex_manip.c src/lex/sh_lex_seek.c src/lex/sh_lex_seek_q.c src/lex/sh_lex_seek_bs.c src/lex/sh_lex_seek_add.c src/lex/sh_lex_seek_op.c src/lex/sh_lex_seek_op_gl.c src/lex/sh_lex_print.c includes/sh_alias.h src/lex/sh_lex_seek_s.c src/lex/sh_lex_seek_hd.c libft/src/table/ft_tab_iter.c src/alias/sh_als.c)

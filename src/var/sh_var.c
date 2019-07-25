@@ -1,7 +1,3 @@
-//
-// Created by xbluecode on 17.05.19.
-//
-
 #include "libft.h"
 #include "ftsh.h"
 
@@ -38,6 +34,7 @@ int 		sh_var_inherit(char **envp)
 			ft_strndup(envp[i], eq - envp[i]), ft_strdup(eq + 1), SH_VO_GLO);
 		ft_tabins(g_var, trow, 0);
 	}
+	return (OK);
 }
 
 int 		sh_var_init(void)
@@ -55,6 +52,7 @@ int 		sh_var_init_id(void)
 	ft_tabins(g_var, ft_tabrow_set(-1, SH_VN_SHPID, vpid, SH_VO_SHPID), 1);
 	ft_memdel((void**)&vpid);
 	ft_tabins(g_var, ft_tabrow_set(-1, SH_VN_ESTAT, 0, SH_VO_ESTAT), 1);
+	return (OK);
 }
 
 int 		sh_var_init_ftsh(void)

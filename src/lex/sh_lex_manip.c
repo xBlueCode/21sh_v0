@@ -1,7 +1,3 @@
-//
-// Created by xbluecode on 24.05.19.
-//
-
 #include "libft.h"
 #include "sh_lex.h"
 
@@ -11,6 +7,7 @@ int 	sh_lex_tok_add(t_lex *lex, t_token *tok)
 		return (-1);
 	//lex->i += tok->l;
 	ft_lst_addlast(&(lex->tlst), ft_lstset(tok, sizeof(t_token*)));
+	return (OK);
 }
 
 t_token 		*sh_lex_tok_eat(t_lex *lex)
@@ -26,8 +23,6 @@ t_token 		*sh_lex_tok_eat(t_lex *lex)
 
 t_token 		*sh_lex_tok_get(t_lex *lex)
 {
-	t_token	*eaten;
-
 	if (!lex->toff)
 		return (NULL);
 	return ((t_token*)lex->toff->content);

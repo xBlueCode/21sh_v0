@@ -1,7 +1,3 @@
-//
-// Created by xbluecode on 27.05.19.
-//
-
 #include "libft.h"
 #include "sh_lex.h"
 
@@ -23,6 +19,7 @@ int		sh_lex_seek_op(t_lex *lex, int op)
 
 int 	sh_lex_seek_op_sc(t_lex *lex, int op)
 {
+	(void)op;
 	if (lex->in->str[lex->i] == ';')
 	{
 		if (lex->in->str[++lex->i] == ';' && lex->i++)
@@ -36,6 +33,7 @@ int 	sh_lex_seek_op_sc(t_lex *lex, int op)
 
 int 	sh_lex_seek_op_a(t_lex *lex, int op)
 {
+	(void)op;
 	if (lex->in->str[lex->i] == '&' && ++lex->i)
 	{
 		if (lex->in->str[lex->i] == '&' && ++lex->i)
@@ -49,6 +47,7 @@ int 	sh_lex_seek_op_a(t_lex *lex, int op)
 
 int 	sh_lex_seek_op_o(t_lex *lex, int op)
 {
+	(void)op;
 	if (lex->in->str[lex->i] == '|' && ++lex->i)
 	{
 		if (lex->in->str[lex->i] == '|' && ++lex->i)

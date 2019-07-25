@@ -1,7 +1,3 @@
-//
-// Created by xbluecode on 24.05.19.
-//
-
 #include "libft.h"
 #include "sh_lex.h"
 

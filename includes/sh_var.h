@@ -40,4 +40,18 @@ int 			sh_var_auto(void);
 int 			sh_var_tsel_glo(t_trow trow);
 char 			*sh_var_tbuild_env(t_trow trow);
 
+t_hset			*sh_varh(void);
+int 			sh_varh_start(char **envp);
+int 			sh_varh_inherit(char **envp);
+int 			sh_varh_init(void);
+int 			sh_varh_init_ftsh(void);
+int 			sh_varh_init_id(void);
+int 			sh_varh_init_hist(void);
+char 			**sh_varh_env(void);
+int 			sh_varh_copy(char **envp);
+int 			sh_varh_auto(void);
+
+int 			sh_varh_tsel_glo(t_trow trow);
+char 			*sh_varh_tbuild_env(t_trow trow);
+
 #endif //FTSH_SH_ENV_H

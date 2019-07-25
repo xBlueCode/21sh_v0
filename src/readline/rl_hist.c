@@ -15,6 +15,7 @@ int 		rl_hist_init(char *filename)
 	g_his.back = NULL;
 	g_his.cur = 0;
 	g_his.off = 0;
+	return (OK);
 }
 
 t_hist 		rl_hist_get(void)

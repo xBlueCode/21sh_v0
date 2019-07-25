@@ -7,6 +7,7 @@
 
 int 			sh_lex_seek_sq(t_lex *lex, int op)
 {
+	(void)op;
 	if (lex->in->str[lex->i] != '\'')
 		return (0);
 	while (lex->in->str[lex->i] && lex->in->str[++lex->i] != '\'')
@@ -19,6 +20,7 @@ int 			sh_lex_seek_sq(t_lex *lex, int op)
 }
 
 int 			sh_lex_seek_bq(t_lex *lex, int op) {
+	(void)op;
 	if (lex->in->str[lex->i] != '`')
 		return (0);
 	while (lex->in->str[lex->i] && lex->in->str[++lex->i] != '`')

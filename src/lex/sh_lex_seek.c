@@ -1,7 +1,3 @@
-//
-// Created by xbluecode on 25.05.19.
-//
-
 #include "libft.h"
 #include "sh_lex.h"
 
@@ -40,10 +36,12 @@ int 		sh_lex_seek_all(t_lex *lex, int op)
 		else
 			lex->i++;
 	}
+	return (OK);
 }
 
 int 		sh_lex_seek_space(t_lex *lex, int op)
 {
+	(void)op;
 	if (!ft_isspace(lex->in->str[lex->i]))
 		return (0);
 	while (ft_isspace(lex->in->str[lex->i]))
@@ -54,6 +52,7 @@ int 		sh_lex_seek_space(t_lex *lex, int op)
 
 int 		sh_lex_seek_wo(t_lex *lex, int op)
 {
+	(void)op;
 	while (lex->in->str[lex->i])
 	{
 		if (sh_lex_seek_join(lex, 0) || sh_lex_seek_escape(lex, 0))
