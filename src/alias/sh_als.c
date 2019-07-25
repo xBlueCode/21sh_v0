@@ -1,37 +1,54 @@
-//
-// Created by xbluecode on 01.06.19.
-//
-
 #include "libft.h"
 #include "sh_alias.h"
 
-t_table		*g_als;
+t_hset		*g_als;
 
-t_table		*sh_als(void)
+t_hset		*sh_als(void)
 {
 	return (g_als);
 }
 
 int 		sh_als_init(void)
 {
-	if (!(g_als = ft_tabnew_max(2)))
-	{
-		ft_printf("sh_als_init: Failed to create a Table");
-		return (-1);
-	}
-	return (0);
+
+	g_als = ft_hset_init(SH_ALS_HTSIZE,
+		ft_htab_hcode_str, ft_htab_equals_str, ft_htab_free_ent_str);
+	return (OK);
 }
 
-int			sh_als_print(void)
+int 		sh_als_add(t_hset *als, char *key, char *val)
 {
-	ft_tabiter(g_als, &sh_als_print_trow);
+	t_htabent	ent;
+
+	if (!als || !key || !val)
+		return (KO);
+	ent = (t_htabent){
+		.key = key, .ksize = ft_strlenz(key) + 1,
+		.val = val, .vsize = ft_strlenz(val) + 1};
+	return (ft_htab_put(als, &ent));
 }
 
-int 		sh_als_print_trow(t_trow trow)
+int 		sh_als_rem(t_hset *als, char *key)
 {
-	ft_putstr("Alis: ");
-	ft_putstr(trow.name);
-	ft_putstr("=");
-	ft_putstr(trow.value);
-	ft_putchar('\n');
+	if (!als || !key)
+		return (KO);
+	return (ft_htab_rem(als, key, ft_strlen(key) + 1));
+}
+
+int 		sh_als_print(t_hset *als)
+{
+	int i;
+
+	i = -1;
+	while (++i < als->max)
+		ft_lstiter(als->arr[i], &sh_als_print_ent);
+	return (OK);
+}
+
+void 		sh_als_print_ent(t_list *entlst)
+{
+	ft_putstr("Alias: ");
+	ft_putstr((char*)((t_htabent*)entlst->content)->key);
+	ft_putchar('=');
+	ft_putstr((char*)((t_htabent*)entlst->content)->val);
 }
