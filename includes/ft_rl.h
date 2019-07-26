@@ -101,6 +101,10 @@ int			rl_ctrl_x_lbeg(int c);
 
 int			rl_scope_update(void);
 int			rl_scope_prompt(char *str);
+int 		rl_scope_prompt_ps(void);
+int 		rl_scope_prompt_ps_u(t_dstr *prompt, int ps1i);
+int 		rl_scope_prompt_ps_h(t_dstr *prompt, int i);
+int 		rl_scope_prompt_ps_w(t_dstr *prompt, int i);
 
 int			rl_scope_scan(void);
 int			rl_scope_scan_none(char *line, ssize_t *pos);
