@@ -10,7 +10,7 @@ int 		rl_hist_init(char *filename)
 	if (filename)
 		g_his.filename = ft_strdup(filename);
 	else
-		g_his.filename = ft_strdup(HIS_FILENAME);
+		g_his.filename = ft_strdup(RL_HIS_FILENAME);
 	g_his.ent = ft_dastrnew_max(1024);
 	g_his.back = NULL;
 	g_his.cur = 0;

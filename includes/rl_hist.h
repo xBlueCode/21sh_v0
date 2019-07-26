@@ -5,7 +5,7 @@
 
 #include "libft.h"
 
-# define HIS_FILENAME ".rl_history"
+# define RL_HIS_FILENAME ".rl_history"
 
 typedef struct	s_hist
 {

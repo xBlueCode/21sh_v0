@@ -35,7 +35,8 @@ int		sh_inter_run(void)
 	t_lex	*lex;
 
 	//init_hist
-	rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
+	//rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
+	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
 	sh_termconfig_init();
@@ -81,4 +82,3 @@ int		main(int ac, char **av, char **envp)
 	//sh_cleanup();
 	return (sh_est);
 }
-
