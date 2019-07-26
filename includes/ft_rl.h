@@ -127,6 +127,7 @@ int			rl_autoc_get_cw(char *line, ssize_t pos, ssize_t *ilen);
 t_dastr		*rl_autoc_match(char *w, int cxt);
 t_dastr		*rl_autoc_match_glob(char *w);
 t_dastr		*rl_autoc_match_var(char *w);
+t_dastr		*rl_autoc_match_bin(char *w);
 
 char		*rl_autoc_menu(t_dastr *res);
 int			rl_autoc_menu_clear(t_dstr **list, int nl);

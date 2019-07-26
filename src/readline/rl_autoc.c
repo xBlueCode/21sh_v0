@@ -60,8 +60,8 @@ t_dastr		*rl_autoc_match(char *w, int cxt) // replace by array
 	//ft_printf("autoc_match\n");
 	if (cxt == RL_CXT_VAR)
 		return (rl_autoc_match_var(w));
-	//else if (cxt == RL_CXT_BIN)
-	//	return (rl_autoc_match_bin(w, cxt));
+	else if (cxt == RL_CXT_BIN)
+		return (rl_autoc_match_bin(w));
 	else
 		return (rl_autoc_match_glob(w));
 }

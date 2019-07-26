@@ -2,11 +2,21 @@
 
 extern t_rl		g_rl;
 
-/*
 t_dastr			*rl_autoc_match_bin(char *w)
 {
+	t_dastr		*res;
+	t_dastr		*bin_names;
+	int 		i;
+
+	bin_names = sh_bin_names();
+	res = ft_dastrnew_max(2);
+	i = -1;
+	while (++i < bin_names->len)
+		if (!ft_strncmp(bin_names->a[i]->str, w, ft_strlen(w)))
+			ft_dastrins_str(res, -1, bin_names->a[i]->str);
+	return (res);
 }
-*/
+
 t_dastr			*rl_autoc_match_var(char *w)
 {
 	t_dastr	*res;

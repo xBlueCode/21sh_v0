@@ -1,0 +1,4 @@
+
+-- RL, HIST
+	- Iterate the history list in the first execution when the hist file stil
+	 shows an empty line when iterating after entring 1 command
