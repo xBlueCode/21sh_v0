@@ -10,6 +10,7 @@
 
 # include "sh_prompt.h"
 # include "sh_var.h"
+# include "sh_bin.h"
 # include "sh_term.h"
 # include "ft_rl.h"
 //# include "rl_hist.h"

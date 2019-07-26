@@ -72,6 +72,11 @@ int		main(int ac, char **av, char **envp)
 	//ft_tabdel_i(sh_env_get(), 2);
 	ft_tabins(sh_var(), ft_tabrow_set(0, "NEW", "nvalue120", 0), 0);
 	ft_tabput(sh_var(), "=");
+
+	sh_bin_init(sh_bin_ptr());
+	sh_bin_update(sh_bin(), sh_var_getval("PATH"));
+	ft_printf("Bins Updated !!!\n");
+	ft_printf("echo :: %s\n", sh_bin_getpath(sh_bin(), "echo"));
 	//sh_invar_init();
 	//sh_hash_init();
 	//if (ac > 1)

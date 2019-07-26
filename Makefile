@@ -26,6 +26,8 @@ ALIAS := sh_als.c
 
 VAR := sh_var.c sh_var_utils.c sh_var_get.c
 
+BIN := sh_bin.c sh_bin_manip.c
+
 TERM := term_config.c
 
 PROMPT := prompt.c
@@ -57,6 +59,7 @@ SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
 	$(addprefix lex/,  $(LEX)) \
 	$(addprefix alias/,  $(ALIAS)) \
 	$(addprefix var/,  $(VAR)) \
+	$(addprefix bin/,  $(BIN)) \
 	$(addprefix term/,  $(TERM)) \
 	$(addprefix prompt/,  $(PROMPT)) \
 	$(addprefix readline/,  $(READLINE)) \
