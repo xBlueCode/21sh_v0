@@ -1,7 +1,3 @@
-//
-// Created by xbluecode on 17.05.19.
-//
-
 #ifndef SH_VAR_H
 # define SH_VAR_H
 
@@ -26,6 +22,9 @@
 # define SH_VO_GLO 0x1
 # define SH_VO_RDO 0x2
 
+# define SH_VN_PS1 "PS1"
+# define SH_VV_PS1 "\\h@\\u $ "
+
 t_table 		*sh_var(void);
 int 			sh_var_start(char **envp);
 int 			sh_var_inherit(char **envp);
@@ -39,6 +38,9 @@ int 			sh_var_auto(void);
 
 int 			sh_var_tsel_glo(t_trow trow);
 char 			*sh_var_tbuild_env(t_trow trow);
+
+int 			sh_var_geti(char *name);
+char 			*sh_var_getval(char *name);
 
 t_hset			*sh_varh(void);
 int 			sh_varh_start(char **envp);
