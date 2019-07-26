@@ -36,9 +36,7 @@ int		sh_bin_add_abs(t_hset *htbin, char *bin_path)
 	htent = (t_htabent){
 		.key = bin_name, .ksize = ft_strlen(bin_name) + 1,
 		.val = bin_path, .vsize = ft_strlen(bin_path) + 1};
-	ft_printf("Adding: ");
-	ft_printf("<%s :: %s>\n", bin_name, bin_path);
-	if (ft_dastrins_str(sh_bin_names(), -1, bin_name))
+	if (!ft_dastrins_str(sh_bin_names(), -1, bin_name))
 		return (ft_htab_put(htbin, &htent));
 	return (KO);
 }
