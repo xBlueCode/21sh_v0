@@ -50,7 +50,8 @@ int 		rl_hist_req_cur(int cur)
 		if (*g_rl.scope->str == RL_SCP_START)
 			*g_rl.scope->str = '\0';
 		rl_putstr_wrap(g_rl.txt->a[g_rl.cl]->str, 0);
-		rl_scope_scan();
+		if (g_rl.txt->a[g_rl.cl + 1])
+			rl_scope_scan();
 	}
 	g_rl.cc = g_rl.txt->a[--g_rl.cl]->len;
 	return (0); // check

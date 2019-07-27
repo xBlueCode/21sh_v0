@@ -20,6 +20,32 @@ int			rl_scope_scan(void)
 	return (0);
 }
 
+int			rl_scope_scan_start(void)
+{
+	char	*line;
+	ssize_t	i;
+	int		iline;
+
+	ft_dstrdel_n(g_rl.scope, 0, g_rl.scope->len);
+	ft_dstrins_ch(g_rl.scope, 0, RL_SCP_NONE);
+	iline = -1;
+	while (++iline <= g_rl.cl)
+	{
+		line = g_rl.txt->a[iline]->str;
+		i = -1;
+		while(line[++i])
+		{
+			//ft_printf("scope_scanner: %d\n", ft_dstrget_ch(g_rl.scope, -1));
+			g_rl_scope_scanner[ft_dstrget_ch(g_rl.scope, -1)](line, &i);
+			if (i > -1 && !line[i])
+				break;
+			//rl_heredoc_scan(linem &i);
+		}
+	}
+	return (0);
+}
+
+
 int			rl_scope_scan_none(char *line, ssize_t *pos)
 {
 	ssize_t	i;

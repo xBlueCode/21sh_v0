@@ -110,6 +110,7 @@ int 		rl_scope_prompt_ps_h(t_dstr *prompt, int i);
 int 		rl_scope_prompt_ps_w(t_dstr *prompt, int i);
 
 int			rl_scope_scan(void);
+int			rl_scope_scan_start(void);
 int			rl_scope_scan_none(char *line, ssize_t *pos);
 int			rl_scope_scan_escape(char *line, ssize_t *pos);
 int			rl_scope_scan_join(char *line, ssize_t *pos);
