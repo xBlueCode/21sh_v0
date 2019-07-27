@@ -33,7 +33,8 @@ TERM := term_config.c
 PROMPT := prompt.c
 
 READLINE := rl.c rl_scope.c  rl_scope_scan.c \
-	rl_scope_scan_q.c rl_scope_scan_s.c rl_scope_scan_h.c\
+	rl_scope_scan_q.c rl_scope_scan_s.c rl_scope_scan_h.c \
+	rl_scope_scan_op.c \
 	rl_scope_prompt.c rl_scope_prompt_ps.c \
 	rl_ctrl.c rl_ctrl_move.c rl_ctrl_jump.c rl_ctrl_kill.c rl_ctrl_kill_w.c\
 	rl_ctrl_save.c rl_ctrl_paste.c rl_ctrl_reg.c\

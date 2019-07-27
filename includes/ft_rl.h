@@ -28,6 +28,9 @@ typedef enum	e_rl_scope
 	RL_SCP_SMATH,
 	RL_SCP_SCMD,
 	RL_SCP_HD,
+	RL_SCP_PIPE,
+	RL_SCP_AND,
+	RL_SCP_OR,
 	RL_SCP_SSH,
 	RL_SCP_MATH
 }				t_rl_scope;
@@ -110,6 +113,10 @@ int			rl_scope_scan(void);
 int			rl_scope_scan_none(char *line, ssize_t *pos);
 int			rl_scope_scan_escape(char *line, ssize_t *pos);
 int			rl_scope_scan_join(char *line, ssize_t *pos);
+int			rl_scope_scan_pipe(char *line, ssize_t *pos);
+int			rl_scope_scan_and(char *line, ssize_t *pos);
+int			rl_scope_scan_or(char *line, ssize_t *pos);
+
 int			rl_scope_scan_sq(char *line, ssize_t *pos);
 int			rl_scope_scan_dq(char *line, ssize_t *pos);
 int			rl_scope_scan_bq(char *line, ssize_t *pos);
@@ -175,6 +182,9 @@ static t_rl_scope_scanner *g_rl_scope_scanner[] =
 	&rl_scope_scan_smath,
 	&rl_scope_scan_scmd,
 	&rl_scope_scan_hd,
+	&rl_scope_scan_pipe,
+	&rl_scope_scan_and,
+	&rl_scope_scan_or,
 };
 
 static char *g_rl_scope_prompt[] =
@@ -189,7 +199,10 @@ static char *g_rl_scope_prompt[] =
 	"braceparam",
 	"mathsubst",
 	"cmdsubst",
-	"heredoc"
+	"heredoc",
+	"pipe",
+	"cmdand",
+	"cmdor"
 };
 
 static int	g_rl_ctrl_keymap[] =
