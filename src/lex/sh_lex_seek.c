@@ -3,7 +3,8 @@
 
 int 		sh_lex_seek(t_lex *lex, int op)
 {
-	return (sh_lex_seek_all(lex, op));
+	//return (sh_lex_seek_all(lex, op));
+	return (sh_lex_seek_start(lex, op));
 }
 
 int 		sh_lex_seek_all(t_lex *lex, int op)

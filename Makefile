@@ -49,8 +49,8 @@ READLINE := rl.c rl_scope.c  rl_scope_scan.c \
 GLOB := sh_glob.c sh_glob_match.c
 
 LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c sh_lex_print.c \
-	sh_lex_seek.c sh_lex_seek_bs.c sh_lex_seek_q.c sh_lex_seek_op.c \
-	sh_lex_seek_s.c sh_lex_seek_hd.c \
+	sh_lex_seek.c sh_lex_seek_start.c sh_lex_seek_bs.c sh_lex_seek_q.c \
+	sh_lex_seek_op.c sh_lex_seek_s.c sh_lex_seek_hd.c \
 	sh_lex_seek_op_gl.c sh_lex_seek_ion.c\
 	sh_lex_seek_add.c
 

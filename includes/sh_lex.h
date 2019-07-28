@@ -13,7 +13,8 @@
 #ifndef SH_LEX_H
 # define SH_LEX_H
 
-# define SH_LEX_SEPSET "'\"`<>!&|;\n"
+# define SH_LEX_SEPSET "'\"`<>!&|;\n$"
+# define SH_LEX_SEPSET_X "<>!&|;\n"
 # define SH_LEX_OPSET "<>!&|;"
 
 # define SH_LEX_RETERR(lex, error) {lex->err = error; return (-1);}
@@ -139,6 +140,9 @@ int				sh_lex_tok_free(t_token **ptok);
 
 int 			sh_lex_seek(t_lex *lex, int op);
 int 			sh_lex_seek_all(t_lex *lex, int op);
+
+int				sh_lex_seek_start(t_lex *lex, int op);
+
 int 			sh_lex_seek_space(t_lex *lex, int op);
 int 			sh_lex_seek_escape(t_lex *lex, int op);
 int 			sh_lex_seek_join(t_lex *lex, int op);
@@ -156,6 +160,7 @@ int 			sh_lex_seek_op_l(t_lex *lex, int op);
 int 			sh_lex_seek_ion(t_lex *lex, int op);
 
 int 			sh_lex_seek_wo(t_lex *lex, int op);
+int 			sh_lex_seek_wox(t_lex *lex, int op);
 
 int 			sh_lex_seek_sq(t_lex *lex, int op);
 int 			sh_lex_seek_dq(t_lex *lex, int op);
