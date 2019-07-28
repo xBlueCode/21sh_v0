@@ -98,6 +98,7 @@ typedef enum	e_token_state
 	TSWSQ,
 	TSWDQ,
 	TSWBQ,
+	TSION
 }				t_token_state;
 
 typedef struct	s_token
@@ -151,6 +152,8 @@ int 			sh_lex_seek_op_a(t_lex *lex, int op);
 int 			sh_lex_seek_op_o(t_lex *lex, int op);
 int 			sh_lex_seek_op_g(t_lex *lex, int op);
 int 			sh_lex_seek_op_l(t_lex *lex, int op);
+
+int 			sh_lex_seek_ion(t_lex *lex, int op);
 
 int 			sh_lex_seek_wo(t_lex *lex, int op);
 

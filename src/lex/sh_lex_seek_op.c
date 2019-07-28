@@ -22,7 +22,7 @@ int 	sh_lex_seek_op_sc(t_lex *lex, int op)
 	(void)op;
 	if (lex->in->str[lex->i] == ';')
 	{
-		if (lex->in->str[++lex->i] == ';' && lex->i++)
+		if (lex->in->str[++lex->i] == ';' && ++lex->i)
 			lex->st = TSSC2;
 		else
 			lex->st = TSSC;

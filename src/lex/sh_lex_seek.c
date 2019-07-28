@@ -28,6 +28,7 @@ int 		sh_lex_seek_all(t_lex *lex, int op)
 			|| sh_lex_seek_scmd(lex, op)
 			|| sh_lex_seek_hd(lex, op)
 			|| sh_lex_seek_op(lex, op)
+			|| sh_lex_seek_ion(lex, op) // check in other scopes
 			|| sh_lex_seek_wo(lex, op)
 			|| sh_lex_seek_nl(lex, op)
 			)
