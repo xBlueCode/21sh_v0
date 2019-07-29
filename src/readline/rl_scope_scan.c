@@ -66,7 +66,9 @@ int			rl_scope_scan_none(char *line, ssize_t *pos)
 			|| rl_scope_scan_bq(line, &i)
 			|| rl_scope_scan_param(line, &i)
 			|| rl_scope_scan_smath(line, &i)
-			|| rl_scope_scan_scmd(line, &i))
+			|| rl_scope_scan_scmd(line, &i)
+			|| rl_scope_scan_ssh(line, &i)
+			)
 			continue;
 		//rl_heredoc_scan(linem &i);
 		i++;

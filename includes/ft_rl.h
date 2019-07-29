@@ -31,6 +31,7 @@ typedef enum	e_rl_scope
 	RL_SCP_PIPE,
 	RL_SCP_AND,
 	RL_SCP_OR,
+	RL_SCP_SUBSH,
 	RL_SCP_SSH,
 	RL_SCP_MATH
 }				t_rl_scope;
@@ -124,6 +125,7 @@ int			rl_scope_scan_bq(char *line, ssize_t *pos);
 int			rl_scope_scan_smath(char *line, ssize_t *pos);
 int			rl_scope_scan_scmd(char *line, ssize_t *pos);
 int			rl_scope_scan_param(char *line, ssize_t *pos);
+int			rl_scope_scan_ssh(char *line, ssize_t *pos);
 int 		rl_scope_scan_hd(char *line, ssize_t *pos);
 
 int			rl_autoc(int c);
@@ -186,6 +188,7 @@ static t_rl_scope_scanner *g_rl_scope_scanner[] =
 	&rl_scope_scan_pipe,
 	&rl_scope_scan_and,
 	&rl_scope_scan_or,
+    &rl_scope_scan_ssh,
 };
 
 static char *g_rl_scope_prompt[] =
@@ -203,7 +206,8 @@ static char *g_rl_scope_prompt[] =
 	"heredoc",
 	"pipe",
 	"cmdand",
-	"cmdor"
+	"cmdor",
+	"subsh"
 };
 
 static int	g_rl_ctrl_keymap[] =
