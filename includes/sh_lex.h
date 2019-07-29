@@ -13,21 +13,20 @@
 #ifndef SH_LEX_H
 # define SH_LEX_H
 
-# define SH_LEX_SEPSET "'\"`<>!&|;\n$"
-# define SH_LEX_SEPSET_X "<>!&|;\n"
-# define SH_LEX_OPSET "<>!&|;"
+# define SH_LEX_SEPSET "'\"`<>&|;\n$" // !
+# define SH_LEX_SEPSET_X "<>&|;\n" // !
+# define SH_LEX_OPSET "<>&|;" // !
 
 # define SH_LEX_RETERR(lex, error) {lex->err = error; return (-1);}
 
 typedef enum	e_token_state
 {
 	TSNONE = 0,
-	TSSTART,
+	TSSTART = 25,
 	TSSTOP,
 	TSCONT,
 	TSSEP,
 	TSWS,
-
 	TSG,
 	TSL,
 	TSE,
@@ -53,54 +52,66 @@ typedef enum	e_token_state
 	TSDQ,
 	TSBQ,
 	TSW,
-
 	TSG2,
 	TSG_E,
 	TSG_A,
 	TSG_O,
-
 	TSL_G,
 	TSL2,
 	TSL2_M,
 	TSL_E,
 	TSL_A,
 	TSL_O,
-
 	TSE2,
-
 	TSN_E,
-
 	TSA_G,
 	TSA2,
-
 	TSO2,
-
 	TSP2,
 	TSP_E,
 	TSM2,
 	TSM_E,
-
 	TSAES_E,
 	TSMOD_E,
 	TSSH_E,
-
 	TSMp,
-
 	TSD_PL,
 	TSD_PL2,
 	TSD_CBL,
-
 	TSSC2,
-
 	TSPL2,
 	TSPR2,
-
 	TSESC,
 	TSWSQ,
 	TSWDQ,
 	TSWBQ,
-	TSION
+	TSBANG,
+	TSION,
+	TSNAME,
+	TSTOK,
+	TSRW_IF,
+    TSRW_THEN,
+    TSRW_ELSE,
+    TSRW_ELIF,
+    TSRW_FI,
+    TSRW_DO,
+    TSRW_DONE,
+    TSRW_CASE,
+    TSRW_ESAC,
+	TSRW_WHILE,
+    TSRW_UNTIL,
+    TSRW_FOR,
+    TSRW_IN,
+    TSRW_BANG,
+    TSRW_LBRACE,
+    TSRW_RBRACE
 }				t_token_state;
+
+typedef enum    e_token_context
+{
+    TCTX_NONE,
+    TCTX_FIRSTW
+}               t_tooken_context;
 
 typedef struct	s_token
 {
@@ -118,9 +129,11 @@ typedef struct	s_lex
 	ssize_t i;
 	t_dstr	*scope;
 	uint8_t st;
+	uint8_t ctx;
 	uint8_t err;
 	t_list	*tlst;
 	t_list 	*toff;
+	t_list  *tclass;
 	t_dastr *hd_val;
 }				t_lex;
 
@@ -142,6 +155,7 @@ int 			sh_lex_seek(t_lex *lex, int op);
 int 			sh_lex_seek_all(t_lex *lex, int op);
 
 int				sh_lex_seek_start(t_lex *lex, int op);
+int 			sh_lex_seek_tok(t_lex *lex, int op);
 
 int 			sh_lex_seek_space(t_lex *lex, int op);
 int 			sh_lex_seek_escape(t_lex *lex, int op);
@@ -157,10 +171,11 @@ int 			sh_lex_seek_op_o(t_lex *lex, int op);
 int 			sh_lex_seek_op_g(t_lex *lex, int op);
 int 			sh_lex_seek_op_l(t_lex *lex, int op);
 
+int 	        sh_lex_seek_op_bang(t_lex *lex, int op); // move to classify
+
 int 			sh_lex_seek_ion(t_lex *lex, int op);
 
 int 			sh_lex_seek_wo(t_lex *lex, int op);
-int 			sh_lex_seek_wox(t_lex *lex, int op);
 
 int 			sh_lex_seek_sq(t_lex *lex, int op);
 int 			sh_lex_seek_dq(t_lex *lex, int op);
@@ -173,6 +188,8 @@ int				sh_lex_seek_hd(t_lex *lex, int op);
 char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
 
 int				sh_lex_seek_add(t_lex *lex, int op);
+
+int             sh_lex_class_name(t_lex *lex, int op);
 
 int				sh_lex_print(t_lex *lex);
 
