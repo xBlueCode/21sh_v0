@@ -14,7 +14,7 @@ int		sh_lex_seek_ion(t_lex *lex, int op)
 	if (lex->in->str[pos] == '<' || lex->in->str[pos] == '>')
 	{
 		lex->st = TSION;
-		lex->i = pos + 1;
+		lex->i = pos;
 		return (1);
 	}
 	return (0);
