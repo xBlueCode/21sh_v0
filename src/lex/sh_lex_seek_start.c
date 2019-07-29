@@ -19,11 +19,11 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 			//|| sh_lex_seek_param(lex, op)
 			//|| sh_lex_seek_smath(lex, op)
 			//|| sh_lex_seek_scmd(lex, op)
-			//|| sh_lex_seek_hd(lex, op)
+			|| sh_lex_seek_hd(lex, op)
 			|| sh_lex_seek_op(lex, op)
 			|| sh_lex_seek_ion(lex, op) // check in other scopes
 			|| sh_lex_seek_nl(lex, op)
-			|| sh_lex_seek_wox(lex, op)
+			|| sh_lex_seek_tok(lex, op)
 			)
 			//continue;
 			sh_lex_seek_add(lex, op);
@@ -33,7 +33,7 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 	return (OK);
 }
 
-int 		sh_lex_seek_wox(t_lex *lex, int op)
+int 		sh_lex_seek_tok(t_lex *lex, int op)
 {
 	(void)op;
 	while (lex->in->str[lex->i])
@@ -57,7 +57,7 @@ int 		sh_lex_seek_wox(t_lex *lex, int op)
 		if (ft_strchr(SH_LEX_SEPSET_X, lex->in->str[lex->i])
 			|| ft_isspace(lex->in->str[lex->i]))
 		{
-			lex->st = TSW;
+			lex->st = TSTOK;
 			return (1);
 		}
 		lex->i++;

@@ -58,3 +58,15 @@ int 	sh_lex_seek_op_o(t_lex *lex, int op)
 	}
 	return (0);
 }
+
+int 	sh_lex_seek_op_bang(t_lex *lex, int op)
+{
+    (void)op;
+    if (lex->in->str[lex->i] == '!' && ft_strchr(SH_LEX_SEPSET, lex->in->str[lex->i + 1]))
+    {
+        lex->i++;
+        lex->st = TSBANG;
+        return (1);
+    }
+    return (0);
+}
