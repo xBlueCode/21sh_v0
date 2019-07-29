@@ -6,11 +6,16 @@ int 		sh_lex_seek_escape(t_lex *lex, int op)
 	(void)op;
 	if (lex->in->str[lex->i] == '\\' && lex->in->str[lex->i + 1] != '\n')
 	{
+	    /*
 		if (op == 1)
 			ft_dstrdel_n(lex->in, lex->i++, 1);
 		else
 			lex->i += 2;
 		return (1);
+	     */
+        //ft_dstrdel_n(lex->in, lex->i++, 1);
+        lex->i += 2;
+        return (1);
 	}
 	return (0);
 }
