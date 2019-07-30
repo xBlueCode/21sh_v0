@@ -32,7 +32,7 @@ typedef enum	e_rl_scope
 	RL_SCP_AND,
 	RL_SCP_OR,
 	RL_SCP_SUBSH,
-	RL_SCP_SSH,
+	//RL_SCP_SSH,
 	RL_SCP_MATH
 }				t_rl_scope;
 

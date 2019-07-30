@@ -18,13 +18,14 @@
 # define SH_LEX_SEPSET "'\"`<>&|;\n$" // !
 # define SH_LEX_SEPSET_X "<>&|;\n" // !
 # define SH_LEX_OPSET "<>&|;" // !
+# define SH_LEX_TOK_FORB "})" // !
 
 # define SH_LEX_RETERR(lex, error) {lex->err = error; return (-1);}
 
 typedef enum	e_token_state
 {
 	TSNONE = 0,
-	TSSTART = 25,
+	TSSTART = 27,
 	TSSTOP,
 	TSCONT,
 	TSSEP,
@@ -106,7 +107,8 @@ typedef enum	e_token_state
     TSRW_IN,
     TSRW_BANG,
     TSRW_LBRACE,
-    TSRW_RBRACE
+    TSRW_RBRACE,
+    TSERR
 }				t_token_state;
 
 typedef enum    e_token_context
@@ -186,6 +188,7 @@ int 			sh_lex_seek_bq(t_lex *lex, int op);
 int 			sh_lex_seek_param(t_lex *lex, int op);
 int 			sh_lex_seek_smath(t_lex *lex, int op);
 int 			sh_lex_seek_scmd(t_lex *lex, int op);
+int 			sh_lex_seek_ssh(t_lex *lex, int op);
 
 int				sh_lex_seek_hd(t_lex *lex, int op);
 char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
