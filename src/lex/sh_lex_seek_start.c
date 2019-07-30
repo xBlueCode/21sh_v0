@@ -23,11 +23,18 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 			|| sh_lex_seek_hd(lex, op)
 			|| sh_lex_seek_op(lex, op)
 			|| sh_lex_seek_ion(lex, op) // check in other scopes
-			//|| sh_lex_seek_nl(lex, op)
+			|| sh_lex_seek_nl(lex, op)
 			|| sh_lex_seek_tok(lex, op)
 			)
 			//continue;
+		{
+			if (lex->st == TSERR) // TODO: Recheck mechanism
+			{
+				ft_printf("Parsing Error around '%c' : [%d]\n", lex->in->str[lex->i], lex->i);
+				return (KO);
+			}
 			sh_lex_seek_add(lex, op);
+		}
 		else
 			lex->i++;
 	}
@@ -48,6 +55,7 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 			|| sh_lex_seek_param(lex, op)
 			|| sh_lex_seek_smath(lex, op)
 			|| sh_lex_seek_scmd(lex, op)
+			|| sh_lex_seek_ssh(lex, op)
 			//|| sh_lex_seek_hd(lex, op)
 			//|| sh_lex_seek_op(lex, op)
 			//|| sh_lex_seek_ion(lex, op) // check in other scopes
@@ -60,6 +68,11 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 		{
 			lex->st = TSTOK;
 			return (1);
+		}
+		if (ft_strchr(SH_LEX_TOK_FORB, lex->in->str[lex->i]))
+		{
+			lex->st = TSERR;
+			return (-1);
 		}
 		lex->i++;
 	}
