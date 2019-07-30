@@ -10,10 +10,13 @@ int 			sh_lex_seek_sq(t_lex *lex, int op)
 	(void)op;
 	if (lex->in->str[lex->i] != '\'')
 		return (0);
+	ft_dstrins_ch(lex->scope, -1, RL_SCP_SQ);
 	while (lex->in->str[lex->i] && lex->in->str[++lex->i] != '\'')
 		;
-	if (!lex->in->str[lex->i])
-		SH_LEX_RETERR(lex, TSSQ)
+	//if (!lex->in->str[lex->i])
+	//	SH_LEX_RETERR(lex, TSSQ)
+	if (lex->in->str[lex->i])
+		ft_dstrdel_n(lex->scope, -1, 1);
 	lex->i++;
 	lex->st = TSSQ;
 	return (1);
@@ -23,10 +26,13 @@ int 			sh_lex_seek_bq(t_lex *lex, int op) {
 	(void)op;
 	if (lex->in->str[lex->i] != '`')
 		return (0);
+	ft_dstrins_ch(lex->scope, -1, RL_SCP_BQ);
 	while (lex->in->str[lex->i] && lex->in->str[++lex->i] != '`')
 		;
-	if (!lex->in->str[lex->i])
-		SH_LEX_RETERR(lex, TSBQ)
+	//if (!lex->in->str[lex->i])
+	//	SH_LEX_RETERR(lex, TSBQ)
+	if (lex->in->str[lex->i])
+		ft_dstrdel_n(lex->scope, -1, 1);
 	lex->i++;
 	lex->st = TSBQ;
 	return (1);
@@ -35,6 +41,7 @@ int 			sh_lex_seek_bq(t_lex *lex, int op) {
 int 			sh_lex_seek_dq(t_lex *lex, int op) {
 	if (lex->in->str[lex->i] != '"')
 		return (0);
+	ft_dstrins_ch(lex->scope, -1, RL_SCP_DQ);
 	lex->i++;
 	while (lex->in->str[lex->i] && lex->in->str[lex->i] != '"')
 	{
@@ -57,8 +64,10 @@ int 			sh_lex_seek_dq(t_lex *lex, int op) {
 		else
 			lex->i++;
 	}
-	if (!lex->in->str[lex->i])
-		SH_LEX_RETERR(lex, TSDQ)
+	//if (!lex->in->str[lex->i])
+	//	SH_LEX_RETERR(lex, TSDQ)
+	if (lex->in->str[lex->i])
+		ft_dstrdel_n(lex->scope, -1, 1);
 	lex->i++;
 	lex->st = TSDQ;
 	return (1);
