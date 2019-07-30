@@ -51,9 +51,15 @@ int 	sh_lex_seek_op_o(t_lex *lex, int op)
 	if (lex->in->str[lex->i] == '|' && ++lex->i)
 	{
 		if (lex->in->str[lex->i] == '|' && ++lex->i)
+		{
 			lex->st = TSO2;
+			ft_dstrins_ch(lex->scope, -1, RL_SCP_OR);
+		}
 		else
-			lex->st = TSO;
+        {
+            lex->st = TSO;
+			ft_dstrins_ch(lex->scope, -1, RL_SCP_PIPE);
+        }
 		return (1);
 	}
 	return (0);

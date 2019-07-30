@@ -65,6 +65,7 @@ char		*rl_start(void);
 void		rl_init(void);
 void		rl_reset(t_dastr *ent);
 void		rl_read(void);
+void		xrl_read(void);
 
 int			rl_ctrl_perform(int c);
 int			rl_vim_perform(int c);

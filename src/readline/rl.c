@@ -47,6 +47,35 @@ void		rl_read(void)
 	}
 }
 
+void		xrl_read(void)
+{
+    t_dstr	*line;
+    int		c;
+    char    *rows;
+    t_lex   *lex;
+
+    line = g_rl.txt->a[g_rl.cl];
+    g_rl.txt->a[g_rl.cl] = ft_dstrnew_max(100);
+    if (*g_rl.scope->str == RL_SCP_START)
+        *g_rl.scope->str = '\0';
+    while (!(c = '\0') && read(0, &c, sizeof(int)))
+    {
+        if (!rl_ctrl_perform(c) && !rl_vim_perform(c) && ft_isascii(c))
+            rl_insert_ch(c);
+        if (c == '\n')
+        {
+            rows = ft_dstrjoin_all(g_rl.txt->a, "")->str;
+            sh_lex_init(&lex, rows);
+            sh_lex_start(lex);
+            ft_dstrdel_n(g_rl.scope, 0, g_rl.scope->len);
+            ft_dstrins_str(g_rl.scope, 0, lex->scope->str);
+            //rl_scope_scan();
+            //ft_printf("lex.scope: %s\nrl.scope: %s");
+            break;
+        }
+    }
+}
+
 char		*rl_start(void)
 {
 	rl_init();
@@ -60,7 +89,7 @@ char		*rl_start(void)
 		rl_scope_prompt(g_rl.scope->str);
 		if (ft_dstrget_ch(g_rl.scope, -1) == RL_SCP_JOIN)
 			ft_dstrdel_n(g_rl.scope, -1, 1);
-		rl_read();
+		xrl_read();
 		if (!g_rl.txt->a[g_rl.cl]->str)
 			ft_putendl("NULL line");
 		ft_putstr(g_rl.txt->a[g_rl.cl]->str);

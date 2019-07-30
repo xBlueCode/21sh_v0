@@ -38,7 +38,8 @@ int 			sh_lex_seek_dq(t_lex *lex, int op) {
 	lex->i++;
 	while (lex->in->str[lex->i] && lex->in->str[lex->i] != '"')
 	{
-		if (sh_lex_seek_join(lex, op)
+		if (sh_lex_seek_rescope(lex, op)
+			|| sh_lex_seek_join(lex, op)
 			//|| sh_lex_seek_space(lex, op)
 			|| sh_lex_seek_escape(lex, op)
 			|| sh_lex_seek_sq(lex, op)

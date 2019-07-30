@@ -13,6 +13,8 @@
 #ifndef SH_LEX_H
 # define SH_LEX_H
 
+# include "ft_rl.h"
+
 # define SH_LEX_SEPSET "'\"`<>&|;\n$" // !
 # define SH_LEX_SEPSET_X "<>&|;\n" // !
 # define SH_LEX_OPSET "<>&|;" // !
@@ -156,6 +158,7 @@ int 			sh_lex_seek_all(t_lex *lex, int op);
 
 int				sh_lex_seek_start(t_lex *lex, int op);
 int 			sh_lex_seek_tok(t_lex *lex, int op);
+int             sh_lex_seek_rescope(t_lex *lex, int op);
 
 int 			sh_lex_seek_space(t_lex *lex, int op);
 int 			sh_lex_seek_escape(t_lex *lex, int op);
