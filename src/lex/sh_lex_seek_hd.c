@@ -6,7 +6,7 @@ int			sh_lex_seek_hd(t_lex *lex, int op)
 	return (sh_lex_seek_hdk(lex, op || sh_lex_seek_hdv(lex, op)));
 }
 
-int			sh_lex_seek_hd_old(t_lex *lex, int op)
+int			sh_lex_seek_hd_old(t_lex *lex, int op) // TODO : Del if not needed
 {
 	char	*hd_key;
 	char	*hd_val;
@@ -67,6 +67,7 @@ int 		sh_lex_seek_hdv(t_lex *lex, int op)
 	hd_key = ft_dastrget_i(lex->hd_key, -1)->str;
 	if (!(hd_val = sh_lex_seek_hd_getval(lex, hd_key, off)))
 	{
+		lex->in->str[off] = '\0';
 		return (0);
 	}
 	ft_dstrdel_n(lex->in, off, ft_strlen(hd_val) + ft_strlen(hd_key));
@@ -75,7 +76,6 @@ int 		sh_lex_seek_hdv(t_lex *lex, int op)
 	return (1);
 
 }
-
 
 char 		*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off)
 {
