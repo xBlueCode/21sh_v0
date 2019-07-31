@@ -44,6 +44,8 @@ int 		sh_lex_seek_all(t_lex *lex, int op)
 int 		sh_lex_seek_space(t_lex *lex, int op)
 {
 	(void)op;
+	if (lex->in->str[lex->i] == '\n')
+		return (0);
 	if (!ft_isspace(lex->in->str[lex->i]))
 		return (0);
 	while (ft_isspace(lex->in->str[lex->i]))
