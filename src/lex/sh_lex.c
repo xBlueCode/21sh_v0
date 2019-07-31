@@ -19,6 +19,7 @@ int 		sh_lex_init(t_lex **plex, char *input)
 	(*plex)->tlst = NULL;
 	(*plex)->toff = (*plex)->tlst;
     (*plex)->tclass = (*plex)->tlst;
+	(*plex)->hd_key = ft_dastrnew_max(1);
 	(*plex)->hd_val = ft_dastrnew_max(1);
 	return (0);
 }
