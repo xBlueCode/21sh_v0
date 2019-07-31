@@ -20,9 +20,9 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 			//|| sh_lex_seek_param(lex, op)
 			//|| sh_lex_seek_smath(lex, op)
 			//|| sh_lex_seek_scmd(lex, op)
-			//|| sh_lex_seek_hd(lex, op)
-			|| sh_lex_seek_hdk(lex, op)
-			|| sh_lex_seek_hdv(lex, op)
+			|| sh_lex_seek_hd(lex, op)
+			//|| sh_lex_seek_hdk(lex, op) // TODO: replace {hdk, hdv} with hd
+			//|| sh_lex_seek_hdv(lex, op)
 			|| sh_lex_seek_op(lex, op)
 			|| sh_lex_seek_ion(lex, op) // check in other scopes
 			|| sh_lex_seek_nl(lex, op)
@@ -30,7 +30,7 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 			)
 			//continue;
 		{
-			if (lex->st == TSERR) // TODO: Recheck mechanism
+			if (lex->st == TSERR) // TODO: recheck mechanism
 			{
 				ft_printf("Parsing Error around '%c' : [%d]\n", lex->in->str[lex->i], lex->i);
 				return (KO);
