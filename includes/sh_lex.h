@@ -15,8 +15,8 @@
 
 # include "ft_rl.h"
 
-# define SH_LEX_SEPSET "'\"`<>&|;\n$" // !
-# define SH_LEX_SEPSET_X "<>&|;\n" // !
+# define SH_LEX_SEPSET "'\"`<>&|;\n$)" // !
+# define SH_LEX_SEPSET_X "<>&|;\n)" // !
 # define SH_LEX_OPSET "<>&|;" // !
 # define SH_LEX_TOK_FORB "})" // !
 
@@ -158,6 +158,7 @@ int				sh_lex_tok_free(t_token **ptok);
 
 int 			sh_lex_seek(t_lex *lex, int op);
 int 			sh_lex_seek_all(t_lex *lex, int op);
+int 			sh_lex_seek_ctx(t_lex *lex, int op);
 
 int				sh_lex_seek_start(t_lex *lex, int op);
 int 			sh_lex_seek_tok(t_lex *lex, int op);
@@ -190,6 +191,7 @@ int 			sh_lex_seek_param(t_lex *lex, int op);
 int 			sh_lex_seek_smath(t_lex *lex, int op);
 int 			sh_lex_seek_scmd(t_lex *lex, int op);
 int 			sh_lex_seek_ssh(t_lex *lex, int op);
+int 			sh_lex_seek_p(t_lex *lex, int op);
 
 int				sh_lex_seek_hd(t_lex *lex, int op);
 int				sh_lex_seek_hdk(t_lex *lex, int op);

@@ -11,18 +11,16 @@ int 	sh_lex_seek_p(t_lex *lex, int op)
 		lex->i++;
 		return (1);
 	}
-	else if (lex->in->str[lex->i] == ')')
+	else if (lex->in->str[lex->i] == ')'
+		&& ft_dstrget_ch(lex->scope, -1) == RL_SCP_SUBSH)
 	{
-		if (ft_dstrget_ch(lex->scope, -1) != RL_SCP_SUBSH)
+		if (ft_dstrget_ch(lex->scope, -1) == RL_SCP_SUBSH)
 		{
-			lex->st = TSERR;
+			lex->st = TSPR;
+			ft_dstrdel_n(lex->scope, -1, 1);
 			lex->i++;
 			return (1);
 		}
-		lex->st = TSPR;
-		ft_dstrdel_n(lex->scope, -1, 1);
-		lex->i++;
-		return (1);
 	}
 	return (0);
 }

@@ -14,6 +14,7 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 		    || sh_lex_seek_join(lex, op)
 		    //|| sh_lex_seek_escape(lex, op)
 			|| sh_lex_seek_space(lex, op)
+			|| sh_lex_seek_p(lex, op)
 			//|| sh_lex_seek_sq(lex, op)
 			//|| sh_lex_seek_dq(lex, op)
 			//|| sh_lex_seek_bq(lex, op)
@@ -35,6 +36,8 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 				ft_printf("Parsing Error around '%c' : [%d]\n", lex->in->str[lex->i], lex->i);
 				return (KO);
 			}
+			else if (lex->st != TSNONE)
+				sh_lex_seek_ctx(lex, op);
 			sh_lex_seek_add(lex, op);
 		}
 		else
@@ -57,7 +60,7 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 			|| sh_lex_seek_param(lex, op)
 			|| sh_lex_seek_smath(lex, op)
 			|| sh_lex_seek_scmd(lex, op)
-			|| sh_lex_seek_ssh(lex, op)
+			//|| sh_lex_seek_ssh(lex, op)
 			//|| sh_lex_seek_hd(lex, op)
 			//|| sh_lex_seek_op(lex, op)
 			//|| sh_lex_seek_ion(lex, op) // check in other scopes
@@ -69,13 +72,16 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 			|| ft_isspace(lex->in->str[lex->i]))
 		{
 			lex->st = TSTOK;
+			//lex->i++;
 			return (1);
 		}
+		/*
 		if (ft_strchr(SH_LEX_TOK_FORB, lex->in->str[lex->i]))
 		{
 			lex->st = TSERR;
 			return (-1);
 		}
+		 */
 		lex->i++;
 	}
 	return (op);

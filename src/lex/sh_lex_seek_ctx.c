@@ -4,7 +4,9 @@
 int 	sh_lex_seek_ctx(t_lex *lex, int op)
 {
 	(void)op;
-	if (lex->st == TSNONE
+	if (lex->st == TSWS)
+		return (0);
+	if (lex->st == TSSTART
 		||	lex->st == TSSC
 		|| lex->st == TSA || lex->st == TSA2
 		|| lex->st == TSO || lex->st == TSO2
@@ -13,5 +15,5 @@ int 	sh_lex_seek_ctx(t_lex *lex, int op)
 		lex->ctx = TCTX_FIRSTW;
 	else
 		lex->ctx = TCTX_NONE;
-	return (0);
+	return (1);
 }

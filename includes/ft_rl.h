@@ -32,6 +32,7 @@ typedef enum	e_rl_scope
 	RL_SCP_AND,
 	RL_SCP_OR,
 	RL_SCP_SUBSH,
+	RL_SCP_CURSH,
 	//RL_SCP_SSH,
 	RL_SCP_MATH
 }				t_rl_scope;
@@ -208,7 +209,9 @@ static char *g_rl_scope_prompt[] =
 	"pipe",
 	"cmdand",
 	"cmdor",
-	"subsh"
+	"subsh",
+	"cursh",
+	NULL
 };
 
 static int	g_rl_ctrl_keymap[] =

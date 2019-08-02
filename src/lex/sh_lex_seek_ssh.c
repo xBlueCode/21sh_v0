@@ -24,7 +24,7 @@ int 			sh_lex_seek_ssh(t_lex *lex, int op) {
 			|| sh_lex_seek_ion(lex, op)
 			//|| sh_lex_seek_wo(lex, op)
 			//|| sh_lex_seek_nl(lex, op)
-			|| sh_lex_seek_tok(lex, op)
+			//|| sh_lex_seek_tok(lex, op)
 			)
 			continue;
 			//sh_lex_seek_add(lex, op);

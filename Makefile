@@ -52,6 +52,7 @@ LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c sh_lex_print.c \
 	sh_lex_seek.c sh_lex_seek_start.c sh_lex_seek_bs.c sh_lex_seek_q.c \
 	sh_lex_seek_op.c sh_lex_seek_s.c sh_lex_seek_hd.c \
 	sh_lex_seek_op_gl.c sh_lex_seek_ion.c sh_lex_seek_ssh.c \
+	sh_lex_seek_ctx.c sh_lex_seek_pcb.c \
 	sh_lex_seek_add.c
 
 UTILS := utils_str.c

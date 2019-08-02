@@ -41,22 +41,38 @@ int 			sh_lex_seek_scmd(t_lex *lex, int op)
 		return (0);
 	ft_dstrins_ch(lex->scope, -1, RL_SCP_SCMD);
 	lex->i += 2;
-	while (lex->in->str[lex->i] && lex->in->str[lex->i] != ')')
+	lex->ctx = TCTX_FIRSTW;
+	//while ((lex->in->str[lex->i] && lex->in->str[lex->i] != ')'))
+		//|| ft_dstrget_ch(lex->scope, -1) == RL_SCP_SUBSH)
+	while ((lex->in->str[lex->i]))
 	{
-		if (sh_lex_seek_rescope(lex, op)
+		if (lex->in->str[lex->i] == ')')
+		{
+			if (sh_lex_seek_p(lex, op))
+				sh_lex_seek_ctx(lex, op);
+			else
+				break;
+		}
+		else if (sh_lex_seek_rescope(lex, op)
 			|| sh_lex_seek_join(lex, op)
 			//|| sh_lex_seek_space(lex, op)
 			|| sh_lex_seek_escape(lex, op)
 			|| sh_lex_seek_hd(lex, op)
 			|| sh_lex_seek_op(lex, op)
+			|| sh_lex_seek_p(lex, op)
 			|| sh_lex_seek_sq(lex, op)
 			|| sh_lex_seek_dq(lex, op)
 			|| sh_lex_seek_bq(lex, op)
 			|| sh_lex_seek_param(lex, op)
 			|| sh_lex_seek_smath(lex, op)
+			//|| sh_lex_seek_ssh(lex, op)
 			|| sh_lex_seek_scmd(lex, op)
 			)
-			continue;
+			//continue;
+		{
+			//if (lex->st != TSNONE)
+			sh_lex_seek_ctx(lex, op);
+		}
 			//sh_lex_seek_add(lex, op);
 		else
 			lex->i++;

@@ -16,6 +16,7 @@ int 		sh_lex_init(t_lex **plex, char *input)
 	(*plex)->i = 0;
 	(*plex)->scope = ft_dstrnew_max(1);
 	(*plex)->st = TSNONE;
+	(*plex)->ctx = TCTX_FIRSTW;
 	(*plex)->tlst = NULL;
 	(*plex)->toff = (*plex)->tlst;
     (*plex)->tclass = (*plex)->tlst;
