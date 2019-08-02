@@ -8,7 +8,7 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 
 	(void)op;
 	//ft_printf("seek_add:: ST: <%d>  off: <%d>  i: <%d>\n", lex->st, off, lex->i);
-	if (lex->st == TSNONE)
+	if (lex->st == TSWS)
 	{
 		lex->off = lex->i;
 		return (0);

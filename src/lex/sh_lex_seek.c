@@ -50,6 +50,7 @@ int 		sh_lex_seek_space(t_lex *lex, int op)
 		return (0);
 	while (ft_isspace(lex->in->str[lex->i]))
 		lex->i++;
+	lex->st = TSWS;
 	//ft_printf("-- > space detected ! at %d\n", lex->i);
 	return (1);
 }
