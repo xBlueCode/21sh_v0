@@ -19,7 +19,7 @@ int 		sh_lex_seek_all(t_lex *lex, int op)
 		//lex->st = TSNONE; // not final
 		//ft_printf("--->  seeking all from %d\n", off);
 		if (sh_lex_seek_join(lex, op)
-			|| sh_lex_seek_space(lex, op)
+			|| sh_lex_seek_blank(lex, op)
 			|| sh_lex_seek_escape(lex, op)
 			|| sh_lex_seek_sq(lex, op)
 			|| sh_lex_seek_dq(lex, op)
@@ -41,17 +41,14 @@ int 		sh_lex_seek_all(t_lex *lex, int op)
 	return (OK);
 }
 
-int 		sh_lex_seek_space(t_lex *lex, int op)
+int 		sh_lex_seek_blank(t_lex *lex, int op)
 {
 	(void)op;
-	if (lex->in->str[lex->i] == '\n')
+	if (!ft_isblank(lex->in->str[lex->i]))
 		return (0);
-	if (!ft_isspace(lex->in->str[lex->i]))
-		return (0);
-	while (ft_isspace(lex->in->str[lex->i]))
-		lex->i++;
-	lex->st = TSWS;
-	//ft_printf("-- > space detected ! at %d\n", lex->i);
+	while (ft_isblank(lex->in->str[++lex->i]))
+		;
+	lex->st = TSBLANK;
 	return (1);
 }
 

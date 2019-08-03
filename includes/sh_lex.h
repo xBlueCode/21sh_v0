@@ -30,6 +30,7 @@ typedef enum	e_token_state
 	TSCONT,
 	TSSEP,
 	TSWS,
+	TSBLANK,
 	TSG,
 	TSL,
 	TSE,
@@ -163,7 +164,7 @@ int				sh_lex_seek_start(t_lex *lex, int op);
 int 			sh_lex_seek_tok(t_lex *lex, int op);
 int             sh_lex_seek_rescope(t_lex *lex, int op);
 
-int 			sh_lex_seek_space(t_lex *lex, int op);
+int 			sh_lex_seek_blank(t_lex *lex, int op);
 int 			sh_lex_seek_escape(t_lex *lex, int op);
 int 			sh_lex_seek_join(t_lex *lex, int op);
 
