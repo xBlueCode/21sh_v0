@@ -142,7 +142,6 @@ typedef struct	s_lex
 	t_dastr *hd_val; // TODO: Transfer to Hashmap<hd_key, hd_val>
 }				t_lex;
 
-
 t_lex 			sh_lex(void);
 int				sh_lex_init(t_lex **plex, char *input);
 int 			sh_lex_free(t_lex **plex);
@@ -168,7 +167,6 @@ int 			sh_lex_seek_space(t_lex *lex, int op);
 int 			sh_lex_seek_escape(t_lex *lex, int op);
 int 			sh_lex_seek_join(t_lex *lex, int op);
 
-
 int 			sh_lex_seek_nl(t_lex *lex, int op);
 
 int 			sh_lex_seek_op(t_lex *lex, int op);
@@ -192,6 +190,7 @@ int 			sh_lex_seek_smath(t_lex *lex, int op);
 int 			sh_lex_seek_scmd(t_lex *lex, int op);
 int 			sh_lex_seek_ssh(t_lex *lex, int op);
 int 			sh_lex_seek_p(t_lex *lex, int op);
+int 			sh_lex_seek_cb(t_lex *lex, int op);
 
 int				sh_lex_seek_hd(t_lex *lex, int op);
 int				sh_lex_seek_hdk(t_lex *lex, int op);

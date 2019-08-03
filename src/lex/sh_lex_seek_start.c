@@ -15,6 +15,7 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 		    //|| sh_lex_seek_escape(lex, op)
 			|| sh_lex_seek_space(lex, op)
 			|| sh_lex_seek_p(lex, op)
+			|| sh_lex_seek_cb(lex, op)
 			//|| sh_lex_seek_sq(lex, op)
 			//|| sh_lex_seek_dq(lex, op)
 			//|| sh_lex_seek_bq(lex, op)
@@ -31,14 +32,17 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 			)
 			//continue;
 		{
+			/*
 			if (lex->st == TSERR) // TODO: recheck mechanism
 			{
 				ft_printf("Parsing Error around '%c' : [%d]\n", lex->in->str[lex->i], lex->i);
 				return (KO);
 			}
-			else if (lex->st != TSNONE)
+			 */
+			if (lex->st != TSNONE)
 				sh_lex_seek_ctx(lex, op);
-			sh_lex_seek_add(lex, op);
+			if (sh_lex_seek_add(lex, op) < 0)
+				return (-1);
 		}
 		else
 			lex->i++;
@@ -48,7 +52,10 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 
 int 		sh_lex_seek_tok(t_lex *lex, int op)
 {
+	int 	off;
+
 	(void)op;
+	off = lex->i;
 	while (lex->in->str[lex->i])
 	{
 		if (sh_lex_seek_rescope(lex, op)
@@ -71,7 +78,10 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 		if (ft_strchr(SH_LEX_SEPSET_X, lex->in->str[lex->i])
 			|| ft_isspace(lex->in->str[lex->i]))
 		{
-			lex->st = TSTOK;
+			if (lex->i == off)
+				lex->st = TSERR;
+			else
+				lex->st = TSTOK;
 			//lex->i++;
 			return (1);
 		}

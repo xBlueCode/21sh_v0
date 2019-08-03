@@ -8,6 +8,11 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 
 	(void)op;
 	//ft_printf("seek_add:: ST: <%d>  off: <%d>  i: <%d>\n", lex->st, off, lex->i);
+	if (lex->st == TSERR)
+	{
+		ft_printf("Parsing Error at [%d]: '%c'\n", lex->i, lex->in->str[lex->i]);
+		return (-1);
+	}
 	if (lex->st == TSWS || lex->st == TSNONE)
 	{
 		lex->off = lex->i;
