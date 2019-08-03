@@ -166,6 +166,7 @@ int             sh_lex_seek_rescope(t_lex *lex, int op);
 
 int 			sh_lex_seek_blank(t_lex *lex, int op);
 int 			sh_lex_seek_escape(t_lex *lex, int op);
+int 			sh_lex_seek_hash(t_lex *lex, int op);
 int 			sh_lex_seek_join(t_lex *lex, int op);
 
 int 			sh_lex_seek_nl(t_lex *lex, int op);

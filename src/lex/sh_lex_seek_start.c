@@ -12,8 +12,9 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 		if (//sh_lex_seek_escape(lex, op)
 			sh_lex_seek_rescope(lex, op)
 		    || sh_lex_seek_join(lex, op)
+		    || sh_lex_seek_hash(lex, op)
 		    //|| sh_lex_seek_escape(lex, op)
-			|| sh_lex_seek_space(lex, op)
+			|| sh_lex_seek_blank(lex, op)
 			|| sh_lex_seek_p(lex, op)
 			|| sh_lex_seek_cb(lex, op)
 			//|| sh_lex_seek_sq(lex, op)
@@ -32,13 +33,6 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 			)
 			//continue;
 		{
-			/*
-			if (lex->st == TSERR) // TODO: recheck mechanism
-			{
-				ft_printf("Parsing Error around '%c' : [%d]\n", lex->in->str[lex->i], lex->i);
-				return (KO);
-			}
-			 */
 			if (lex->st != TSNONE)
 				sh_lex_seek_ctx(lex, op);
 			if (sh_lex_seek_add(lex, op) < 0)
