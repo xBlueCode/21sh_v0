@@ -4,7 +4,7 @@
 int 	sh_lex_seek_ctx(t_lex *lex, int op)
 {
 	(void)op;
-	if (lex->st == TSWS)
+	if (lex->st == TSBLANK)
 		return (0);
 	if (lex->st == TSSTART
 		||	lex->st == TSSC
