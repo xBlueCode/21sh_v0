@@ -109,6 +109,7 @@ typedef enum	e_token_state
     TSRW_BANG,
     TSRW_LBRACE,
     TSRW_RBRACE,
+    TSALIAS,
     TSERR
 }				t_token_state;
 
@@ -141,6 +142,9 @@ typedef struct	s_lex
 	t_list  *tclass;
 	t_dastr	*hd_key;
 	t_dastr *hd_val; // TODO: Transfer to Hashmap<hd_key, hd_val>
+	t_hset	*alias_chain;
+	int 	alias_off;
+	int 	alias_rec;
 }				t_lex;
 
 t_lex 			sh_lex(void);
@@ -199,7 +203,10 @@ int				sh_lex_seek_hdk(t_lex *lex, int op);
 int				sh_lex_seek_hdv(t_lex *lex, int op);
 char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
 
+int				sh_lex_seek_als(t_lex *lex, int op);
 int				sh_lex_seek_add(t_lex *lex, int op);
+
+int 			sh_lex_isinname(char c);
 
 int             sh_lex_class_name(t_lex *lex, int op);
 

@@ -13,9 +13,10 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 		ft_printf("Parsing Error at [%d]: '%c'\n", lex->i, lex->in->str[lex->i]);
 		return (-1);
 	}
-	if (lex->st == TSBLANK || lex->st == TSNONE)
+	if (lex->st == TSBLANK || lex->st == TSNONE || lex->st == TSALIAS)
 	{
 		lex->off = lex->i;
+		lex->st = TSNONE;
 		return (0);
 	}
 	l = lex->i - lex->off;
@@ -29,6 +30,7 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 	sh_lex_tok_add(lex, tok);
 	lex->st = TSNONE; // not final
 	lex->off = lex->i; // not final
-	ft_printf("Tok: %-4d - %s\n", tok->t, tok->val ? tok->val->str : "");
+	if (op)
+		ft_printf("Tok: %-4d - %s\n", tok->t, tok->val ? tok->val->str : "");
 	return (1);
 }

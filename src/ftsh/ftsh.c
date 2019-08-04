@@ -77,6 +77,17 @@ int		main(int ac, char **av, char **envp)
 	sh_bin_update(sh_bin(), sh_var_getval("PATH"));
 	ft_printf("Bins Updated !!!\n");
 	ft_printf("echo :: %s\n", sh_bin_getpath(sh_bin(), "echo"));
+
+	sh_als_init();
+	sh_als_add(sh_als(), "al1", "cd ;");
+	sh_als_add(sh_als(), "al2", "cd ; al2");
+	sh_als_add(sh_als(), "al3", "al1 ; al2");
+
+
+	sh_als_add(sh_als(), "AA", "BB");
+	sh_als_add(sh_als(), "BB", "CC");
+	sh_als_add(sh_als(), "CC", "AA");
+
 	//sh_invar_init();
 	//sh_hash_init();
 	//if (ac > 1)

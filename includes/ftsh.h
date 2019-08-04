@@ -17,6 +17,7 @@
 # include "sh_lex.h"
 # include "sh_glob.h"
 # include "sh_utils.h"
+# include "sh_alias.h"
 
 # define TEST_LEAKS 0
 

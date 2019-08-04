@@ -22,6 +22,10 @@ int 		sh_lex_init(t_lex **plex, char *input)
     (*plex)->tclass = (*plex)->tlst;
 	(*plex)->hd_key = ft_dastrnew_max(1);
 	(*plex)->hd_val = ft_dastrnew_max(1);
+	(*plex)->alias_chain =
+			ft_hset_init(24, &ft_hcode_str, &ft_hequals_str, &ft_memdel);
+	(*plex)->alias_off = 0;
+	(*plex)->alias_rec = 0;
 	return (0);
 }
 
