@@ -6,7 +6,7 @@ int 	sh_lex_seek_ctx(t_lex *lex, int op)
 	(void)op;
 	if (lex->st == TSBLANK)
 		return (0);
-	if (lex->st == TSSTART
+	else if (lex->st == TSSTART
 		||	lex->st == TSSC
 		|| lex->st == TSA || lex->st == TSA2
 		|| lex->st == TSO || lex->st == TSO2

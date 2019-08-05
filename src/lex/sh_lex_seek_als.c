@@ -74,7 +74,8 @@ int 	sh_lex_seek_als(t_lex *lex, int op)
 
 	(void) op;
 	if (lex->i < lex->alias_off
-		|| lex->ctx != TCTX_FIRSTW || !sh_lex_isinname(lex->in->str[lex->i]))
+		|| (lex->ctx != TCTX_ALIAS && lex->ctx != TCTX_FIRSTW)
+		|| !sh_lex_isinname(lex->in->str[lex->i]))
 		return (0);
 	pos = lex->i;
 	while (sh_lex_isinname(lex->in->str[++pos]));
@@ -96,6 +97,7 @@ int 	sh_lex_seek_als(t_lex *lex, int op)
 	}
 	if (sh_lex_seek_als_start(alex, op) < 0)
 		return (0);
+	//lex->st = TSALIAS;
 	ft_dstrdel_n(lex->in, lex->i, pos);
 	ft_dstrins_str(lex->in, lex->i, alex->in->str);
 	lex->alias_off = lex->i + ft_strlen(alex->in->str);

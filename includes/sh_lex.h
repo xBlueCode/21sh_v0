@@ -15,8 +15,8 @@
 
 # include "ft_rl.h"
 
-# define SH_LEX_SEPSET "'\"`<>&|;\n$)" // !
-# define SH_LEX_SEPSET_X "<>&|;\n)" // !
+# define SH_LEX_SEPSET "'\"`<>&|;\n$)(" // !
+# define SH_LEX_SEPSET_X "<>&|;\n)(" // !
 # define SH_LEX_OPSET "<>&|;" // !
 # define SH_LEX_TOK_FORB "})" // !
 
@@ -116,7 +116,8 @@ typedef enum	e_token_state
 typedef enum    e_token_context
 {
     TCTX_NONE,
-    TCTX_FIRSTW
+    TCTX_FIRSTW,
+	TCTX_ALIAS
 }               t_tooken_context;
 
 typedef struct	s_token

@@ -5,7 +5,7 @@ Tokens:
 	TSSTOP,
 	TSCONT,
 	TSSEP,
-	TSWS,
+	TSBLANK,
 
 	TSG,	>
 	TSL,	<
