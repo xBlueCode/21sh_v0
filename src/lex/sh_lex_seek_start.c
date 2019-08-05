@@ -51,6 +51,7 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 
 	(void)op;
 	off = lex->i;
+	lex->assi = -1;
 	while (lex->in->str[lex->i])
 	{
 		if (sh_lex_seek_rescope(lex, op)
@@ -87,7 +88,8 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 			return (-1);
 		}
 		 */
-		lex->i++;
+		if (lex->in->str[lex->i++] == '=' && lex->assi < 0)
+			lex->assi = lex->i - 1;
 	}
 	return (op);
 }

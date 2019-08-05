@@ -26,6 +26,7 @@ int 		sh_lex_init(t_lex **plex, char *input)
 			ft_hset_init(24, &ft_hcode_str, &ft_hequals_str, &ft_memdel);
 	(*plex)->alias_off = 0;
 	(*plex)->alias_rec = 0;
+	(*plex)->assi = -1;
 	return (0);
 }
 

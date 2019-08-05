@@ -10,6 +10,7 @@ t_token			*sh_lex_tok_new(int type, ssize_t pos, int len, char *xme)
 	tok->t = type;
 	tok->p = pos;
 	tok->l = len;
+	tok->assi = -1;
 	tok->val = ft_dstrset_str(xme);
 	return (tok);
 }

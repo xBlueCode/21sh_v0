@@ -124,6 +124,7 @@ typedef struct	s_token
 {
 	int		t;
 	ssize_t p;
+	int 	assi;
 	int 	l;
 	t_dstr	*val;
 }				t_token;
@@ -146,6 +147,7 @@ typedef struct	s_lex
 	t_hset	*alias_chain;
 	int 	alias_off;
 	int 	alias_rec;
+	int 	assi;
 }				t_lex;
 
 t_lex 			sh_lex(void);
