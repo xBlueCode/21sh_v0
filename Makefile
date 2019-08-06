@@ -56,10 +56,17 @@ LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c sh_lex_print.c \
 	sh_lex_seek_hash.c sh_lex_seek_add.c \
 	sh_lex_utils.c
 
+PARSER := sh_p_and_or.c sh_p_cmd.c sh_p_cmd_pref.c sh_p_cmd_suff.c \
+    sh_p_comp_list.c sh_p_complete_cmd.c sh_p_group.c sh_p_io.c \
+    sh_p_lbreak.c sh_p_list.c sh_p_pipe.c sh_p_program.c sh_p_redir_list.c \
+    sh_p_sep.c sh_p_simp_cmd.c sh_p_start.c sh_p_subsh.c \
+    sh_p_term.c sh_p_utils.c
+
 UTILS := utils_str.c
 
 SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
 	$(addprefix lex/,  $(LEX)) \
+	$(addprefix parser/,  $(PARSER)) \
 	$(addprefix alias/,  $(ALIAS)) \
 	$(addprefix var/,  $(VAR)) \
 	$(addprefix bin/,  $(BIN)) \
