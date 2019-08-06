@@ -20,10 +20,7 @@ int				sh_p_cmd(t_parser *p, t_btree *ast)
 
 int				sh_p_comp_cmd(t_parser *p, t_btree *ast)
 {
-	t_list	*back;
-
 	DP0
-	back = p->tlook;
 	if (sh_p_cb_group(p, ast))
 		PRET(1)
 	if (sh_p_subsh(p, ast))

@@ -36,7 +36,9 @@ int		sh_p_io_file(t_parser *p, t_btree *ast)
 int		sh_p_filename(t_parser *p, t_btree *ast)
 {
 	DP0
-	PRET(sh_p_match(p, ast, TSTOK_WORD)); //TODO: Rule 2
+	if (sh_p_match(p, ast, TSTOK_WORD)) //TODO: Rule 2
+		PRET(1);
+	PRET(0)
 }
 
 int		sh_p_io_here(t_parser *p, t_btree *ast)
@@ -54,5 +56,7 @@ int		sh_p_io_here(t_parser *p, t_btree *ast)
 int		sh_p_here_end(t_parser *p, t_btree *ast)
 {
 	DP0
-	PRET(sh_p_match(p, ast, TSTOK_WORD)); // Apply Rule 3
+	if (sh_p_match(p, ast, TSTOK_WORD)) // Apply Rule 3
+		PRET(1);
+	PRET(0);
 }

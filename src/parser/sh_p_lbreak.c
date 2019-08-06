@@ -3,7 +3,9 @@
 int		sh_p_nl_list(t_parser *p, t_btree *ast)
 {
 	DP0
-	PRET(sh_p_match(p, ast, TSNL) && sh_p_nl_list_sub(p, ast));
+	if (sh_p_match(p, ast, TSNL) && sh_p_nl_list_sub(p, ast))
+		PRET(1);
+	PRET(0);
 }
 
 int		sh_p_nl_list_sub(t_parser *p, t_btree *ast)
