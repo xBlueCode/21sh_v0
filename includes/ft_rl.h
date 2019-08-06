@@ -2,8 +2,8 @@
 # define FT_RL_H
 
 # include "libft.h"
-#include "ftsh.h"
-#include "rl_hist.h"
+//# include "ftsh.h"
+# include "rl_hist.h"
 
 # define RL_SCP_SIZE 1
 

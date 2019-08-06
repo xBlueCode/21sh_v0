@@ -14,7 +14,8 @@
 # include "sh_term.h"
 # include "ft_rl.h"
 //# include "rl_hist.h"
-# include "sh_lex.h"
+# include "sh_parser.h"
+//# include "sh_lex.h"
 # include "sh_glob.h"
 # include "sh_utils.h"
 # include "sh_alias.h"
@@ -24,5 +25,7 @@
 # define EXIT -2
 
 # define CFPUTSTR(c, str, fd) (ft_dprintf(fd, "%s%s%s", c, str, T_END))
+
+//int				sh_p_start(t_lex *lex);
 
 #endif
