@@ -1,22 +1,38 @@
 // header
 
 #include "ftsh.h"
+#include <fcntl.h>
 
 t_term	g_term;
 
+int		sh_script_run(char *script);
+
 int		sh_file_run(char *filename)
 {
+	t_dstr	*dscript;
+	char 	c;
+	int 	fd;
+
 	ft_putendl(filename);
-	if (filename)
-		return (0);
-	return (1);
+	dscript = ft_dstrnew_max(128);
+	if ((fd = open(filename, O_RDONLY)) < 0)
+		return (1);
+	while (!(c = 0) && read(fd, &c, 1))
+		ft_dstrins_ch(dscript, -1, c);
+	return (sh_script_run(dscript->str));
 }
 
 int		sh_script_run(char *script)
 {
-	if (script)
-		return (0);
-	return (1);
+	t_lex *lex;
+
+	ft_printf("\nRunning:\n%s\n\n", script);
+	if (!script)
+		return (1);
+	sh_lex_init(&lex, script);
+	sh_lex_start(lex);
+	sh_p_start(lex);
+	return (0);
 }
 
 int		sh_inter_read(char **line)
@@ -111,11 +127,13 @@ int		main(int ac, char **av, char **envp)
 
 	//sh_invar_init();
 	//sh_hash_init();
-	//if (ac > 1)
-	//	sh_est = (sh_file_run(av[1]));
-	//else
+	if (ac > 1)
+		sh_est = (sh_file_run(av[1]));
+	else
+	{
 		sh_est = (sh_inter_run());
-	sh_termconfig_reset();
+		sh_termconfig_reset();
+	}
 	//sh_cleanup();
 	return (sh_est);
 }
