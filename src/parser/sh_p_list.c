@@ -24,8 +24,9 @@ int		sh_p_list_sub(t_parser *p, t_btree *ast)
 	if (sh_p_sep_op(p, ast))
 	{
 		if (sh_p_and_or(p, ast) && sh_p_list_sub(p, ast))
-			PRET(1)
-		PRET(0)
+			PRET(1);
+		p->tlook = back;
+		PRET(1)
 	}
 	//return (sh_p_lookshift(p));
 //	p->tlook = back;
