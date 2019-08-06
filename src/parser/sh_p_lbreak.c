@@ -19,10 +19,10 @@ int		sh_p_nl_list_sub(t_parser *p, t_btree *ast)
 	{
 		if (sh_p_nl_list_sub(p, ast))
 			PRET(1)
-		PRET(0)
+		PRET(1)
 	}
 	p->tlook = back;
-	PRET(0);
+	PRET(1);
 }
 
 int		sh_p_lbreak(t_parser *p, t_btree *ast)
