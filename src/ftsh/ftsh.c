@@ -28,6 +28,26 @@ int		sh_inter_read(char **line)
 	*line = rl_start();
 	return (0);
 }
+/*
+// TODO: move to parser folder
+static int 	sh_p_start(t_lex *lex)
+{
+	t_parser p;
+
+	p.tbase = lex->tlst;
+	p.tlook = lex->tlst;
+	p.tlast = lex->tlst;
+	p.lev = 0;
+
+	sh_p_program(&p, NULL);
+	if (p.tlook && p.tlook->content)
+	{
+		ft_printf("\n Parsing Error at: ");
+		DPTOKPUT(((t_token*)p.tlook->content))
+	}
+	return (0);
+}
+ */
 
 int		sh_inter_run(void)
 {
@@ -48,6 +68,7 @@ int		sh_inter_run(void)
 		rl_hist_add(line);
 		sh_lex_init(&lex, line);
 		sh_lex_start(lex);
+		sh_p_start(lex);
 		//rl_cleanup();
 		//if (sh_script_run(line) == EXIT)
 		//{
@@ -79,7 +100,7 @@ int		main(int ac, char **av, char **envp)
 	ft_printf("echo :: %s\n", sh_bin_getpath(sh_bin(), "echo"));
 
 	sh_als_init();
-	sh_als_add(sh_als(), "al1", "cd ;");
+	sh_als_add(sh_als(), "al1", "cd ");
 	sh_als_add(sh_als(), "al2", "cd ; al2");
 	sh_als_add(sh_als(), "al3", "al1 ; al2");
 
