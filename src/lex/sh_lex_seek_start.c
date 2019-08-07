@@ -54,7 +54,10 @@ int 		sh_lex_seek_tok_delim(t_lex *lex, int op)
 	{
 //		if (sh_lex_tok_last(lex)->t == TSL2)
 //			ft_dastrins_str(lex->hd_key, -1, hd_key);
-		lex->st = TSTOK;
+//		if (!*lex->scope->str)
+			lex->st = TSTOK;
+//		else
+//			lex->st = TSNONE;
 		return (1);
 	}
 	if (lex->in->str[lex->i] == '=' && lex->assi < 0)

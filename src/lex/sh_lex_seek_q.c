@@ -49,7 +49,7 @@ int 			sh_lex_seek_dq(t_lex *lex, int op) {
 			|| sh_lex_seek_join(lex, op)
 			//|| sh_lex_seek_blank(lex, op)
 			|| sh_lex_seek_escape(lex, op)
-			|| sh_lex_seek_sq(lex, op)
+			//|| sh_lex_seek_sq(lex, op)
 			//|| sh_lex_seek_dq(lex, op)
 			|| sh_lex_seek_bq(lex, op)
 			|| sh_lex_seek_param(lex, op)

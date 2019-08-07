@@ -82,12 +82,16 @@ int 		sh_lex_seek_hdv(t_lex *lex, int op)
 		lex->st = TSERR;
 		return (1);
 	}
-	ft_printf(C_RED"--- > I'm here < ---\n"T_END);
+	ft_printf(C_BLU"--- > I'm here < ---\n"T_END);
+	ft_printf("In:\n++++\n%s\n++++\n", lex->in->str + off);
 	if (!(hd_val = sh_lex_seek_hd_getval(lex, dhd_key->str, off)))
 	{
+		ft_printf(C_BLU"Here-DOC: <%s>\n%s\n-------\n"T_END, dhd_key->str, hd_val);
 		lex->in->str[off] = '\0';
-		return (0);
+//		lex->st = TSERR;
+		return (1);
 	}
+	ft_printf(C_BLU"Here-DOC: <%s>\n%s\n-------\n"T_END, dhd_key->str, hd_val);
 	lex->i = off + ft_strlen(dhd_key->str) + ft_strlen(hd_val);
 	ft_dstrdel_n(lex->scope, -1, 1);
 	ft_dastrdel_n(lex->hd_key, -1, 1);
@@ -129,13 +133,13 @@ char 		*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off)
 
 	hd_vlen = 0;
 	hd_klen = ft_strlenz(hd_key);
-	while (ft_strncmp(lex->in->str + off + hd_vlen, hd_key, hd_klen)
-		|| lex->in->str[off + hd_vlen + hd_klen] != '\n')
+	while (ft_strncmp(lex->in->str + off + hd_vlen, hd_key, hd_klen))
+	{
 		if ((i = ft_strichr(lex->in->str + off + hd_vlen, '\n')) < 0)
 			return (NULL);
 		else
 			hd_vlen += i + 1;
+	}
 	hd_val = ft_strndup(lex->in->str + off, hd_vlen);
-	//ft_dstrdel_n(lex->in, off, hd_vlen + hd_klen + 1);
 	return (hd_val);
 }

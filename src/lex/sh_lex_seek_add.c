@@ -27,7 +27,10 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 		tok = sh_lex_tok_new(lex->st, lex->off, l,
 							 ft_strndup(lex->in->str + lex->off, l));
 		if (sh_lex_tok_last(lex)->t == TSL2 && lex->st == TSTOK)
-				ft_dastrins_str(lex->hd_key, -1, tok->val->str);
+		{
+			ft_dastrins_str(lex->hd_key, -1, tok->val->str);
+			ft_dstrins_ch(ft_dastrget_i(lex->hd_key, -1), -1, '\n');
+		}
 		if (lex->assi > -1)
 			tok->assi = lex->assi - lex->off;
 		//lex->assi = -1;
@@ -44,6 +47,6 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 	lex->st = TSNONE; // not final
 	lex->off = lex->i; // not final
 	if (op)
-		ft_printf("Tok: %-4d - %-24s %3d\n", tok->t, tok->val ? tok->val->str : "", tok->assi);
+		ft_printf(C_MGN"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
 	return (1);
 }
