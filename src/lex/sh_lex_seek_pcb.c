@@ -37,13 +37,18 @@ int 	sh_lex_seek_cb(t_lex *lex, int op)
 		lex->i++;
 		return (1);
 	}
-	else if (lex->in->str[lex->i] == '}'
-		&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1]))
+	else if (lex->in->str[lex->i] == '}')
 	{
-		lex->st = TSCBR;
-		ft_dstrdel_n(lex->scope, -1, 1);
-		lex->i++;
-		return (1);
+		if (ft_dstrget_ch(lex->scope, -1) == RL_SCP_PARAM)
+			return (0);
+		if (sh_lex_tok_isdelim(lex->in->str[lex->i + 1]))
+		{
+			if (ft_dstrget_ch(lex->scope, -1) == RL_SCP_CURSH)
+				ft_dstrdel_n(lex->scope, -1, 1);
+			lex->i++;
+			lex->st = TSCBR;
+			return (1);
+		}
 	}
 	return (0);
 }
