@@ -9,7 +9,7 @@ int		sh_p_cb_group(t_parser *p, t_btree *ast)
 		&& sh_p_match(p, ast, TSBR));
 	 */
 	if (sh_p_match(p, ast, TSCBL)
-		&& sh_p_comp_list(p, ast) && sh_p_match(p, ast, TSBR))
+		&& sh_p_comp_list(p, ast) && sh_p_match(p, ast, TSCBR))
 		PRET(1)
 	PRET(0)
 }
