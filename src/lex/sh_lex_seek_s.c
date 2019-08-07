@@ -11,12 +11,20 @@ int 			sh_lex_seek_param(t_lex *lex, int op)
 		return (0);
 	ft_dstrins_ch(lex->scope, -1, RL_SCP_PARAM);
 	lex->i += 2;
-	while (lex->in->str[lex->i] && lex->in->str[lex->i] != '}')
+	while (lex->in->str[lex->i])
 	{
-		if (sh_lex_seek_rescope(lex, op)
+		if (lex->in->str[lex->i] == '}')
+		{
+			if (sh_lex_seek_cb(lex, op))
+				sh_lex_seek_ctx(lex, op);
+			else
+				break;
+		}
+		else if (sh_lex_seek_rescope(lex, op)
 			|| sh_lex_seek_join(lex, op)
 			//|| sh_lex_seek_blank(lex, op)
 			|| sh_lex_seek_escape(lex, op)
+			|| sh_lex_seek_cb(lex, op)
 			//|| sh_lex_seek_sq(lex, op)
 			//|| sh_lex_seek_dq(lex, op)
 			|| sh_lex_seek_bq(lex, op)

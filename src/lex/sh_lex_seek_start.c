@@ -45,6 +45,21 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 	return (OK);
 }
 
+int 		sh_lex_seek_tok_delim(t_lex *lex, int op)
+{
+	(void)op;
+	if (sh_lex_tok_isdelim(lex->in->str[lex->i])
+		|| (lex->in->str[lex->i] == '}'
+		&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1])))
+	{
+		lex->st = TSTOK;
+		return (1);
+	}
+	if (lex->in->str[lex->i] == '=' && lex->assi < 0)
+		lex->assi = lex->i - 1;
+	return (0);
+}
+
 int 		sh_lex_seek_tok(t_lex *lex, int op)
 {
 	int 	off;
@@ -71,6 +86,10 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 			//|| sh_lex_seek_nl(lex, op)
 			)
 			continue;
+		else if (sh_lex_seek_tok_delim(lex, op))
+			return (1);
+		lex->i++;
+		/*
 		if (ft_strchr(SH_LEX_SEPSET_X, lex->in->str[lex->i])
 			|| ft_isspace(lex->in->str[lex->i]))
 		{
@@ -81,15 +100,9 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 			//lex->i++;
 			return (1);
 		}
-		/*
-		if (ft_strchr(SH_LEX_TOK_FORB, lex->in->str[lex->i]))
-		{
-			lex->st = TSERR;
-			return (-1);
-		}
-		 */
 		if (lex->in->str[lex->i++] == '=' && lex->assi < 0)
 			lex->assi = lex->i - 1;
+		*/
 	}
 	return (op);
 }

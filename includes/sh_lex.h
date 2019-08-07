@@ -212,6 +212,7 @@ char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
 int				sh_lex_seek_als(t_lex *lex, int op);
 int				sh_lex_seek_add(t_lex *lex, int op);
 
+int 			sh_lex_tok_isdelim(char c);
 int 			sh_lex_isinname(char c);
 
 int             sh_lex_class_name(t_lex *lex, int op);

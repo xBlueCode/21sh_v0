@@ -28,6 +28,8 @@ int 	sh_lex_seek_p(t_lex *lex, int op)
 int 	sh_lex_seek_cb(t_lex *lex, int op)
 {
 	(void)op;
+	if (!lex->in->str[lex->i])
+		return (0);
 	if (lex->in->str[lex->i] == '{' && lex->ctx == TCTX_FIRSTW)
 	{
 		lex->st = TSCBL;
@@ -36,15 +38,16 @@ int 	sh_lex_seek_cb(t_lex *lex, int op)
 		return (1);
 	}
 	else if (lex->in->str[lex->i] == '}'
-			 && ft_dstrget_ch(lex->scope, -1) == RL_SCP_CURSH)
+		&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1]))
+	//		 && ft_dstrget_ch(lex->scope, -1) == RL_SCP_CURSH)
 	{
-		if (ft_dstrget_ch(lex->scope, -1) == RL_SCP_CURSH)
-		{
+	//	if (ft_dstrget_ch(lex->scope, -1) == RL_SCP_CURSH)
+	//	{
 			lex->st = TSCBR;
 			ft_dstrdel_n(lex->scope, -1, 1);
 			lex->i++;
 			return (1);
-		}
+	//	}
 	}
 	return (0);
 }
