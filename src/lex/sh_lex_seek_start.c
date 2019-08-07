@@ -91,22 +91,8 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 		else if (sh_lex_seek_tok_delim(lex, op))
 			return (1);
 		lex->i++;
-		/*
-		if (ft_strchr(SH_LEX_SEPSET_X, lex->in->str[lex->i])
-			|| ft_isspace(lex->in->str[lex->i]))
-		{
-			if (lex->i == off)
-				lex->st = TSERR;
-			else
-				lex->st = TSTOK;
-			//lex->i++;
-			return (1);
-		}
-		if (lex->in->str[lex->i++] == '=' && lex->assi < 0)
-			lex->assi = lex->i - 1;
-		*/
 	}
-	return (op);
+	return (0);
 }
 
 int         sh_lex_seek_rescope(t_lex *lex, int op)
