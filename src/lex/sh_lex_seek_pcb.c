@@ -3,24 +3,22 @@
 
 int 	sh_lex_seek_p(t_lex *lex, int op)
 {
-	(void)op;
-	if (lex->in->str[lex->i] == '(' && lex->ctx == TCTX_FIRSTW)
+	(void)op; // TODO: Implement two types of (): subshell and other ...
+	if (lex->in->str[lex->i] == '(')
 	{
 		lex->st = TSPL;
-		ft_dstrins_ch(lex->scope, -1, RL_SCP_SUBSH);
+		if (lex->ctx == TCTX_FIRSTW)
+			ft_dstrins_ch(lex->scope, -1, RL_SCP_SUBSH);
 		lex->i++;
 		return (1);
 	}
-	else if (lex->in->str[lex->i] == ')'
-		&& ft_dstrget_ch(lex->scope, -1) == RL_SCP_SUBSH)
+	else if (lex->in->str[lex->i] == ')')
 	{
+		lex->st = TSPR;
 		if (ft_dstrget_ch(lex->scope, -1) == RL_SCP_SUBSH)
-		{
-			lex->st = TSPR;
 			ft_dstrdel_n(lex->scope, -1, 1);
-			lex->i++;
-			return (1);
-		}
+		lex->i++;
+		return (1);
 	}
 	return (0);
 }
@@ -39,15 +37,11 @@ int 	sh_lex_seek_cb(t_lex *lex, int op)
 	}
 	else if (lex->in->str[lex->i] == '}'
 		&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1]))
-	//		 && ft_dstrget_ch(lex->scope, -1) == RL_SCP_CURSH)
 	{
-	//	if (ft_dstrget_ch(lex->scope, -1) == RL_SCP_CURSH)
-	//	{
-			lex->st = TSCBR;
-			ft_dstrdel_n(lex->scope, -1, 1);
-			lex->i++;
-			return (1);
-	//	}
+		lex->st = TSCBR;
+		ft_dstrdel_n(lex->scope, -1, 1);
+		lex->i++;
+		return (1);
 	}
 	return (0);
 }
