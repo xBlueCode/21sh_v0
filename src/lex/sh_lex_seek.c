@@ -3,8 +3,10 @@
 
 int 		sh_lex_seek(t_lex *lex, int op)
 {
-	//return (sh_lex_seek_all(lex, op));
-	return (sh_lex_seek_start(lex, op));
+	if (sh_lex_seek_start(lex, op) == OK)
+		return (OK);
+	ft_printf("Lexical Error at [%d]: '%c'\n", lex->i, lex->in->str[lex->i]);
+	return (KO);
 }
 
 int 		sh_lex_seek_all(t_lex *lex, int op)

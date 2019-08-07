@@ -27,6 +27,9 @@ int 		sh_lex_init(t_lex **plex, char *input)
 	(*plex)->alias_off = 0;
 	(*plex)->alias_rec = 0;
 	(*plex)->assi = -1;
+//	sh_lex_tok_add(*plex, sh_lex_tok_new(TSNONE, -1, 0, NULL));
+	(*plex)->tokend = &((t_token){.t = TSNONE, .p = -1, .l = 0, .val = NULL});
+
 	return (0);
 }
 
@@ -41,6 +44,5 @@ int 		sh_lex_free(t_lex **plex)
 
 int 		sh_lex_start(t_lex *lex)
 {
-	sh_lex_seek(lex, 1);
-	return (0);
+	return (sh_lex_seek(lex, 1));
 }

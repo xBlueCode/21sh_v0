@@ -7,6 +7,7 @@ int 	sh_lex_tok_add(t_lex *lex, t_token *tok)
 		return (-1);
 	//lex->i += tok->l;
 	ft_lst_addlast(&(lex->tlst), ft_lstset(tok, sizeof(t_token*)));
+	lex->tokend = tok;
 	return (OK);
 }
 

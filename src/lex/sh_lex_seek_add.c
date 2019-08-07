@@ -10,7 +10,7 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 	//ft_printf("seek_add:: ST: <%d>  off: <%d>  i: <%d>\n", lex->st, off, lex->i);
 	if (lex->st == TSERR)
 	{
-		ft_printf("Parsing Error at [%d]: '%c'\n", lex->i, lex->in->str[lex->i]);
+//		ft_printf("Parsing Error at [%d]: '%c'\n", lex->i, lex->in->str[lex->i]);
 		return (-1);
 	}
 	if (lex->st == TSBLANK || lex->st == TSNONE || lex->st == TSALIAS)
@@ -26,9 +26,17 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 	{
 		tok = sh_lex_tok_new(lex->st, lex->off, l,
 							 ft_strndup(lex->in->str + lex->off, l));
+		if (sh_lex_tok_last(lex)->t == TSL2 && lex->st == TSTOK)
+				ft_dastrins_str(lex->hd_key, -1, tok->val->str);
 		if (lex->assi > -1)
 			tok->assi = lex->assi - lex->off;
 		//lex->assi = -1;
+	}
+	else if (sh_lex_tok_last(lex)->t == TSL2 && lex->st != TSTOK)
+	{
+		ft_dstrdel_n(lex->scope, -1, 1);
+		lex->st = TSERR;
+		return (-1);
 	}
 	else
 		tok = sh_lex_tok_new(lex->st, lex->off, l, NULL);

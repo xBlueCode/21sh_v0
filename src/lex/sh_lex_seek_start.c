@@ -37,7 +37,7 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 			if (lex->st != TSNONE)
 				sh_lex_seek_ctx(lex, op);
 			if (sh_lex_seek_add(lex, op) < 0)
-				return (-1);
+				return (KO);
 		}
 		else
 			lex->i++;
@@ -52,11 +52,13 @@ int 		sh_lex_seek_tok_delim(t_lex *lex, int op)
 		|| (lex->in->str[lex->i] == '}'
 		&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1])))
 	{
+//		if (sh_lex_tok_last(lex)->t == TSL2)
+//			ft_dastrins_str(lex->hd_key, -1, hd_key);
 		lex->st = TSTOK;
 		return (1);
 	}
 	if (lex->in->str[lex->i] == '=' && lex->assi < 0)
-		lex->assi = lex->i - 1;
+		lex->assi = lex->i;
 	return (0);
 }
 

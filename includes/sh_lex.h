@@ -143,6 +143,7 @@ typedef struct	s_lex
 	uint8_t ctx;
 	uint8_t err;
 	t_list	*tlst;
+	t_token	*tokend;
 	t_list 	*toff;
 	t_list  *tclass;
 	t_dastr	*hd_key;
@@ -213,6 +214,7 @@ int				sh_lex_seek_als(t_lex *lex, int op);
 int				sh_lex_seek_add(t_lex *lex, int op);
 
 int 			sh_lex_tok_isdelim(char c);
+t_token 		*sh_lex_tok_last(t_lex *lex);
 int 			sh_lex_isinname(char c);
 
 int             sh_lex_class_name(t_lex *lex, int op);
