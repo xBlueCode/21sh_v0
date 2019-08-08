@@ -67,7 +67,7 @@ void		xrl_read(void)
             rows = ft_dstrjoin_all(g_rl.txt->a, "")->str;
             ft_dstrdel_n(g_rl.scope, 0, g_rl.scope->len);
 			sh_lex_init(&lex, rows);
-			if (sh_lex_start(lex) == OK)
+			if (sh_lex_seek_start(lex, 1) == OK)
             	ft_dstrins_str(g_rl.scope, 0, lex->scope->str);
             //rl_scope_scan();
             //ft_printf("lex.scope: %s\nrl.scope: %s");

@@ -26,7 +26,7 @@ int		sh_script_run(char *script)
 {
 	t_lex *lex;
 
-	ft_printf("\nRunning:\n%s\n\n", script);
+	ft_printf(C_CYN"\nScript:\n-------\n%s\n-------\n\n"T_END, script);
 	if (!script)
 		return (1);
 	sh_lex_init(&lex, script);

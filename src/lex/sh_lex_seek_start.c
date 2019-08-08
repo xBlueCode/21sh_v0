@@ -95,7 +95,7 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 			return (1);
 		lex->i++;
 	}
-	return (0);
+	return (1);
 }
 
 int         sh_lex_seek_rescope(t_lex *lex, int op)

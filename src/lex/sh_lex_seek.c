@@ -3,9 +3,12 @@
 
 int 		sh_lex_seek(t_lex *lex, int op)
 {
-	if (sh_lex_seek_start(lex, op) == OK)
+	int lexret;
+
+	lexret = sh_lex_seek_start(lex, op);
+	if (lexret == OK && !*lex->scope->str)
 		return (OK);
-	ft_printf("Lexical Error at [%d]: '%c'\n", lex->i, lex->in->str[lex->i]);
+	ft_printf(C_RED"Lexical Error at [%d]: '%c'\n"T_END, lex->i, lex->in->str[lex->i]);
 	return (KO);
 }
 
