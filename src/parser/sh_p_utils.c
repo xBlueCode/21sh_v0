@@ -8,7 +8,7 @@ int		sh_p_lookshift(t_parser *p)
 	PRET(1)
 }
 
-int		sh_p_match(t_parser *p, t_btree *ast, int toktype)
+int		sh_p_match(t_parser *p, t_btree **ast, int toktype)
 {
 	(void)ast;
 	DPM0

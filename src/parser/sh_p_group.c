@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int		sh_p_cb_group(t_parser *p, t_btree *ast)
+int		sh_p_cb_group(t_parser *p, t_btree **ast)
 {
 	DP0
 	/*
@@ -14,4 +14,4 @@ int		sh_p_cb_group(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-//int		sh_p_do_group(t_parser *p, t_btree *ast);
+//int		sh_p_do_group(t_parser *p, t_btree **ast);

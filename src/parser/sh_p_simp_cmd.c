@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int		sh_p_simp_cmd(t_parser *p, t_btree *ast)
+int		sh_p_simp_cmd(t_parser *p, t_btree **ast)
 {
 	t_list	*back0;
 	t_list	*back1;
@@ -34,7 +34,7 @@ int		sh_p_simp_cmd(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_cmd_name(t_parser *p, t_btree *ast)
+int		sh_p_cmd_name(t_parser *p, t_btree **ast)
 {
 	(void)p;
 	(void)ast;
@@ -45,7 +45,7 @@ int		sh_p_cmd_name(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_cmd_word(t_parser *p, t_btree *ast)
+int		sh_p_cmd_word(t_parser *p, t_btree **ast)
 {
 	(void)p;
 	(void)ast;

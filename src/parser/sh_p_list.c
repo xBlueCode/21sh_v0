@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int		sh_p_list(t_parser *p, t_btree *ast)
+int		sh_p_list(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_and_or(p, ast) && sh_p_list_sub(p, ast))
@@ -9,7 +9,7 @@ int		sh_p_list(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_list_sub(t_parser *p, t_btree *ast)
+int		sh_p_list_sub(t_parser *p, t_btree **ast)
 {
 	DP0
 	t_list *back;

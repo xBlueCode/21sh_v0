@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int		sh_p_nl_list(t_parser *p, t_btree *ast)
+int		sh_p_nl_list(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_match(p, ast, TSNL) && sh_p_nl_list_sub(p, ast))
@@ -8,7 +8,7 @@ int		sh_p_nl_list(t_parser *p, t_btree *ast)
 	PRET(0);
 }
 
-int		sh_p_nl_list_sub(t_parser *p, t_btree *ast)
+int		sh_p_nl_list_sub(t_parser *p, t_btree **ast)
 {
 	t_list	*back;
 
@@ -25,7 +25,7 @@ int		sh_p_nl_list_sub(t_parser *p, t_btree *ast)
 	PRET(1);
 }
 
-int		sh_p_lbreak(t_parser *p, t_btree *ast)
+int		sh_p_lbreak(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (!p->tlook)

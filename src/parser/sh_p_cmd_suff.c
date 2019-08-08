@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int		sh_p_cmd_suff(t_parser *p, t_btree *ast)
+int		sh_p_cmd_suff(t_parser *p, t_btree **ast)
 {
 	t_list	*back;
 
@@ -13,7 +13,7 @@ int		sh_p_cmd_suff(t_parser *p, t_btree *ast)
 		PRET(1)
 	PRET(0)
 }
-int		sh_p_cmd_suff_sub(t_parser *p, t_btree *ast)
+int		sh_p_cmd_suff_sub(t_parser *p, t_btree **ast)
 {
 	t_list	*back;
 

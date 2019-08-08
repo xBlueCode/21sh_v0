@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int		sh_p_io_redir(t_parser *p, t_btree *ast)
+int		sh_p_io_redir(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_match(p, ast, TSION))
@@ -14,7 +14,7 @@ int		sh_p_io_redir(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_io_file(t_parser *p, t_btree *ast)
+int		sh_p_io_file(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_match(p, ast, TSL)
@@ -33,7 +33,7 @@ int		sh_p_io_file(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_filename(t_parser *p, t_btree *ast)
+int		sh_p_filename(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_match(p, ast, TSTOK_WORD)) //TODO: Rule 2
@@ -41,10 +41,10 @@ int		sh_p_filename(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_io_here(t_parser *p, t_btree *ast)
+int		sh_p_io_here(t_parser *p, t_btree **ast)
 {
 	DP0
-	if (sh_p_match(p, ast, TSG2)) // TODO: Implement <<-
+	if (sh_p_match(p, ast, TSL2)) // TODO: Implement <<-
 	{
 		if (sh_p_here_end(p, ast))
 			PRET(1)
@@ -53,7 +53,7 @@ int		sh_p_io_here(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_here_end(t_parser *p, t_btree *ast)
+int		sh_p_here_end(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_match(p, ast, TSTOK_WORD)) // Apply Rule 3

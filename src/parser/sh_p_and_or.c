@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int		sh_p_and_or(t_parser *p, t_btree *ast)
+int		sh_p_and_or(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_pipeline(p, ast) && sh_p_and_or_sub(p, ast))
@@ -8,7 +8,7 @@ int		sh_p_and_or(t_parser *p, t_btree *ast)
 		//return (sh_p_lookshift(p));
 	PRET(0)
 }
-int		sh_p_and_or_sub(t_parser *p, t_btree *ast)
+int		sh_p_and_or_sub(t_parser *p, t_btree **ast)
 {
 	t_list	*back;
 

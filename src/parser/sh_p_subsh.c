@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int			sh_p_subsh(t_parser *p, t_btree *ast)
+int			sh_p_subsh(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_match(p, ast, TSPL)

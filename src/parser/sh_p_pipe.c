@@ -1,7 +1,7 @@
 #include "ftsh.h"
 
 
-int		sh_p_pipeline(t_parser *p, t_btree *ast)
+int		sh_p_pipeline(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_match(p, ast, TSBANG))
@@ -16,7 +16,7 @@ int		sh_p_pipeline(t_parser *p, t_btree *ast)
 		PRET(0)
 }
 
-int		sh_p_pipe_seq(t_parser *p, t_btree *ast)
+int		sh_p_pipe_seq(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_cmd(p, ast) && sh_p_pipe_seq_sub(p, ast))
@@ -24,7 +24,7 @@ int		sh_p_pipe_seq(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int		sh_p_pipe_seq_sub(t_parser *p, t_btree *ast)
+int		sh_p_pipe_seq_sub(t_parser *p, t_btree **ast)
 {
 	t_list *back;
 

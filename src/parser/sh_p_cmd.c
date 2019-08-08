@@ -1,6 +1,6 @@
 #include "ftsh.h"
 
-int				sh_p_cmd(t_parser *p, t_btree *ast)
+int				sh_p_cmd(t_parser *p, t_btree **ast)
 {
 	t_list	*back;
 
@@ -18,7 +18,7 @@ int				sh_p_cmd(t_parser *p, t_btree *ast)
 	PRET(0)
 }
 
-int				sh_p_comp_cmd(t_parser *p, t_btree *ast)
+int				sh_p_comp_cmd(t_parser *p, t_btree **ast)
 {
 	DP0
 	if (sh_p_cb_group(p, ast))
