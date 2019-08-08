@@ -55,6 +55,8 @@ int 		sh_lex_seek_tok_delim(t_lex *lex, int op)
 //		if (sh_lex_tok_last(lex)->t == TSL2)
 //			ft_dastrins_str(lex->hd_key, -1, hd_key);
 //		if (!*lex->scope->str)
+//ft_printf(C_RED"\nST before adding TOK %d\n"T_END, lex->st);
+//			sh_lex_seek_ctx(lex, op);
 			lex->st = TSTOK;
 //		else
 //			lex->st = TSNONE;

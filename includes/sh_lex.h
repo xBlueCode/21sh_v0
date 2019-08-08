@@ -96,6 +96,7 @@ typedef enum	e_token_state
 	TSTOK_NAME,
 	TSTOK_ASS_WORD,
 	TSTOK_WORD,
+	TSRW,
 	TSRW_IF,
     TSRW_THEN,
     TSRW_ELSE,
@@ -212,6 +213,12 @@ char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
 
 int				sh_lex_seek_als(t_lex *lex, int op);
 int				sh_lex_seek_add(t_lex *lex, int op);
+
+int				sh_lex_seek_rw(t_token *token, int ctx);
+
+
+int 			sh_lex_tok_ctx(t_token *token);
+int 			sh_lex_ctx_last(t_lex *lex, int op);
 
 int 			sh_lex_tok_isdelim(char c);
 t_token 		*sh_lex_tok_last(t_lex *lex);

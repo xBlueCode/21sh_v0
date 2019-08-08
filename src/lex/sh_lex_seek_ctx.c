@@ -17,3 +17,26 @@ int 	sh_lex_seek_ctx(t_lex *lex, int op)
 		lex->ctx = TCTX_NONE;
 	return (1);
 }
+
+int 	sh_lex_ctx_last(t_lex *lex, int op)
+{
+	(void)op;
+	return (sh_lex_tok_ctx(sh_lex_tok_last(lex)));
+}
+
+int 	sh_lex_tok_ctx(t_token *token)
+{
+	if (!token)
+		return (TCTX_NONE);
+	if (token->t == TSBLANK)
+		return (TCTX_NONE);
+	else if (token->t == TSSTART || token->t == TSNONE // TODO: re-Check TSNONE
+			 ||	token->t == TSSC
+			 || token->t == TSA || token->t == TSA2
+			 || token->t == TSO || token->t == TSO2
+			 || token->t == TSPL || token->t == TSNL
+			)
+		return (TCTX_FIRSTW);
+	else
+		return (TCTX_NONE);
+}
