@@ -16,9 +16,16 @@ int		sh_p_lookshift(t_parser *p)
 
 void 	test_sh_p_astapp(t_btree *root)
 {
+	int i;
+
 	if (!root)
 		return;
-	ft_printf("%*c GR(%03d): ", 2 * g_btreeapp_lev, '-', root->op);
+
+	i = -1;
+	while (++i < g_btreeapp_lev)
+		ft_printf("%s |"T_END, i % 2 ? C_GRN : C_RED);
+	ft_printf("- GR(%03d): ", root->op);
+	//ft_printf("%*c GR(%03d): ", 2 * g_btreeapp_lev, '-', root->op);
 	ft_printf(C_CYN"  L (%03d) "T_END, root->left ? root->left->op : 0);
 	ft_putstr(" | ");
 	ft_printf(C_MGN" R (%03d)"T_END, root->right ? root->right->op : 0);

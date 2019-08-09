@@ -114,7 +114,8 @@ typedef enum	e_token_state
     TSRW_LBRACE,
     TSRW_RBRACE,
     TSALIAS,
-    TSERR
+    TSERR,
+    TSMAX = 163
 }				t_token_state;
 
 typedef enum    e_token_context

@@ -22,11 +22,11 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 	l = lex->i - lex->off;
 	if (lex->st == TSW || lex->st == TSSQ || lex->st == TSDQ || lex->st == TSBQ
 		|| lex->st == TSD_CBL || lex->st == TSD_PL || lex->st == TSD_PL2
-		|| lex->st == TSION || lex->st == TSTOK)
+		|| lex->st == TSION || lex->st == TSTOK || lex->st == TSTOK_WORD)
 	{
 		tok = sh_lex_tok_new(lex->st, lex->off, l,
 							 ft_strndup(lex->in->str + lex->off, l));
-		sh_lex_seek_rw(tok, sh_lex_ctx_last(lex, op));
+	//	sh_lex_seek_rw(tok, sh_lex_ctx_last(lex, op)); // TODO : Activate for RW
 		if (sh_lex_tok_last(lex)->t == TSL2 && lex->st == TSTOK)
 		{
 			ft_dastrins_str(lex->hd_key, -1, tok->val->str);
