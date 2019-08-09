@@ -13,12 +13,17 @@ static int p_lev = 0;
 # define DPTOKPUT(tok) ft_printf("Tok");
 */
 
-
 # define DPTEST if (p->tlook)
 # define DP0_STR(dstr) dstr ? dstr->str : "."
 # define DPLEV(shift) (p->lev += shift)
+//# define SHP_CAST_INIT ft_btreeinit(&cast, NULL, 0, SH_GR_PROGRAM);
+# define SHP_CAST_INIT(gr) cast = ft_btreenew(NULL, 0); cast->op = gr;
+# define SHP_CAST_L &(cast->left)
+# define SHP_CAST_R &(cast->right)
 
-# define DP0 DPTEST {DPLEV(2); ft_printf("%3d%*c %-24s : %2d :%s\n",p->lev, p->lev, '-', \
+
+# define DP0 DPTEST {DPLEV(2); \
+ft_printf("%3d%*c %-24s : %2d :%s\n",p->lev, p->lev, '-', \
 __FUNCTION__, \
 ((t_token*)p->tlook->content)->t, \
 DP0_STR(((t_token*)p->tlook->content)->val)); \
@@ -40,7 +45,10 @@ DP0_STR(((t_token*)p->tlook->content)->val), toktype); \
 
 # define DPTOKPUT(tok) ft_printf(C_RED"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
 
-# define PRET(ret) {DPLEV(-2); return (ret);}
+//# define PRET(ret) {*ast = (ret == 1 && ast) ? cast : NULL; DPLEV(-2); return (ret);}
+# define PRET(ret) {{if (ast && ret == 1) *ast = cast;} DPLEV(-2); return (ret);}
+
+# define PMRET(ret) {DPLEV(-2); return (ret);}
 
 typedef struct	s_parser
 {
@@ -53,62 +61,46 @@ typedef struct	s_parser
 
 typedef enum	e_grammar_rules
 {
-	SH_GR_START,
+	SH_GR_START = TSMAX + 1,
 	SH_GR_PROGRAM,
 	SH_GR_COMPLETE_CMDS,
 	SH_GR_COMPLETE_CMDS_SUB,
 	SH_GR_COMPLETE_CMD,
-
 	SH_GR_LIST,
 	SH_GR_LIST_SUB,
-
 	SH_GR_AND_OR,
 	SH_GR_AND_OR_SUB,
-
 	SH_GR_PIPELINE,
 	SH_GR_PIPE_SEQ,
 	SH_GR_PIPE_SEQ_SUB,
-
 	SH_GR_CMD,
 	SH_GR_COMP_CMD,
-
 	SH_GR_SUBSH,
 	SH_GR_COMP_LIST,
-
 	SH_GR_TERM,
 	SH_GR_TERM_SUB,
-
 	SH_GR_FOR_CLAUSE,
-
 	SH_GR_NAME,
 	SH_GR_IN,
-
 	SH_GR_WORDLIST,
 	SH_GR_WORDLIST_SUB,
-
 	SH_GR_CASE_CLAUSE,
 	SH_GR_CASE_LIST_NS,
 	SH_GR_CASE_LIST,
 	SH_GR_CASE_LIST_SUB,
 	SH_GR_CASE_ITEM_NS,
 	SH_GR_CASE_ITEM,
-
 	SH_GR_PATT,
 	SH_GR_PATT_SUB,
-
 	SH_GR_IF_CLAUSE,
 	SH_GR_ELSE_PART,
-
 	SH_GR_WHILE_CLAUSE,
 	SH_GR_UNTIL_CLAUSE,
-
 	SH_GR_FUNC_DEF,
 	SH_GR_FUNC_BOD,
 	SH_GR_FNAME,
-
 	SH_GR_CB_GROUP,
 	SH_GR_DO_GROUP,
-
 	SH_GR_SIMP_CMD,
 	SH_GR_CMD_NAME,
 	SH_GR_CMD_WORD,
@@ -116,19 +108,15 @@ typedef enum	e_grammar_rules
 	SH_GR_CMD_PREF_SUB,
 	SH_GR_CMD_SUFF,
 	SH_GR_CMD_SUFF_SUB,
-
 	SH_GR_REDIR_LIST,
 	SH_GR_REDIR_LIST_SUB,
-
 	SH_GR_IO_REDIR,
 	SH_GR_IO_FILE,
 	SH_GR_FILENAME,
 	SH_GR_IO_HERE,
 	SH_GR_HERE_END,
-
 	SH_GR_NL_LIST,
 	SH_GR_NL_LIST_SUB,
-
 	SH_GR_LBREAK,
 	SH_GR_SEP_OP,
 	SH_GR_SEP,
@@ -218,5 +206,7 @@ int				sh_p_seq_sep(t_parser *p, t_btree **ast);
 
 int				sh_p_lookshift(t_parser *p);
 int				sh_p_match(t_parser *p, t_btree **ast, int toktype);
+
+void			test_sh_p_astapp(t_btree *root);
 
 #endif
