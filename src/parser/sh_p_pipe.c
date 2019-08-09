@@ -3,14 +3,17 @@
 
 int		sh_p_pipeline(t_parser *p, t_btree **ast)
 {
+	t_btree *cast;
+
 	DP0
-	if (sh_p_match(p, ast, TSBANG))
+	SHP_CAST_INIT(SH_GR_PIPELINE)
+	if (sh_p_match(p, &cast, TSBANG)) // TODO: TBD
 	{
-		if (sh_p_pipe_seq(p, ast))
+		if (sh_p_pipe_seq(p, SHP_CAST_L)) // TODO: or R
 			PRET(1)
 		PRET(0)
 	}
-	else if (sh_p_pipe_seq(p, ast))
+	else if (sh_p_pipe_seq(p, SHP_CAST_L)) // TODO: or R
 		PRET(1)
 	else
 		PRET(0)
@@ -18,8 +21,11 @@ int		sh_p_pipeline(t_parser *p, t_btree **ast)
 
 int		sh_p_pipe_seq(t_parser *p, t_btree **ast)
 {
+	t_btree *cast;
+
 	DP0
-	if (sh_p_cmd(p, ast) && sh_p_pipe_seq_sub(p, ast))
+	SHP_CAST_INIT(SH_GR_PIPE_SEQ)
+	if (sh_p_cmd(p, SHP_CAST_L) && sh_p_pipe_seq_sub(p, SHP_CAST_R))
 		PRET(1)
 	PRET(0)
 }
@@ -27,12 +33,16 @@ int		sh_p_pipe_seq(t_parser *p, t_btree **ast)
 int		sh_p_pipe_seq_sub(t_parser *p, t_btree **ast)
 {
 	t_list *back;
+	t_btree *cast;
 
 	DP0
+	SHP_CAST_INIT(SH_GR_PIPE_SEQ_SUB)
 	if (!(back = p->tlook))
 		PRET(1)
-	if (sh_p_match(p, ast, TSO) && sh_p_lbreak(p, ast) && sh_p_cmd(p, ast)
-		&& sh_p_pipe_seq_sub(p, ast))
+	if (sh_p_match(p, NULL, TSO) // TODO: Recheck NULL
+		&& sh_p_lbreak(p, NULL)
+		&& sh_p_cmd(p, SHP_CAST_L)
+		&& sh_p_pipe_seq_sub(p, SHP_CAST_R))
 		PRET(1)
 	p->tlook = back;
 	PRET(1)
