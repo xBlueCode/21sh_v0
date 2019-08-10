@@ -5,6 +5,9 @@
 # include "sh_lex.h"
 # include "sh_parser.h"
 
+# define SHG_MALLCHECK(g) {if (!(g = ft_memalloc(sizeof(*g)))) return (NULL);};
+# define SHG_LSTADD(g, lst, ncont) ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));
+
 typedef enum	e_grammar_rules
 {
 	SH_GR_START = TSMAX + 1,
@@ -69,12 +72,12 @@ typedef enum	e_grammar_rules
 	SH_GR_SEQ_SEP
 }				t_grammar_rules;
 
-typedef struct	s_redirect
+typedef struct	s_redir
 {
 	int 	ion;
 	int 	op;
 	char 	*word;
-}				t_redirect;
+}				t_redir;
 
 typedef struct	s_simp_cmd
 {
@@ -114,10 +117,27 @@ typedef struct	s_com_cmds
 	t_list	*lst_com_cmd;
 }				t_com_cmds;
 
-int				sh_g_com_cmds(t_btree *ast, void *gr);
-int				sh_g_com_cmd(t_btree *ast, void *gr);
-int				sh_g_and_or(t_btree *ast, void *gr);
-int				sh_g_pipe(t_btree *ast, void *gr);
-int				sh_g_cmd(t_btree *ast, void *gr);
+/*
+int				sh_g_com_cmds(t_btree *ast, void *);
+int				sh_g_com_cmd(t_btree *ast, void *);
+int				sh_g_and_or(t_btree *ast, void *);
+int				sh_g_pipe(t_btree *ast, void *);
+int				sh_g_cmd(t_btree *ast, void *);
+int				sh_g_redir(t_btree *ast, void *);
+*/
+
+void			*sh_g_com_cmds_new(void);
+void			*sh_g_com_cmd_new(void);
+void			*sh_g_and_or_new(void);
+void			*sh_g_pipe_new(void);
+void			*sh_g_cmd_new(void);
+void			*sh_g_redir_new(void);
+
+void			*sh_g_com_cmds(t_btree *ast);
+void			*sh_g_com_cmd(t_btree *ast);
+void			*sh_g_and_or(t_btree *ast);
+void			*sh_g_pipe(t_btree *ast);
+void			*sh_g_cmd(t_btree *ast);
+void			*sh_g_redir(t_btree *ast);
 
 #endif

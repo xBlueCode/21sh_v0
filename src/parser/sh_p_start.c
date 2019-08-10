@@ -1,9 +1,28 @@
 #include "ftsh.h"
 
+void	sep(t_list *e)
+{
+	t_com_cmd com_cmd;
+
+	ft_printf("sep\n");
+	if (!e)
+		ft_printf("ELEM NULL\n");
+	com_cmd = *((t_com_cmd*)(e->content));
+	if (!e->content)
+		ft_printf("content NULL\n");
+	else if (!com_cmd.sep)
+		ft_printf("sep NULL");
+	else if (!com_cmd.sep->str)
+		ft_printf("sep->str NULL");
+	else
+		ft_putendl(com_cmd.sep->str);
+}
+
 int 	sh_p_start(t_lex *lex)
 {
 	t_parser	p;
 	t_btree		*ast;
+	t_com_cmds	*com_cmds;
 
 	p.tbase = lex->tlst;
 	p.tlook = lex->tlst;
@@ -24,6 +43,12 @@ int 	sh_p_start(t_lex *lex)
 	else
 	{
 		ft_btreeapp_prefix(ast, test_sh_p_astapp);
+		com_cmds = sh_g_com_cmds(ast->left->left);
+		ft_printf("Separators: \n");
+		if (com_cmds)
+			ft_lstiter(com_cmds->lst_com_cmd, &sep);
+		else
+			ft_printf("Failed to build com_cmds !!!!\n");
 	}
 	return (0);
 }
