@@ -2,6 +2,7 @@
 # define SH_PARSER_H
 
 # include "libft.h"
+# include "sh_grammar.h"
 # include "sh_lex.h"
 
 static int p_lev = 0;
@@ -58,70 +59,6 @@ typedef struct	s_parser
 	int			lev;
 //	t_btree		***ast;
 }				t_parser;
-
-typedef enum	e_grammar_rules
-{
-	SH_GR_START = TSMAX + 1,
-	SH_GR_PROGRAM,
-	SH_GR_COMPLETE_CMDS,
-	SH_GR_COMPLETE_CMDS_SUB,
-	SH_GR_COMPLETE_CMD,
-	SH_GR_LIST,
-	SH_GR_LIST_SUB,
-	SH_GR_AND_OR,
-	SH_GR_AND_OR_SUB,
-	SH_GR_PIPELINE,
-	SH_GR_PIPE_SEQ,
-	SH_GR_PIPE_SEQ_SUB,
-	SH_GR_CMD,
-	SH_GR_COMP_CMD,
-	SH_GR_SUBSH,
-	SH_GR_COMP_LIST,
-	SH_GR_TERM,
-	SH_GR_TERM_SUB,
-	SH_GR_FOR_CLAUSE,
-	SH_GR_NAME,
-	SH_GR_IN,
-	SH_GR_WORDLIST,
-	SH_GR_WORDLIST_SUB,
-	SH_GR_CASE_CLAUSE,
-	SH_GR_CASE_LIST_NS,
-	SH_GR_CASE_LIST,
-	SH_GR_CASE_LIST_SUB,
-	SH_GR_CASE_ITEM_NS,
-	SH_GR_CASE_ITEM,
-	SH_GR_PATT,
-	SH_GR_PATT_SUB,
-	SH_GR_IF_CLAUSE,
-	SH_GR_ELSE_PART,
-	SH_GR_WHILE_CLAUSE,
-	SH_GR_UNTIL_CLAUSE,
-	SH_GR_FUNC_DEF,
-	SH_GR_FUNC_BOD,
-	SH_GR_FNAME,
-	SH_GR_CB_GROUP,
-	SH_GR_DO_GROUP,
-	SH_GR_SIMP_CMD,
-	SH_GR_CMD_NAME,
-	SH_GR_CMD_WORD,
-	SH_GR_CMD_PREF,
-	SH_GR_CMD_PREF_SUB,
-	SH_GR_CMD_SUFF,
-	SH_GR_CMD_SUFF_SUB,
-	SH_GR_REDIR_LIST,
-	SH_GR_REDIR_LIST_SUB,
-	SH_GR_IO_REDIR,
-	SH_GR_IO_FILE,
-	SH_GR_FILENAME,
-	SH_GR_IO_HERE,
-	SH_GR_HERE_END,
-	SH_GR_NL_LIST,
-	SH_GR_NL_LIST_SUB,
-	SH_GR_LBREAK,
-	SH_GR_SEP_OP,
-	SH_GR_SEP,
-	SH_GR_SEQ_SEP
-}				t_grammar_rules;
 
 int 			sh_p_start(t_lex *lex);
 int				sh_p_program(t_parser *p, t_btree **ast);
