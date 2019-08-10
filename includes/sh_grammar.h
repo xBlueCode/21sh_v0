@@ -69,4 +69,55 @@ typedef enum	e_grammar_rules
 	SH_GR_SEQ_SEP
 }				t_grammar_rules;
 
+typedef struct	s_redirect
+{
+	int 	ion;
+	int 	op;
+	char 	*word;
+}				t_redirect;
+
+typedef struct	s_simp_cmd
+{
+	t_list	*lst_assign;
+	t_list	*lst_words;
+	t_list	*lst_redirect;
+//	int 	cnt_op;
+}				t_simp_cmd;
+
+typedef struct	s_cmd
+{
+	void 	*core;
+	t_list	*lst_redirect;
+	int16_t	type;
+}				t_cmd;
+
+typedef struct	s_pipe
+{
+	t_list	*lst_cmd;
+	int8_t	neg;
+}				t_pipe;
+
+typedef struct	s_and_or
+{
+	t_list	*lst_pipe;
+	t_dstr	*sep;
+}				t_and_or;
+
+typedef struct	s_com_cmd
+{
+	t_list	*lst_and_or;
+	t_dstr	*sep;
+}				t_com_cmd;
+
+typedef struct	s_com_cmds
+{
+	t_list	*lst_com_cmd;
+}				t_com_cmds;
+
+int				sh_g_com_cmds(t_btree *ast, void *gr);
+int				sh_g_com_cmd(t_btree *ast, void *gr);
+int				sh_g_and_or(t_btree *ast, void *gr);
+int				sh_g_pipe(t_btree *ast, void *gr);
+int				sh_g_cmd(t_btree *ast, void *gr);
+
 #endif
