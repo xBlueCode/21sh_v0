@@ -117,9 +117,18 @@ typedef struct	s_and_or
 	t_dstr	*sep;
 }				t_and_or;
 
+/*
+typedef struct	s_comp_cmd
+{
+	void	*clause;
+	int 	type;
+}				t_comp_cmd;
+*/
+
 typedef struct	s_com_cmd
 {
 	t_list	*lst_and_or;
+	int 	gr; // it can be _COM_CMD, _SUBSH, _CB_GROUP, _DO_GROUP
 	t_dstr	*sep;
 }				t_com_cmd;
 
@@ -155,6 +164,7 @@ void			*sh_g_cmd(t_btree *ast);
 void			*sh_g_cmd_core(int t);
 void			*sh_g_simp_cmd(t_btree *ast);
 void			*sh_g_comp_cmd(t_btree *ast);
+void			*sh_g_subsh(t_btree *ast);
 void			*sh_g_redir(t_btree *ast);
 
 void			sh_g_com_cmds_put(void*g, int op);

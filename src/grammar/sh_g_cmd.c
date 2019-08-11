@@ -17,16 +17,17 @@ void			*sh_g_cmd(t_btree *ast)
 {
 	t_cmd	*cmd;
 	t_btree	*ast_redirlist;
+	t_btree	*ast_core;
 	t_redir	*redir;
 
 	SHG_CHECK_AST(ast, SH_GR_CMD)
 	cmd = sh_g_cmd_new();
 	if (!ast->left)
-		return (NULL);
-//	cmd->type = sh_g_cmd_core_type(ast->left->op);
-	cmd->type = ast->left->op;
-//	cmd->core = sh_g_cmd_core(ast->left);
-	cmd->core = ((void*(*)(t_btree*))sh_g_cmd_core(cmd->type))(ast->left);
+		return (NULL); // TODO: free cmd
+	if (!(ast_core = ast->left->op == SH_GR_COMP_CMD ? ast->left->left : ast->left))
+		return (NULL); // TODO: free cmd
+	cmd->type = ast_core->op;
+	cmd->core = ((void*(*)(t_btree*))sh_g_cmd_core(cmd->type))(ast_core);
 	ast_redirlist = ast->right;
 	while (ast_redirlist)
 	{
@@ -46,8 +47,7 @@ void			sh_g_cmd_put(void *g, int op)
 	g_g_putlev++;
 	SHG_PUT_CASTVAR(cmd, g, t_cmd*, op)
 	SHG_PUT_PRINTF("command:\n", g_g_putlev++);
-	SHG_PUT_PRINTF("command_core (%d):\n", g_g_putlev);
-	//sh_g_cmd_core_put(cmd->core);
+	SHG_PUT_PRINTF("command_core:\n", g_g_putlev);
 	((void(*)(void*, int))sh_g_cmd_core_put(cmd->type))(cmd->core, 0);
 	SHG_PUT_PRINTF("redirect_list:\n", g_g_putlev);
 	ft_lstiterop(cmd->lst_redir, SHG_PUT_CASTFUN(sh_g_redir_put), 1);
