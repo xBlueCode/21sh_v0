@@ -1,5 +1,7 @@
 #include "ftsh.h"
 
+int 			g_g_putlev = 0;
+
 void			*sh_g_com_cmds_new(void)
 {
 	t_com_cmds	*com_cmds;
@@ -61,97 +63,34 @@ void			*sh_g_com_cmd(t_btree *ast)
 	return (com_cmd);
 }
 
-/*
-void			*sh_g_and_or(t_btree *ast)
+void			sh_g_com_cmds_put(void*g, int op)
 {
-	t_and_or	and_or;
-	t_pipe		pipe;
+	t_com_cmds *com_cmds;
 
-	if (!ast || ast->op != SH_GR_AND_OR)
-		return (0);
-	and_or.lst_pipe = NULL;
-	and_or.sep = ft_dstrnew_max(2);
-//	ast = ast->left;
-	while (ast->left && ast->left->op == SH_GR_PIPELINE)
-	{
-		if (sh_g_pipe(ast->left, &and_or))
-			ft_lst_addlast(&and_or.lst_pipe, ft_lstnew(&pipe, sizeof(t_pipe*)));
-		if (ast->data)
-			ft_dstrins_ch(and_or.sep, -1, ((t_token*)(ast->data))->t); // TODO: change to 0, 1, 2
-		ast = ast->right;
-	}
-//	gr = &and_or;
-	return (1);
+	if (!g)
+		return ;
+	//com_cmds = (t_com_cmds*)g;
+	SHG_PUT_CASTVAR(com_cmds, g, t_com_cmds*, op)
+	SHG_PUT_PRINTF("complete_commands:\n", g_g_putlev);
+	ft_lstiterop(com_cmds->lst_com_cmd, SHG_PUT_CASTFUN(sh_g_com_cmd_put), 1);
 }
 
-void			*sh_g_pipe(t_btree *ast)
+void			sh_g_com_cmd_put(void*g, int op)
 {
-	t_pipe		pipe;
-	t_btree		*pipe_sec;
-	t_cmd		cmd;
+	t_com_cmd	*com_cmd;
+	int 		i;
 
-	if (!ast || !gr || ast->op != SH_GR_PIPELINE)
-		return (0);
-	pipe.lst_cmd = NULL;
-	pipe.neg = ast->data ? 1 : 0;
-	pipe_sec = ast->left;
-	while (pipe_sec)
-	{
-		if (sh_g_cmd(pipe_sec->left, &cmd))
-			ft_lst_addlast(&pipe.lst_cmd, ft_lstnew(&cmd, sizeof(t_and_or*)));
-		pipe_sec = pipe_sec->right;
-	}
-//	gr = &pipe;
-	return (1);
+	if (!g)
+		return ;
+	g_g_putlev++;
+	SHG_PUT_CASTVAR(com_cmd, g, t_com_cmd*, op);
+	SHG_PUT_PRINTF("complete_command:\n", g_g_putlev++);
+	SHG_PUT_PRINTF("and_or_list:\n", g_g_putlev);
+	ft_lstiterop(com_cmd->lst_and_or, SHG_PUT_CASTFUN(sh_g_and_or_put), 1);
+	SHG_PUT_PRINTF("separators: ", g_g_putlev);
+	i = -1;
+	while (++i < com_cmd->sep->len)
+		ft_putchar(com_cmd->sep->str[i] == TSSC ? ';' : '&');
+	ft_putchar('\n');
+	g_g_putlev -= 2;
 }
-
-void			*sh_g_cmd(t_btree *ast)
-{
-	t_cmd	cmd;
-	t_redir	*redir;
-	t_btree	*redir_list;
-	t_btree	*ast_core;
-//	void	*cmd_core;
-
-	if (!ast || ast->op != SH_GR_CMD)
-		return (0);
-	cmd.lst_redir = NULL;
-	redir_list = ast->right;
-	ast_core = ast->left;
-	while (redir_list)
-	{
-		if (sh_g_redir(redir_list->left, &redir))
-			ft_lst_addlast(&cmd.lst_redir, ft_lstnew(&redir, sizeof(t_and_or*)));
-		redir_list = redir_list->right;
-	}
-	if (ast_core)
-	{
-		ft_printf("      Adding simp cmd from %d in %d\n", ast_core->op, ast->op);
-	}
-//	gr = &cmd;
-	return (1);
-}
-
-void			*sh_g_redir(t_btree *ast)
-{
-	t_redir	redir;
-	t_btree	*ast_io;
-
-	if (!ast || ast->op != SH_GR_IO_REDIR)
-		return (0);
-	if (ast->data)
-		redir.ion = 21;
-	else
-		redir.ion = -42;
-	ast_io = ast->left;
-	if (ast_io)
-	{
-		if (ast_io->data)
-			redir.op = ((t_token*)ast_io->data)->t;
-		if (ast_io->left)
-			redir.word = ft_strdup(((t_token*)ast_io->left->data)->val->str);
-	}
-//	gr = &redir;
-	return (1);
-}
-*/

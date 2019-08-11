@@ -1,5 +1,7 @@
 #include "ftsh.h"
 
+extern int 		g_g_putlev;
+
 void			*sh_g_pipe_new(void)
 {
 	t_pipe *pipe;
@@ -27,4 +29,19 @@ void			*sh_g_pipe(t_btree *ast)
 		ast_pipesec = ast_pipesec->right;
 	}
 	return (pipe);
+}
+
+void			sh_g_pipe_put(void*g, int op)
+{
+	t_pipe *pipe;
+
+	if (!g)
+		return;
+	g_g_putlev++;
+	SHG_PUT_CASTVAR(pipe, g, t_pipe*, op)
+	SHG_PUT_PRINTF("pipe: ", g_g_putlev++);
+	ft_printf("(neg = %d)\n", pipe->neg);
+	SHG_PUT_PRINTF("command_list:\n", g_g_putlev);
+	ft_lstiterop(pipe->lst_cmd, SHG_PUT_CASTFUN(sh_g_cmd_put), 1);
+	g_g_putlev -= 2;
 }
