@@ -115,6 +115,7 @@ typedef enum	e_token_state
     TSRW_RBRACE,
     TSALIAS,
     TSERR,
+    TSFAKE,
     TSMAX = 223 // TODO: MAX it must be
 }				t_token_state;
 

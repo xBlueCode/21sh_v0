@@ -49,15 +49,17 @@ void			*sh_g_com_cmd(t_btree *ast)
 	t_and_or	*and_or;
 	t_btree		*list;
 
-	SHG_CHECK_AST(ast, SH_GR_COMPLETE_CMD)
+	SHG_CHECK_AST(ast, SH_GR_COMPLETE_CMD) // TODO: || _COMP_LIST
 	com_cmd = sh_g_com_cmd_new();
-	list = ast->left;
+	list = ast->left; // term
 	while (list)
 	{
 		if ((and_or = sh_g_and_or(list->left)))
 			SHG_LSTADD(com_cmd, lst_and_or, and_or)
-		if (list->data)
+		if (list->data) // list & term must store the sep in data
 			ft_dstrins_ch(com_cmd->sep, -1, SHG_AST_TOK(list)->t);
+		else // TODO: FOR COMP_LIST but it must be compatible with complete_cmd
+			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);
 		list = list->right;
 	}
 	return (com_cmd);
