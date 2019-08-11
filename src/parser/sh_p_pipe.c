@@ -1,6 +1,5 @@
 #include "ftsh.h"
 
-
 int		sh_p_pipeline(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;

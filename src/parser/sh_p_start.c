@@ -44,11 +44,14 @@ int 	sh_p_start(t_lex *lex)
 	{
 		ft_btreeapp_prefix(ast, test_sh_p_astapp);
 		com_cmds = sh_g_com_cmds(ast->left->left);
+		/*
 		ft_printf("Separators: \n");
 		if (com_cmds)
 			ft_lstiter(com_cmds->lst_com_cmd, &sep);
 		else
 			ft_printf("Failed to build com_cmds !!!!\n");
+		 */
+		sh_g_com_cmds_put(com_cmds, 0);
 	}
 	return (0);
 }

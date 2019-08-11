@@ -14,7 +14,6 @@ int		sh_p_nl_list(t_parser *p, t_btree **ast)
 int		sh_p_nl_list_sub(t_parser *p, t_btree **ast)
 {
 	t_list	*back;
-
 	t_btree *cast;
 
 	DP0
