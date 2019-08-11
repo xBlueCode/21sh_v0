@@ -5,8 +5,19 @@
 # include "sh_lex.h"
 # include "sh_parser.h"
 
-# define SHG_MALLCHECK(g) {if (!(g = ft_memalloc(sizeof(*g)))) return (NULL);};
+# define SHG_CHECK_MALL(g) {if (!(g = ft_memalloc(sizeof(*g)))) return (NULL);};
 # define SHG_LSTADD(g, lst, ncont) ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));
+# define SHG_LSTADDS(g, lst, nc, ns) ft_lst_addlast(&(g->lst), ft_lstnew(nc, ns));
+
+# define SHG_CHECK_AST(node, gt) {if (!node || node->op != gt) return (NULL);};
+
+# define SHG_AST_TOK(ast) ((t_token*)ast->data)
+
+# define SHG_PUT_CASTVAR(v, g, t, op) v = op ? ((t)(((t_list*)g)->content)) : (t)g;
+
+# define SHG_PUT_CASTFUN(f) ((void(*)(t_list*, int))&f)
+
+# define SHG_PUT_PRINTF(str, l) ft_printf("%*c %s", l * 4, '-', str);
 
 typedef enum	e_grammar_rules
 {
@@ -83,14 +94,14 @@ typedef struct	s_simp_cmd
 {
 	t_list	*lst_assign;
 	t_list	*lst_words;
-	t_list	*lst_redirect;
+	t_list	*lst_redir;
 //	int 	cnt_op;
 }				t_simp_cmd;
 
 typedef struct	s_cmd
 {
 	void 	*core;
-	t_list	*lst_redirect;
+	t_list	*lst_redir;
 	int16_t	type;
 }				t_cmd;
 
@@ -131,6 +142,9 @@ void			*sh_g_com_cmd_new(void);
 void			*sh_g_and_or_new(void);
 void			*sh_g_pipe_new(void);
 void			*sh_g_cmd_new(void);
+void			*sh_g_cmd_core_new(int t);
+void			*sh_g_simp_cmd_new(void);
+void			*sh_g_comp_cmd_new(void);
 void			*sh_g_redir_new(void);
 
 void			*sh_g_com_cmds(t_btree *ast);
@@ -138,6 +152,20 @@ void			*sh_g_com_cmd(t_btree *ast);
 void			*sh_g_and_or(t_btree *ast);
 void			*sh_g_pipe(t_btree *ast);
 void			*sh_g_cmd(t_btree *ast);
+void			*sh_g_cmd_core(int t);
+void			*sh_g_simp_cmd(t_btree *ast);
+void			*sh_g_comp_cmd(t_btree *ast);
 void			*sh_g_redir(t_btree *ast);
 
+void			sh_g_com_cmds_put(void*g, int op);
+void			sh_g_com_cmd_put(void*g, int op);
+void			sh_g_and_or_put(void*g, int op);
+void			sh_g_pipe_put(void*g, int op);
+void			sh_g_cmd_put(void*g, int op);
+void			*sh_g_cmd_core_put(int t);
+void			sh_g_simp_cmd_put(void*g, int op);
+void			sh_g_comp_cmd_put(void*g, int op);
+void			sh_g_redir_put(void*g, int op);
+
+int 		sh_g_cmd_core_type(int gr_enum);
 #endif
