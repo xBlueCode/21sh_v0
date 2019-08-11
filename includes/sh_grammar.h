@@ -164,7 +164,7 @@ void			*sh_g_cmd(t_btree *ast);
 void			*sh_g_cmd_core(int t);
 void			*sh_g_simp_cmd(t_btree *ast);
 void			*sh_g_comp_cmd(t_btree *ast);
-void			*sh_g_subsh(t_btree *ast);
+void			*sh_g_group(t_btree *ast);
 void			*sh_g_redir(t_btree *ast);
 
 void			sh_g_com_cmds_put(void*g, int op);
