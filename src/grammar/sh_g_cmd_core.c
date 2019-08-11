@@ -6,6 +6,7 @@ static int	g_cmd_core_types[] = {
 		SH_GR_SIMP_CMD,
 		SH_GR_SUBSH,
 		SH_GR_CB_GROUP,
+		SH_GR_DO_GROUP,
 		SH_GR_FUNC_DEF,
 		-1
 		};
@@ -18,12 +19,16 @@ static void	*g_cmd_core_new[] = {
 
 static void	*g_cmd_core[] = {
 		&sh_g_simp_cmd,
-		&sh_g_subsh,
+		&sh_g_group,
+		&sh_g_group,
+		&sh_g_group,
 		NULL
 };
 
 static void	*g_cmd_core_put[] = {
 		&sh_g_simp_cmd_put,
+		sh_g_com_cmd_put,
+		sh_g_com_cmd_put,
 		sh_g_com_cmd_put,
 		NULL
 };
