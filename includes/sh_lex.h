@@ -113,6 +113,7 @@ typedef enum	e_token_state
     TSRW_BANG,
     TSRW_LBRACE,
     TSRW_RBRACE,
+    TSRW_MAX,
     TSALIAS,
     TSERR,
     TSFAKE,

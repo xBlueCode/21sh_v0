@@ -37,19 +37,22 @@ void 	test_sh_p_astapp(t_btree *root)
 	//ft_printf(C_MGN"\n  %*c (%d)"T_END, g_btreeapp_lev, 'R',root->right ? root->right->op : 0);
 }
 
-int		sh_p_match(t_parser *p, t_btree **ast, int toktype)
+int		sh_p_match(t_parser *p, t_btree **ast, int target)
 {
 //	t_btree *cast;
+	t_token *token;
 
-	//SHP_CAST_INIT(toktype);
+	//SHP_CAST_INIT(target);
 	DPM0
-	if (!p->tlook)
+	if (!p->tlook || !(token = (t_token*)p->tlook->content))
+		PMRET(0);
+	if (token->t == TSTOK)
+	{
+		if (!sh_tok_distinct(p->tlook->content, target))
+			PMRET(0)
+	}
+	else if (((t_token*)p->tlook->content)->t != target)
 		PMRET(0)
-	if (toktype == TSTOK_WORD) // TODO: Just for debugging
-		toktype = TSTOK;
-	if (((t_token*)p->tlook->content)->t != toktype)
-		PMRET(0)
-	//cast->data = ft_strndup(p->tlook->content, p->tlook->content_size);
 	if (ast && *ast)
 	{
 		//(*ast)->data = ft_strndup(p->tlook->content, sizeof(t_token));

@@ -50,7 +50,7 @@ int		sh_p_cmd_name(t_parser *p, t_btree **ast)
 	DP0
 	SHP_CAST_INIT(SH_GR_CMD_NAME)
 	//p->tlook = p->tlook->next;
-	if (sh_p_match(p, &cast, TSTOK)) // TODO
+	if (sh_p_match(p, &cast, SH_GR_CMD_NAME)) // TODO: / TSTOK
 		PRET(1)
 	PRET(0)
 }
@@ -61,8 +61,8 @@ int		sh_p_cmd_word(t_parser *p, t_btree **ast)
 
 	DP0
 	SHP_CAST_INIT(SH_GR_CMD_WORD)
-	p->tlook = p->tlook->next;
-	if (sh_p_match(p, &cast, TSTOK)) // TODO
+//	p->tlook = p->tlook;
+	if (sh_p_match(p, &cast, SH_GR_CMD_WORD)) // TODO
 		PRET(1)
 	PRET(0)
 }

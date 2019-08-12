@@ -60,7 +60,7 @@ PARSER := sh_p_and_or.c sh_p_cmd.c sh_p_cmd_pref.c sh_p_cmd_suff.c \
     sh_p_comp_list.c sh_p_complete_cmd.c sh_p_group.c sh_p_io.c \
     sh_p_lbreak.c sh_p_list.c sh_p_pipe.c sh_p_program.c sh_p_redir_list.c \
     sh_p_sep.c sh_p_simp_cmd.c sh_p_start.c sh_p_subsh.c \
-    sh_p_term.c sh_p_utils.c
+    sh_p_term.c sh_p_utils.c sh_p_distinct.c
 
 GRAMMAR := sh_g_cmd.c sh_g_and_or.c sh_g_com_cmd.c sh_g_pipe.c sh_g_redir.c \
     sh_g_cmd_core.c sh_g_simp_cmd.c sh_g_group.c

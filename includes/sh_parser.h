@@ -34,14 +34,14 @@ DP0_STR(((t_token*)p->tlook->content)->val)); \
 # define DPM0 DPTEST {DPLEV(2); ft_printf(C_YLW"%3d%*c %-24s : %2d :%s <%d>\n"T_END, p->lev, p->lev, '-', \
 __FUNCTION__, \
 ((t_token*)p->tlook->content)->t, \
-DP0_STR(((t_token*)p->tlook->content)->val), toktype); \
+DP0_STR(((t_token*)p->tlook->content)->val), target); \
 }
 
 
 # define DPM1 DPTEST {ft_printf(C_GRN"%3d%*c %-24s : %2d :%s <%d>\n"T_END, p->lev, p->lev, '-', \
 __FUNCTION__, \
 ((t_token*)p->tlook->content)->t, \
-DP0_STR(((t_token*)p->tlook->content)->val), toktype); \
+DP0_STR(((t_token*)p->tlook->content)->val), target); \
 }
 
 # define DPTOKPUT(tok) ft_printf(C_RED"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
@@ -143,6 +143,12 @@ int				sh_p_seq_sep(t_parser *p, t_btree **ast);
 
 int				sh_p_lookshift(t_parser *p);
 int				sh_p_match(t_parser *p, t_btree **ast, int toktype);
+
+
+int 			sh_tok_getrw(char *tokval);
+int				sh_tok_distinct(t_token *token, int target);
+int				sh_tok_isname_till_eq(char *val);
+int				sh_tok_isname(char *val);
 
 void			test_sh_p_astapp(t_btree *root);
 
