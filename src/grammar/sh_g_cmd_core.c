@@ -7,6 +7,7 @@ static int	g_cmd_core_types[] = {
 		SH_GR_SUBSH,
 		SH_GR_CB_GROUP,
 		SH_GR_DO_GROUP,
+		SH_GR_FOR_CLAUSE,
 		SH_GR_FUNC_DEF,
 		-1
 		};
@@ -22,6 +23,7 @@ static void	*g_cmd_core[] = {
 		&sh_g_group,
 		&sh_g_group,
 		&sh_g_group,
+		&sh_g_for,
 		NULL
 };
 
@@ -30,6 +32,7 @@ static void	*g_cmd_core_put[] = {
 		sh_g_com_cmd_put,
 		sh_g_com_cmd_put,
 		sh_g_com_cmd_put,
+		sh_g_for_put,
 		NULL
 };
 
@@ -63,7 +66,12 @@ void		*sh_g_cmd_core(int t)
 //	ft_printf("cmd_core : type=%d\n", type);
 	return (g_cmd_core[type]);
 }
+/*
+void		*sh_g_group(t_btree *ast, int t)
+{
 
+}
+*/
 void		*sh_g_cmd_core_put(int t)
 {
 	int type;

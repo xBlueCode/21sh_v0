@@ -125,6 +125,7 @@ typedef struct	s_comp_cmd
 }				t_comp_cmd;
 */
 
+
 typedef struct	s_com_cmd
 {
 	t_list	*lst_and_or;
@@ -137,6 +138,13 @@ typedef struct	s_com_cmds
 	t_list	*lst_com_cmd;
 }				t_com_cmds;
 
+typedef struct	s_for
+{
+	t_dstr		*name;
+	t_list		*lst_wordlist;
+	t_com_cmd	*do_group;
+}				t_for;
+
 /*
 int				sh_g_com_cmds(t_btree *ast, void *);
 int				sh_g_com_cmd(t_btree *ast, void *);
@@ -146,6 +154,7 @@ int				sh_g_cmd(t_btree *ast, void *);
 int				sh_g_redir(t_btree *ast, void *);
 */
 
+void			*sh_g_for_new(void);
 void			*sh_g_com_cmds_new(void);
 void			*sh_g_com_cmd_new(void);
 void			*sh_g_and_or_new(void);
@@ -156,6 +165,7 @@ void			*sh_g_simp_cmd_new(void);
 void			*sh_g_comp_cmd_new(void);
 void			*sh_g_redir_new(void);
 
+void			*sh_g_for(t_btree *ast);
 void			*sh_g_com_cmds(t_btree *ast);
 void			*sh_g_com_cmd(t_btree *ast);
 void			*sh_g_and_or(t_btree *ast);
@@ -167,6 +177,7 @@ void			*sh_g_comp_cmd(t_btree *ast);
 void			*sh_g_group(t_btree *ast);
 void			*sh_g_redir(t_btree *ast);
 
+void			sh_g_for_put(void*g, int op);
 void			sh_g_com_cmds_put(void*g, int op);
 void			sh_g_com_cmd_put(void*g, int op);
 void			sh_g_and_or_put(void*g, int op);
@@ -177,5 +188,7 @@ void			sh_g_simp_cmd_put(void*g, int op);
 void			sh_g_comp_cmd_put(void*g, int op);
 void			sh_g_redir_put(void*g, int op);
 
-int 		sh_g_cmd_core_type(int gr_enum);
+void			sh_g_wordput(t_list *elem);
+
+int 			sh_g_cmd_core_type(int gr_enum);
 #endif

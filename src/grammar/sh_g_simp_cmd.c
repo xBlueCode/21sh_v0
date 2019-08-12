@@ -26,7 +26,7 @@ static void		sh_g_simp_cmd_prefsuff(t_simp_cmd *simp_cmd, t_btree *fix)
 	}
 }
 
-static void		sh_g_wordput(t_list *elem)
+void			sh_g_wordput(t_list *elem)
 {
 	t_dstr *dstr;
 
