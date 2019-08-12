@@ -84,7 +84,7 @@ int				sh_p_comp_list(t_parser *p, t_btree **ast);
 
 int				sh_p_term(t_parser *p, t_btree **ast);
 int				sh_p_term_sub(t_parser *p, t_btree **ast);
-/*
+
 int				sh_p_for_clause(t_parser *p, t_btree **ast);
 
 int				sh_p_name(t_parser *p, t_btree **ast);
@@ -92,7 +92,7 @@ int				sh_p_in(t_parser *p, t_btree **ast);
 
 int				sh_p_wordlist(t_parser *p, t_btree **ast);
 int				sh_p_wordlist_sub(t_parser *p, t_btree **ast);
-
+/*
 int				sh_p_case_clause(t_parser *p, t_btree **ast);
 int				sh_p_case_list_ns(t_parser *p, t_btree **ast);
 int				sh_p_case_list(t_parser *p, t_btree **ast);
@@ -114,7 +114,7 @@ int				sh_p_func_bod(t_parser *p, t_btree **ast);
 int				sh_p_fname(t_parser *p, t_btree **ast);
 */
 int				sh_p_cb_group(t_parser *p, t_btree **ast);
-//int				sh_p_do_group(t_parser *p, t_btree **ast);
+int				sh_p_do_group(t_parser *p, t_btree **ast);
 
 int				sh_p_simp_cmd(t_parser *p, t_btree **ast);
 int				sh_p_cmd_name(t_parser *p, t_btree **ast);
@@ -140,17 +140,18 @@ int				sh_p_lbreak(t_parser *p, t_btree **ast);
 int				sh_p_sep_op(t_parser *p, t_btree **ast);
 int				sh_p_sep(t_parser *p, t_btree **ast);
 int				sh_p_seq_sep(t_parser *p, t_btree **ast);
-
+/*
+//int				sh_p_for(t_parser *p, t_btree **ast);
 int				sh_p_do_group(t_parser *p, t_btree **ast);
-
+*/
 int				sh_p_lookshift(t_parser *p);
 int				sh_p_match(t_parser *p, t_btree **ast, int toktype);
 
 
 int 			sh_tok_getrw(char *tokval);
 int				sh_tok_distinct(t_token *token, int target);
-int				sh_tok_isname_till_eq(char *val);
-int				sh_tok_isname(char *val);
+int				sh_tok_isname_till(char *val, char delim);
+//int				sh_tok_isname(char *val);
 
 void			test_sh_p_astapp(t_btree *root);
 

@@ -30,7 +30,7 @@ int				sh_p_comp_cmd(t_parser *p, t_btree **ast)
 		PRET(1)
 	if (sh_p_subsh(p, SHP_CAST_L))
 		PRET(1)
-//	if (sh_p_do_group(p, SHP_CAST_L))
-//		PRET(1);
+	if (sh_p_for_clause(p, SHP_CAST_L))
+		PRET(1);
 	PRET(0)
 }
