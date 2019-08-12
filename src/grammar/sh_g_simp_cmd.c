@@ -14,7 +14,7 @@ static void		sh_g_simp_cmd_prefsuff(t_simp_cmd *simp_cmd, t_btree *fix)
 		if (fix->data)
 		{
 			tok = SHG_AST_TOK(fix);
-			if (tok->t == TSTOK_WORD)
+			if (tok->t == TSTOK_WORD) // TODO: orgin: TOK_WORD
 				SHG_LSTADD(simp_cmd, lst_words, tok->val)
 			else if (tok->t == TSTOK_ASS_WORD)
 				SHG_LSTADD(simp_cmd, lst_assign, tok->val);
@@ -24,6 +24,22 @@ static void		sh_g_simp_cmd_prefsuff(t_simp_cmd *simp_cmd, t_btree *fix)
 		redir = NULL;
 		fix = fix->right;
 	}
+}
+
+static void		sh_g_wordput(t_list *elem)
+{
+	t_dstr *dstr;
+
+	if (!elem)
+		return;
+	g_g_putlev++;
+	dstr = (t_dstr*)elem->content;
+	if (dstr->str)
+	{
+		SHG_PUT_PRINTF(dstr->str, g_g_putlev)
+		ft_putchar('\n');
+	}
+	g_g_putlev--;
 }
 
 void			*sh_g_simp_cmd_new(void)
@@ -63,7 +79,9 @@ void			sh_g_simp_cmd_put(void*g, int op)
 	SHG_PUT_CASTVAR(simp_cmd, g, t_simp_cmd*, op)
 	SHG_PUT_PRINTF("simple_command:\n", g_g_putlev++);
 	SHG_PUT_PRINTF("assigns_list:\n", g_g_putlev);
+	ft_lstiter(simp_cmd->lst_assign, &sh_g_wordput);
 	SHG_PUT_PRINTF("words_list:\n", g_g_putlev);
+	ft_lstiter(simp_cmd->lst_words, &sh_g_wordput);
 //	ft_lstiterop(simp_cmd->lst_words, ft_dstr)
 	SHG_PUT_PRINTF("redirect_list:\n", g_g_putlev);
 //	if (simp_cmd)
