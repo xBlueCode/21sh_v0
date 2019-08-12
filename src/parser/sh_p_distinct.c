@@ -1,7 +1,7 @@
 #include "ftsh.h"
 
 char 	*g_reserved[] =
-		{	/*
+		{/*
 			"if",
 			"then",
 			"else",
@@ -14,8 +14,7 @@ char 	*g_reserved[] =
 			"while",
 			"until",
 			"for",
-			"in",
-			*/
+			"in",*/
 			NULL
 		};
 

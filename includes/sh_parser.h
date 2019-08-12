@@ -141,6 +141,8 @@ int				sh_p_sep_op(t_parser *p, t_btree **ast);
 int				sh_p_sep(t_parser *p, t_btree **ast);
 int				sh_p_seq_sep(t_parser *p, t_btree **ast);
 
+int				sh_p_do_group(t_parser *p, t_btree **ast);
+
 int				sh_p_lookshift(t_parser *p);
 int				sh_p_match(t_parser *p, t_btree **ast, int toktype);
 

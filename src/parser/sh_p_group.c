@@ -23,7 +23,7 @@ int		sh_p_do_group(t_parser *p, t_btree **ast)
 	t_btree *cast;
 
 	DP0
-	SHP_CAST_INIT(SH_GR_CB_GROUP)
+	SHP_CAST_INIT(SH_GR_DO_GROUP)
 	/*
 	return (sh_p_match(p, ast, TSCBL)
 		&& sh_p_comp_list(p, ast)
