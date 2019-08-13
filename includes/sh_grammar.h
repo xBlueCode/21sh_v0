@@ -11,7 +11,7 @@
 
 # define SHG_CHECK_AST(node, gt) {if (!node || node->op != gt) return (NULL);};
 
-# define SHG_AST_TOK(ast) ((t_token*)ast->data)
+# define SHG_AST_TOK(ast) ((t_token*)(ast)->data)
 
 # define SHG_PUT_CASTVAR(v, g, t, op) v = op ? ((t)(((t_list*)g)->content)) : (t)g;
 
@@ -54,6 +54,8 @@ typedef enum	e_grammar_rules
 	SH_GR_PATT_SUB,
 	SH_GR_IF_CLAUSE,
 	SH_GR_ELSE_PART,
+	SH_GR_ELIF,
+	SH_GR_IFBODY,
 	SH_GR_WHILE_CLAUSE,
 	SH_GR_UNTIL_CLAUSE,
 	SH_GR_FUNC_DEF,

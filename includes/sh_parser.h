@@ -103,10 +103,11 @@ int				sh_p_case_item(t_parser *p, t_btree **ast);
 
 int				sh_p_patt(t_parser *p, t_btree **ast);
 int				sh_p_patt_sub(t_parser *p, t_btree **ast);
+*/
 
 int				sh_p_if_clause(t_parser *p, t_btree **ast);
 int				sh_p_else_part(t_parser *p, t_btree **ast);
-*/
+int				sh_p_ifbody(t_parser *p, t_btree **ast);
 
 int				sh_p_while_clause(t_parser *p, t_btree **ast);
 int				sh_p_until_clause(t_parser *p, t_btree **ast);

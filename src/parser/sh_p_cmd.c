@@ -36,5 +36,7 @@ int				sh_p_comp_cmd(t_parser *p, t_btree **ast)
 		PRET(1);
 	if (sh_p_until_clause(p, SHP_CAST_L))
 		PRET(1);
+	if (sh_p_if_clause(p, SHP_CAST_L))
+	PRET(1);
 	PRET(0)
 }

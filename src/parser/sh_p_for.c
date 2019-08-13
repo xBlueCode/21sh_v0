@@ -5,10 +5,10 @@ int				sh_p_for_clause(t_parser *p, t_btree **ast)
 	t_btree *cast;
 
 	DP0
-	SHP_CAST_INIT(SH_GR_FOR_CLAUSE)
 	if (!sh_p_match(p, NULL, TSRW_FOR))
 		PRET(0)
-	else if (!sh_p_match(p, &cast, SH_GR_NAME))
+	SHP_CAST_INIT(SH_GR_FOR_CLAUSE)
+	if (!sh_p_match(p, &cast, SH_GR_NAME)) // TODO: free if true
 		PRET(0);
 	sh_p_lbreak(p, NULL);
 	sh_p_match(p, NULL, TSRW_IN);
