@@ -43,7 +43,7 @@ void			*sh_g_com_cmds(t_btree *ast)
 	return (com_cmds);
 }
 
-void			*sh_g_com_cmd(t_btree *ast)
+void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
 {
 	t_com_cmd	*com_cmd;
 	t_and_or	*and_or;

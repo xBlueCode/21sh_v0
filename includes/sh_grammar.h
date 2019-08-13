@@ -126,7 +126,7 @@ typedef struct	s_comp_cmd
 */
 
 
-typedef struct	s_com_cmd
+typedef struct	s_com_cmd // comp_list
 {
 	t_list	*lst_and_or;
 	int 	gr; // it can be _COM_CMD, _SUBSH, _CB_GROUP, _DO_GROUP
@@ -145,6 +145,12 @@ typedef struct	s_for
 	t_com_cmd	*do_group;
 }				t_for;
 
+typedef struct	s_loop
+{
+	t_com_cmd	*cond;
+	t_com_cmd	*do_group;
+}				t_loop;
+
 /*
 int				sh_g_com_cmds(t_btree *ast, void *);
 int				sh_g_com_cmd(t_btree *ast, void *);
@@ -154,6 +160,7 @@ int				sh_g_cmd(t_btree *ast, void *);
 int				sh_g_redir(t_btree *ast, void *);
 */
 
+void			*sh_g_loop_new(void);
 void			*sh_g_for_new(void);
 void			*sh_g_com_cmds_new(void);
 void			*sh_g_com_cmd_new(void);
@@ -165,6 +172,7 @@ void			*sh_g_simp_cmd_new(void);
 void			*sh_g_comp_cmd_new(void);
 void			*sh_g_redir_new(void);
 
+void			*sh_g_loop(t_btree *ast);
 void			*sh_g_for(t_btree *ast);
 void			*sh_g_com_cmds(t_btree *ast);
 void			*sh_g_com_cmd(t_btree *ast);
@@ -177,6 +185,7 @@ void			*sh_g_comp_cmd(t_btree *ast);
 void			*sh_g_group(t_btree *ast);
 void			*sh_g_redir(t_btree *ast);
 
+void			sh_g_loop_put(void*g, int op);
 void			sh_g_for_put(void*g, int op);
 void			sh_g_com_cmds_put(void*g, int op);
 void			sh_g_com_cmd_put(void*g, int op);

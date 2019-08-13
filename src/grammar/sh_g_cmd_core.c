@@ -8,6 +8,8 @@ static int	g_cmd_core_types[] = {
 		SH_GR_CB_GROUP,
 		SH_GR_DO_GROUP,
 		SH_GR_FOR_CLAUSE,
+		SH_GR_WHILE_CLAUSE,
+		SH_GR_UNTIL_CLAUSE,
 		SH_GR_FUNC_DEF,
 		-1
 		};
@@ -24,6 +26,8 @@ static void	*g_cmd_core[] = {
 		&sh_g_group,
 		&sh_g_group,
 		&sh_g_for,
+		&sh_g_loop,
+		&sh_g_loop,
 		NULL
 };
 
@@ -33,6 +37,8 @@ static void	*g_cmd_core_put[] = {
 		sh_g_com_cmd_put,
 		sh_g_com_cmd_put,
 		sh_g_for_put,
+		sh_g_loop_put,
+		sh_g_loop_put,
 		NULL
 };
 
