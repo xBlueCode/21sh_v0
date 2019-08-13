@@ -12,6 +12,7 @@ int 		sh_lex_init(t_lex **plex, char *input)
 {
 	if (!input || !(*plex = (t_lex*)ft_memalloc(sizeof(t_lex))))
 		return (-1);
+//	ft_printf(C_CYN"LEX INIT:\n%s\n"T_END, input);
 	(*plex)->in = ft_dstrnew_str(input);
 	(*plex)->i = 0;
 	(*plex)->scope = ft_dstrnew_max(1);

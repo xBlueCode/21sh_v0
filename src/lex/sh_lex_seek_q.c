@@ -15,9 +15,8 @@ int 			sh_lex_seek_sq(t_lex *lex, int op)
 		;
 	//if (!lex->in->str[lex->i])
 	//	SH_LEX_RETERR(lex, TSSQ)
-	if (lex->in->str[lex->i])
+	if (lex->in->str[lex->i] && ++lex->i)
 		ft_dstrdel_n(lex->scope, -1, 1);
-	lex->i++;
 	lex->st = TSSQ;
 	return (1);
 }
@@ -31,9 +30,8 @@ int 			sh_lex_seek_bq(t_lex *lex, int op) {
 		;
 	//if (!lex->in->str[lex->i])
 	//	SH_LEX_RETERR(lex, TSBQ)
-	if (lex->in->str[lex->i])
+	if (lex->in->str[lex->i] && ++lex->i)
 		ft_dstrdel_n(lex->scope, -1, 1);
-	lex->i++;
 	lex->st = TSBQ;
 	return (1);
 }
@@ -66,9 +64,8 @@ int 			sh_lex_seek_dq(t_lex *lex, int op) {
 	}
 	//if (!lex->in->str[lex->i])
 	//	SH_LEX_RETERR(lex, TSDQ)
-	if (lex->in->str[lex->i])
+	if (lex->in->str[lex->i] && ++lex->i)
 		ft_dstrdel_n(lex->scope, -1, 1);
-	lex->i++;
 	lex->st = TSDQ;
 	return (1);
 }

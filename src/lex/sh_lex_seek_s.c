@@ -89,9 +89,6 @@ int 			sh_lex_seek_scmd(t_lex *lex, int op)
 	}
 	if (lex->in->str[lex->i] == ')' && ++lex->i)
 		ft_dstrdel_n(lex->scope, -1, 1);
-	//if (!lex->in->str[lex->i])
-	//	SH_LEX_RETERR(lex, TSD_PL)
-	//lex->i++;
 	lex->st = TSD_PL;
 	return (1);
 }

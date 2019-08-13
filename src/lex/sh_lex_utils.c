@@ -8,6 +8,8 @@ int		sh_lex_isinname(char c)
 
 int 	sh_lex_tok_isdelim(char c)
 {
+	if (!c)
+		return (1);
 	return (ft_strchr(SH_LEX_SEPSET_X, c) || ft_isspace(c));
 }
 

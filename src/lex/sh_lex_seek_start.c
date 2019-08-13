@@ -118,10 +118,10 @@ int         sh_lex_seek_rescope(t_lex *lex, int op)
 	{
 		while (ft_isspace(line[i]))
 			i++;
-		if (line[i] && line[i] != '\n' && line[i] != '\\')
-			ft_dstrdel_n(lex->scope, -1, 1);
 		if (sh_lex_seek_join(lex, op))
 			return (1);
+		if (line[i] && line[i] != '\n')
+			ft_dstrdel_n(lex->scope, -1, 1);
 		lex->i = i;
 		return (1);
 	}

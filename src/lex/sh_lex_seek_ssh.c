@@ -35,7 +35,7 @@ int 			sh_lex_seek_ssh(t_lex *lex, int op) {
 	//	SH_LEX_RETERR(lex, TSDQ)
 	if (lex->in->str[lex->i] == ')' && ++lex->i)
 		ft_dstrdel_n(lex->scope, -1, 1);
-	//lex->i++;
+	//lex->i++; // TODO: DANGEROUS
 	lex->st = TSPL;
 	return (1);
 }
