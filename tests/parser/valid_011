@@ -1,0 +1,1 @@
+for x in 1 2 4 5  646  756 7 436 34  354 634634;do echo "$x - " >> forfile && echo "$x ++ " >> forfile & done &

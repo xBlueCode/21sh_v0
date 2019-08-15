@@ -1,0 +1,5 @@
+echo hello world
+echo hello | cat -e
+echo hello ; echo world
+echo hello > to_file.txt
+cat -e < from_file.txt
