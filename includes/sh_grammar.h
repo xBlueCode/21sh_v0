@@ -92,7 +92,7 @@ typedef struct	s_redir
 	char 	*word;
 }				t_redir;
 
-typedef struct	s_simp_cmd
+typedef struct	s_simp_cmd // process
 {
 	t_list	*lst_assign;
 	t_list	*lst_words;
@@ -116,23 +116,14 @@ typedef struct	s_pipe
 typedef struct	s_and_or
 {
 	t_list	*lst_pipe;
-	t_dstr	*sep;
+	t_dstr	*sep; // &&, ||
 }				t_and_or;
-
-/*
-typedef struct	s_comp_cmd
-{
-	void	*clause;
-	int 	type;
-}				t_comp_cmd;
-*/
-
 
 typedef struct	s_com_cmd // comp_list
 {
 	t_list	*lst_and_or;
 	int 	gr; // it can be _COM_CMD, _SUBSH, _CB_GROUP, _DO_GROUP
-	t_dstr	*sep;
+	t_dstr	*sep; // ;, &
 }				t_com_cmd;
 
 typedef struct	s_com_cmds

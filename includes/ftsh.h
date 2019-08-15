@@ -15,6 +15,7 @@
 # include "ft_rl.h"
 //# include "rl_hist.h"
 # include "sh_parser.h"
+# include "sh_jobc.h"
 //# include "sh_lex.h"
 # include "sh_glob.h"
 # include "sh_utils.h"
