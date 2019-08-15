@@ -14,16 +14,21 @@ typedef struct	s_process {
 
 /* A job is a pipeline of processes. */
 typedef struct	s_job {
-	struct			job *next; /* next active job */
-	char			*command; /* command line, used for messages */
-	t_process		*process; /* list of processes in this job */ // and_or
+	int				ind;
 	pid_t			pgid; /* process group ID */
 	char			notified; /* true if user told about stopped job */
-	struct termios	tmodes; /* saved terminal modes */
-//	int 			std_in;
-//	int				std_out;
-//	int				std_err;
+	t_termios		tmodes; /* saved terminal modes */
+	t_and_or		*andor_list;
+	char 			bg;
 }				t_job;
+
+typedef struct	s_jcon
+{
+	int			cind;
+	t_list		*jobs;
+	pid_t 		sh_pid; // it can be moved to the shell dashboard
+	t_termios	sh_termios; // it can be moved to shell dashboard
+}				t_jcon;
 
 /**
  *
@@ -31,6 +36,24 @@ typedef struct	s_job {
  * @return
  */
 int 			sh_jc_launch(t_job *job);
+
+int 			sh_jc_exec(t_job *job);
+
+/**
+ *
+ * @param job
+ * @param info
+ * @return
+ */
+int 			sh_jc_putj_in_forg(t_job *job, int info);
+
+/**
+ *
+ * @param job
+ * @param info
+ * @return
+ */
+int 			sh_jc_putj_in_back(t_job *job, int info);
 
 /**
 ** Find the active job with the indicated pgid.

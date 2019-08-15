@@ -97,14 +97,19 @@ typedef struct	s_simp_cmd // process
 	t_list	*lst_assign;
 	t_list	*lst_words;
 	t_list	*lst_redir;
+	pid_t 	pid;
+	char 	state;
+	int 	status;
 //	int 	cnt_op;
 }				t_simp_cmd;
 
 typedef struct	s_cmd
 {
-	void 	*core;
+	void 	*core; // simp_cmd, com_cmd, for, loop
 	t_list	*lst_redir;
 	int16_t	type;
+	int 	stdi;
+	int 	stdo;
 }				t_cmd;
 
 typedef struct	s_pipe
@@ -122,7 +127,7 @@ typedef struct	s_and_or
 typedef struct	s_com_cmd // comp_list
 {
 	t_list	*lst_and_or;
-	int 	gr; // it can be _COM_CMD, _SUBSH, _CB_GROUP, _DO_GROUP
+	int 	gr; // it can be _COM_CMD, _SUBSH, _CB_GROUP, _DO_GROUP  // gr=group
 	t_dstr	*sep; // ;, &
 }				t_com_cmd;
 
