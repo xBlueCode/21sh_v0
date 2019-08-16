@@ -4,6 +4,8 @@
 #include "sh_parser.h"
 #include "sh_sh.h"
 
+# define DE0 ft_printf("%s\n", __FUNCTION__);
+
 /*
 int			sh_e_loop(void *gr);
 int			sh_e_for(void *gr);

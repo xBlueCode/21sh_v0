@@ -6,6 +6,7 @@ int			sh_e_com_cmds(t_sh *sh, void *gr, int cinb)
 	t_list		*com_cmd;
 	int 		ret;
 
+	DE0
 	(void)cinb;
 	if (!sh || !gr)
 		return (0);
@@ -14,7 +15,7 @@ int			sh_e_com_cmds(t_sh *sh, void *gr, int cinb)
 	ret = 0;
 	while (com_cmd) // replace by lst_iter
 	{
-		ret = sh_e_com_cmd(sh, com_cmd, 0);
+		ret = sh_e_com_cmd(sh, com_cmd->content, 0);
 		com_cmd = com_cmd->next;
 	}
 	return (ret);
@@ -27,6 +28,7 @@ int			sh_e_com_cmd(t_sh *sh, void *gr, int inbg) // map to group exec (subsh)
 	int 		cinbg; // current in_back (level)
 	int 		ret;
 
+	DE0
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	com_cmd = (t_com_cmd*)gr;
@@ -37,7 +39,8 @@ int			sh_e_com_cmd(t_sh *sh, void *gr, int inbg) // map to group exec (subsh)
 		if (!cinbg)
 		{
 			cinbg = ft_dstrget_ch(com_cmd->sep, -1) == '&' ? 1 : 0;
-			sh_jc_add(sh->jc, sh_jc_new(cinbg));
+			sh_jc_add(sh->jc, cinbg);
+			ft_printf("job created ! %s\n", cinbg? "back" : "forg");
 		}
 		ft_dstrdel_n(com_cmd->sep, -1, 1);
 		ret = sh_e_and_or(sh, and_or_lst->content, cinbg);
@@ -53,6 +56,7 @@ int 		sh_e_and_or(t_sh *sh, void *gr, int cinb)
 	int 		ret;
 	int 		sep_ao;
 
+	DE0
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	and_or = (t_and_or*)gr;
@@ -77,6 +81,7 @@ int			sh_e_pipe(t_sh *sh, void *gr, int cinb)
 	int 	fifo[2];
 	int 	ret;
 
+	DE0
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	pip = (t_pipe*)gr;
@@ -97,6 +102,7 @@ int			sh_e_pipe(t_sh *sh, void *gr, int cinb)
 			cmd->stdo = fifo[1];
 		}
 		ret = sh_e_cmd(sh, cmd, cinb);
+		cmd_lst = cmd_lst->next;
 	}
 	ret = pip->neg ? pip->neg - ret : ret;
 	return (ret);
@@ -107,6 +113,7 @@ int			sh_e_cmd(t_sh *sh, void *gr, int cinb)
 	t_cmd	*cmd;
 	int 	ret;
 
+	DE0
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	cmd = (t_cmd*)gr;
@@ -125,22 +132,31 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr, int cinb)
 	int 		i;
 	int 	ret;
 	t_dastr	*dcli;
+	pid_t		pid;
 
+	DE0
 	(void)cinb;
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	simp_cmd = (t_simp_cmd*)gr;
 	dcli = ft_dastrnew_max(5);
 	wordslst = simp_cmd->lst_words;
+	ft_printf("while beg !\n");
 	while (wordslst)
 	{
-		ft_dastrput_dstr(dcli, -1, (t_dstr*)wordslst->content);
+		//ft_dastrput_dstr(dcli, -1, (t_dstr*)wordslst->content);
+		ft_dastrins_str(dcli, -1, ((t_dstr*)wordslst->content)->str);
 		wordslst = wordslst->next;
 	}
+	ft_printf("while end !\n");
 	wordsarr = ft_memalloc(dcli->len + 1);
 	i = -1;
-	while (++i < dcli->len + 1)
+	wordsarr[dcli->len] = NULL;
+	while (++i < dcli->len)
 		wordsarr[i] = dcli->a[i]->str;
-	execve(wordsarr[0], wordsarr + 1, NULL);
+	if ((pid = fork()) < 0)
+		return (ft_printf("fork error\n"));
+	else if (!pid)
+		execve(wordsarr[0], wordsarr, NULL);
 	return (ret);
 }
