@@ -7,6 +7,7 @@ logs/*
 *.zip
 .idea*
 [cC]make*
+ign*
 
 ## To be Uncommented for 42 -> down
 #todo/*

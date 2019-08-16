@@ -1,1 +1,5 @@
 Check libft link & in .gitignore
+
+TODO: handle non-interactive shell
+
+TODO: handle unexpected tokens at lexer level
