@@ -52,6 +52,17 @@ int 	sh_p_start(t_lex *lex)
 			ft_printf("Failed to build com_cmds !!!!\n");
 		 */
 		sh_g_com_cmds_put(com_cmds, 0);
+		t_sh sh;
+		sh.inter = 1;
+		sh.term = 0;
+		sh.pgid = -1;
+		sh.jc = ft_memalloc(sizeof(t_jcon));
+		sh.jc->cind = -1;
+		//sh.jc->jlev = -1;
+		sh.jc->jobs = NULL;
+		sh.jc->cjob = NULL;
+
+		return (sh_e_com_cmds(&sh, com_cmds, 0));
 	}
 	return (0);
 }

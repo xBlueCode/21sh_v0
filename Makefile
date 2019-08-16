@@ -65,12 +65,15 @@ PARSER := sh_p_and_or.c sh_p_cmd.c sh_p_cmd_pref.c sh_p_cmd_suff.c \
 GRAMMAR := sh_g_cmd.c sh_g_and_or.c sh_g_com_cmd.c sh_g_pipe.c sh_g_redir.c \
     sh_g_cmd_core.c sh_g_simp_cmd.c sh_g_group.c sh_g_for.c sh_g_loop.c \
 
+EXEC := sh_e.c
+
 UTILS := utils_str.c
 
 SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
 	$(addprefix lex/,  $(LEX)) \
 	$(addprefix parser/,  $(PARSER)) \
 	$(addprefix grammar/,  $(GRAMMAR)) \
+	$(addprefix exec/,  $(EXEC)) \
 	$(addprefix alias/,  $(ALIAS)) \
 	$(addprefix var/,  $(VAR)) \
 	$(addprefix bin/,  $(BIN)) \

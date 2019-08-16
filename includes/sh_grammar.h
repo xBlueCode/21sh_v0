@@ -110,6 +110,7 @@ typedef struct	s_cmd
 	int16_t	type;
 	int 	stdi;
 	int 	stdo;
+	int 	stde;
 }				t_cmd;
 
 typedef struct	s_pipe
