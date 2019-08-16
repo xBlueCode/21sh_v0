@@ -27,10 +27,10 @@ typedef struct	s_job
 	int				ind;
 	pid_t			pgid;
 	char			notified;
-	t_termios		tmodes;
+	t_termios		*tmodes;
 	t_list			*process;
 	char 			bg;
-	int 			lev;
+//	int 			lev;
 }				t_job;
 
 /**
@@ -50,8 +50,8 @@ typedef struct	s_jcon
 //int 			sh_jc_launch(t_job *job);
 //int 			sh_jc_exec(t_job *job);
 
-t_job 			*sh_jc_new(int bg);
-int 			sh_jc_add(t_jcon *jc, t_job *job);
+t_job 			*sh_jc_new(int ind, int bg);
+int 			sh_jc_add(t_jcon *jc, int bg);
 
 /**
  *

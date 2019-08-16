@@ -7,7 +7,7 @@ LIBFT := $(addprefix $(LIBFT_DIR), libft.a)
 INC_DIR = $(LIBFT_DIR)includes/ ./includes/
 
 CC = gcc
-CC_FLAGS = -W -Wall -Werror -Wextra
+CC_FLAGS = #-W -Wall -Werror -Wextra
 
 T_BLK = \033[5m
 T_NRM = \033[25m
@@ -67,6 +67,8 @@ GRAMMAR := sh_g_cmd.c sh_g_and_or.c sh_g_com_cmd.c sh_g_pipe.c sh_g_redir.c \
 
 EXEC := sh_e.c
 
+JOBC := sh_jc.c
+
 UTILS := utils_str.c
 
 SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
@@ -74,6 +76,7 @@ SRC_FILES := $(addprefix ftsh/,  $(FTSH)) \
 	$(addprefix parser/,  $(PARSER)) \
 	$(addprefix grammar/,  $(GRAMMAR)) \
 	$(addprefix exec/,  $(EXEC)) \
+	$(addprefix jobc/,  $(JOBC)) \
 	$(addprefix alias/,  $(ALIAS)) \
 	$(addprefix var/,  $(VAR)) \
 	$(addprefix bin/,  $(BIN)) \

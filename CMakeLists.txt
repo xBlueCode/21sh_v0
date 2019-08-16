@@ -1,32 +1,52 @@
 cmake_minimum_required(VERSION 3.13)
-project(ftsh)
+project(21sh_gh)
 
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(includes)
 include_directories(libft/includes)
 
-add_executable(ftsh
+add_executable(21sh_gh
         includes/ft_rl.h
         includes/ftsh.h
+        includes/rl_hist.h
+        includes/sh_alias.h
+        includes/sh_bin.h
+        includes/sh_exec.h
         includes/sh_glob.h
+        includes/sh_grammar.h
+        includes/sh_jobc.h
         includes/sh_lex.h
+        includes/sh_parser.h
         includes/sh_prompt.h
+        includes/sh_sh.h
         includes/sh_term.h
         includes/sh_utils.h
+        includes/sh_var.h
         libft/includes/ft_arr.h
         libft/includes/ft_bit.h
+        libft/includes/ft_btree.h
+        libft/includes/ft_cell.h
         libft/includes/ft_char.h
         libft/includes/ft_conv.h
         libft/includes/ft_dastr.h
+        libft/includes/ft_dirent.h
         libft/includes/ft_dstr.h
+        libft/includes/ft_err.h
+        libft/includes/ft_fio.h
+        libft/includes/ft_hash.h
+        libft/includes/ft_hset.h
+        libft/includes/ft_htab.h
         libft/includes/ft_logger.h
         libft/includes/ft_lst.h
         libft/includes/ft_math.h
         libft/includes/ft_mem.h
+        libft/includes/ft_point.h
         libft/includes/ft_print.h
         libft/includes/ft_str.h
+        libft/includes/ft_table.h
         libft/includes/ft_term.h
+        libft/includes/ft_vector.h
         libft/includes/get_next_line.h
         libft/includes/libft.h
         libft/includes/libftprintf.h
@@ -37,6 +57,11 @@ add_executable(ftsh
         libft/src/arr/ft_arr_new.c
         libft/src/arr/ft_arr_print.c
         libft/src/arr/ft_arr_strdup.c
+        libft/src/btree/ft_btree_app.c
+        libft/src/btree/ft_btree_basics.c
+        libft/src/btree/ft_btree_manip.c
+        libft/src/btree/ft_btree_traverse.c
+        libft/src/cell/ft_cell.c
         libft/src/char/ft_isalnum.c
         libft/src/char/ft_isalpha.c
         libft/src/char/ft_isascii.c
@@ -58,13 +83,24 @@ add_executable(ftsh
         libft/src/dastr/ft_dastr_extend.c
         libft/src/dastr/ft_dastr_get.c
         libft/src/dastr/ft_dastr_insert.c
+        libft/src/dastr/ft_dastr_print.c
+        libft/src/dastr/ft_dastr_replace.c
+        libft/src/dirent/ft_dirent.c
         libft/src/dstr/ft_dstr_basic.c
         libft/src/dstr/ft_dstr_del.c
         libft/src/dstr/ft_dstr_extend.c
         libft/src/dstr/ft_dstr_get.c
         libft/src/dstr/ft_dstr_insert.c
+        libft/src/dstr/ft_dstr_join.c
         libft/src/dstr/ft_dstr_replace.c
+        libft/src/fio/ft_dup2.c
         libft/src/gnl/get_next_line.c
+        libft/src/hash/ft_hcode_str.c
+        libft/src/hset/ft_hset_basics.c
+        libft/src/hset/ft_hset_manip.c
+        libft/src/htab/ft_htab_basics.c
+        libft/src/htab/ft_htab_hash_str.c
+        libft/src/htab/ft_htab_manip.c
         libft/src/logger/ft_logger.c
         libft/src/logger/ft_logger_update.c
         libft/src/lst/ft_lst_addlast.c
@@ -158,11 +194,85 @@ add_executable(ftsh
         libft/src/str/ft_strsub.c
         libft/src/str/ft_strtrim.c
         libft/src/str/ft_wstrlenz.c
+        libft/src/table/ft_tab_basic.c
+        libft/src/table/ft_tab_del.c
+        libft/src/table/ft_tab_get.c
+        libft/src/table/ft_tab_insert.c
+        libft/src/table/ft_tab_iter.c
+        libft/src/table/ft_tab_put.c
+        libft/src/table/ft_tab_to.c
+        libft/src/vector/ft_vec_basics.c
+        libft/src/vector/ft_vec_delete.c
+        libft/src/vector/ft_vec_insert.c
+        libft/test/ft_btree_test.c
+        libft/test/ft_hset_test.c
+        libft/test/ft_htab_test.c
         libft/Makefile
+        src/alias/sh_als.c
+        src/bin/sh_bin.c
+        src/bin/sh_bin_manip.c
+        src/exec/sh_e.c
         src/ftsh/ftsh.c
         src/glob/sh_glob.c
         src/glob/sh_glob_match.c
         src/glob/sh_glob_scandir.c
+        src/grammar/sh_g_and_or.c
+        src/grammar/sh_g_cmd.c
+        src/grammar/sh_g_cmd_core.c
+        src/grammar/sh_g_com_cmd.c
+        src/grammar/sh_g_for.c
+        src/grammar/sh_g_group.c
+        src/grammar/sh_g_loop.c
+        src/grammar/sh_g_pipe.c
+        src/grammar/sh_g_redir.c
+        src/grammar/sh_g_simp_cmd.c
+        src/grammar/sh_g_utils.c
+        src/jobc/sh_jobc_launch.c
+        src/lex/sh_lex.c
+        src/lex/sh_lex_classify.c
+        src/lex/sh_lex_manip.c
+        src/lex/sh_lex_print.c
+        src/lex/sh_lex_seek.c
+        src/lex/sh_lex_seek_add.c
+        src/lex/sh_lex_seek_als.c
+        src/lex/sh_lex_seek_bs.c
+        src/lex/sh_lex_seek_ctx.c
+        src/lex/sh_lex_seek_hash.c
+        src/lex/sh_lex_seek_hd.c
+        src/lex/sh_lex_seek_ion.c
+        src/lex/sh_lex_seek_op.c
+        src/lex/sh_lex_seek_op_gl.c
+        src/lex/sh_lex_seek_pcb.c
+        src/lex/sh_lex_seek_q.c
+        src/lex/sh_lex_seek_rw.c
+        src/lex/sh_lex_seek_s.c
+        src/lex/sh_lex_seek_ssh.c
+        src/lex/sh_lex_seek_start.c
+        src/lex/sh_lex_tok.c
+        src/lex/sh_lex_utils.c
+        src/parser/sh_p_and_or.c
+        src/parser/sh_p_cmd.c
+        src/parser/sh_p_cmd_pref.c
+        src/parser/sh_p_cmd_suff.c
+        src/parser/sh_p_comp_list.c
+        src/parser/sh_p_complete_cmd.c
+        src/parser/sh_p_distinct.c
+        src/parser/sh_p_for.c
+        src/parser/sh_p_group.c
+        src/parser/sh_p_ifelse.c
+        src/parser/sh_p_io.c
+        src/parser/sh_p_lbreak.c
+        src/parser/sh_p_list.c
+        src/parser/sh_p_loop.c
+        src/parser/sh_p_pipe.c
+        src/parser/sh_p_program.c
+        src/parser/sh_p_redir_list.c
+        src/parser/sh_p_sep.c
+        src/parser/sh_p_simp_cmd.c
+        src/parser/sh_p_start.c
+        src/parser/sh_p_subsh.c
+        src/parser/sh_p_term.c
+        src/parser/sh_p_utils.c
         src/prompt/prompt.c
         src/readline/rl.c
         src/readline/rl_autoc.c
@@ -185,25 +295,23 @@ add_executable(ftsh
         src/readline/rl_edit_v0.c
         src/readline/rl_edit_v1.c
         src/readline/rl_edit_v2.c
+        src/readline/rl_hist.c
+        src/readline/rl_hist_io.c
+        src/readline/rl_hist_request.c
         src/readline/rl_put.c
         src/readline/rl_scope.c
+        src/readline/rl_scope_prompt.c
+        src/readline/rl_scope_prompt_ps.c
         src/readline/rl_scope_scan.c
+        src/readline/rl_scope_scan_h.c
+        src/readline/rl_scope_scan_op.c
         src/readline/rl_scope_scan_q.c
         src/readline/rl_scope_scan_s.c
+        src/readline/rl_scope_scan_ssh.c
         src/readline/rl_utils.c
         src/term/term_config.c
         src/utils/utils_str.c
-        tests/test_keymapper.c
-        tests/test_lex.c
-        Makefile libft/src/dstr/ft_dstr_join.c
-        src/readline/rl_hist.c
-        includes/rl_hist.h
-        src/readline/rl_hist_io.c
-        src/readline/rl_hist_request.c
-        libft/src/dastr/ft_dastr_print.c
-        includes/sh_var.h
-        libft/includes/ft_table.h
-        libft/src/table/ft_tab_insert.c libft/src/table/ft_tab_get.c
-        libft/src/table/ft_tab_del.c libft/src/table/ft_tab_put.c libft/src/dastr/ft_dastr_replace.c
-        src/var/sh_var.c libft/src/table/ft_tab_to.c
-        src/var/sh_var_utils.c src/readline/rl_scope_scan_h.c src/lex/sh_lex.c src/lex/sh_lex_tok.c src/lex/sh_lex_manip.c src/lex/sh_lex_seek.c src/lex/sh_lex_seek_q.c src/lex/sh_lex_seek_bs.c src/lex/sh_lex_seek_add.c src/lex/sh_lex_seek_op.c src/lex/sh_lex_seek_op_gl.c src/lex/sh_lex_print.c includes/sh_alias.h src/lex/sh_lex_seek_s.c src/lex/sh_lex_seek_hd.c libft/src/table/ft_tab_iter.c src/alias/sh_als.c)
+        src/var/sh_var.c
+        src/var/sh_var_get.c
+        src/var/sh_var_utils.c
+        Makefile src/jobc/sh_jc.c)

@@ -1,5 +1,5 @@
 #include "ftsh.h"
-
+/*
 int				sh_jc_launch(t_job *job)
 {
 	sh_jc_exec(job);
@@ -11,3 +11,4 @@ int				sh_jc_launch(t_job *job)
 	else
 		sh_jc_putj_in_back(job, 0);
 }
+*/
