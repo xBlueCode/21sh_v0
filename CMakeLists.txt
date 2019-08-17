@@ -314,4 +314,4 @@ add_executable(21sh_gh
         src/var/sh_var.c
         src/var/sh_var_get.c
         src/var/sh_var_utils.c
-        Makefile src/jobc/sh_jc.c)
+        Makefile src/jobc/sh_jc.c src/sh/sh_sh.c)

@@ -15,8 +15,9 @@
 # include "ft_rl.h"
 //# include "rl_hist.h"
 # include "sh_parser.h"
-# include "sh_jobc.h"
+# include "sh_sh.h"
 # include "sh_exec.h"
+//# include "sh_jobc.h"
 //# include "sh_lex.h"
 # include "sh_glob.h"
 # include "sh_utils.h"
@@ -29,6 +30,6 @@
 # define CFPUTSTR(c, str, fd) (ft_dprintf(fd, "%s%s%s", c, str, T_END))
 
 
-//int				sh_p_start(t_lex *lex);
+int			sh_script_run(char *script);
 
 #endif

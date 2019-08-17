@@ -50,8 +50,11 @@ typedef struct	s_jcon
 //int 			sh_jc_launch(t_job *job);
 //int 			sh_jc_exec(t_job *job);
 
-t_job 			*sh_jc_new(int ind, int bg);
+t_job 			*sh_jc_new_job(int ind, int bg);
 int 			sh_jc_add(t_jcon *jc, int bg);
+
+int 			sh_jc_init(t_jcon *jc);
+t_jcon 			*sh_jc_new(void);
 
 /**
  *

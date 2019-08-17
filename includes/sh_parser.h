@@ -60,7 +60,7 @@ typedef struct	s_parser
 //	t_btree		***ast;
 }				t_parser;
 
-int 			sh_p_start(t_lex *lex);
+t_com_cmds		*sh_p_start(t_lex *lex);
 int				sh_p_program(t_parser *p, t_btree **ast);
 int				sh_p_complete_cmds(t_parser *p, t_btree **ast);
 int				sh_p_complete_cmds_sub(t_parser *p, t_btree **ast);
