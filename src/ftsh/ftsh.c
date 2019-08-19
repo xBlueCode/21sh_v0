@@ -12,6 +12,7 @@ int		sh_file_run(char *filename)
 	t_dstr	*dscript;
 	char 	c;
 	int 	fd;
+	t_sh	*sh;
 
 	ft_putendl(filename);
 	dscript = ft_dstrnew_max(128);
@@ -19,10 +20,11 @@ int		sh_file_run(char *filename)
 		return (1);
 	while (!(c = 0) && read(fd, &c, 1))
 		ft_dstrins_ch(dscript, -1, c);
-	return (sh_script_run(dscript->str));
+	sh_sh_init(&sh);
+	return (sh_script_run(sh, dscript->str));
 }
 
-int		sh_script_run(char *script) // TODO: add sh as param (subsh ...)
+int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 {
 	t_lex *lex;
 	t_com_cmds *com_cmds;
@@ -32,9 +34,12 @@ int		sh_script_run(char *script) // TODO: add sh as param (subsh ...)
 		return (1);
 	sh_lex_init(&lex, script);
 	sh_lex_start(lex);
+	if (!lex->tlst)
+		return (KO);
 	if (!(com_cmds = sh_p_start(lex)))
 		return (KO);
-	return (sh_e_com_cmds(g_sh, com_cmds, 0));
+	ft_printf(C_GRN"Parsed !!!\n"T_END);
+	return (sh_e_com_cmds(sh, com_cmds));
 }
 
 int		sh_inter_read(char **line)
@@ -65,9 +70,10 @@ int		sh_term_run(void)
 		sh_inter_read(&line);
 	//	ft_printf("in run: line: <%s>\n", line);
 		rl_hist_add(line);
-		if (!ft_strcmp("exit", line))
+		ft_printf(C_CYN"LINE: <%s>\n"T_END, line);
+		if (!ft_strncmp("exit", line, 4))
 			return (0);
-		sh_script_run(line);
+		sh_script_run(g_sh, line);
 		/*
 		sh_lex_init(&lex, line);
 		sh_lex_start(lex);
@@ -98,11 +104,13 @@ int		main(int ac, char **av, char **envp)
 
 	//sh_invar_init();
 	//sh_hash_init();
+	sh_bin_init(sh_bin_ptr());
+	sh_bin_update(sh_bin(), sh_var_getval("PATH"));
 	if (ac > 1)
 		sh_est = (sh_file_run(av[1]));
 	else
 	{
-		sh_est = (sh_term_run());
+		sh_est = sh_term_run();
 		sh_termconfig_reset();
 	}
 	//sh_cleanup();

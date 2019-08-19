@@ -39,6 +39,8 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 	else
 	{
 		ft_btreeapp_prefix(ast, test_sh_p_astapp);
+		if (!ast || !ast->left || !ast->left->left)
+			return (NULL);
 		com_cmds = sh_g_com_cmds(ast->left->left);
 		sh_g_com_cmds_put(com_cmds, 0);
 		return (com_cmds);
