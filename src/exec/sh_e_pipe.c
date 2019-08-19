@@ -27,6 +27,7 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 				ft_printf("error: pipe()\n");
 				exit(1);
 			}
+			ft_printf(C_GRN"PIPE (%d, %d)\n"T_END, fifo[0], fifo[1]);
 			cmd->stdo = fifo[1];
 		}
 		ret = sh_e_cmd(sh, cmd);
@@ -42,13 +43,19 @@ int			sh_e_cmd(t_sh *sh, void *gr)
 	int 	ret;
 
 	DF0
-	if ((ret = 0) || !sh || !gr)
+	if (!sh || !gr)
 		return (0);
 	cmd = (t_cmd*)gr;
 	// TODO: perform redirection for compound cmd
+	ft_dup2(cmd->stdi, STDIN_FILENO, 1);
+	ft_dup2(cmd->stdo, STDOUT_FILENO, 1);
 	if (cmd->type == SH_GR_SIMP_CMD)
-		return (sh_e_simp_cmd(sh, cmd->core));
+	{
+		ret = sh_e_simp_cmd(sh, cmd->core);
+		dup2(sh->stdi, STDIN_FILENO);
+		dup2(sh->stdo, STDOUT_FILENO);
+		return (ret);
+	}
 	else
 		return (KO);
 }
-

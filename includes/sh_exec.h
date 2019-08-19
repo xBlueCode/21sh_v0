@@ -32,4 +32,8 @@ int			sh_e_simp_cmd(t_sh *sh, void *gr);
 int			sh_e_comp_cmd(t_sh *sh, void *gr);
 int			sh_e_group(t_sh *sh, void *gr);
 
+
+char 		*sh_e_get_binpath(t_sh *sh, char *bin_name);
+char		**sh_e_get_argv(t_sh *sh, t_dastr *words);
+
 #endif
