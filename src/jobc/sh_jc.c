@@ -15,28 +15,59 @@ t_job 			*sh_jc_new_job(int ind, int bg)
 {
 	t_job *job;
 
-	DE0
+	DF0
 	job = ft_memalloc(sizeof(t_job));
 	job->ind = ind;
 	job->bg = bg;
-	job->pgid = -1;
+	job->pgid = 0;
 	job->notified = 0;
 	job->tmodes = NULL;
 	job->process = NULL;
+	job->done = 0;
+	job->sep_ao = 0;
 	return (job);
+}
+
+void			sh_jc_free_job(void **pjob) // TODO: intern free
+{
+	DF0
+	ft_memdel(pjob);
 }
 
 int 			sh_jc_add(t_jcon *jc, int bg)
 {
-	t_job *new_job;
+	t_job	*new_job;
+	t_list	*jlast;
 
-	DE0
+	DF0
 	if (!jc && ft_printf("JC NULL\n"))
 		return (KO);
-	jc->cind++;
+	if (!jc->jobs)
+		jc->cind = 1;
+	else
+		jc->cind++;
 	new_job = sh_jc_new_job(jc->cind, bg);
-	jc->cjob = new_job;
 	ft_printf("--- > job added \n");
-	ft_lst_addlast(&(jc->jobs), ft_lstnew(new_job, sizeof(t_job)));
+	jlast = ft_lstnew(new_job, sizeof(t_job));
+	//ft_lst_addlast(&(jc->jobs), jlast);
+	ft_lstadd(&(jc->jobs), jlast);
+	jc->cjob = (t_job*)jlast->content;
 	return (0);
+}
+
+int 			sh_jc_wait(t_jcon *jc, t_job *job)
+{
+	int wstatus;
+	pid_t pid;
+
+	DF0
+//	pid = waitpid (WAIT_ANY, &wstatus, WUNTRACED);
+//	ft_printf("----> pid got from wait: %d\n", pid);
+	pid = waitpid(WAIT_ANY, &wstatus, WUNTRACED); // TODO: WAIT_ANY
+	ft_printf("----> pid got from wait: %d\n", pid);
+	while (!sh_jc_mark_status(jc, pid, wstatus)
+		   && !sh_jc_is_stop(job)
+		   && !sh_jc_is_done(job))
+		pid = waitpid (WAIT_ANY, &wstatus, WUNTRACED);
+	return (OK);
 }
