@@ -38,6 +38,8 @@ void			*sh_g_cmd(t_btree *ast)
 			SHG_LSTADD(cmd, lst_redir, redir);
 		ast_redirlist = ast_redirlist->right;
 	}
+	if (!cmd->core)
+		return (NULL);
 	return (cmd);
 }
 

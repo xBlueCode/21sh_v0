@@ -29,6 +29,8 @@ void			*sh_g_and_or(t_btree *ast_ao)
 			break;
 		ast_ao = ast_ao->right;
 	}
+	if (!and_or->lst_pipe)
+		return (NULL);
 	return (and_or);
 }
 

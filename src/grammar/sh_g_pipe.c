@@ -28,6 +28,8 @@ void			*sh_g_pipe(t_btree *ast)
 			SHG_LSTADD(pipe, lst_cmd, cmd);
 		ast_pipesec = ast_pipesec->right;
 	}
+	if (!pipe->lst_cmd)
+		return (NULL);
 	return (pipe);
 }
 

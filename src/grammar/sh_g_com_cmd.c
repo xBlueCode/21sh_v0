@@ -30,7 +30,7 @@ void			*sh_g_com_cmds(t_btree *ast)
 	if (!ast ||
 		(ast->op != SH_GR_COMPLETE_CMDS
 		&& ast->op != SH_GR_COMPLETE_CMDS_SUB))
-		return (0);
+		return (NULL);
 	com_cmds = sh_g_com_cmds_new();
 	while (ast)
 	{
@@ -40,6 +40,8 @@ void			*sh_g_com_cmds(t_btree *ast)
 		SHG_LSTADD(com_cmds, lst_com_cmd, com_cmd)
 		ast = ast->right;
 	}
+	if (!com_cmds->lst_com_cmd)
+		return (NULL);
 	return (com_cmds);
 }
 
@@ -64,6 +66,8 @@ void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
 			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);
 		list = list->right;
 	}
+	if (!com_cmd->lst_and_or)
+		return (NULL);
 	return (com_cmd);
 }
 
