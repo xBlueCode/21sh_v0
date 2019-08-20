@@ -1,5 +1,7 @@
 #include "ftsh.h"
 
+
+
 int			sh_e_pipe(t_sh *sh, void *gr)
 {
 	t_pipe	*pip;
@@ -51,12 +53,15 @@ int			sh_e_cmd(t_sh *sh, void *gr)
 	// TODO: perform redirection for compound cmd
 	ft_dup_stdioe_copy(stdioe, 0);
 	ft_dup_stdioe_set(cmd->stdioe, 1);
+	ret = cmd->exec(sh, cmd->core);
+	ft_dup_stdioe_set(stdioe, 1);
+	return (ret);
+	/*
 	if (cmd->type == SH_GR_SIMP_CMD)
 	{
 		ret = sh_e_simp_cmd(sh, cmd->core);
 		ft_dup_stdioe_set(stdioe, 1);
 		return (ret);
 	}
-	else
-		return (KO);
+	 */
 }

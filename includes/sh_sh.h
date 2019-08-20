@@ -2,7 +2,7 @@
 # define FT_SH_H
 
 # include "sh_jctype.h"
-# include "sh_jobc.h"
+//# include "sh_jobc.h"
 # include "libft.h"
 
 /**

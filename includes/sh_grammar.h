@@ -4,6 +4,9 @@
 # include "libft.h"
 # include "sh_lex.h"
 # include "sh_parser.h"
+//# include "sh_sh.h"
+//# include "sh_gr_type.h"
+#include "sh_exec.h"
 
 # define SHG_CHECK_MALL(g) {if (!(g = ft_memalloc(sizeof(*g)))) return (NULL);};
 # define SHG_LSTADD(g, lst, ncont) ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));
@@ -108,6 +111,7 @@ typedef struct	s_cmd
 	void 	*core; // simp_cmd, com_cmd, for, loop
 	t_list	*lst_redir;
 	int16_t	type;
+	t_exec	*exec;
 	int 	stdioe[3];
 //	int 	stdi;
 //	int 	stdo;
@@ -150,6 +154,19 @@ typedef struct	s_loop
 	t_com_cmd	*cond;
 	t_com_cmd	*do_group;
 }				t_loop;
+
+typedef void *(t_g_new)(void);
+typedef void *(t_g_seek)(t_btree*);
+typedef void (put)(void*, int);
+//typedef int (t_exec)(t_sh*, gr);
+
+typedef struct	s_gr
+{
+	int		t;
+	void	*(*n)(void);
+	void	*(*parse)(t_btree*);
+	void	(*put)(void*, int);
+}				t_gr;
 
 /*
 int				sh_g_com_cmds(t_btree *ast, void *);
@@ -200,4 +217,5 @@ void			sh_g_redir_put(void*g, int op);
 void			sh_g_wordput(t_list *elem);
 
 int 			sh_g_cmd_core_type(int gr_enum);
+t_exec			*sh_g_cmd_core_get_exec(int grt);
 #endif

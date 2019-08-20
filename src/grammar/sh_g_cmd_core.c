@@ -42,6 +42,17 @@ static void	*g_cmd_core_put[] = {
 		NULL
 };
 
+static void	*g_cmd_core_exec[] = {
+		&sh_e_simp_cmd,
+		sh_e_com_cmd,
+		sh_e_com_cmd,
+		sh_e_com_cmd,
+//		sh_e_for,
+//		sh_e_loop,
+//		sh_e_loop,
+		NULL
+};
+
 int 		sh_g_cmd_core_type(int gr_enum)
 {
 	int i;
@@ -85,4 +96,13 @@ void		*sh_g_cmd_core_put(int t)
 	if ((type = sh_g_cmd_core_type(t)) < 0)
 		return (NULL);
 	return (g_cmd_core_put[type]);
+}
+
+t_exec		*sh_g_cmd_core_get_exec(int grt)
+{
+	int type;
+
+	if ((type = sh_g_cmd_core_type(grt)) < 0)
+		return (NULL);
+	return (g_cmd_core_exec[type]);
 }
