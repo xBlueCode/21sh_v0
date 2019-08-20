@@ -108,9 +108,10 @@ typedef struct	s_cmd
 	void 	*core; // simp_cmd, com_cmd, for, loop
 	t_list	*lst_redir;
 	int16_t	type;
-	int 	stdi;
-	int 	stdo;
-	int 	stde;
+	int 	stdioe[3];
+//	int 	stdi;
+//	int 	stdo;
+//	int 	stde;
 }				t_cmd;
 
 typedef struct	s_pipe

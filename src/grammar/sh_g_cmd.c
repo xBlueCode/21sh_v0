@@ -10,9 +10,9 @@ void			*sh_g_cmd_new(void)
 	cmd->core = NULL;
 	cmd->lst_redir = NULL;
 	cmd->type = -1;
-	cmd->stdi = STDIN_FILENO;
-	cmd->stdo = STDOUT_FILENO;
-	cmd->stde = STDERR_FILENO;
+	//cmd->stdi = STDIN_FILENO;
+	//cmd->stdo = STDOUT_FILENO;
+	//cmd->stde = STDERR_FILENO;
 	return (cmd);
 }
 

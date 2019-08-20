@@ -20,8 +20,8 @@ int 			sh_sh_init(t_sh **sh) // init mode (subsh ...)
 	(*sh)->tmodes = NULL;
 	(*sh)->term = STDIN_FILENO;
 	(*sh)->inter = isatty((*sh)->term);
-	(*sh)->stdi = dup(STDIN_FILENO);
-	(*sh)->stdo = dup(STDOUT_FILENO);
+//	(*sh)->stdi = dup(STDIN_FILENO);
+//	(*sh)->stdo = dup(STDOUT_FILENO);
 	if ((*sh)->inter)
 	{
 		while (tcgetpgrp ((*sh)->term) != ((*sh)->pgid = getpgrp ()))
