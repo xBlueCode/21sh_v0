@@ -3,7 +3,7 @@
 
 #include "sh_jctype.h"
 #include "sh_sh.h"
-//#include "ftsh.h"
+//#include "sh_gr_type.h"
 
 //int 			sh_jc_launch(t_job *job);
 //int 			sh_jc_exec(t_job *job);
