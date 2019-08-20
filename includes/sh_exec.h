@@ -2,6 +2,7 @@
 # define SH_EXEC_H
 
 #include "sh_parser.h"
+#include "sh_grammar.h"
 #include "sh_sh.h"
 
 
@@ -48,5 +49,10 @@ int			sh_e_group(t_sh *sh, void *gr);
 
 char 		*sh_e_get_binpath(t_sh *sh, char *bin_name);
 char		**sh_e_get_argv(t_sh *sh, t_dastr *words);
+
+int 		sh_e_prepare_file(char *fname, int exist, int read, int write);
+int 		sh_e_redirect(t_list *redir_lst);
+int			sh_e_redirect_g(t_redir *redir);
+int			sh_e_redirect_l(t_redir *redir);
 
 #endif

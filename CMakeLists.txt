@@ -93,7 +93,7 @@ add_executable(21sh_gh
         libft/src/dstr/ft_dstr_insert.c
         libft/src/dstr/ft_dstr_join.c
         libft/src/dstr/ft_dstr_replace.c
-        libft/src/fio/ft_dup2.c
+        libft/src/fio/ft_dup.c
         libft/src/gnl/get_next_line.c
         libft/src/hash/ft_hcode_str.c
         libft/src/hset/ft_hset_basics.c
@@ -314,4 +314,4 @@ add_executable(21sh_gh
         src/var/sh_var.c
         src/var/sh_var_get.c
         src/var/sh_var_utils.c
-        Makefile src/jobc/sh_jc.c src/sh/sh_sh.c)
+        Makefile src/jobc/sh_jc.c src/sh/sh_sh.c src/jobc/sh_jc_state.c src/jobc/sh_jc_put.c includes/sh_jctype.h src/jobc/sh_jc_notify.c src/jobc/sh_jc_cont.c src/jobc/sh_jc_process.c src/exec/sh_e_simp_cmd.c src/exec/sh_e_pipe.c src/exec/sh_e_utils.c src/exec/sh_e_redirect.c libft/src/fio/ft_stat.c includes/sh_gram_type.h)
