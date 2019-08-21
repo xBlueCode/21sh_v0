@@ -1,9 +1,6 @@
-// header
-
 #include "ftsh.h"
 #include <fcntl.h>
 
-t_term	g_term;
 t_sh	*g_sh;
 
 
@@ -65,7 +62,7 @@ int		sh_term_run(void)
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
-	sh_termconfig_init();
+//	sh_termconfig_init();
 	line = "";
 	while (ft_strcmp(line, "exit\n"))
 	{
@@ -113,7 +110,7 @@ int		main(int ac, char **av, char **envp)
 	else
 	{
 		sh_est = sh_term_run();
-		sh_termconfig_reset();
+		sh_termconfig_reset(&sh_sh()->term);
 	}
 	//sh_cleanup();
 	return (sh_est);

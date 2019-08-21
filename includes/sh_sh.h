@@ -14,7 +14,8 @@ typedef struct	s_sh
 	t_jcon		*jc;
 	pid_t		pgid;
 	t_termios	tmodes;
-	int			term;
+	int			term_std;
+	t_term		term;
 	int			inter;
 	int 		stdi;
 	int 		stdo;

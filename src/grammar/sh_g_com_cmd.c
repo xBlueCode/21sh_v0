@@ -55,12 +55,12 @@ void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
 	if (!ast || (ast->op != SH_GR_COMPLETE_CMD && ast->op != SH_GR_COMP_LIST))
 		return (NULL);
 	com_cmd = sh_g_com_cmd_new();
-	list = ast->left; // term
+	list = ast->left; // term_std
 	while (list)
 	{
 		if ((and_or = sh_g_and_or(list->left)))
 			SHG_LSTADD(com_cmd, lst_and_or, and_or)
-		if (list->data) // list & term must store the sep in data
+		if (list->data) // list & term_std must store the sep in data
 			ft_dstrins_ch(com_cmd->sep, -1, SHG_AST_TOK(list)->t);
 		else // TODO: FOR COMP_LIST but it must be compatible with complete_cmd
 			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);

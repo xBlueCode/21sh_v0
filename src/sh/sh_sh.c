@@ -17,15 +17,15 @@ int 			sh_sh_init(t_sh **sh, int mode) // init mode (subsh ...)
 	(*sh)->jc = NULL;
 	(*sh)->pgid = -1;
 //	(*sh)->tmodes = NULL;
-	(*sh)->term = STDIN_FILENO;
-	(*sh)->inter = isatty((*sh)->term);
+	(*sh)->term_std = STDIN_FILENO;
+	(*sh)->inter = isatty((*sh)->term_std);
 	//(*sh)->stdi = dup(STDIN_FILENO);
 	//(*sh)->stdo = dup(STDOUT_FILENO);
 	sh_bin_init(&(*sh)->bin_ht, &(*sh)->bin_nl);
 	sh_bin_update((*sh)->bin_ht, (*sh)->bin_nl, sh_var_getval("PATH"));
 	if ((*sh)->inter)
 	{
-		while (tcgetpgrp ((*sh)->term) != ((*sh)->pgid = getpgrp ()))
+		while (tcgetpgrp ((*sh)->term_std) != ((*sh)->pgid = getpgrp ()))
 			kill (- (*sh)->pgid, SIGTTIN);
 		//signal (SIGINT, SIG_IGN);
 		//signal (SIGQUIT, SIG_IGN);
@@ -39,8 +39,9 @@ int 			sh_sh_init(t_sh **sh, int mode) // init mode (subsh ...)
 			ft_printf("Couldn't put the shell in its own process group !\n");
 			exit(1);
 		}
-		tcsetpgrp((*sh)->term, (*sh)->pgid);
-		tcgetattr((*sh)->term, &(*sh)->tmodes);
+		tcsetpgrp((*sh)->term_std, (*sh)->pgid);
+		//tcgetattr((*sh)->term_std, &(*sh)->tmodes);
+		sh_termconfig_init(&(*sh)->term);
 		(*sh)->jc = sh_jc_new();
 		ft_printf(C_GRN"Interactive Term initialized ^ ^\n"T_END);
 	}

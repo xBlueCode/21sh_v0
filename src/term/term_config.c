@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "ftsh.h"
 
-extern	t_term g_term;
+//extern	t_term g_term;
 
 int			ter_putchar(int ch)
 {
@@ -21,20 +21,20 @@ int			ter_putchar(int ch)
 	return (0);
 }
 
-static int	termconfig_attr(void)
+static int	termconfig_attr(t_term *term)
 {
 	struct termios tconfig;
 
 	//tputs(tgetstr("ti", NULL), 1, ter_putchar);
 	//tputs(tgetstr("vi", NULL), 1, ter_putchar);
-	tcgetattr(STDERR_FILENO, &(g_term.tconfig_def));
+	tcgetattr(STDERR_FILENO, &(term->tconfig_def));
 	if (tcgetattr(STDERR_FILENO, &tconfig))
 	{
 		ft_putendl_fd("ftsh: tcgetattr: Failed !", STDERR_FILENO);
-		sh_termconfig_reset();
+		sh_termconfig_reset(term);
 		return (-1);
 	}
-	g_term.tconfig_def = tconfig;
+	term->tconfig_def = tconfig;
 	tconfig.c_lflag &= (~ICANON & ~ECHO);
 	tconfig.c_cc[VTIME] = 0;
 	tconfig.c_cc[VMIN] = 1;
@@ -46,13 +46,13 @@ static int	termconfig_attr(void)
 	return (0);
 }
 
-int			sh_termconfig_init(void)
+int			sh_termconfig_init(t_term *term)
 {
 	char			*tname;
 	char			buff[2048];
 	int				r;
 
-	if (!(tname = getenv("TER")))
+	if (!(tname = getenv("TER"))) // TODO: replace with ft_getenv
 	{
 		if (!(tname = TER_DEF) || !isatty(STDIN_FILENO))
 		{
@@ -68,16 +68,16 @@ int			sh_termconfig_init(void)
 			ft_putendl_fd("Err: Failed to get Terminfo DB !", STDERR_FILENO);
 		return (-1);
 	}
-	if (termconfig_attr())
+	if (termconfig_attr(term))
 		return (-1);
 	return (0);
 }
 
-int			sh_termconfig_reset(void)
+int			sh_termconfig_reset(t_term *term)
 {
 	//tputs(tgetstr("te", NULL), 1, ter_putchar);
 	//tputs(tgetstr("ve", NULL), 1, ter_putchar);
-	if (tcsetattr(STDERR_FILENO, TCSANOW, &(g_term.tconfig_def)))
+	if (tcsetattr(STDERR_FILENO, TCSANOW, &(term->tconfig_def)))
 	{
 		ft_putendl_fd("ftsh: tcsetattr: Failed !", STDERR_FILENO);
 		return (1);
