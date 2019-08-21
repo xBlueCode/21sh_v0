@@ -21,10 +21,11 @@ typedef struct	s_sh
 	int 		stdo;
 	t_hset		*bin_ht;
 	t_dastr		*bin_nl;
+	t_table		*var;
 }				t_sh;
 
 t_sh 			*sh_sh(void);
-int 			sh_sh_init(t_sh **sh, int mode);
+int 			sh_sh_init(t_sh **sh, char **envp, int mode);
 int 			sh_sh_new(t_sh **sh);
 int 			sh_sh_free(t_sh **sh);
 

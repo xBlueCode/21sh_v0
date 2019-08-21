@@ -26,12 +26,12 @@
 # define SH_VV_PS1 "\\h@\\u $ "
 
 t_table 		*sh_var(void);
-int 			sh_var_start(char **envp);
-int 			sh_var_inherit(char **envp);
-int 			sh_var_init(void);
-int 			sh_var_init_ftsh(void);
-int 			sh_var_init_id(void);
-int 			sh_var_init_hist(void);
+int 			sh_var_start(t_table **var, char **envp);
+int 			sh_var_inherit(t_table *var, char **envp);
+int 			sh_var_init(t_table *var);
+int 			sh_var_init_ftsh(t_table *var);
+int 			sh_var_init_id(t_table *var);
+int 			sh_var_init_hist(t_table *var);
 char 			**sh_var_env(void);
 int 			sh_var_copy(char **envp);
 int 			sh_var_auto(void);
@@ -40,7 +40,7 @@ int 			sh_var_tsel_glo(t_trow trow);
 char 			*sh_var_tbuild_env(t_trow trow);
 
 int 			sh_var_geti(char *name);
-char 			*sh_var_getval(char *name);
+char 			*sh_var_getval(t_table *var, char *name);
 
 t_hset			*sh_varh(void);
 int 			sh_varh_start(char **envp);

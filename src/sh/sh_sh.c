@@ -8,7 +8,7 @@ t_sh 			*sh_sh(void)
 	return (g_sh);
 }
 
-int 			sh_sh_init(t_sh **sh, int mode) // init mode (subsh ...)
+int 			sh_sh_init(t_sh **sh, char **envp, int mode) // init mode (subsh ...)
 {
 	if (!sh)
 		return (KO);
@@ -19,10 +19,11 @@ int 			sh_sh_init(t_sh **sh, int mode) // init mode (subsh ...)
 //	(*sh)->tmodes = NULL;
 	(*sh)->term_std = STDIN_FILENO;
 	(*sh)->inter = isatty((*sh)->term_std);
+	sh_var_start(&(*sh)->var, envp);
 	//(*sh)->stdi = dup(STDIN_FILENO);
 	//(*sh)->stdo = dup(STDOUT_FILENO);
 	sh_bin_init(&(*sh)->bin_ht, &(*sh)->bin_nl);
-	sh_bin_update((*sh)->bin_ht, (*sh)->bin_nl, sh_var_getval("PATH"));
+	sh_bin_update((*sh)->bin_ht, (*sh)->bin_nl, sh_var_getval((*sh)->var, "PATH"));
 	if ((*sh)->inter)
 	{
 		while (tcgetpgrp ((*sh)->term_std) != ((*sh)->pgid = getpgrp ()))

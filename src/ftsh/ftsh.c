@@ -4,7 +4,7 @@
 t_sh	*g_sh;
 
 
-int		sh_file_run(char *filename)
+int		sh_file_run(char *filename, char **envp)
 {
 	t_dstr	*dscript;
 	char 	c;
@@ -17,7 +17,7 @@ int		sh_file_run(char *filename)
 		return (1);
 	while (!(c = 0) && read(fd, &c, 1))
 		ft_dstrins_ch(dscript, -1, c);
-	sh_sh_init(&sh, 1); // TODO: specify correct sh-mode
+	sh_sh_init(&sh, envp, 1); // TODO: specify correct sh-mode
 	return (sh_script_run(sh, dscript->str));
 }
 
@@ -50,7 +50,7 @@ int		sh_inter_read(char **line)
 	return (0);
 }
 
-int		sh_term_run(void)
+int		sh_term_run(char **envp)
 {
 	char	*line;
 //	t_lex	*lex;
@@ -58,7 +58,7 @@ int		sh_term_run(void)
 	//init_hist
 	//rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
 	DF0
-	sh_sh_init(&g_sh, 0); // TODO: specify correct sh-mode
+	sh_sh_init(&g_sh, envp, 0); // TODO: specify correct sh-mode
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
@@ -97,7 +97,7 @@ int		main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	//(void)envp;
-	sh_var_start(envp);
+	//sh_var_start(envp);
 	//ft_tabdel_n(sh_env_get(), "LS_COLORS");
 	//ft_tabdel_i(sh_env_get(), 2);
 
@@ -106,10 +106,10 @@ int		main(int ac, char **av, char **envp)
 	//sh_bin_init(sh_bin_ptr());
 	//sh_bin_update(sh_bin(), sh_var_getval("PATH"));
 	if (ac > 1)
-		sh_est = (sh_file_run(av[1]));
+		sh_est = (sh_file_run(av[1], envp));
 	else
 	{
-		sh_est = sh_term_run();
+		sh_est = sh_term_run(envp);
 		sh_termconfig_reset(&sh_sh()->term);
 	}
 	//sh_cleanup();

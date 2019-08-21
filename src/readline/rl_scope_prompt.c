@@ -26,7 +26,7 @@ int 		rl_scope_prompt_ps(void)
 	int 	i;
 
 	g_rl.plen = 0;
-	if (!(ps1 = sh_var_getval("PS1")))
+	if (!(ps1 = sh_var_getval(sh_sh()->var, "PS1")))
 		ps1 = SH_VV_PS1;
 	//g_rl.plen += ft_printf("%s", ps1);
 	prompt = ft_dstrnew_str(ps1);
