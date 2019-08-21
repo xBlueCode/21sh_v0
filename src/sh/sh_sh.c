@@ -14,26 +14,26 @@ int 			sh_sh_init(t_sh **sh) // init mode (subsh ...)
 {
 	if (!sh)
 		return (KO);
+	DF0
 	*sh = ft_memalloc(sizeof(t_sh));
 	(*sh)->jc = NULL;
 	(*sh)->pgid = -1;
-	(*sh)->tmodes = NULL;
+//	(*sh)->tmodes = NULL;
 	(*sh)->term = STDIN_FILENO;
 	(*sh)->inter = isatty((*sh)->term);
 //	(*sh)->stdi = dup(STDIN_FILENO);
 //	(*sh)->stdo = dup(STDOUT_FILENO);
+
 	if ((*sh)->inter)
 	{
 		while (tcgetpgrp ((*sh)->term) != ((*sh)->pgid = getpgrp ()))
 			kill (- (*sh)->pgid, SIGTTIN);
-		/*
-		signal (SIGINT, SIG_IGN);
-		signal (SIGQUIT, SIG_IGN);
-		signal (SIGTSTP, SIG_IGN);
-		signal (SIGTTIN, SIG_IGN);
-		signal (SIGTTOU, SIG_IGN);
-		signal (SIGCHLD, SIG_IGN);
-		 */
+		//signal (SIGINT, SIG_IGN);
+		//signal (SIGQUIT, SIG_IGN);
+		//signal (SIGTSTP, SIG_IGN);
+		//signal (SIGTTIN, SIG_IGN);
+		//signal (SIGTTOU, SIG_IGN);
+		//signal (SIGCHLD, SIG_IGN);
 		(*sh)->pgid = getpid();
 		if (setpgid((*sh)->pgid, (*sh)->pgid) < 0)
 		{
@@ -41,7 +41,7 @@ int 			sh_sh_init(t_sh **sh) // init mode (subsh ...)
 			exit(1);
 		}
 		tcsetpgrp((*sh)->term, (*sh)->pgid);
-		tcgetattr((*sh)->term, (*sh)->tmodes);
+		tcgetattr((*sh)->term, &(*sh)->tmodes);
 		(*sh)->jc = sh_jc_new();
 		ft_printf(C_GRN"Interactive Term initialized ^ ^\n"T_END);
 	}

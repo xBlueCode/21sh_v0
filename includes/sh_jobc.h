@@ -1,8 +1,9 @@
 #ifndef SH_JOBC_H
-#define SH_JOBC_H
+# define SH_JOBC_H
 
-#include "sh_jctype.h"
-#include "sh_sh.h"
+# include "sys/wait.h"
+# include "sh_jctype.h"
+# include "sh_sh.h"
 //#include "sh_gr_type.h"
 
 //int 			sh_jc_launch(t_job *job);

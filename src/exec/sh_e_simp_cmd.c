@@ -1,4 +1,6 @@
 #include "ftsh.h"
+#include <sys/wait.h>
+//#include <sys/types.h>
 
 int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 {

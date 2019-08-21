@@ -14,7 +14,7 @@ int 			sh_jc_put_in_forg(t_sh *sh, int cont)
 	sh_jc_wait(sh->jc, sh->jc->cjob);
 	tcsetpgrp(sh->term, sh->pgid);
 	tcgetattr(sh->term, sh->jc->cjob->tmodes);
-	tcsetattr(sh->term, TCSADRAIN, sh->tmodes);
+	tcsetattr(sh->term, TCSADRAIN, &sh->tmodes);
 	sh->jc->cind--;
 	sh->jc->jobs = sh->jc->jobs->next;
 	sh->jc->cjob = sh->jc->jobs ? (t_job*)sh->jc->jobs->content : NULL;

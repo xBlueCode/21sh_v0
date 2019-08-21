@@ -44,6 +44,7 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 
 int		sh_inter_read(char **line)
 {
+	DF0
 	//(void)line;
 	//prompt_display();
 	//signal(SIGINT, sighand_parent);
@@ -59,6 +60,7 @@ int		sh_term_run(void)
 
 	//init_hist
 	//rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
+	DF0
 	sh_sh_init(&g_sh);
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();

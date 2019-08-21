@@ -12,7 +12,7 @@ typedef struct	s_sh
 {
 	t_jcon		*jc;
 	pid_t		pgid;
-	t_termios	*tmodes;
+	t_termios	tmodes;
 	int			term;
 	int			inter;
 	int 		stdi;
