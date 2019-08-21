@@ -7,6 +7,7 @@ t_hist		g_his;
 
 int 		rl_hist_init(char *filename)
 {
+	DF0
 	if (filename)
 		g_his.filename = ft_strdup(filename);
 	else

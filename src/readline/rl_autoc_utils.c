@@ -6,15 +6,15 @@ int				rl_autoc_isdelim(int c)
 {
 	if (ft_isspace(c) || c == ';' || c == '\n' || c == '&' || c == '|'
 			|| c == '>' || c == '<' || c == '\'' || c == '"'
-			|| c == '`' || c == '$')
+			|| c == '`' || c == '$' || c == '(' || c == ')')
 		return (c);
 	return (0);
 }
 
 int				rl_autoc_cxt_isbin(int c)
 {
-	return (c == ';' || c == '&' || c == '|' || c == '>' || c == '<'
-			|| c == '\n' || c == '`');
+	return (c == ';' || c == '&' || c == '|' || c == '\n' || c == '`'
+		|| c == '(');
 }
 
 int				rl_autoc_get_cw(char *line, ssize_t pos, ssize_t *ilen)
