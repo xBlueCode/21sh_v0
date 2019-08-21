@@ -20,7 +20,7 @@ int		sh_file_run(char *filename)
 		return (1);
 	while (!(c = 0) && read(fd, &c, 1))
 		ft_dstrins_ch(dscript, -1, c);
-	sh_sh_init(&sh);
+	sh_sh_init(&sh, 1); // TODO: specify correct sh-mode
 	return (sh_script_run(sh, dscript->str));
 }
 
@@ -61,7 +61,7 @@ int		sh_term_run(void)
 	//init_hist
 	//rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
 	DF0
-	sh_sh_init(&g_sh);
+	sh_sh_init(&g_sh, 0); // TODO: specify correct sh-mode
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
@@ -106,8 +106,8 @@ int		main(int ac, char **av, char **envp)
 
 	//sh_invar_init();
 	//sh_hash_init();
-	sh_bin_init(sh_bin_ptr());
-	sh_bin_update(sh_bin(), sh_var_getval("PATH"));
+	//sh_bin_init(sh_bin_ptr());
+	//sh_bin_update(sh_bin(), sh_var_getval("PATH"));
 	if (ac > 1)
 		sh_est = (sh_file_run(av[1]));
 	else

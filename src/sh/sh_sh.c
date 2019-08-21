@@ -1,16 +1,14 @@
 #include "ftsh.h"
 #include <signal.h>
 
-//t_sh			*g_sh;
+extern t_sh		*g_sh;
 
-/*
 t_sh 			*sh_sh(void)
 {
 	return (g_sh);
 }
-*/
 
-int 			sh_sh_init(t_sh **sh) // init mode (subsh ...)
+int 			sh_sh_init(t_sh **sh, int mode) // init mode (subsh ...)
 {
 	if (!sh)
 		return (KO);
@@ -21,9 +19,10 @@ int 			sh_sh_init(t_sh **sh) // init mode (subsh ...)
 //	(*sh)->tmodes = NULL;
 	(*sh)->term = STDIN_FILENO;
 	(*sh)->inter = isatty((*sh)->term);
-//	(*sh)->stdi = dup(STDIN_FILENO);
-//	(*sh)->stdo = dup(STDOUT_FILENO);
-
+	//(*sh)->stdi = dup(STDIN_FILENO);
+	//(*sh)->stdo = dup(STDOUT_FILENO);
+	sh_bin_init(&(*sh)->bin_ht, &(*sh)->bin_nl);
+	sh_bin_update((*sh)->bin_ht, (*sh)->bin_nl, sh_var_getval("PATH"));
 	if ((*sh)->inter)
 	{
 		while (tcgetpgrp ((*sh)->term) != ((*sh)->pgid = getpgrp ()))

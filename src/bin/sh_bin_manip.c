@@ -1,7 +1,7 @@
 #include "libft.h"
 #include "sh_bin.h"
 
-int 	sh_bin_update(t_hset *htbin, char *paths)
+int 	sh_bin_update(t_hset *htbin, t_dastr *bin_names, char *paths)
 {
 	char 	**path_arr;
 	t_dastr	*bins;
@@ -17,12 +17,13 @@ int 	sh_bin_update(t_hset *htbin, char *paths)
 			continue;
 		j = -1;
 		while (++j < bins->len)
-			sh_bin_add_abs(htbin, ft_dastrget_i(bins, j)->str);
+			sh_bin_add_abs(htbin, bin_names, ft_dastrget_i(bins, j)->str);
 	}
+	ft_arr_free((void***)&path_arr, ft_arr_len((void**)path_arr));
 	return (OK);
 }
 
-int		sh_bin_add_abs(t_hset *htbin, char *bin_path)
+int		sh_bin_add_abs(t_hset *htbin, t_dastr *bin_names, char *bin_path)
 {
 	t_htabent	htent;
 	char 		*bin_name;
@@ -36,7 +37,7 @@ int		sh_bin_add_abs(t_hset *htbin, char *bin_path)
 	htent = (t_htabent){
 		.key = bin_name, .ksize = ft_strlen(bin_name) + 1,
 		.val = bin_path, .vsize = ft_strlen(bin_path) + 1};
-	if (!ft_dastrins_str(sh_bin_names(), -1, bin_name))
+	if (!ft_dastrins_str(bin_names, -1, bin_name))
 		return (ft_htab_put(htbin, &htent));
 	return (KO);
 }
