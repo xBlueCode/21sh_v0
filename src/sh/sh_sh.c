@@ -24,7 +24,7 @@ int 			sh_sh_init(t_sh **sh, char **envp, int mode) // init mode (subsh ...)
 	//(*sh)->stdo = dup(STDOUT_FILENO);
 	sh_bin_init(&(*sh)->bin_ht, &(*sh)->bin_nl);
 	sh_bin_update((*sh)->bin_ht, (*sh)->bin_nl, sh_var_getval((*sh)->var, "PATH"));
-	if ((*sh)->inter)
+	if (!mode && (*sh)->inter)
 	{
 		while (tcgetpgrp ((*sh)->term_std) != ((*sh)->pgid = getpgrp ()))
 			kill (- (*sh)->pgid, SIGTTIN);

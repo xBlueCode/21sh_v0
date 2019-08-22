@@ -3,20 +3,15 @@
 
 t_sh	*g_sh;
 
-
 int		sh_file_run(char *filename, char **envp)
 {
 	t_dstr	*dscript;
-	char 	c;
-	int 	fd;
 	t_sh	*sh;
 
+	DF0
 	ft_putendl(filename);
-	dscript = ft_dstrnew_max(128);
-	if ((fd = open(filename, O_RDONLY)) < 0)
-		return (1);
-	while (!(c = 0) && read(fd, &c, 1))
-		ft_dstrins_ch(dscript, -1, c);
+	if (!(dscript = ft_read_file(filename)))
+		return (KO);
 	sh_sh_init(&sh, envp, 1); // TODO: specify correct sh-mode
 	return (sh_script_run(sh, dscript->str));
 }
@@ -30,7 +25,8 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	if (!script)
 		return (1);
 	sh_lex_init(&lex, script);
-	sh_lex_start(lex);
+	if (sh_lex_start(lex) == KO)
+		return (KO);
 	if (!lex->tlst)
 		return (KO);
 	if (!(com_cmds = sh_p_start(lex)))
@@ -53,66 +49,40 @@ int		sh_inter_read(char **line)
 int		sh_term_run(char **envp)
 {
 	char	*line;
-//	t_lex	*lex;
+	int 	ret;
 
-	//init_hist
-	//rl_hist_init("/home/xbluecode/ft/ftsh/history/.ftsh_history"); // replace arg by _getpath
 	DF0
 	sh_sh_init(&g_sh, envp, 0); // TODO: specify correct sh-mode
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
-//	sh_termconfig_init();
 	line = "";
+	ret = 0;
 	while (ft_strcmp(line, "exit\n"))
 	{
 		sh_inter_read(&line);
-	//	ft_printf("in run: line: <%s>\n", line);
 		rl_hist_add(line);
-		ft_printf(C_CYN"LINE: <%s>\n"T_END, line);
 		if (!ft_strncmp("exit", line, 4))
 			return (0);
-		sh_script_run(g_sh, line);
-		/*
-		sh_lex_init(&lex, line);
-		sh_lex_start(lex);
-		sh_p_start(lex);
-		 */
-		//rl_cleanup();
-		//if (sh_script_run(line) == EXIT)
-		//{
-		//	ft_memdel((void**)&line);
-		//	return (OK);
-		//}
-		//ft_memdel((void**)&line);
+		ret = sh_script_run(g_sh, line);
+//		ft_memdel((void**)line);
 	}
-	rl_hist_save();
-	return (0);
+	rl_hist_save(); // TODO: history_cleanup
+	return (ret);
 }
 
 int		main(int ac, char **av, char **envp)
 {
 	int sh_est;
 
-	(void)ac;
-	(void)av;
-	//(void)envp;
-	//sh_var_start(envp);
-	//ft_tabdel_n(sh_env_get(), "LS_COLORS");
-	//ft_tabdel_i(sh_env_get(), 2);
-
-	//sh_invar_init();
-	//sh_hash_init();
-	//sh_bin_init(sh_bin_ptr());
-	//sh_bin_update(sh_bin(), sh_var_getval("PATH"));
 	if (ac > 1)
 		sh_est = (sh_file_run(av[1], envp));
 	else
 	{
 		sh_est = sh_term_run(envp);
-		sh_termconfig_reset(&sh_sh()->term);
+		sh_termconfig_reset(&sh_sh()->term); // replace with sh_free
 	}
-	//sh_cleanup();
+	// TODO: sh_cleanup
 	return (sh_est);
 }
 
