@@ -37,27 +37,30 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 		j = 0;
 		while (j < words->a[i]->len)
 		{
-			if (sh_xp_brace(sh, words, i, &j))
+			if (sh_xp_brace(sh, words, &i, &j))
 				continue;
 			j++;
 		}
 	}
 }
 
-int 	sh_xp_brace(t_sh *sh, t_dastr *words, int i, int *j)
+int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	t_dastr	*res;
 	char 	*word;
 	char 	*inp;
 	t_lex	*lex;
 	int		off;
+	int		k;
+	char 	*pref;
 
 	(void)sh;
-	word = words->a[i]->str;
+	word = words->a[*i]->str;
 	if (word[*j] != '{')
 		return (0);
 	off = *j + 1;
 	*j += 1;
+	pref = ft_strndup(words->a[*i]->str, *j - 1);
 	sh_lex_init(&lex, word + off);
 	off = 0;
 	inp = lex->in->str;
@@ -83,8 +86,19 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int i, int *j)
 	inp[lex->i++] = '\0';
 	ft_dastrins_str(res, -1, inp + off);
 	*j = lex->i;
+	if (res->len)
+		ft_dastrdel_n(words, *i, 1);
+	k = -1;
+	while (++k < res->len)
+	{
+		ft_dstrins_str(res->a[k], 0, pref);
+		ft_dastrins_str(words, *i + k, res->a[k]->str);
+	}
+	if (res->len)
+		*i -= 1;
 	ft_putstr(C_MGN);
 	ft_dastrprint_all(res, "\n");
 	ft_putstr(T_END"\n");
+	// TODO: free res dastr
 	return (1);
 }
