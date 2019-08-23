@@ -48,9 +48,9 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 int 		sh_lex_seek_tok_delim(t_lex *lex, int op)
 {
 	(void)op;
-	if (sh_lex_tok_isdelim(lex->in->str[lex->i])
-		|| (lex->in->str[lex->i] == '}'
-		&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1])))
+	if (sh_lex_tok_isdelim(lex->in->str[lex->i]))
+	//	|| (lex->in->str[lex->i] == '}'
+	//	&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1])))
 	{
 //		if (sh_lex_tok_last(lex)->t == TSL2)
 //			ft_dastrins_str(lex->hd_key, -1, hd_key);
