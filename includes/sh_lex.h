@@ -117,6 +117,7 @@ typedef enum	e_token_state
     TSALIAS,
     TSERR,
     TSFAKE,
+    TSS_BRACE,
     TSMAX = 223 // TODO: MAX it must be
 }				t_token_state;
 
@@ -208,6 +209,8 @@ int 			sh_lex_seek_scmd(t_lex *lex, int op);
 int 			sh_lex_seek_ssh(t_lex *lex, int op);
 int 			sh_lex_seek_p(t_lex *lex, int op);
 int 			sh_lex_seek_cb(t_lex *lex, int op);
+
+int				sh_lex_seek_brace(t_lex *lex, int op);
 
 int				sh_lex_seek_hd(t_lex *lex, int op);
 int				sh_lex_seek_hdk(t_lex *lex, int op);

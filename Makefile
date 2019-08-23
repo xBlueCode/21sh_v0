@@ -54,7 +54,7 @@ LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c sh_lex_print.c \
 	sh_lex_seek_op_gl.c sh_lex_seek_ion.c sh_lex_seek_ssh.c \
 	sh_lex_seek_ctx.c sh_lex_seek_pcb.c sh_lex_seek_als.c \
 	sh_lex_seek_hash.c sh_lex_seek_add.c sh_lex_seek_rw.c \
-	sh_lex_utils.c
+	sh_lex_utils.c sh_lex_seek_brace.c
 
 PARSER := sh_p_and_or.c sh_p_cmd.c sh_p_cmd_pref.c sh_p_cmd_suff.c \
     sh_p_comp_list.c sh_p_complete_cmd.c sh_p_group.c sh_p_io.c \

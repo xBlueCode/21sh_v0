@@ -6,7 +6,7 @@
 
 int		sh_xp_start(t_sh *sh, t_dastr *words);
 
-int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j);
+int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j, int op);
 
 int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j);
 

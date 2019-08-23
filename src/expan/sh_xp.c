@@ -38,7 +38,7 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 		sh_xp_tilde(sh, words, &i, &j);
 		while (j < words->a[i]->len)
 		{
-			if (sh_xp_brace(sh, words, &i, &j))
+			if (sh_xp_brace(sh, words, &i, &j, 1))
 				continue;
 			j++;
 		}
@@ -79,7 +79,7 @@ int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 	return (1);
 }
 
-int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
+int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j, int op)
 {
 	t_dastr	*res;
 	char 	*word;
@@ -103,9 +103,12 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	res = ft_dastrnew_max(2);
 	while (inp[lex->i] && lex->st != TSBLANK && inp[lex->i] != '}')
 	{
+		*j += lex->i;
 		if (sh_lex_seek_scmd(lex, 0)
 			|| sh_lex_seek_dq(lex, 0)
 			|| sh_lex_seek_blank(lex, 0)
+			|| sh_lex_seek_brace(lex, 0)
+			//|| sh_xp_brace(sh, words, i, j, 0)
 			)
 			continue;
 		if (inp[lex->i] == ',')
@@ -114,11 +117,20 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 			ft_dastrins_str(res, -1, inp + off);
 			off = lex->i;
 		}
+		/*
+		else if (inp[lex->i] == '{')
+		{
+			while (inp[lex->i] && inp[lex->i++] != '}')
+				;
+		}
+		 */
 		else
 			lex->i++;
 	}
 	if (lex->st == TSBLANK || inp[lex->i] != '}')
 		return (0);
+	if (!op && (*j += lex->i + 1))
+		return (1);
 	inp[lex->i++] = '\0';
 	ft_dastrins_str(res, -1, inp + off);
 	*j = lex->i;
