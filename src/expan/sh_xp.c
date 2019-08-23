@@ -35,6 +35,7 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 	while (++i < words->len)
 	{
 		j = 0;
+		sh_xp_tilde(sh, words, &i, &j);
 		while (j < words->a[i]->len)
 		{
 			if (sh_xp_brace(sh, words, &i, &j))
@@ -42,6 +43,40 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 			j++;
 		}
 	}
+}
+
+int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
+{
+	char	*word;
+	char 	*rep;
+	int 	k;
+
+	word = words->a[*i]->str;
+	if (word[*j] != '~')
+		return (0);
+	k = *j + 1;
+	if ((word[k] == '+' || word[k] == '-') && (!word[k + 1] || word[k + 1] == '/'))
+	{
+		rep = sh_var_getval(sh->var, word[k] == '+' ? "PWD" : "OLDPWD");
+		ft_dstrdel_n(words->a[*i], *j, 2);
+		ft_dstrins_str(words->a[*i], *j, rep); // TODO: free rep
+		*j += ft_strlenz(rep);
+		return (1);
+	}
+	while (++k < words->a[*i]->len && word[k] != '/')
+	{
+		if (word[k] != '_' && !ft_isalnum(word[k]))
+			break;
+	}
+	if (word[k] && word[k] != '/')
+		return (0);
+	ft_dstrdel_n(words->a[*i], *j, k - *j);
+	if (*j == k + 1)
+		rep = sh_var_getval(sh->var, "HOME");
+	else
+		rep = "USERPATH";
+	ft_dstrins_str(words->a[*i], *j, rep);
+	return (1);
 }
 
 int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
@@ -53,6 +88,7 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	int		off;
 	int		k;
 	char 	*pref;
+	char 	*suff;
 
 	(void)sh;
 	word = words->a[*i]->str;
@@ -86,12 +122,14 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	inp[lex->i++] = '\0';
 	ft_dastrins_str(res, -1, inp + off);
 	*j = lex->i;
+	suff = ft_strdup(lex->in->str + *j);
 	if (res->len)
 		ft_dastrdel_n(words, *i, 1);
 	k = -1;
 	while (++k < res->len)
 	{
 		ft_dstrins_str(res->a[k], 0, pref);
+		ft_dstrins_str(res->a[k], -1, suff);
 		ft_dastrins_str(words, *i + k, res->a[k]->str);
 	}
 	if (res->len)
