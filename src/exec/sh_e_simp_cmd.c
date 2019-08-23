@@ -16,6 +16,7 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	simp_cmd = (t_simp_cmd*)gr;
 	if (!(argv = sh_e_get_argv(sh, simp_cmd->lst_words)))
 		return (-1);
+	sh_xp_start(sh, simp_cmd->lst_words);
 	ft_printf("--------> forking ...\n");
 	//sh_e_redirect(simp_cmd->lst_redir);
 	if ((pid = fork()) < 0)

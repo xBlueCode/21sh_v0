@@ -18,6 +18,7 @@
 # include "sh_jobc.h"
 # include "sh_sh.h"
 # include "sh_exec.h"
+# include "sh_expan.h"
 //# include "sh_jobc.h"
 //# include "sh_lex.h"
 # include "sh_glob.h"
