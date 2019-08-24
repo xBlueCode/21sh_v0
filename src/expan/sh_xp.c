@@ -51,31 +51,27 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 	}
 }
 
-
 int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j)
 {
-	char *word;
+	t_dstr *word;
 
-	word = words->a[*i]->str;
-	if (word[*j] != '"')
+	word = words->a[*i];
+	if (word->str[*j] != '"')
 		return (0);
 	ft_dstrdel_n(words->a[*i], *j, 1);
-	while (word[*j] && word[*j] != '"')
+	while (word->str[*j] && word->str[*j] != '"')
 	{
-		ft_printf(C_GRN"Worddq: %s\n"T_END, word + *j);
+		ft_printf(C_GRN"Worddq: %s\n"T_END, word->str + *j);
 		if (//sh_xp_brace(sh, words, i, j)
 			sh_xp_param(sh, words, i, j)
 			|| sh_xp_var(sh, words, i, j)
 			|| sh_xp_esc(sh, words, i, j)
 		//	|| sh_xp_dq(sh, words, i, j)
 			)
-		{
-			word = words->a[*i]->str;
 			continue;
-		}
 		(*j)++;
 	}
-	if (word[*j] != '"')
+	if (word->str[*j] != '"')
 		return (-1);
 	ft_dstrdel_n(words->a[*i], *j, 1);
 	return (1);
@@ -111,29 +107,29 @@ int 	sh_xp_esc(t_sh *sh, t_dastr *words, int *i, int *j)
 
 int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 {
-	char	*word;
+	t_dstr	*word;
 	char 	*rep;
 	int 	k;
 
-	word = words->a[*i]->str;
-	if (word[*j] != '~')
+	word = words->a[*i];
+	if (word->str[*j] != '~')
 		return (0);
 	k = *j + 1;
-	if ((word[k] == '+' || word[k] == '-') && (!word[k + 1] || word[k + 1] == '/'))
+	if ((word->str[k] == '+' || word->str[k] == '-') && (!word->str[k + 1] || word->str[k + 1] == '/'))
 	{
-		rep = sh_var_getval(sh->var, word[k] == '+' ? "PWD" : "OLDPWD");
+		rep = sh_var_getval(sh->var, word->str[k] == '+' ? "PWD" : "OLDPWD");
 		ft_dstrdel_n(words->a[*i], *j, 2);
 		ft_dstrins_str(words->a[*i], *j, rep); // TODO: free rep
 		*j += ft_strlenz(rep);
 		return (1);
 	}
-	while (k < words->a[*i]->len && word[k] != '/')
+	while (k < words->a[*i]->len && word->str[k] != '/')
 	{
-		if (word[k] != '_' && !ft_isalnum(word[k]))
+		if (word->str[k] != '_' && !ft_isalnum(word->str[k]))
 			break;
 		k++;
 	}
-	if (word[k] && word[k] != '/')
+	if (word->str[k] && word->str[k] != '/')
 		return (0);
 	ft_dstrdel_n(words->a[*i], *j, k - *j);
 	if (*j + 1 == k)
@@ -161,7 +157,7 @@ int 	sh_xp_var(t_sh *sh, t_dastr *words, int *i, int *j)
 	while (sh_lex_isinname(word->str[*j]))
 		(*j)++;
 	key = ft_strndup(word->str + off, *j - off);
-	ft_dstrdel_n(word, off - 1, *j);
+	ft_dstrdel_n(word, off - 1, *j - off + 1);
 	ft_printf(C_RED"word after deletion: %s\n"T_END, word->str);
 	val = sh_var_getval(sh->var, key);
 	(*j) = off - 1 + ft_strlenz(val);
