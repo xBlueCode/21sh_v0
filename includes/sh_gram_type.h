@@ -15,7 +15,7 @@ typedef struct	s_redir
 
 typedef struct	s_simp_cmd // process
 {
-	t_list	*lst_assign;
+	t_dastr	*lst_assign;
 	t_dastr	*lst_words;
 	t_list	*lst_redir;
 	pid_t 	pid;

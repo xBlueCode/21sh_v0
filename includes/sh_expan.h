@@ -5,6 +5,7 @@
 # include "sh_exec.h"
 
 int		sh_xp_start(t_sh *sh, t_dastr *words);
+int		sh_xp_assign(t_sh *sh, t_dastr *assigns);
 
 int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j);
 

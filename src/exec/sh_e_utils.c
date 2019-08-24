@@ -34,3 +34,11 @@ char		**sh_e_get_argv(t_sh *sh, t_dastr *words)
 	}
 	return (argv);
 }
+
+char		**sh_e_get_envp(t_sh *sh, t_dastr *assigns)
+{
+	t_table		*envt;
+	char 		**envp;
+
+	envt = ft_tabdup(sh->var);
+}

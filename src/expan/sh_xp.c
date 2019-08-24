@@ -51,6 +51,37 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 	}
 }
 
+int		sh_xp_assign(t_sh *sh, t_dastr *assigns)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < assigns->len)
+	{
+		j = 0;
+		while (sh_lex_isinname(assigns->a[i]->str[j]))
+			j++;
+		if (assigns->a[i]->str[j] != '=')
+			return (-1);
+		j++;
+		sh_xp_tilde(sh, assigns, &i, &j);
+		while (j < assigns->a[i]->len)
+		{
+			if (sh_xp_brace(sh, assigns, &i, &j)
+				|| sh_xp_param(sh, assigns, &i, &j)
+				|| sh_xp_var(sh, assigns, &i, &j)
+				|| sh_xp_dq(sh, assigns, &i, &j)
+				|| sh_xp_sq(sh, assigns, &i, &j)
+				|| sh_xp_esc(sh, assigns, &i, &j)
+				|| (assigns->a[i]->str[j] == ':' && ++j && sh_xp_tilde(sh, assigns, &i, &j))
+				)
+				continue;
+			j++;
+		}
+	}
+}
+
 int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	t_dstr *word;
