@@ -10,6 +10,8 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j);
 
 int 	sh_xp_param(t_sh *sh, t_dastr *words, int *i, int *j);
 
+int 	sh_xp_var(t_sh *sh, t_dastr *words, int *i, int *j);
+
 int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j);
 int 	sh_xp_sq(t_sh *sh, t_dastr *words, int *i, int *j);
 int 	sh_xp_esc(t_sh *sh, t_dastr *words, int *i, int *j);

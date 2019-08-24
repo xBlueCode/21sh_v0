@@ -40,6 +40,7 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 		{
 			if (sh_xp_brace(sh, words, &i, &j)
 				|| sh_xp_param(sh, words, &i, &j)
+				|| sh_xp_var(sh, words, &i, &j)
 				|| sh_xp_dq(sh, words, &i, &j)
 				|| sh_xp_sq(sh, words, &i, &j)
 				|| sh_xp_esc(sh, words, &i, &j)
@@ -64,6 +65,8 @@ int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j)
 		ft_printf(C_GRN"Worddq: %s\n"T_END, word + *j);
 		if (//sh_xp_brace(sh, words, i, j)
 			sh_xp_param(sh, words, i, j)
+			|| sh_xp_var(sh, words, i, j)
+			|| sh_xp_esc(sh, words, i, j)
 		//	|| sh_xp_dq(sh, words, i, j)
 			)
 		{
@@ -140,6 +143,30 @@ int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_dstrins_str(words->a[*i], *j, rep);
 	*j += ft_strlenz(rep);
 	return (1);
+}
+
+int 	sh_xp_var(t_sh *sh, t_dastr *words, int *i, int *j)
+{
+	t_dstr	*word;
+	char 	*key;
+	char 	*val;
+	int		off;
+
+	word = words->a[*i];
+	if (word->str[*j] != '$' || ft_strchr("{(", word->str[*j + 1]))
+		return (0);
+	off = ++(*j);
+	if (!sh_lex_isinname(word->str[*j]))
+		return (1);
+	while (sh_lex_isinname(word->str[*j]))
+		(*j)++;
+	key = ft_strndup(word->str + off, *j - off);
+	ft_dstrdel_n(word, off - 1, *j);
+	ft_printf(C_RED"word after deletion: %s\n"T_END, word->str);
+	val = sh_var_getval(sh->var, key);
+	(*j) = off - 1 + ft_strlenz(val);
+	ft_dstrins_str(word, off - 1, val);
+	return (1); // TODO: don't free val (it still point in the env)
 }
 
 int 	sh_xp_param(t_sh *sh, t_dastr *words, int *i, int *j)
