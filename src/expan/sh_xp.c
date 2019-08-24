@@ -38,11 +38,72 @@ int		sh_xp_start(t_sh *sh, t_dastr *words)
 		sh_xp_tilde(sh, words, &i, &j);
 		while (j < words->a[i]->len)
 		{
-			if (sh_xp_brace(sh, words, &i, &j, 1))
+			if (sh_xp_brace(sh, words, &i, &j)
+				|| sh_xp_param(sh, words, &i, &j)
+				|| sh_xp_dq(sh, words, &i, &j)
+				|| sh_xp_sq(sh, words, &i, &j)
+				|| sh_xp_esc(sh, words, &i, &j)
+			)
 				continue;
 			j++;
 		}
 	}
+}
+
+
+int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j)
+{
+	char *word;
+
+	word = words->a[*i]->str;
+	if (word[*j] != '"')
+		return (0);
+	ft_dstrdel_n(words->a[*i], *j, 1);
+	while (word[*j] && word[*j] != '"')
+	{
+		ft_printf(C_GRN"Worddq: %s\n"T_END, word + *j);
+		if (//sh_xp_brace(sh, words, i, j)
+			sh_xp_param(sh, words, i, j)
+		//	|| sh_xp_dq(sh, words, i, j)
+			)
+		{
+			word = words->a[*i]->str;
+			continue;
+		}
+		(*j)++;
+	}
+	if (word[*j] != '"')
+		return (-1);
+	ft_dstrdel_n(words->a[*i], *j, 1);
+	return (1);
+}
+
+int 	sh_xp_sq(t_sh *sh, t_dastr *words, int *i, int *j)
+{
+	char *word;
+
+	word = words->a[*i]->str;
+	if (word[*j] != '\'')
+		return (0);
+	ft_dstrdel_n(words->a[*i], *j, 1);
+	while (word[*j] && word[*j] != '\'')
+		(*j)++;
+	if (word[*j] != '\'')
+		return (-1);
+	ft_dstrdel_n(words->a[*i], *j, 1);
+	return (1);
+}
+
+int 	sh_xp_esc(t_sh *sh, t_dastr *words, int *i, int *j)
+{
+	char *word;
+
+	word = words->a[*i]->str;
+	if (word[*j] != '\\')
+		return (0);
+	ft_dstrdel_n(words->a[*i], *j, 1);
+	(*j)++;
+	return (1);
 }
 
 int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
@@ -81,7 +142,39 @@ int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 	return (1);
 }
 
-int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j, int op)
+int 	sh_xp_param(t_sh *sh, t_dastr *words, int *i, int *j)
+{
+	char	*word;
+	char 	*param;
+	char	*val;
+	int		off;
+
+	word = words->a[*i]->str;
+	if (ft_strncmp("${", word + *j, 2))
+		return (0);
+	ft_dstrdel_n(words->a[*i], *j, 2);
+	off = *j;
+	while (word[*j] && word[*j] != '}')
+	{
+		if (!sh_lex_isinname(word[*j]))
+			break ;
+		(*j)++;
+	}
+	if (word[*j] != '}')
+		return (-1);
+	param = ft_strndup(word + off, *j - off);
+	ft_dstrdel_n(words->a[*i], off, *j - off + 1);
+	ft_printf(C_RED"After deleting: %s\n"T_END, words->a[*i]->str);
+	val = sh_var_getval(sh->var, param);
+	ft_dstrins_str(words->a[*i], off, val);
+	ft_printf(C_RED"After insertion: %s\n"T_END, words->a[*i]->str);
+	if (val)
+		*j = off + ft_strlenz(val);
+	ft_printf(C_RED"After moving: %s\n"T_END, words->a[*i]->str + *j);
+	return (1); // TODO: free param
+}
+
+int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	t_dastr	*res;
 	char 	*word;
@@ -131,8 +224,6 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j, int op)
 	}
 	if (lex->st == TSBLANK || inp[lex->i] != '}')
 		return (0);
-	if (!op && (*j += lex->i + 1))
-		return (1);
 	inp[lex->i++] = '\0';
 	ft_dastrins_str(res, -1, inp + off);
 	*j = lex->i;
