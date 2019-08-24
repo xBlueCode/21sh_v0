@@ -63,19 +63,21 @@ int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 		*j += ft_strlenz(rep);
 		return (1);
 	}
-	while (++k < words->a[*i]->len && word[k] != '/')
+	while (k < words->a[*i]->len && word[k] != '/')
 	{
 		if (word[k] != '_' && !ft_isalnum(word[k]))
 			break;
+		k++;
 	}
 	if (word[k] && word[k] != '/')
 		return (0);
 	ft_dstrdel_n(words->a[*i], *j, k - *j);
-	if (*j == k + 1)
+	if (*j + 1 == k)
 		rep = sh_var_getval(sh->var, "HOME");
 	else
 		rep = "USERPATH";
 	ft_dstrins_str(words->a[*i], *j, rep);
+	*j += ft_strlenz(rep);
 	return (1);
 }
 
