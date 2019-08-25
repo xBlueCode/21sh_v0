@@ -64,14 +64,14 @@ int 		sh_var_init_ftsh(t_table *var)
 	trow = ft_tabget_n(var, SH_VN_FTSH);
 	if (trow.i < 0)
 	{
-		ft_tabins(var, ft_tabrow_set(-1, SH_VN_FTSH, SH_VV_FTSH, 0x3), 0);
+		ft_tabins(var, ft_tabrow_set(-1, SH_VN_FTSH, SH_VV_FTSH, SH_VO_LOC), 0);
 		vshlvl = NULL;
 	}
 	trow = ft_tabget_n(var, SH_VN_SHLVL);
 	if (trow.i < 0 || !vshlvl)
-		ft_tabins(var, ft_tabrow_set(-1, SH_VN_SHLVL, SH_VV_SHLVL, 0x3), 1);
+		ft_tabins(var, ft_tabrow_set(-1, SH_VN_SHLVL, SH_VV_SHLVL, SH_VO_LOC), 1);
 	else if ((vshlvl = ft_itoa(ft_atoi(trow.value) + 1)))
-		ft_tabins(var, ft_tabrow_set(-1, SH_VN_SHLVL, vshlvl, 0x3), 1);
+		ft_tabins(var, ft_tabrow_set(-1, SH_VN_SHLVL, vshlvl, SH_VO_LOC), 1);
 	ft_memdel((void**)&vshlvl);
 	return (0);
 }

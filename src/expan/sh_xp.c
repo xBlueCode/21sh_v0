@@ -26,7 +26,7 @@
  * in case first part is not valid param --> err: bad subst
 */
 
-int		sh_xp_start(t_sh *sh, t_dastr *words)
+int		sh_xp_word(t_sh *sh, t_dastr *words)
 {
 	int i;
 	int j;
@@ -68,8 +68,8 @@ int		sh_xp_assign(t_sh *sh, t_dastr *assigns)
 		sh_xp_tilde(sh, assigns, &i, &j);
 		while (j < assigns->a[i]->len)
 		{
-			if (sh_xp_brace(sh, assigns, &i, &j)
-				|| sh_xp_param(sh, assigns, &i, &j)
+			if (//sh_xp_brace(sh, assigns, &i, &j)
+				sh_xp_param(sh, assigns, &i, &j)
 				|| sh_xp_var(sh, assigns, &i, &j)
 				|| sh_xp_dq(sh, assigns, &i, &j)
 				|| sh_xp_sq(sh, assigns, &i, &j)

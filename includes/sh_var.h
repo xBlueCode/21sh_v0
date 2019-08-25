@@ -5,6 +5,10 @@
 
 # define SH_VAR_MAX 32
 
+# define SH_VO_LOC 0x1
+# define SH_VO_GLO 0x2
+# define SH_VO_RDO 0x3
+
 # define SH_VN_FTSH "FTSH"
 # define SH_VV_FTSH "FTSH"
 # define SH_VN_SHLVL "SHLVL"
@@ -12,15 +16,12 @@
 
 # define SH_VN_SHPID "$"
 # define SH_VV_SHPID 0x00
-# define SH_VO_SHPID 0x00
+# define SH_VO_SHPID SH_VO_LOC
 
 # define SH_VN_ESTAT "?"
 # define SH_VV_ESTAT 0x00
-# define SH_VO_ESTAT 0x00
+# define SH_VO_ESTAT SH_VO_LOC
 
-# define SH_VO_LOC 0x0
-# define SH_VO_GLO 0x1
-# define SH_VO_RDO 0x2
 
 # define SH_VN_PS1 "PS1"
 # define SH_VV_PS1 "\\h@\\u $ "
@@ -41,6 +42,8 @@ char 			*sh_var_tbuild_env(t_trow trow);
 
 int 			sh_var_geti(char *name);
 char 			*sh_var_getval(t_table *var, char *name);
+
+int 			sh_var_assign(t_table *envt, t_dastr *assigns);
 
 t_hset			*sh_varh(void);
 int 			sh_varh_start(char **envp);

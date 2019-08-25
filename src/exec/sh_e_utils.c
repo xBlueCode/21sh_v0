@@ -20,7 +20,7 @@ char		**sh_e_get_argv(t_sh *sh, t_dastr *words)
 	int 	i;
 
 	DF0
-	if (!words || !words->a)
+	if (!words || !words->len)
 		return (NULL);
 	if (!(bin = sh_e_get_binpath(sh, words->a[0]->str)))
 		return (NULL);
@@ -41,4 +41,8 @@ char		**sh_e_get_envp(t_sh *sh, t_dastr *assigns)
 	char 		**envp;
 
 	envt = ft_tabdup(sh->var);
+	sh_var_assign(envt, assigns);
+	envp = ft_tabto_arr(envt, &sh_var_tsel_glo, &sh_var_tbuild_env);
+	return (envp);
 }
+
