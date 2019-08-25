@@ -1,7 +1,3 @@
-//
-// Created by xbluecode on 18.05.19.
-//
-
 #include "ftsh.h"
 
 int 	sh_var_tsel_glo(t_trow trow)
@@ -32,7 +28,6 @@ int 		sh_var_assign(t_table *envt, t_dastr *assigns)
 			return (-1);
 		*val = '\0';
 		val++;
-		ft_printf("Inserting: %s | %s\n", key, val);
 		ft_tabins(envt, ft_tabrow_set(-1, key, val, SH_VO_GLO), 1);
 	}
 	return (1);

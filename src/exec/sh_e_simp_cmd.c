@@ -21,7 +21,10 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	ft_dastrprint_all(simp_cmd->lst_assign, "\n");
 	ft_printf("\n"T_END);
 	if (!(argv = sh_e_get_argv(sh, simp_cmd->lst_words))) // assign to current env
-		return (-1);
+	{
+		sh_var_assign(sh->var, simp_cmd->lst_assign);
+		return (0);
+	}
 	envp = sh_e_get_envp(sh, simp_cmd->lst_assign);
 	ft_printf(T_END"--------> forking ...\n");
 	//sh_e_redirect(simp_cmd->lst_redir);
