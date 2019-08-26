@@ -48,7 +48,8 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 int 		sh_lex_seek_tok_delim(t_lex *lex, int op)
 {
 	(void)op;
-	if (sh_lex_tok_isdelim(lex->in->str[lex->i]))
+	if (sh_lex_tok_isdelim(lex->in->str[lex->i])
+		|| !lex->in->str[lex->i])
 	//	|| (lex->in->str[lex->i] == '}'
 	//	&& sh_lex_tok_isdelim(lex->in->str[lex->i + 1])))
 	{
@@ -74,7 +75,7 @@ int 		sh_lex_seek_tok(t_lex *lex, int op)
 	(void)op;
 	off = lex->i;
 	lex->assi = -1;
-	while (lex->in->str[lex->i])
+	while (lex->i < lex->in->len + 1)
 	{
 		if (sh_lex_seek_rescope(lex, op)
 			|| sh_lex_seek_join(lex, op)
