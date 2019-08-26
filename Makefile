@@ -67,7 +67,7 @@ GRAMMAR := sh_g_cmd.c sh_g_and_or.c sh_g_com_cmd.c sh_g_pipe.c sh_g_redir.c \
 
 EXEC := sh_e.c sh_e_pipe.c sh_e_simp_cmd.c sh_e_utils.c sh_e_redirect.c
 
-EXPAN := sh_xp.c
+EXPAN := sh_xp.c sh_xp_scmd.c
 
 JOBC := sh_jc.c sh_jc_state.c sh_jc_put.c sh_jc_notify.c sh_jc_process.c
 

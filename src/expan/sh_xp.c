@@ -31,6 +31,7 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 	int i;
 	int j;
 
+	DF0
 	i = -1;
 	while (++i < words->len)
 	{
@@ -43,6 +44,7 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 				|| sh_xp_var(sh, words, &i, &j)
 				|| sh_xp_dq(sh, words, &i, &j)
 				|| sh_xp_sq(sh, words, &i, &j)
+				|| sh_xp_bq(sh, words, &i, &j)
 				|| sh_xp_esc(sh, words, &i, &j)
 			)
 				continue;
