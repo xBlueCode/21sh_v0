@@ -45,6 +45,7 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 				|| sh_xp_dq(sh, words, &i, &j)
 				|| sh_xp_sq(sh, words, &i, &j)
 				|| sh_xp_bq(sh, words, &i, &j)
+				|| sh_xp_scmd(sh, words, &i, &j)
 				|| sh_xp_esc(sh, words, &i, &j)
 			)
 				continue;
@@ -75,6 +76,8 @@ int		sh_xp_assign(t_sh *sh, t_dastr *assigns)
 				|| sh_xp_var(sh, assigns, &i, &j)
 				|| sh_xp_dq(sh, assigns, &i, &j)
 				|| sh_xp_sq(sh, assigns, &i, &j)
+				|| sh_xp_bq(sh, assigns, &i, &j)
+				|| sh_xp_scmd(sh, assigns, &i, &j)
 				|| sh_xp_esc(sh, assigns, &i, &j)
 				|| (assigns->a[i]->str[j] == ':' && ++j && sh_xp_tilde(sh, assigns, &i, &j))
 				)
@@ -98,6 +101,8 @@ int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j)
 		if (//sh_xp_brace(sh, words, i, j)
 			sh_xp_param(sh, words, i, j)
 			|| sh_xp_var(sh, words, i, j)
+			|| sh_xp_bq(sh, words, i, j)
+			|| sh_xp_scmd(sh, words, i, j)
 			|| sh_xp_esc(sh, words, i, j)
 		//	|| sh_xp_dq(sh, words, i, j)
 			)
@@ -261,10 +266,15 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	while (inp[lex->i] && lex->st != TSBLANK && inp[lex->i] != '}')
 	{
 		*j += lex->i;
-		if (sh_lex_seek_scmd(lex, 0)
-			|| sh_lex_seek_dq(lex, 0)
-			|| sh_lex_seek_blank(lex, 0)
+		if (sh_lex_seek_blank(lex, 0)
 			|| sh_lex_seek_brace(lex, 0)
+			|| sh_lex_seek_escape(lex, 0)
+			|| sh_lex_seek_sq(lex, 0)
+			|| sh_lex_seek_dq(lex, 0)
+			|| sh_lex_seek_bq(lex, 0)
+			|| sh_lex_seek_param(lex, 0)
+			|| sh_lex_seek_smath(lex, 0)
+			|| sh_lex_seek_scmd(lex, 0)
 			//|| sh_xp_brace(sh, words, i, j, 0)
 			)
 			continue;
@@ -274,13 +284,6 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 			ft_dastrins_str(res, -1, inp + off);
 			off = lex->i;
 		}
-		/*
-		else if (inp[lex->i] == '{')
-		{
-			while (inp[lex->i] && inp[lex->i++] != '}')
-				;
-		}
-		 */
 		else
 			lex->i++;
 	}

@@ -30,3 +30,28 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	// TODO: free nsh
 	return (1);
 }
+
+int 	sh_xp_scmd(t_sh *sh, t_dastr *words, int *i, int *j)
+{
+	t_dstr	*word;
+	t_sh	*nsh;
+	char 	*script;
+	t_lex	*lex;
+
+	DF0
+	word = words->a[*i];
+	if (ft_strncmp(word->str + *j, "$(", 2)) // check for smath
+		return (0);
+	sh_lex_init(&lex, word->str + *j);
+	if (!sh_lex_seek_scmd(lex, 0)) // TODO: recheck
+		return (1);
+	script = ft_strndup(lex->in->str + 2, lex->i - 3);
+	ft_printf("BQ Script: <%s>\n", script);
+	ft_dstrdel_n(word, *j, lex->i);
+	nsh = sh_sh_clone(sh, SH_MODE_SCMD);
+	sh_script_run(nsh, script);
+	ft_printf(C_GRN"RES SUBST:\n%s\n++++++++++++++++++\n", nsh->sub_out->str);
+	ft_dstrins_str(word, *j, nsh->sub_out->str);
+	*j += ft_strlenz(nsh->sub_out->str);
+	return (1);
+}
