@@ -21,7 +21,7 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	t_lex *lex;
 	t_com_cmds *com_cmds;
 
-	ft_printf(C_CYN"\nScript:\n-------\n%s\n-------\n\n"T_END, script);
+	//ft_printf(C_CYN"\nScript:\n-------\n%s\n-------\n\n"T_END, script);
 	if (!script)
 		return (1);
 	sh_lex_init(&lex, script);
@@ -31,7 +31,7 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 		return (KO);
 	if (!(com_cmds = sh_p_start(lex)))
 		return (KO);
-	ft_printf(C_GRN"Parsed !!!\n"T_END);
+//	ft_printf(C_GRN"Parsed !!!\n"T_END);
 	return (sh_e_com_cmds(sh, com_cmds));
 }
 

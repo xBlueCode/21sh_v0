@@ -9,7 +9,7 @@ char 		*sh_e_get_binpath(t_sh *sh, char *bin_name)
 	if (!bin_name)
 		return (NULL);
 	binpath = sh_bin_getpath(sh->bin_ht, bin_name);
-	ft_printf(C_RED"bin: %s\t\tbinpath: %s\n"T_END, bin_name, binpath);
+	ft_printf(C_RED"bin: <%s>\t\tbinpath: %s\n"T_END, bin_name, binpath);
 	return (binpath); // TODO: to be improved
 }
 

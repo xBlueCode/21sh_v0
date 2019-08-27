@@ -28,15 +28,22 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	envp = sh_e_get_envp(sh, simp_cmd->lst_assign);
 	ft_printf(T_END"--------> forking ...\n");
 	//sh_e_redirect(simp_cmd->lst_redir);
+	// -----------
+	if (sh->mode == SH_MODE_SCMD)
+		pipe(sh->sub_pipe);
 	if ((pid = fork()) < 0)
 		return (ft_printf("fork error\n"));
 	else if (!pid)
 	{
+		if (sh->mode == SH_MODE_SCMD)
+			ft_dup2(sh->sub_pipe[1], STDOUT_FILENO, 1);
 		sh_e_redirect(simp_cmd->lst_redir);
 		execve(argv[0], argv, envp);
 		exit(1);
 	}
 	ft_printf("waiting ....\n");
 	wait(&wstat);
+	if (sh->mode == SH_MODE_SCMD && !close(sh->sub_pipe[1]))
+		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
 	return (WEXITSTATUS(wstat));
 }
