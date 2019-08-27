@@ -31,9 +31,12 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 	int i;
 	int j;
 	int dql;
+	int indq;
 
 	DF0
 	i = -1;
+	indq = BIT_IS(sh->mode, SH_MODE_INDQ);
+	BIT_USET(sh->mode, SH_MODE_INDQ);
 	while (++i < words->len)
 	{
 		j = 0;
@@ -57,10 +60,8 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 				j++;
 		}
 	}
-	if (BIT_IS(sh->mode, SH_MODE_INDQ))
-		return (1);
-	ft_printf("Mode before spliting: %d\n", sh->mode);
-	sh_xp_word_split(sh, words);
+	if (indq)
+		sh_xp_word_split(sh, words);
 	i = -1;
 	while (++i < words->len)
 	{
