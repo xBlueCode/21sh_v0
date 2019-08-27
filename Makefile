@@ -54,7 +54,7 @@ LEX := sh_lex.c sh_lex_tok.c sh_lex_manip.c sh_lex_print.c \
 	sh_lex_seek_op_gl.c sh_lex_seek_ion.c sh_lex_seek_ssh.c \
 	sh_lex_seek_ctx.c sh_lex_seek_pcb.c sh_lex_seek_als.c \
 	sh_lex_seek_hash.c sh_lex_seek_add.c sh_lex_seek_rw.c \
-	sh_lex_utils.c sh_lex_seek_brace.c
+	sh_lex_utils.c sh_lex_seek_brace.c sh_lex_skip.c
 
 PARSER := sh_p_and_or.c sh_p_cmd.c sh_p_cmd_pref.c sh_p_cmd_suff.c \
     sh_p_comp_list.c sh_p_complete_cmd.c sh_p_group.c sh_p_io.c \
@@ -67,7 +67,8 @@ GRAMMAR := sh_g_cmd.c sh_g_and_or.c sh_g_com_cmd.c sh_g_pipe.c sh_g_redir.c \
 
 EXEC := sh_e.c sh_e_pipe.c sh_e_simp_cmd.c sh_e_utils.c sh_e_redirect.c
 
-EXPAN := sh_xp.c sh_xp_scmd.c
+EXPAN := sh_xp.c sh_xp_scmd.c sh_xp_brace.c sh_xp_param.c sh_xp_q.c \
+	sh_xp_tilde.c
 
 JOBC := sh_jc.c sh_jc_state.c sh_jc_put.c sh_jc_notify.c sh_jc_process.c
 
