@@ -159,6 +159,8 @@ typedef struct	s_lex
 	int 	assi;
 }				t_lex;
 
+typedef int (*t_sh_lex_seeker)(t_lex *lex, int op);
+
 t_lex 			sh_lex(void);
 int				sh_lex_init(t_lex **plex, char *input);
 int 			sh_lex_free(t_lex **plex);
@@ -222,6 +224,7 @@ int				sh_lex_seek_add(t_lex *lex, int op);
 
 int				sh_lex_seek_rw(t_token *token, int ctx);
 
+int 			sh_lex_skip(char *input, t_sh_lex_seeker lex_seeker, int *len);
 
 int 			sh_lex_tok_ctx(t_token *token);
 int 			sh_lex_ctx_last(t_lex *lex, int op);
