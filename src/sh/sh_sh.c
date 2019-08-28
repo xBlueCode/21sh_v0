@@ -48,6 +48,7 @@ int 			sh_sh_init(t_sh **sh, char **envp, int mode) // init mode (subsh ...)
 		(*sh)->jc = sh_jc_new();
 		ft_printf(C_GRN"Interactive Term initialized ^ ^\n"T_END);
 	}
+	(*sh)->sub_pipe = NULL;
 	(*sh)->sub_out = NULL;
 	return (OK);
 }
@@ -70,7 +71,10 @@ t_sh 			*sh_sh_clone(t_sh *sh, int mode)
 		nsh->bin_ht = sh->bin_ht; // TODO: duplicate or init
 		nsh->bin_nl = sh->bin_nl; // TODO: duplicate ot init
 		if (mode == SH_MODE_SCMD)
+		{
+			nsh->sub_pipe = ft_memalloc(2 * sizeof(int));
 			nsh->sub_out = ft_dstrnew_max(2);
+		}
 	}
 	return (nsh);
 }

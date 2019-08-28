@@ -36,7 +36,7 @@ typedef struct	s_sh
 	t_hset		*bin_ht;
 	t_dastr		*bin_nl;
 	t_table		*var;
-	int 		sub_pipe[2];
+	int 		*sub_pipe;
 	t_dstr		*sub_out;
 }				t_sh;
 

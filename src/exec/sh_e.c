@@ -24,6 +24,7 @@ int			sh_e_com_cmd(t_sh *sh, void *gr) // map to group exec (subsh)
 {
 	t_list		*and_or_lst;
 	t_com_cmd	*com_cmd;
+	t_sh		*nsh;
 	int 		ret;
 
 	DF0
@@ -31,6 +32,11 @@ int			sh_e_com_cmd(t_sh *sh, void *gr) // map to group exec (subsh)
 		return (0);
 	com_cmd = (t_com_cmd*)gr;
 	and_or_lst = com_cmd->lst_and_or;
+	if (com_cmd->gr == SH_GR_SUBSH)
+	{
+		nsh = sh_sh_clone(sh, SH_MODE_SSH);
+		sh = nsh;
+	}
 	while (and_or_lst)
 	{
 		ft_dstrdel_n(com_cmd->sep, -1, 1);
