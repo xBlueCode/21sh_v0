@@ -17,10 +17,13 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	if (word->str[*j] != '`')
 		return (-1);
 	script = ft_strndup(word->str + off + 1, *j - off - 1);
+	ft_printf(C_YLW"Before deleting BQ: %s\n"T_END, word->str);
 	ft_dstrdel_n(word, off, *j - off + 1);
+	ft_printf(C_YLW"after deleting BQ: %s\n"T_END, word->str);
 	*j = off;
 	nsh = sh_sh_clone(sh, SH_MODE_SCMD);
 	sh_script_run(nsh, script);
+	ft_printf(C_RED"OLD SUBST: %s\n", word->str);
 	ft_printf(C_RED"BQ SUBST: %s\n", nsh->sub_out->str);
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
 	*j += ft_strlenz(nsh->sub_out->str);

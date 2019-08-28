@@ -64,9 +64,6 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 	}
 	if (!indq)
 		sh_xp_word_split(sh, words);
-	ft_printf(C_YLW"---------------- words out of split \n");
-	ft_dastrprint_all(words, "\n");
-	ft_putstr("\n"T_END);
 	i = -1;
 	while (++i < words->len)
 	{
