@@ -5,11 +5,16 @@
 //# include "sh_jobc.h"
 # include "libft.h"
 
-# define SH_MODE_INT	0x01
-# define SH_MODE_SCR	0x02
-# define SH_MODE_SSH	0x04
-# define SH_MODE_SCMD	0x08
-# define SH_MODE_INDQ	0x10
+
+# define SH_MODE_TER	0x01
+# define SH_MODE_INT	0x02
+# define SH_MODE_SCR	0x04
+# define SH_MODE_SSH	0x08
+# define SH_MODE_SCMD	0x10
+# define SH_MODE_M		0x77
+
+# define SH_NEST_INDQ	0x01
+# define SH_NEST_M		0x07
 // TODO: max is 7
 
 /**
@@ -18,7 +23,8 @@
  */
 typedef struct	s_sh
 {
-	int			mode;
+	uint8_t		mode;
+	uint8_t		nest;
 	t_jcon		*jc;
 	pid_t		pgid;
 	t_termios	tmodes;

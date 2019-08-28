@@ -35,8 +35,10 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 
 	DF0
 	i = -1;
-	indq = BIT_IS(sh->mode, SH_MODE_INDQ);
-	BIT_USET(sh->mode, SH_MODE_INDQ);
+	//indq = BIT_IS(sh->mode, SH_MODE_INDQ);
+	//BIT_USET(sh->mode, SH_MODE_INDQ);
+	indq = BIT_MIS(sh->nest, SH_NEST_M, SH_NEST_INDQ);
+	BIT_MUSET(sh->nest, SH_NEST_M);
 	while (++i < words->len)
 	{
 		j = 0;
@@ -60,8 +62,11 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 				j++;
 		}
 	}
-	if (indq)
+	if (!indq)
 		sh_xp_word_split(sh, words);
+	ft_printf(C_YLW"---------------- words out of split \n");
+	ft_dastrprint_all(words, "\n");
+	ft_putstr("\n"T_END);
 	i = -1;
 	while (++i < words->len)
 	{

@@ -7,7 +7,9 @@ int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j)
 	word = words->a[*i];
 	if (word->str[*j] != '"')
 		return (0);
-	BIT_SET(sh->mode, SH_MODE_INDQ);
+	//BIT_SET(sh->mode, SH_MODE_INDQ);
+	sh->nest = SH_NEST_INDQ;
+	ft_printf(C_GRN"WORD_DQ: %s\n"T_END, word->str + *j);
 	ft_dstrdel_n(words->a[*i], *j, 1);
 	while (word->str[*j] && word->str[*j] != '"')
 	{
@@ -23,7 +25,8 @@ int 	sh_xp_dq(t_sh *sh, t_dastr *words, int *i, int *j)
 			continue;
 		(*j)++;
 	}
-	BIT_USET(sh->mode, SH_MODE_INDQ);
+	//BIT_USET(sh->mode, SH_MODE_INDQ);
+	sh->nest = 0;
 	if (word->str[*j] != '"')
 		return (-1);
 	ft_dstrdel_n(words->a[*i], *j, 1);

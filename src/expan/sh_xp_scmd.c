@@ -21,8 +21,10 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	*j = off;
 	nsh = sh_sh_clone(sh, SH_MODE_SCMD);
 	sh_script_run(nsh, script);
+	ft_printf(C_RED"BQ SUBST: %s\n", nsh->sub_out->str);
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
 	*j += ft_strlenz(nsh->sub_out->str);
+	ft_printf(C_RED"NEW SUBST: %s\n", word->str);
 	// TODO: free nsh
 	return (1);
 }

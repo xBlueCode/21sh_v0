@@ -12,7 +12,7 @@ int		sh_file_run(char *filename, char **envp)
 	ft_putendl(filename);
 	if (!(dscript = ft_read_file(filename)))
 		return (KO);
-	sh_sh_init(&sh, envp, 1); // TODO: specify correct sh-mode
+	sh_sh_init(&sh, envp, SH_MODE_SCR); // TODO: specify correct sh-mode
 	return (sh_script_run(sh, dscript->str));
 }
 
@@ -37,7 +37,7 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 
 int		sh_inter_read(char **line)
 {
-	DF0
+	//DF0
 	//(void)line;
 	//prompt_display();
 	//signal(SIGINT, sighand_parent);
@@ -52,7 +52,7 @@ int		sh_term_run(char **envp)
 	int 	ret;
 
 	DF0
-	sh_sh_init(&g_sh, envp, 0); // TODO: specify correct sh-mode
+	sh_sh_init(&g_sh, envp, SH_MODE_TER); // TODO: specify correct sh-mode
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();

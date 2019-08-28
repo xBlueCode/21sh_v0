@@ -25,7 +25,8 @@ int 			sh_sh_init(t_sh **sh, char **envp, int mode) // init mode (subsh ...)
 	//(*sh)->stdo = dup(STDOUT_FILENO);
 	sh_bin_init(&(*sh)->bin_ht, &(*sh)->bin_nl);
 	sh_bin_update((*sh)->bin_ht, (*sh)->bin_nl, sh_var_getval((*sh)->var, "PATH"));
-	if (!mode && (*sh)->inter)
+	(*sh)->nest = 0;
+	if (BIT_MIS(mode, SH_MODE_M, SH_MODE_TER) && (*sh)->inter)
 	{
 		while (tcgetpgrp ((*sh)->term_std) != ((*sh)->pgid = getpgrp ()))
 			kill (- (*sh)->pgid, SIGTTIN);
@@ -61,10 +62,11 @@ t_sh 			*sh_sh_clone(t_sh *sh, int mode)
 	if (mode == SH_MODE_SSH || mode == SH_MODE_SCMD)
 	{
 		nsh->mode = sh->mode;
-		BIT_SET(nsh->mode, mode);
+		BIT_MSET(nsh->mode, SH_MODE_M, mode);
 		nsh->jc = NULL;
 		nsh->var = ft_tabdup(sh->var);
 		nsh->inter = 0;
+		nsh->nest = sh->nest; // TODO: recheck
 		nsh->bin_ht = sh->bin_ht; // TODO: duplicate or init
 		nsh->bin_nl = sh->bin_nl; // TODO: duplicate ot init
 		if (mode == SH_MODE_SCMD)

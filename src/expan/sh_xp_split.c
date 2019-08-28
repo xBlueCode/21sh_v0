@@ -45,6 +45,10 @@ int		sh_xp_word_split(t_sh *sh, t_dastr *words)
 		}
 	}
 	ft_printf(C_MGN"Split:\n");
+	ft_dastrclear(words);
 	ft_dastrprint_all(split, "\n");
 	ft_printf("\n----------\n"T_END);
+	ft_dastrcpy(words, split);
+	FT_MEMDEL(split);
+	return (1);
 }
