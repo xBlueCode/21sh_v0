@@ -57,7 +57,9 @@ typedef struct	s_parser
 	t_list		*tlook;
 	t_list		*tlast;
 	int			lev;
-//	t_btree		***ast;
+	t_dastr		*hd_key;
+	t_dastr		*hd_val;
+	//t_btree	***ast;
 }				t_parser;
 
 t_com_cmds		*sh_p_start(t_lex *lex);

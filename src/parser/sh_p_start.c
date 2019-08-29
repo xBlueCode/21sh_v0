@@ -27,6 +27,8 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 	p.tbase = lex->tlst;
 	p.tlook = lex->tlst;
 	p.tlast = lex->tlst;
+//	p.hd_key = lex->hd_val;
+	p.hd_val = lex->hd_val;
 	p.lev = 0;
 	ft_btreeinit(&ast, NULL, 0, SH_GR_START);
 	sh_p_program(&p, &(ast->left));

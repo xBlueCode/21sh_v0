@@ -53,6 +53,7 @@ int			sh_e_cmd(t_sh *sh, void *gr)
 	// TODO: perform redirection for compound cmd
 	ft_dup_stdioe_copy(stdioe, 0);
 	ft_dup_stdioe_set(cmd->stdioe, 1);
+	sh_e_redirect(cmd->lst_redir);
 	ret = cmd->exec(sh, cmd->core);
 	ft_dup_stdioe_set(stdioe, 1);
 	return (ret);

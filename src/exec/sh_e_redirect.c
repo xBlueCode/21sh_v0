@@ -13,8 +13,10 @@ int 	sh_e_redirect(t_list *redir_lst)
 			continue;
 		if (redir->op == TSG || redir->op == TSG_O || redir->op == TSG2)
 			sh_e_redirect_g(redir);
-		if (redir->op == TSL)
+		else if (redir->op == TSL)
 			sh_e_redirect_l(redir);
+		else if (redir->op == TSL2)
+			sh_e_redirect_l2(redir);
 		redir_lst = redir_lst->next;
 	}
 	return (OK);
@@ -66,5 +68,21 @@ int 	sh_e_redirect_l(t_redir *redir)
 		return (KO);
 	fdi = redir->ion < 0 ? STDIN_FILENO : redir->ion;
 	ft_dup2(fdf, fdi, 1);
+	return (OK);
+}
+
+int 	sh_e_redirect_l2(t_redir *redir)
+{
+	int		hdpipe[2];
+
+	if (!redir || !redir->word)
+		return (KO);
+	pipe(hdpipe);
+	write(hdpipe[1], redir->word, ft_strlen(redir->word));
+	close(hdpipe[1]);
+	if (redir->ion > -1)
+		ft_dup2(hdpipe[0], redir->ion, 1);
+	else
+		ft_dup2(hdpipe[0], STDIN_FILENO, 1);
 	return (OK);
 }

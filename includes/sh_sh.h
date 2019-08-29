@@ -38,6 +38,8 @@ typedef struct	s_sh
 	t_table		*var;
 	int 		*sub_pipe;
 	t_dstr		*sub_out;
+	//t_dastr		*hd_key;
+	//t_dastr		*hd_val;
 }				t_sh;
 
 t_sh 			*sh_sh(void);

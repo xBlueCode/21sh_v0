@@ -68,10 +68,29 @@ int		sh_p_io_here(t_parser *p, t_btree **ast)
 int		sh_p_here_end(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
+	t_dstr 	*dhd;
 
 	DP0
 	SHP_CAST_INIT(SH_GR_HERE_END)
 	if (sh_p_match(p, &cast, TSTOK_WORD)) // Apply Rule 3
+	{
+		dhd = SHG_AST_TOK(cast)->val;
+		ft_dstrdel_n(dhd, 0, dhd->len);
+		ft_dstrins_str(dhd, 0, p->hd_val->a[0]->str);
+		ft_dastrdel_n(p->hd_val, 0, 1);
+		/* // Replacemenet of the above
+		i = -1;
+		while (++i < p->hd_key->len)
+		{
+			if (!ft_strcmp(dhd->str, p->hd_key->a[i]->str))
+			{
+				ft_dstrdel_n(dhd, 0, dhd->len);
+				ft_dstrins_str(dhd, 0, p->hd_val->a[i]->str);
+				break;
+			}
+		}
+		*/
 		PRET(1);
+	}
 	PRET(0);
 }
