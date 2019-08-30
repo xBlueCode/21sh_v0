@@ -1,31 +1,5 @@
 #include "ftsh.h"
 
-/**
- * brace expansion
- * :> generate a list of words
- * start with '{'
- * 		invoke lexers: cmdsub, quotes ...
- * 			if (space_lexer positive)
- * 				stop (and escape the first {) and return 0
- * 		if (c == '}')
- * 			break;
- * 		if (c == ',')
- * 			build a new word from pervious offset to current
-*/
-
-/**
- * tilde expansion
- * ~+[/[_word]], ~-[/[_word]], ~loginname[/[_word]]
- * detection: 1st char in word, 1st char after = or : in assign
-*/
-
-/**
- * param expansion
- * ${param}
- * ${param.:.modifier.word}
- * in case first part is not valid param --> err: bad subst
-*/
-
 int		sh_xp_word(t_sh *sh, t_dastr *words)
 {
 	int i;

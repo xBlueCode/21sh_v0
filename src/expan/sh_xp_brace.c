@@ -63,9 +63,9 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	}
 	if (res->len)
 		*i -= 1;
-	ft_putstr(C_MGN);
-	ft_dastrprint_all(res, "\n");
-	ft_putstr(T_END"\n");
+	//ft_putstr(C_MGN);
+	//ft_dastrprint_all(res, "\n");
+	//ft_putstr(T_END"\n");
 	// TODO: free res dastr
 	return (1);
 }
