@@ -47,12 +47,13 @@ int 	sh_e_redirect_l(t_redir *redir)
 		return (KO);
 	if (access(redir->word, F_OK) || access(redir->word, R_OK))
 		return (KO);
-	if ((fdf = open(redir->word, O_RDONLY)) < 0)
+	if ((fdf = open(redir->word, redir->op == TSL_G ? O_RDWR : O_RDONLY)) < 0)
 		return (KO);
 	fdi = redir->ion < 0 ? STDIN_FILENO : redir->ion;
 	ft_dup2(fdf, fdi, 1);
 	return (OK);
 }
+
 
 int 	sh_e_redirect_l2(t_redir *redir)
 {
