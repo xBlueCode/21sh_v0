@@ -22,27 +22,33 @@ static int p_lev = 0;
 # define SHP_CAST_L &(cast->left)
 # define SHP_CAST_R &(cast->right)
 
-
+/*
 # define DP0 DPTEST {DPLEV(2); \
 ft_printf("%3d%*c %-24s : %2d :%s\n",p->lev, p->lev, '-', \
 __FUNCTION__, \
 ((t_token*)p->tlook->content)->t, \
 DP0_STR(((t_token*)p->tlook->content)->val)); \
 } else return (0);
+*/
+# define DP0
 
-
+/*
 # define DPM0 DPTEST {DPLEV(2); ft_printf(C_YLW"%3d%*c %-24s : %2d :%s <%d>\n"T_END, p->lev, p->lev, '-', \
 __FUNCTION__, \
 ((t_token*)p->tlook->content)->t, \
 DP0_STR(((t_token*)p->tlook->content)->val), target); \
 }
+*/
+# define DPM0
 
-
+/*
 # define DPM1 DPTEST {ft_printf(C_GRN"%3d%*c %-24s : %2d :%s <%d>\n"T_END, p->lev, p->lev, '-', \
 __FUNCTION__, \
 ((t_token*)p->tlook->content)->t, \
 DP0_STR(((t_token*)p->tlook->content)->val), target); \
 }
+*/
+# define DPM1
 
 # define DPTOKPUT(tok) ft_printf(C_RED"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
 

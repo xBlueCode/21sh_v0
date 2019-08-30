@@ -13,7 +13,7 @@ void		rl_init()
 	ft_dstrins_ch(g_rl.scope, 0, RL_SCP_START);
 	g_rl.hd = ft_dastrnew_max(1);
 	rl_update_win();
-	ft_printf("win %dx%d\n", g_rl.wc, g_rl.wl);
+	//ft_printf("win %dx%d\n", g_rl.wc, g_rl.wl);
 }
 
 void		rl_reset(t_dastr *txt)
@@ -92,7 +92,7 @@ char		*rl_start(void)
 		xrl_read();
 		if (!g_rl.txt->a[g_rl.cl]->str)
 			ft_putendl("NULL line");
-		ft_putstr(g_rl.txt->a[g_rl.cl]->str);
+		//ft_putstr(g_rl.txt->a[g_rl.cl]->str);
 	}
 	return (ft_dstrjoin_all(g_rl.txt->a, "")->str); // check safety if return NULL
 	//return ("no");

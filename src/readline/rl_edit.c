@@ -22,7 +22,7 @@ int				rl_insert_nl(int c)
 		return (1);
 	ft_dstrins_ch(g_rl.txt->a[g_rl.cl], -1, c);
 	rl_cur_fromto(g_rl.cc, ft_strlenz(g_rl.txt->a[g_rl.cl]->str) - 1);
-	ft_putstr("$\n"); // putchar c
+	ft_putchar('\n'); // putchar c
 	return (0);
 }
 

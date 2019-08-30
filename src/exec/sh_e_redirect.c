@@ -4,7 +4,6 @@
 
 int 	sh_e_redirect(t_list *redir_lst)
 {
-//	int		fdf;
 	t_redir	*redir;
 
 	while (redir_lst)
@@ -19,22 +18,6 @@ int 	sh_e_redirect(t_list *redir_lst)
 			sh_e_redirect_l2(redir);
 		redir_lst = redir_lst->next;
 	}
-	return (OK);
-}
-
-int 	sh_e_prepare_file(char *fname, int exist, int read, int write)
-{
-// TODO: to be rechecked
-	if (!fname)
-		return (KO);
-	if (exist && access(fname, F_OK))
-		return (KO);
-	if (ft_stat_is(fname, S_IFDIR))
-		return (KO);
-	if (read && (!access(fname, F_OK) && access(fname, R_OK)))
-		return (KO);
-	if (write && (!access(fname, F_OK) && access(fname, W_OK)))
-		return (KO);
 	return (OK);
 }
 

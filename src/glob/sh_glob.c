@@ -22,7 +22,6 @@ t_list		*sh_glob_scandir(char *base, char *spath)
 	return (conds);
 }
 
-
 int				rl_glob_indir_lin(char *base, char *spath, char *pat,
 									 t_dastr *res)
 {
@@ -32,7 +31,7 @@ int				rl_glob_indir_lin(char *base, char *spath, char *pat,
 
 	//ft_printf("--> indir_lin: %s, %s, %s\n", base, spath, pat);
 	if ((slash = ft_strchr_inv(pat, '/')))
-		conds = sh_glob_scandir(base, ft_strndup(pat, slash++ - pat));
+		conds = sh_glob_scandir(base, ft_strndup(pat, slash++ - pat)); // TODO: clean after strdup
 	else
 		conds = sh_glob_scandir(base, spath);
 	cond = conds;
@@ -55,6 +54,7 @@ int				rl_glob_indir_lin(char *base, char *spath, char *pat,
 	return (0);
 }
 
+// TODO: check memory leaks + Refactoring to ft
 int				rl_glob_indir(char *base, char *spath, char *pat,
 								 t_dastr *res)
 {

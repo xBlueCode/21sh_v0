@@ -24,13 +24,13 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 			cmd->stdioe[0] = fifo[0];
 		if (cmd_lst->next)
 		{
-			ft_printf(C_MGN"--> piping ...\n"T_END);
+			//ft_printf(C_MGN"--> piping ...\n"T_END);
 			if (pipe(fifo) < 0)
 			{
 				ft_printf("error: pipe()\n");
 				exit(1);
 			}
-			ft_printf(C_GRN"PIPE (%d, %d)\n"T_END, fifo[0], fifo[1]);
+			//ft_printf(C_GRN"PIPE (%d, %d)\n"T_END, fifo[0], fifo[1]);
 			cmd->stdioe[1] = fifo[1];
 		}
 		ret = sh_e_cmd(sh, cmd);

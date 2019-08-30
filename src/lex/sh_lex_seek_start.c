@@ -70,10 +70,7 @@ int 		sh_lex_seek_tok_delim(t_lex *lex, int op)
 
 int 		sh_lex_seek_tok(t_lex *lex, int op)
 {
-	int 	off;
-
 	(void)op;
-	off = lex->i;
 	lex->assi = -1;
 	while (lex->i < lex->in->len + 1)
 	{

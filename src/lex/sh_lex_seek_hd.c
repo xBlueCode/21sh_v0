@@ -34,6 +34,7 @@ int			sh_lex_seek_hd_old(t_lex *lex, int op) // TODO : del if not needed
 	lex->st = TSL2;
 	return (1);
 }
+
 /*
 int			sh_lex_seek_hdk(t_lex *lex, int op)
 {
@@ -53,7 +54,6 @@ int			sh_lex_seek_hdk(t_lex *lex, int op)
 	return (1);
 }
 */
-
 
 int			sh_lex_seek_hdk(t_lex *lex, int op)
 {
@@ -88,7 +88,7 @@ int 		sh_lex_seek_hdv(t_lex *lex, int op)
 	{
 		//ft_printf(C_BLU"Here-DOC: <%s>\n%s\n-------\n"T_END, dhd_key->str, hd_val);
 		lex->in->str[off] = '\0';
-//		lex->st = TSERR;
+		//lex->st = TSERR;
 		return (1);
 	}
 	//ft_printf(C_BLU"Here-DOC: <%s>\n%s\n-------\n"T_END, dhd_key->str, hd_val);

@@ -63,7 +63,7 @@ int 		sh_e_and_or(t_sh *sh, void *gr)
 		sep_ao = ft_dstrget_ch(and_or->sep, -1);
 		ft_dstrdel_n(and_or->sep, -1, 1);
 		ret = sh_e_pipe(sh, pipe_lst->content);
-		ft_printf("ret: %d\n", ret);
+		//ft_printf("and_or ret: %d\n", ret);
 		if ((ret && sep_ao == TSA2) || (!ret && sep_ao == TSO2))
 			break;
 		pipe_lst = pipe_lst->next;

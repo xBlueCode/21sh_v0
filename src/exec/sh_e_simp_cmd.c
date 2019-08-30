@@ -17,18 +17,15 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	simp_cmd = (t_simp_cmd*)gr;
 	sh_xp_word(sh, simp_cmd->lst_words);
 	sh_xp_assign(sh, simp_cmd->lst_assign);
-	ft_printf(C_GRN"Assignments:\n");
-	ft_dastrprint_all(simp_cmd->lst_assign, "\n");
-	ft_printf("\n"T_END);
+	//ft_printf(C_GRN"Assignments:\n");
+	//ft_dastrprint_all(simp_cmd->lst_assign, "\n");
+	//ft_printf("\n"T_END);
 	if (!(argv = sh_e_get_argv(sh, simp_cmd->lst_words))) // assign to current env
 	{
 		sh_var_assign(sh->var, simp_cmd->lst_assign);
 		return (0);
 	}
 	envp = sh_e_get_envp(sh, simp_cmd->lst_assign);
-	ft_printf(T_END"--------> forking ...\n");
-	//sh_e_redirect(simp_cmd->lst_redir);
-	// -----------
 	if (BIT_MIS(sh->mode, SH_MODE_M, SH_MODE_SCMD))
 		pipe(sh->sub_pipe);
 	if ((pid = fork()) < 0)
@@ -41,7 +38,6 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 		execve(argv[0], argv, envp);
 		exit(1);
 	}
-	ft_printf("waiting ....\n");
 	wait(&wstat);
 	if (BIT_MIS(sh->mode, SH_MODE_M, SH_MODE_SCMD) && !close(sh->sub_pipe[1]))
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);

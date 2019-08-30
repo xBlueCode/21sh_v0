@@ -48,7 +48,7 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 //	sh_lex_seek_ctx(lex, op);
 	lex->st = TSNONE; // not final
 	lex->off = lex->i; // not final
-	if (op)
-		ft_printf(C_MGN"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
+	//if (op)
+	//	ft_printf(C_MGN"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
 	return (1);
 }
