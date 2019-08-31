@@ -41,5 +41,6 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	wait(&wstat);
 	if (BIT_MIS(sh->mode, SH_MODE_M, SH_MODE_SCMD) && !close(sh->sub_pipe[1]))
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
+	sh->exit = WEXITSTATUS(wstat);
 	return (WEXITSTATUS(wstat));
 }
