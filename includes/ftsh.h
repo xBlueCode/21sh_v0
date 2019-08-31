@@ -34,6 +34,10 @@
 
 # define CFPUTSTR(c, str, fd) (ft_dprintf(fd, "%s%s%s", c, str, T_END))
 
+# define SH_PATHNAME_MAX 1023
+
+# define SH_FILENAME_MAX 255
+
 int			sh_script_run(t_sh *sh, char *script);
 
 #endif
