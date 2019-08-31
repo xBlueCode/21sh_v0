@@ -46,4 +46,3 @@ char		**sh_e_get_envp(t_sh *sh, t_dastr *assigns)
 	envp = ft_tabto_arr(envt, &sh_var_tsel_glo, &sh_var_tbuild_env);
 	return (envp);
 }
-

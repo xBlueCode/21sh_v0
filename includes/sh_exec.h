@@ -51,6 +51,11 @@ char 		*sh_e_get_binpath(t_sh *sh, char *bin_name);
 char		**sh_e_get_argv(t_sh *sh, t_dastr *words);
 char		**sh_e_get_envp(t_sh *sh, t_dastr *assigns);
 
+int 		sh_e_check_exec(char *cmd_name);
+int 		sh_e_check_built(char *cmd_name);
+
+int 		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd);
+
 int 		sh_e_prepare_file(char *fname, int exist, int read, int write);
 int 		sh_e_redirect(t_list *redir_lst);
 int			sh_e_redirect_g(t_redir *redir);
