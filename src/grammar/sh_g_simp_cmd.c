@@ -52,6 +52,8 @@ void			*sh_g_simp_cmd_new(void)
 	simp_cmd->lst_assign = ft_dastrnew_max(2);
 	simp_cmd->lst_redir = NULL;
 	simp_cmd->lst_words = ft_dastrnew_max(2);
+	simp_cmd->envp = NULL;
+	simp_cmd->argv = NULL;
 	return (simp_cmd);
 }
 void			*sh_g_simp_cmd(t_btree *ast)
