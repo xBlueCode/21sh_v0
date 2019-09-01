@@ -56,7 +56,9 @@ int		sh_p_match(t_parser *p, t_btree **ast, int target)
 	if (ast && *ast)
 	{
 		//(*ast)->data = ft_strndup(p->tlook->content, sizeof(t_token));
-		(*ast)->data = p->tlook->content;
+		(*ast)->data = token;//ft_strndup((void*)token, sizeof(t_token));
+		//(*ast)->data = sh_lex_tokdup(token);
+		((t_token*)((*ast)->data))->t = token->t;
 		(*ast)->dsize = sizeof(t_token);
 	}
 	DPM1

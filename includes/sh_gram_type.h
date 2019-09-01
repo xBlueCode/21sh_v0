@@ -41,6 +41,7 @@ typedef struct	s_cmd
 typedef struct	s_pipe
 {
 	t_list	*lst_cmd;
+	t_dstr	*op;
 	int8_t	neg;
 }				t_pipe;
 

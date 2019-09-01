@@ -32,6 +32,9 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 			}
 			//ft_printf(C_GRN"PIPE (%d, %d)\n"T_END, fifo[0], fifo[1]);
 			cmd->stdioe[1] = fifo[1];
+			//if (pip->op->str[0] == TSO_A)
+			//	ft_dup2(fifo[1], STDERR_FILENO, 0);
+			//ft_dstrdel_n(pip->op, 0, 1);
 		}
 		ret = sh_e_cmd(sh, cmd);
 		cmd_lst = cmd_lst->next;

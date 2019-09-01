@@ -71,6 +71,7 @@ typedef enum	e_token_state
 	TSA_G,
 	TSA2,
 	TSO2,
+	TSO_A,
 	TSP2,
 	TSP_E,
 	TSM2,
@@ -232,6 +233,8 @@ int 			sh_lex_ctx_last(t_lex *lex, int op);
 int 			sh_lex_tok_isdelim(char c);
 t_token 		*sh_lex_tok_last(t_lex *lex);
 int 			sh_lex_isinname(char c);
+
+t_token			*sh_lex_tokdup(t_token *);
 
 int             sh_lex_class_name(t_lex *lex, int op);
 

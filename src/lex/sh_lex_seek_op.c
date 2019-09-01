@@ -67,7 +67,10 @@ int 	sh_lex_seek_op_o(t_lex *lex, int op)
 		}
 		else
         {
-            lex->st = TSO;
+			if (lex->in->str[lex->i] == '&' && ++lex->i)
+				lex->st = TSO_A;
+			else
+            	lex->st = TSO;
 			ft_dstrins_ch(lex->scope, -1, RL_SCP_PIPE);
         }
 		//lex->ctx = TCTX_FIRSTW;
