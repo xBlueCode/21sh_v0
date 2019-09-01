@@ -11,9 +11,10 @@ char 		*sh_e_get_binpath(t_sh *sh, char *bin_name)
 		return (NULL);
 	if (!ft_strchr(bin_name, '/'))
 		return (sh_bin_getpath(sh->bin_ht, bin_name));
-	if (!(cwd = ft_getcwd()))
-		return (NULL);
-	binpath = ft_strconnect(3, cwd, "/", bin_name);
+	//if (!(cwd = ft_getcwd()))
+	//	return (NULL);
+	//binpath = ft_strconnect(3, cwd, "/", bin_name);
+	binpath = bin_name;
 	return (binpath); // TODO: to be improved
 }
 
