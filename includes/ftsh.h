@@ -24,6 +24,7 @@
 # include "sh_glob.h"
 # include "sh_utils.h"
 # include "sh_alias.h"
+# include "sh_builtin.h"
 
 //# define DF0 ft_dprintf(2, "%s\n", __FUNCTION__);
 # define DF0
