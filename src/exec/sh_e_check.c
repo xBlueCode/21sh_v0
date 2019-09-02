@@ -3,11 +3,13 @@
 
 char 		*g_bnames[] = {
 	"echo",
+	"cd",
 	NULL
 	};
 
 t_sh_blt	g_blts[] = {
 	&sh_blt_echo,
+	&sh_blt_cd,
 	NULL
 };
 

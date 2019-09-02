@@ -6,13 +6,14 @@ int 	sh_blt_cd(char *bname, char **argv, char **envp)
 	int		ac;
 	char	*dir;
 
+	(void)envp;
 	if (!bname || !argv)
 		return (1);
 	if ((ac = ft_arr_len((void**)argv)) > 2)
 		FT_STDE_RET(-1, "ftsh: cd: Too many arguments !");
 	if (ac == 1)
 	{
-		if (!(dir = sh_env_getval("HOME")))
+		if (!(dir = sh_env_getval(envp, "HOME")))
 			FT_STDE_RET(1, "ftsh: cd: HOME not set !");
 		// change dir
 		return (0);
@@ -21,7 +22,7 @@ int 	sh_blt_cd(char *bname, char **argv, char **envp)
 	{
 		if (!ft_strcmp(argv[1], "-"))
 		{
-			if (!(dir = sh_env_getval("OLDPWD")))
+			if (!(dir = sh_env_getval(envp, "OLDPWD")))
 				FT_STDE_RET(1, "ftsh: cd: OLDPWD not set !");
 			ft_putendl(dir);
 			// change dir

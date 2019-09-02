@@ -44,6 +44,7 @@ int 			sh_var_geti(char *name);
 char 			*sh_var_getval(t_table *var, char *name);
 
 int 			sh_var_assign(t_table *envt, t_dastr *assigns);
+char 			*sh_env_getval(char **envp, char *name);
 
 t_hset			*sh_varh(void);
 int 			sh_varh_start(char **envp);
