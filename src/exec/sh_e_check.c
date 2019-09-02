@@ -1,7 +1,26 @@
 #include "ftsh.h"
 #include <sys/stat.h>
 
-int 	sh_e_check_exec(char *cmd_name)
+char 		*g_bnames[] = {
+	"echo",
+	NULL
+	};
+
+t_sh_blt	g_blts[] = {
+	&sh_blt_echo,
+	NULL
+};
+
+t_sh_blt	sh_e_get_blt(char *bname)
+{
+	int i;
+
+	if ((i = sh_e_check_built(bname)) < 0)
+		return (NULL);
+	return (g_blts[i]);
+}
+
+int 		sh_e_check_exec(char *cmd_name)
 {
 	char *tail;
 
@@ -28,7 +47,17 @@ int 	sh_e_check_exec(char *cmd_name)
 	return (OK);
 }
 
-int 	sh_e_check_built(char *cmd_name)
+int 		sh_e_check_built(char *cmd_name)
 {
+	int i;
 
+	if (!cmd_name)
+		return (-1);
+	i = -1;
+	while (g_bnames[++i])
+		if (!ft_strcmp(g_bnames[i], cmd_name))
+			break;
+	if (g_bnames[i])
+		return (i);
+	return (-1);
 }
