@@ -36,6 +36,8 @@ int 			sh_var_init_hist(t_table *var);
 char 			**sh_var_env(void);
 int 			sh_var_copy(char **envp);
 int 			sh_var_auto(void);
+int 			sh_varins(t_table *table, char *str, int m);
+int 			sh_varins_nv(t_table *table, char *name, char *value, int m);
 
 int 			sh_var_tsel_glo(t_trow trow);
 char 			*sh_var_tbuild_env(t_trow trow);
