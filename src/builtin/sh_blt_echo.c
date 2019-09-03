@@ -1,12 +1,12 @@
 #include "ftsh.h"
 
-int 	sh_blt_echo(char *bname, char **argv, char **envp)
+int 	sh_blt_echo(t_sh *sh, char **argv, char **envp)
 {
 	uint8_t op;
 	int 	i;
 
 	(void)envp;
-	if (!bname || !argv)
+	if (!argv)
 		return (1);
 	op = 0;
 	i = 1;
