@@ -68,7 +68,7 @@ GRAMMAR := sh_g_cmd.c sh_g_and_or.c sh_g_com_cmd.c sh_g_pipe.c sh_g_redir.c \
 EXEC := sh_e.c sh_e_pipe.c sh_e_simp_cmd.c sh_e_utils.c sh_e_redirect.c \
 	sh_e_check.c sh_e_run.c
 
-BUILTIN := sh_blt_echo.c sh_blt_cd.c
+BUILTIN := sh_blt_echo.c sh_blt_cd.c sh_blt_env.c
 
 EXPAN := sh_xp.c sh_xp_scmd.c sh_xp_brace.c sh_xp_param.c sh_xp_q.c \
 	sh_xp_tilde.c sh_xp_split.c sh_xp_glob.c
