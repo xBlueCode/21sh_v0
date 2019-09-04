@@ -33,4 +33,5 @@ int		sh_xp_glob(t_sh *sh, t_dastr *words)
 		rl_glob_indir()
 	}
  */
+	return (0);
 }

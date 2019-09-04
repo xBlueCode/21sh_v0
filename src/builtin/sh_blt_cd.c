@@ -20,7 +20,7 @@ int 	sh_blt_cd_setwd(t_sh *sh, char *dir)
 				ft_dprintf(2, "ftsh: cd: %s: Permission denied !\n", dir))
 	else if (chdir(dir))
 		FT_INST_RET(1,
-				ft_dprintf(2, "ftsh: cd: %s: Unable to change dir !\n", dir));
+				ft_dprintf(2, "ftsh: cd: %s: Unable to change dir !\n", dir))
 	ft_tabins(sh->var, ft_tabrow_set(-1, "PWD", dir, SH_VO_GLO), 1);
 	ft_tabins(sh->var, ft_tabrow_set(-1, "OLDPWD", cwd, SH_VO_GLO), 1);
 	return (0);

@@ -38,4 +38,7 @@ int			sh_blt_unsetenv(t_sh *sh, char **argv, char **envp)
 	return (0);
 }
 
+int			sh_blt_env(t_sh *sh, char **argv, char **envp)
+{
 
+}
