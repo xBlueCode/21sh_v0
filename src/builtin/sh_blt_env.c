@@ -38,6 +38,15 @@ int			sh_blt_unsetenv(t_sh *sh, char **argv, char **envp)
 	return (0);
 }
 
+int 		sh_blt_printenv(t_sh *sh, char **argv, char **envp)
+{
+	(void)argv;
+	if (!sh || !envp)
+		return (1);
+	ft_arr_print(envp, ft_arr_len((void**)envp));
+	return (0);
+}
+
 int			sh_blt_env(t_sh *sh, char **argv, char **envp)
 {
 

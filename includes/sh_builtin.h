@@ -10,6 +10,7 @@ typedef int (*t_sh_blt)(t_sh *sh, char **argv, char **envp);
 int			sh_blt_echo(t_sh *sh, char **argv, char **envp);
 int			sh_blt_cd(t_sh *sh, char **argv, char **envp);
 int			sh_blt_env(t_sh *sh, char **argv, char **envp);
+int 		sh_blt_printenv(t_sh *sh, char **argv, char **envp);
 int			sh_blt_setenv(t_sh *sh, char **argv, char **envp);
 int			sh_blt_unsetenv(t_sh *sh, char **argv, char **envp);
 
