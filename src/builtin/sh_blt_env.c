@@ -49,5 +49,5 @@ int 		sh_blt_printenv(t_sh *sh, char **argv, char **envp)
 
 int			sh_blt_env(t_sh *sh, char **argv, char **envp)
 {
-
+	return (0);
 }

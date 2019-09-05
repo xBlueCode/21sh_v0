@@ -4,6 +4,7 @@
 char 		*g_bnames[] = {
 	"echo",
 	"cd",
+	"printenv",
 	"setenv",
 	"unsetenv",
 	NULL
@@ -12,6 +13,7 @@ char 		*g_bnames[] = {
 t_sh_blt	g_blts[] = {
 	&sh_blt_echo,
 	&sh_blt_cd,
+	&sh_blt_printenv,
 	&sh_blt_setenv,
 	&sh_blt_unsetenv,
 	NULL

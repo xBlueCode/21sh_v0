@@ -30,7 +30,9 @@ char		**sh_e_get_argv(t_sh *sh, t_dastr *words)
 	argv = (char**)ft_memalloc((words->len + 1) * sizeof(char*));
 	argv[words->len] = NULL;
 	i = -1;
-	if ((bin = sh_e_get_binpath(sh, words->a[0]->str)))
+	if (sh_e_check_built(words->a[0]->str) > -1)
+		argv[++i] = ft_strdup(words->a[0]->str);
+	else if ((bin = sh_e_get_binpath(sh, words->a[0]->str)))
 		argv[++i] = bin;
 	while (++i < words->len)
 		argv[i] = ft_strdup(words->a[i]->str);
