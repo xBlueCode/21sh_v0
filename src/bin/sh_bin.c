@@ -28,6 +28,11 @@ int 	sh_bin_init(t_hset **phtbin, t_dastr **bin_names)
 	return (OK);
 }
 
+int 	sh_bin_free(t_hset **phtbin)
+{
+	return (0);
+}
+
 int		sh_bin_filter(const struct dirent *dent)
 {
 	return  (BIT_IS(dent->d_type, DT_REG));

@@ -18,6 +18,7 @@ int 	sh_bin_update(t_hset *htbin, t_dastr *bin_names, char *paths)
 		j = -1;
 		while (++j < bins->len)
 			sh_bin_add_abs(htbin, bin_names, ft_dastrget_i(bins, j)->str);
+		ft_dastrfree(&bins);
 	}
 	ft_arr_free((void***)&path_arr, ft_arr_len((void**)path_arr));
 	return (OK);
