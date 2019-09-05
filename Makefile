@@ -32,7 +32,7 @@ TERM := term_config.c
 
 PROMPT := prompt.c
 
-READLINE := rl.c rl_scope.c  rl_scope_scan.c \
+READLINE := rl.c rl_read.c rl_scope.c  rl_scope_scan.c \
 	rl_scope_scan_q.c rl_scope_scan_s.c rl_scope_scan_h.c \
 	rl_scope_scan_op.c rl_scope_scan_ssh.c \
 	rl_scope_prompt.c rl_scope_prompt_ps.c \
@@ -44,7 +44,7 @@ READLINE := rl.c rl_scope.c  rl_scope_scan.c \
 	rl_put.c \
 	rl_autoc.c rl_autoc_utils.c rl_autoc_match.c \
 	rl_autoc_menu.c rl_autoc_xmenu.c rl_autoc_xmenu_move.c \
-	rl_hist.c rl_hist_io.c rl_hist_request.c
+	rl_hist.c rl_hist_io.c rl_hist_request.c rl_hist_manip.c
 
 GLOB := sh_glob.c sh_glob_match.c
 

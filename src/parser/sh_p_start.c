@@ -34,9 +34,10 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 	sh_p_program(&p, &(ast->left));
 	if (p.tlook && p.tlook->content)
 	{
-		ft_printf("\nParsing Error at: ");
+		ft_printf(C_RED"\nParsing Error at: %d\n"T_END,
+				(((t_token*)p.tlook->content)->p));
 		DPTOKPUT(((t_token*)p.tlook->content))
-		ft_printf(C_RED"Near : '%c'\n"T_END, lex->in->str[((t_token*)p.tlook->content)->p]);
+		//ft_printf(C_RED"Near : '%c'\n"T_END, lex->in->str[((t_token*)p.tlook->content)->p]);
 	}
 	else
 	{

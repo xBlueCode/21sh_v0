@@ -32,8 +32,9 @@ int 		sh_var_inherit(t_table *var, char **envp)
 		if (!(eq = ft_strchr(envp[i], '=')))
 			continue;
 		trow = ft_tabrow_set(i,
-			ft_strndup(envp[i], eq - envp[i]), ft_strdup(eq + 1), SH_VO_GLO);
+			ft_strndup(envp[i], eq - envp[i]), eq + 1, SH_VO_GLO);
 		ft_tabins(var, trow, 0);
+		FT_MEMDEL(trow.name);
 	}
 	return (OK);
 }

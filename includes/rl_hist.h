@@ -1,9 +1,7 @@
-// header
-
 #ifndef RL_HIST_H
- # define RL_HIST_H
+# define RL_HIST_H
 
-#include "libft.h"
+# include "libft.h"
 
 # define RL_HIS_FILENAME ".rl_history"
 
@@ -17,6 +15,7 @@ typedef struct	s_hist
 }				t_hist;
 
 int 			rl_hist_init(char *filename);
+int 			rl_hist_free(void);
 t_hist 			rl_hist_get(void);
 int 			rl_hist_reset(void);
 int				rl_hist_upload(void);

@@ -10,7 +10,7 @@ int 	sh_blt_echo(t_sh *sh, char **argv, char **envp)
 		return (1);
 	op = 0;
 	i = 1;
-	if (!ft_strcmp(argv[i], "-n") && i++)
+	if (argv[i] && !ft_strcmp(argv[i], "-n") && i++)
 		op = 1;
 	while (argv[i])
 	{

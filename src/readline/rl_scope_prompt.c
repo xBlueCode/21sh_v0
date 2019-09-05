@@ -38,6 +38,7 @@ int 		rl_scope_prompt_ps(void)
 		rl_scope_prompt_ps_w(prompt, i);
 	}
 	g_rl.plen += ft_printf("%s", prompt->str);
+	ft_dstrfree(&prompt);
 	return (OK);
 }
 
