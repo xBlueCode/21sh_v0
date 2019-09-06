@@ -38,6 +38,7 @@ int			rl_hist_read(int fd)
 	t_dstr		*data;
 	int			c;
 	int 		num;
+	int 		ret;
 
 	num = 0;
 	data = ft_dstrnew_max(1024);
@@ -48,9 +49,11 @@ int			rl_hist_read(int fd)
 			num++;
 	}
 	if (num && (g_his.off = num))
-		return (rl_hist_parse(data->str, num));
+		ret = rl_hist_parse(data->str, num);
 	else
-		return (0);
+		ret = 0;
+	ft_dstrfree(&data);
+	return (ret);
 }
 
 int			rl_hist_write(int fd)

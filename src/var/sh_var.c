@@ -23,6 +23,7 @@ int 		sh_var_inherit(t_table *var, char **envp)
 	int		i;
 	char 	*eq;
 	t_trow	trow;
+	char 	*name;
 
 	if (!envp)
 		return (-1);
@@ -31,10 +32,11 @@ int 		sh_var_inherit(t_table *var, char **envp)
 	{
 		if (!(eq = ft_strchr(envp[i], '=')))
 			continue;
-		trow = ft_tabrow_set(i,
-			ft_strndup(envp[i], eq - envp[i]), eq + 1, SH_VO_GLO);
-		ft_tabins(var, trow, 0);
-		FT_MEMDEL(trow.name);
+		name = ft_strndup(envp[i], eq - envp[i]);
+		trow = ft_tabrow_set(i, name , eq + 1, SH_VO_GLO);
+		ft_tabins(var, trow, 0); // TODO: memory leaks
+		//FT_MEMDEL(name);
+		ft_memdel((void**)&(trow.name));
 	}
 	return (OK);
 }

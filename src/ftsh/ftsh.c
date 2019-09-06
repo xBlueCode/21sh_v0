@@ -58,18 +58,18 @@ int		sh_term_run(char **envp)
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
-	line = "";
-	ret = 0;
-	while (ft_strcmp(line, "exit\n"))
+	while (1)
 	{
+		ret = 0;
 		sh_inter_read(&line);
 		rl_hist_add(line);
 		if (!ft_strncmp("exit", line, 4))
-			return (0);
+			 break;
 		ret = sh_script_run(g_sh, line);
-//		ft_memdel((void**)line);
+		ft_memdel((void**)&line);
 	}
 	rl_hist_save(); // TODO: history_cleanup
+	rl_hist_free();
 	return (ret);
 }
 

@@ -3,7 +3,7 @@
 
 # include "ftsh.h"
 
-# define SH_VAR_MAX 32
+# define SH_VAR_MAX 128
 
 # define SH_VO_LOC 0x1
 # define SH_VO_GLO 0x2
