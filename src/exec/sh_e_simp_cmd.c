@@ -8,8 +8,8 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	//char 		**argv;
 	//char 		**envp;
 	int 		ret;
-	pid_t		pid;
-	int 		wstat;
+	//pid_t		pid;
+	//int 		wstat;
 
 	DF0
 	if ((ret = 0) || !sh || !gr)

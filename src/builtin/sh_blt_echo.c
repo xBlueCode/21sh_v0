@@ -6,6 +6,7 @@ int 	sh_blt_echo(t_sh *sh, char **argv, char **envp)
 	int 	i;
 
 	(void)envp;
+	(void)sh;
 	if (!argv)
 		return (1);
 	op = 0;

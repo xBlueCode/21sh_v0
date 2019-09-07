@@ -13,8 +13,9 @@ int 		sh_var_start(t_table **var, char **envp)
 {
 	if (!(*var = ft_tabnew_max(SH_VAR_MAX)))
 		ft_printf("sh_var_init: Failed to create Env Table\n");
+	(void)envp;
 	sh_var_inherit(*var, envp);
-	sh_var_init(*var);
+	//sh_var_init(*var);
 	return (0);
 }
 
@@ -38,6 +39,8 @@ int 		sh_var_inherit(t_table *var, char **envp)
 		//FT_MEMDEL(name);
 		ft_memdel((void**)&(trow.name));
 	}
+	//ft_printf("tab inserted !\n");
+	//sleep(5);
 	return (OK);
 }
 

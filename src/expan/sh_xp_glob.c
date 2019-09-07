@@ -19,10 +19,10 @@ t_dastr			*sh_xp_scandir(char *w)
 	return (res);
 }
 
-int		sh_xp_glob(t_sh *sh, t_dastr *words)
-{
-	int			i;
-	t_dastr		*res;
+//int		sh_xp_glob(t_sh *sh, t_dastr *words)
+//{
+//	int			i;
+//	t_dastr		*res;
 /*
 	if (!sh || !words)
 		return (0);
@@ -33,5 +33,5 @@ int		sh_xp_glob(t_sh *sh, t_dastr *words)
 		rl_glob_indir()
 	}
  */
-	return (0);
-}
+//	return (0);
+//}

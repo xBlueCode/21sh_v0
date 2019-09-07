@@ -17,7 +17,7 @@ int 		sh_lex_seek_all(t_lex *lex, int op)
 	//ssize_t off;
 
 	//ft_printf("seeking All...\n");
-	lex->buf = ft_dstrnew_max(1);
+	//lex->buf = ft_dstrnew_max(1);
 	while (lex->in->str[lex->i])
 	{
 		//lex->off = lex->i; // not final

@@ -3,7 +3,7 @@
 char 		*sh_e_get_binpath(t_sh *sh, char *bin_name)
 {
 	char 	*binpath;
-	char 	*cwd;
+	//char 	*cwd;
 
 	DF0
 	(void)sh;

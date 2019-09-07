@@ -20,13 +20,13 @@ t_list		*sh_glob_scandir(char *base, char *spath)
 	t_list			*conds;
 
 	conds = NULL;
-	path = ft_dstrnew_max(PATH_MAX);
+	path = ft_dstrnew_max(FT_PATHNAME_MAX);
 	ft_dstrins_str(path, 0, base);
 	ft_dstrins_ch(path, -1, '/');
 	ft_dstrins_str(path, -1, spath);
 	if (!(dirp = opendir(path->str)))
 		return (NULL);
-	while ((dent = readir(dirp)))
+	while ((dent = readdir(dirp)))
 		ft_lstadd(&conds, ft_lstnew(dent->d_name, ft_strlenz(dent->d_name)));
 	return (conds);
 }

@@ -3,7 +3,7 @@
 
 int		sh_lex_seek_start(t_lex *lex, int op)
 {
-	lex->buf = ft_dstrnew_max(1);
+	//lex->buf = ft_dstrnew_max(1);
 	while (lex->in->str[lex->i])
 	{
 		//lex->off = lex->i; // not final

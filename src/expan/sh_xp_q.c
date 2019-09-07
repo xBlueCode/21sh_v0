@@ -39,6 +39,7 @@ int 	sh_xp_sq(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	char *word;
 
+	(void)sh;
 	word = words->a[*i]->str;
 	if (word[*j] != '\'')
 		return (0);
@@ -55,6 +56,7 @@ int 	sh_xp_esc(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	char *word;
 
+	(void)sh;
 	word = words->a[*i]->str;
 	if (word[*j] != '\\')
 		return (0);

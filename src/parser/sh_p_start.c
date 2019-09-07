@@ -31,6 +31,8 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 	p.hd_val = lex->hd_val;
 	p.lev = 0;
 	ft_btreeinit(&ast, NULL, 0, SH_GR_START);
+	ft_printf("\nOups !!!\n");
+	sleep(10);
 	sh_p_program(&p, &(ast->left));
 	if (p.tlook && p.tlook->content)
 	{
@@ -46,6 +48,7 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 			return (NULL);
 		com_cmds = sh_g_com_cmds(ast->left->left);
 		//sh_g_com_cmds_put(com_cmds, 0);
+		//ft_btreefree(&ast, (t_free)sh_lex_tok_free);
 		return (com_cmds);
 	}
 	return (NULL);

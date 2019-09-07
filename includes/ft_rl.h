@@ -5,6 +5,9 @@
 //# include "ftsh.h"
 # include "rl_hist.h"
 
+#include <curses.h>
+#include <term.h>
+
 # define RL_SCP_SIZE 1
 
 # define RL_MODE_INS 1

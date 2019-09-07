@@ -30,7 +30,7 @@ int 	sh_bin_init(t_hset **phtbin, t_dastr **bin_names)
 
 int 	sh_bin_free(t_hset **phtbin)
 {
-	return (0);
+	return (ft_hset_free(phtbin));
 }
 
 int		sh_bin_filter(const struct dirent *dent)

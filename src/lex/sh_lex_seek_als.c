@@ -101,12 +101,14 @@ int 	sh_lex_seek_als(t_lex *lex, int op)
 	ft_dstrdel_n(lex->in, lex->i, pos);
 	ft_dstrins_str(lex->in, lex->i, alex->in->str);
 	lex->alias_off = lex->i + ft_strlen(alex->in->str);
+	FT_MEMDEL(word);
+	sh_lex_free(&alex);
 	return (1);
 }
 
 int 	sh_lex_seek_als_start(t_lex *lex, int op)
 {
-	lex->buf = ft_dstrnew_max(1);
+	//lex->buf = ft_dstrnew_max(1);
 	while (lex->in->str[lex->i])
 	{
 		if (sh_lex_seek_als(lex, op) < 0)
