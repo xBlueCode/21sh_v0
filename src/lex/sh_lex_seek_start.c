@@ -4,6 +4,8 @@
 int		sh_lex_seek_start(t_lex *lex, int op)
 {
 	//lex->buf = ft_dstrnew_max(1);
+	//ft_printf("\noops ! seek_start 0\n");
+	//sleep(8);
 	while (lex->in->str[lex->i])
 	{
 		//lex->off = lex->i; // not final
@@ -42,6 +44,8 @@ int		sh_lex_seek_start(t_lex *lex, int op)
 		else
 			lex->i++;
 	}
+	//ft_printf("\nseek_start_endin\n");
+	//sleep(8);
 	return (OK);
 }
 

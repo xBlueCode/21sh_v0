@@ -25,5 +25,5 @@ t_token	*sh_lex_tokdup(t_token *t)
 	if (!t)
 		return (NULL);
 	return (sh_lex_tok_new(t->t, t->p, t->l,
-		!t->val ? NULL : ft_strdup(t->val->str))); // TODO: check memory leaks
+		!t->val ? NULL : t->val->str)); // TODO: check memory leaks
 }

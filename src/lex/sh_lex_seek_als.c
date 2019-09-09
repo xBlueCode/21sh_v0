@@ -73,6 +73,8 @@ int 	sh_lex_seek_als(t_lex *lex, int op)
 	t_list *keys;
 
 	(void) op;
+	//ft_printf("\noops ! als 0\n");
+	//sleep(8);
 	if (lex->i < lex->alias_off
 		|| (lex->ctx != TCTX_ALIAS && lex->ctx != TCTX_FIRSTW)
 		|| !sh_lex_isinname(lex->in->str[lex->i]))
@@ -84,9 +86,10 @@ int 	sh_lex_seek_als(t_lex *lex, int op)
 		return (0);
 	word = ft_strndup(lex->in->str + lex->i, pos - lex->i);
 	if (!ft_htab_contains(sh_als(), word, ft_strlenz(word) + 1))
-		return (0);
+		FT_INST_RET(0, FT_MEMDEL(word));
 	if (ft_hset_contains(lex->alias_chain, word))
-		return (-1);
+		FT_INST_RET(0, FT_MEMDEL(word));
+	//	return (-1);
 	sh_lex_init(&alex, ft_htab_getval(sh_als(), word, ft_strlen(word) + 1));
 	ft_hset_add(alex->alias_chain, word, ft_strlen(word) + 1);
 	keys = ft_hset_tolst(lex->alias_chain);
@@ -103,6 +106,8 @@ int 	sh_lex_seek_als(t_lex *lex, int op)
 	lex->alias_off = lex->i + ft_strlen(alex->in->str);
 	FT_MEMDEL(word);
 	sh_lex_free(&alex);
+	ft_printf("\noops ! als endin\n");
+	sleep(8);
 	return (1);
 }
 

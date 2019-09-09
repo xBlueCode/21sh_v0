@@ -24,13 +24,13 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 		|| lex->st == TSD_CBL || lex->st == TSD_PL || lex->st == TSD_PL2
 		|| lex->st == TSION || lex->st == TSTOK || lex->st == TSTOK_WORD)
 	{
-		ft_printf("\nOoops before_new!!!\n");
-		sleep(10);
-		tok = sh_lex_tok_new(lex->st, lex->off, l,
+		//ft_printf("\nOoops before_new!!!\n");
+		//sleep(10);
+		tok = sh_lex_tok_set(lex->st, lex->off, l,
 							 ft_strndup(lex->in->str + lex->off, l));
 	//	sh_lex_seek_rw(tok, sh_lex_ctx_last(lex, op)); // TODO : Activate for RW
-		ft_printf("\nOoops lex_add!!!\n");
-		sleep(10);
+		//ft_printf("\nOoops lex_add!!!\n");
+		//sleep(10);
 		if (sh_lex_tok_last(lex)->t == TSL2 && lex->st == TSTOK)
 		{
 			ft_dastrins_str(lex->hd_key, -1, tok->val->str);
@@ -47,7 +47,7 @@ int		sh_lex_seek_add(t_lex *lex, int op)
 		return (-1);
 	}
 	else
-		tok = sh_lex_tok_new(lex->st, lex->off, l, NULL);
+		tok = sh_lex_tok_set(lex->st, lex->off, l, NULL);
 	sh_lex_tok_add(lex, tok);
 //	sh_lex_seek_ctx(lex, op);
 	lex->st = TSNONE; // not final
