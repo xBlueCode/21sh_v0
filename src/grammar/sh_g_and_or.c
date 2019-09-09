@@ -19,6 +19,7 @@ void			*sh_g_and_or(t_btree *ast_ao)
 
 	SHG_CHECK_AST(ast_ao, SH_GR_AND_OR);
 	and_or = sh_g_and_or_new();
+	//pipe = NULL; // TODO: recheck
 	while (ast_ao)
 	{
 		if (ast_ao->data)
@@ -28,6 +29,7 @@ void			*sh_g_and_or(t_btree *ast_ao)
 		else
 			break;
 		ast_ao = ast_ao->right;
+		FT_MEMDEL(pipe);
 	}
 	if (!and_or->lst_pipe)
 		return (NULL);

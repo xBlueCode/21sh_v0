@@ -39,6 +39,7 @@ void			*sh_g_com_cmds(t_btree *ast)
 		com_cmd->gr = SH_GR_COMPLETE_CMD;
 		SHG_LSTADD(com_cmds, lst_com_cmd, com_cmd)
 		ast = ast->right;
+		FT_MEMDEL(com_cmd);
 	}
 	if (!com_cmds->lst_com_cmd)
 		return (NULL);
@@ -65,6 +66,7 @@ void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
 		else // TODO: FOR COMP_LIST but it must be compatible with complete_cmd
 			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);
 		list = list->right;
+		FT_MEMDEL(and_or);
 	}
 	if (!com_cmd->lst_and_or)
 		return (NULL);

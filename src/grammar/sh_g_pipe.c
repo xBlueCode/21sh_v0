@@ -27,6 +27,7 @@ void			*sh_g_pipe(t_btree *ast)
 		if ((cmd = sh_g_cmd(ast_pipesec->left)))
 			SHG_LSTADD(pipe, lst_cmd, cmd);
 		ast_pipesec = ast_pipesec->right;
+		FT_MEMDEL(cmd);
 	}
 	if (!pipe->lst_cmd)
 		return (NULL);

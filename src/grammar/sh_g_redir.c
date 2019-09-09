@@ -35,10 +35,6 @@ void			*sh_g_redir(t_btree *ast)
 	{
 		redir->word = ft_strdup(SHG_AST_TOK(ast_fh)->val->str); // TODO: secure val(dstr)
 	}
-
-		ft_printf(C_RED);
-	//	sh_g_redir_put(redir, 0);
-		ft_putstr(T_END);
 	return (redir);
 }
 

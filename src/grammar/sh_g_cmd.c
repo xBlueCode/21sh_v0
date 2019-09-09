@@ -38,6 +38,7 @@ void			*sh_g_cmd(t_btree *ast)
 		if ((redir = sh_g_redir(ast_redirlist->left)))
 			SHG_LSTADD(cmd, lst_redir, redir);
 		ast_redirlist = ast_redirlist->right;
+		FT_MEMDEL(redir);
 	}
 	if (!cmd->core)
 		return (NULL);
