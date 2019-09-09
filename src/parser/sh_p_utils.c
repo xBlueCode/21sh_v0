@@ -46,23 +46,30 @@ int		sh_p_match(t_parser *p, t_btree **ast, int target)
 	DPM0
 	if (!p->tlook || !(token = (t_token*)p->tlook->content))
 		PMRET(0);
+	//ft_printf("\nmatch 0\n");
+	//sleep(8);
 	if (token->t == TSTOK)
 	{
 		if (!sh_tok_distinct(p->tlook->content, target))
 			PMRET(0)
+		//ft_printf("\ndistinct 1\n");
+		//sleep(4);
 	}
 	else if (((t_token*)p->tlook->content)->t != target)
 		PMRET(0)
 	if (ast && *ast)
 	{
 		//(*ast)->data = ft_strndup(p->tlook->content, sizeof(t_token));
-		(*ast)->data = token;//ft_strndup((void*)token, sizeof(t_token));
-		//(*ast)->data = sh_lex_tokdup(token);
-		((t_token*)((*ast)->data))->t = token->t;
+		//(*ast)->data = token;//ft_strndup((void*)token, sizeof(t_token));
+		sh_lex_tok_free((t_token**)&(*ast)->data);
+		(*ast)->data = sh_lex_tokdup(token);
+		//((t_token*)((*ast)->data))->t = token->t;
 		(*ast)->dsize = sizeof(t_token);
 	}
 	DPM1
 	p->tlook = p->tlook->next;
+	//ft_printf("\nmatch 1\n");
+	//sleep(4);
 	PMRET(1)
 	//return (1);
 }

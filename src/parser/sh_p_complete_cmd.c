@@ -18,13 +18,13 @@ int		sh_p_complete_cmds(t_parser *p, t_btree **ast)
 int		sh_p_complete_cmds_sub(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
-	t_list *back;
+	//t_list *back;
 
 	DP0
 	SHP_CAST_INIT(SH_GR_COMPLETE_CMDS_SUB)
 	if (!p->tlook)
 		PRET(1);
-	back = p->tlook;
+	//back = p->tlook;
 	if (sh_p_nl_list(p, NULL))
 	{
 		if (sh_p_complete_cmd(p, SHP_CAST_L))

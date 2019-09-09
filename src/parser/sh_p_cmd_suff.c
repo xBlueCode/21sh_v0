@@ -12,6 +12,7 @@ int		sh_p_cmd_suff(t_parser *p, t_btree **ast)
 		&& sh_p_cmd_suff_sub(p, SHP_CAST_R))
 		PRET(1)
 	p->tlook = back;
+	ft_btreefree(&(cast->right), (t_free)&sh_lex_tok_tfree);
 	if (sh_p_io_redir(p, SHP_CAST_L)
 		&& sh_p_cmd_suff_sub(p, SHP_CAST_R))
 		PRET(1)
@@ -30,6 +31,7 @@ int		sh_p_cmd_suff_sub(t_parser *p, t_btree **ast)
 		&& sh_p_cmd_suff_sub(p, SHP_CAST_R))
 		PRET(1)
 	p->tlook = back;
+	ft_btreefree(&(cast->right), (t_free)&sh_lex_tok_tfree);
 	if (sh_p_match(p, &cast, TSTOK_WORD) // TODO
 		&& sh_p_cmd_suff_sub(p, SHP_CAST_R))
 		PRET(1)

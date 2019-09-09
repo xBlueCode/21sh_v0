@@ -78,6 +78,7 @@ int		sh_p_here_end(t_parser *p, t_btree **ast)
 		ft_dstrdel_n(dhd, 0, dhd->len);
 		ft_dstrins_str(dhd, 0, p->hd_val->a[0]->str);
 		ft_dastrdel_n(p->hd_val, 0, 1);
+		//ft_dstrfree(&dhd);
 		/* // Replacemenet of the above
 		i = -1;
 		while (++i < p->hd_key->len)

@@ -18,11 +18,14 @@ int		sh_p_sep(t_parser *p, t_btree **ast)
 
 	DP0
 	SHP_CAST_INIT(SH_GR_SEP)
-	fast = ft_btreenew(NULL, 0);
+	fast = NULL;
 	if (sh_p_sep_op(p, &fast))
 	{
-		cast->data = fast->data;
+		//cast->data = fast->data;
+		//cast->dsize = fast->dsize;
+		cast->data = sh_lex_tokdup(SHG_AST_TOK(fast));
 		cast->dsize = fast->dsize;
+		ft_btreefree(&fast, (t_free)&sh_lex_tok_tfree);
 		if (sh_p_lbreak(p, NULL))
 			PRET(1)
 	}

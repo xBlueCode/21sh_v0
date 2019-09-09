@@ -24,21 +24,24 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 	t_btree		*ast;
 	t_com_cmds	*com_cmds;
 
-	p.tbase = lex->tlst;
 	p.tlook = lex->tlst;
-	p.tlast = lex->tlst;
 //	p.hd_key = lex->hd_val;
 	p.hd_val = lex->hd_val;
 	p.lev = 0;
 	ft_btreeinit(&ast, NULL, 0, SH_GR_START);
-	ft_printf("\nOups !!!\n");
-	sleep(10);
+	//ft_printf("\nOups !!!\n");
+	//sleep(10);
+	//ft_printf("\nOups prog 0!!!\n");
+	//sleep(8);
 	sh_p_program(&p, &(ast->left));
+	ft_printf("\nOups prog 1!!!\n");
+	sleep(8);
 	if (p.tlook && p.tlook->content)
 	{
 		ft_printf(C_RED"\nParsing Error at: %d\n"T_END,
 				(((t_token*)p.tlook->content)->p));
 		DPTOKPUT(((t_token*)p.tlook->content))
+		ft_btreefree(&ast, (t_free)&sh_lex_tok_tfree);
 		//ft_printf(C_RED"Near : '%c'\n"T_END, lex->in->str[((t_token*)p.tlook->content)->p]);
 	}
 	else
@@ -49,6 +52,7 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 		com_cmds = sh_g_com_cmds(ast->left->left);
 		//sh_g_com_cmds_put(com_cmds, 0);
 		//ft_btreefree(&ast, (t_free)sh_lex_tok_free);
+		ft_btreefree(&ast, (t_free)&sh_lex_tok_tfree);
 		return (com_cmds);
 	}
 	return (NULL);
