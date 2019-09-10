@@ -56,9 +56,9 @@ void			*sh_g_com_cmds(t_btree *ast)
 		if (!(com_cmd = sh_g_com_cmd(ast->left)))
 			break ;
 		com_cmd->gr = SH_GR_COMPLETE_CMD;
-		SHG_LSTADD(com_cmds, lst_com_cmd, com_cmd)
+		SHG_LSTADD_FREE(com_cmds, lst_com_cmd, com_cmd)
 		ast = ast->right;
-		FT_MEMDEL(com_cmd);
+		//FT_MEMDEL(com_cmd);
 	}
 	if (!com_cmds->lst_com_cmd)
 		return (NULL);
@@ -79,13 +79,13 @@ void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
 	while (list)
 	{
 		if ((and_or = sh_g_and_or(list->left)))
-			SHG_LSTADD(com_cmd, lst_and_or, and_or)
+			SHG_LSTADD_FREE(com_cmd, lst_and_or, and_or)
 		if (list->data) // list & term_std must store the sep in data
 			ft_dstrins_ch(com_cmd->sep, -1, SHG_AST_TOK(list)->t);
 		else // TODO: FOR COMP_LIST but it must be compatible with complete_cmd
 			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);
 		list = list->right;
-		FT_MEMDEL(and_or);
+		//FT_MEMDEL(and_or);
 	}
 	if (!com_cmd->lst_and_or)
 		return (NULL);

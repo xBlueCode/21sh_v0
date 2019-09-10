@@ -35,11 +35,11 @@ void			*sh_g_and_or(t_btree *ast_ao)
 		if (ast_ao->data)
 			ft_dstrins_ch(and_or->sep, -1, SHG_AST_TOK(ast_ao)->t);
 		if ((pipe = sh_g_pipe(ast_ao->left)))
-			SHG_LSTADD(and_or, lst_pipe, pipe)
+			SHG_LSTADD_FREE(and_or, lst_pipe, pipe)
 		else
 			break;
 		ast_ao = ast_ao->right;
-		FT_MEMDEL(pipe);
+		//FT_MEMDEL(pipe);
 	}
 	if (!and_or->lst_pipe)
 		return (NULL);

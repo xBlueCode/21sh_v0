@@ -47,9 +47,9 @@ void			*sh_g_cmd(t_btree *ast)
 	while (ast_redirlist)
 	{
 		if ((redir = sh_g_redir(ast_redirlist->left)))
-			SHG_LSTADD(cmd, lst_redir, redir);
+			SHG_LSTADD_FREE(cmd, lst_redir, redir);
 		ast_redirlist = ast_redirlist->right;
-		FT_MEMDEL(redir);
+		//FT_MEMDEL(redir);
 	}
 	if (!cmd->core)
 		return (NULL);

@@ -22,8 +22,8 @@ static void		sh_g_simp_cmd_prefsuff(t_simp_cmd *simp_cmd, t_btree *fix)
 				//SHG_LSTADD(simp_cmd, lst_assign, tok->val);
 		}
 		if (fix->left && (redir = sh_g_redir(fix->left)))
-			SHG_LSTADD(simp_cmd, lst_redir, redir);
-		FT_MEMDEL(redir)
+			SHG_LSTADD_FREE(simp_cmd, lst_redir, redir);
+			//FT_MEMDEL(redir)
 		fix = fix->right;
 	}
 	//DF_PFWAIT("simp prefsuff i >", 8)
