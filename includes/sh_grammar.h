@@ -10,6 +10,7 @@
 
 # define SHG_CHECK_MALL(g) {if (!(g = ft_memalloc(sizeof(*g)))) return (NULL);};
 # define SHG_LSTADD(g, lst, ncont) ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));
+# define SHG_LSTADD_FREE(g, lst, ncont) {ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));FT_MEMDEL(ncont)}
 # define SHG_LSTADDS(g, lst, nc, ns) ft_lst_addlast(&(g->lst), ft_lstnew(nc, ns));
 
 # define SHG_CHECK_AST(node, gt) {if (!node || node->op != gt) return (NULL);};

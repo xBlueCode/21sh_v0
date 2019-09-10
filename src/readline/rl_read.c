@@ -52,11 +52,11 @@ void		xrl_read(void)
 			//sleep(8);
 			if (sh_lex_seek_start(lex, 1) == OK)
 				ft_dstrins_str(g_rl.scope, 0, lex->scope->str);
+			sh_lex_free(&lex);
 			break;
 		}
-		sh_lex_free(&lex);
 	}
-	sh_lex_free(&lex);
+	//sh_lex_free(&lex);
 	//ft_printf("\nxrl_endin\n");
 	//sleep(8);
 }
