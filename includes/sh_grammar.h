@@ -123,6 +123,18 @@ void			*sh_g_simp_cmd_new(void);
 void			*sh_g_comp_cmd_new(void);
 void			*sh_g_redir_new(void);
 
+void			sh_g_loop_free(void**g);
+void			sh_g_for_free(void**g);
+void			sh_g_com_cmds_free(void**g);
+void			sh_g_com_cmd_free(void**g);
+void			sh_g_and_or_free(void**g);
+void			sh_g_pipe_free(void**g);
+void			sh_g_cmd_free(void**g);
+void			sh_g_cmd_core_free(int t);
+void			sh_g_simp_cmd_free(void**g);
+void			sh_g_comp_cmd_free(void**g);
+void			sh_g_redir_free(void**g);
+
 void			*sh_g_loop(t_btree *ast);
 void			*sh_g_for(t_btree *ast);
 void			*sh_g_com_cmds(t_btree *ast);
@@ -152,4 +164,5 @@ void			sh_g_wordput(t_list *elem);
 
 int 			sh_g_cmd_core_type(int gr_enum);
 t_exec			*sh_g_cmd_core_get_exec(int grt);
+t_free			sh_g_cmd_core_get_free(int grt);
 #endif

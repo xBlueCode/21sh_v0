@@ -16,6 +16,16 @@ void			*sh_g_cmd_new(void)
 	return (cmd);
 }
 
+void			sh_g_cmd_free(void**g)
+{
+	t_cmd **cmd;
+
+	cmd = (t_cmd**)g;
+	ft_lst_free(&(*cmd)->lst_redir, &sh_g_redir_free);
+	(*cmd)->tfree((void**)&(*cmd)->core);
+	FT_MEMDEL(*g);
+}
+
 void			*sh_g_cmd(t_btree *ast)
 {
 	t_cmd	*cmd;
@@ -32,6 +42,7 @@ void			*sh_g_cmd(t_btree *ast)
 	cmd->type = ast_core->op;
 	cmd->core = ((void*(*)(t_btree*))sh_g_cmd_core(cmd->type))(ast_core);
 	cmd->exec = sh_g_cmd_core_get_exec(cmd->type);
+	cmd->tfree = sh_g_cmd_core_get_free(cmd->type);
 	ast_redirlist = ast->right;
 	while (ast_redirlist)
 	{

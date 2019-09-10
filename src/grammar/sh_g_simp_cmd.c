@@ -56,6 +56,20 @@ void			*sh_g_simp_cmd_new(void)
 	simp_cmd->argv = NULL;
 	return (simp_cmd);
 }
+
+void			sh_g_simp_cmd_free(void**g)
+{
+	t_simp_cmd	**simp_cmd;
+
+	simp_cmd = (t_simp_cmd**)g;
+	ft_dastrfree(&(*simp_cmd)->lst_assign);
+	ft_dastrfree(&(*simp_cmd)->lst_words);
+	ft_arr_free((void***)&(*simp_cmd)->envp, ft_arr_len((void**)(*simp_cmd)->envp));
+	ft_arr_free((void***)&(*simp_cmd)->argv, ft_arr_len((void**)(*simp_cmd)->argv));
+	ft_lst_free(&(*simp_cmd)->lst_redir, &sh_g_redir_free);
+	FT_MEMDEL(*g)
+}
+
 void			*sh_g_simp_cmd(t_btree *ast)
 {
 	t_simp_cmd	*simp_cmd;

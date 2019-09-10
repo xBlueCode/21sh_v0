@@ -12,6 +12,16 @@ void			*sh_g_and_or_new(void)
 	return (and_or);
 }
 
+void			sh_g_and_or_free(void**g)
+{
+	t_and_or	**and_or;
+
+	and_or = (t_and_or**)g;
+	ft_dstrfree(&(*and_or)->sep);
+	ft_lst_free(&(*and_or)->lst_pipe, &sh_g_pipe_free);
+	FT_MEMDEL(*and_or);
+}
+
 void			*sh_g_and_or(t_btree *ast_ao)
 {
 	t_and_or	*and_or;

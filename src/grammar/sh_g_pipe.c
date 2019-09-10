@@ -12,6 +12,16 @@ void			*sh_g_pipe_new(void)
 	return (pipe);
 }
 
+void			sh_g_pipe_free(void**g)
+{
+	t_pipe	**pipe;
+
+	pipe = (t_pipe**)g;
+	ft_lst_free(&(*pipe)->lst_cmd, &sh_g_cmd_free);
+	ft_dstrfree(&(*pipe)->op);
+	FT_MEMDEL(*g)
+}
+
 void			*sh_g_pipe(t_btree *ast)
 {
 	t_pipe	*pipe;

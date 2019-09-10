@@ -32,6 +32,7 @@ typedef struct	s_cmd
 	t_list	*lst_redir;
 	int16_t	type;
 	t_exec	*exec;
+	t_free	tfree;
 	int 	stdioe[3];
 //	int 	stdi;
 //	int 	stdo;

@@ -13,6 +13,15 @@ void			*sh_g_redir_new(void)
 	return (redir);
 }
 
+void			sh_g_redir_free(void**g)
+{
+	t_redir		**redir;
+
+	redir = (t_redir**)g;
+	FT_MEMDEL((*redir)->word)
+	FT_MEMDEL(*g)
+}
+
 void			*sh_g_redir(t_btree *ast)
 {
 	t_btree		*ast_iofh;

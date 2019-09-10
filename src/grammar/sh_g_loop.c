@@ -12,6 +12,16 @@ void			*sh_g_loop_new(void)
 	return (loop);
 }
 
+void			sh_g_loop_free(void**g)
+{
+	t_loop	**loop;
+
+	loop = (t_loop**)g;
+	sh_g_com_cmd_free((void**)&(*loop)->cond);
+	sh_g_com_cmd_free((void**)&(*loop)->do_group);
+	FT_MEMDEL(*g);
+}
+
 void			*sh_g_loop(t_btree *ast)
 {
 

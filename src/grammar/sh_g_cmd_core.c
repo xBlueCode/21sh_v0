@@ -53,6 +53,17 @@ static void	*g_cmd_core_exec[] = {
 		NULL
 };
 
+static void	*g_cmd_core_free[] = {
+		&sh_g_simp_cmd_free,
+		sh_g_com_cmd_free,
+		sh_g_com_cmd_free,
+		sh_g_com_cmd_free,
+		//sh_g_for_free,
+		//sh_g_loop_free,
+		//sh_g_loop_free,
+		NULL
+};
+
 int 		sh_g_cmd_core_type(int gr_enum)
 {
 	int i;
@@ -105,4 +116,13 @@ t_exec		*sh_g_cmd_core_get_exec(int grt)
 	if ((type = sh_g_cmd_core_type(grt)) < 0)
 		return (NULL);
 	return (g_cmd_core_exec[type]);
+}
+
+t_free		sh_g_cmd_core_get_free(int grt)
+{
+	int type;
+
+	if ((type = sh_g_cmd_core_type(grt)) < 0)
+		return (NULL);
+	return (g_cmd_core_free[type]);
 }
