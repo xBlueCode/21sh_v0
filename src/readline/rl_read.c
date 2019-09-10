@@ -25,29 +25,40 @@ void		rl_read(void)
 
 void		xrl_read(void)
 {
-	t_dstr	*dline;
+	//t_dstr	*dline;
 	int		c;
-	char    *rows;
+	t_dstr	*rows;
 	t_lex   *lex;
 
-	dline = g_rl.txt->a[g_rl.cl];
+	//dline = g_rl.txt->a[g_rl.cl];
 	g_rl.txt->a[g_rl.cl] = ft_dstrnew_max(100);
 	if (*g_rl.scope->str == RL_SCP_START)
 		*g_rl.scope->str = '\0';
+	//lex = NULL;
 	while (!(c = '\0') && read(0, &c, sizeof(int)))
 	{
 		if (!rl_ctrl_perform(c) && !rl_vim_perform(c) && ft_isascii(c))
 			rl_insert_ch(c);
 		if (c == '\n')
 		{
-			rows = ft_dstrjoin_all(g_rl.txt->a, "")->str;
+			rows = ft_dstrjoin_all(g_rl.txt->a, "");
 			ft_dstrdel_n(g_rl.scope, 0, g_rl.scope->len);
-			sh_lex_init(&lex, rows);
+			if (!rows || !rows->str)
+				continue;
+			//lex = sh_lex_new(rows->str);
+			sh_lex_init(&lex, rows->str);
+			ft_dstrfree(&rows);
+			//ft_printf("\nxxxxx\n");
+			//sleep(8);
 			if (sh_lex_seek_start(lex, 1) == OK)
 				ft_dstrins_str(g_rl.scope, 0, lex->scope->str);
 			break;
 		}
+		sh_lex_free(&lex);
 	}
+	sh_lex_free(&lex);
+	//ft_printf("\nxrl_endin\n");
+	//sleep(8);
 }
 
 char		*rl_start(void)
@@ -67,6 +78,8 @@ char		*rl_start(void)
 		if (ft_dstrget_ch(g_rl.scope, -1) == RL_SCP_JOIN)
 			ft_dstrdel_n(g_rl.scope, -1, 1);
 		xrl_read();
+		//ft_printf("\nxrl_end\n");
+		//sleep(8);
 		if (!g_rl.txt->a[g_rl.cl]->str)
 			ft_putendl("NULL line");
 		//ft_putstr(g_rl.txt->a[g_rl.cl]->str);

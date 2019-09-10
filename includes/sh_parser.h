@@ -53,17 +53,19 @@ DP0_STR(((t_token*)p->tlook->content)->val), target); \
 # define DPTOKPUT(tok) ft_printf(C_RED"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
 
 //# define PRET(ret) {*ast = (ret == 1 && ast) ? cast : NULL; DPLEV(-2); return (ret);}
-# define PRET(ret) {{if (ast && ret == 1) *ast = cast;} DPLEV(-2); return (ret);}
+
+# define FREE_CAST ft_btreefree(&cast, (t_free)&sh_lex_tok_tfree);
+# define PRET(ret) {{if (ast && ret == 1) *ast = cast; else FREE_CAST} DPLEV(-2); return (ret);}
 
 # define PMRET(ret) {DPLEV(-2); return (ret);}
 
 typedef struct	s_parser
 {
-	t_list		*tbase;
+//	t_list		*tbase;
 	t_list		*tlook;
-	t_list		*tlast;
+//	t_list		*tlast;
 	int			lev;
-	t_dastr		*hd_key;
+//	t_dastr		*hd_key;
 	t_dastr		*hd_val;
 	//t_btree	***ast;
 }				t_parser;

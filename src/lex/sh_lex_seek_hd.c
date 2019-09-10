@@ -96,6 +96,7 @@ int 		sh_lex_seek_hdv(t_lex *lex, int op)
 	lex->i = off + ft_strlen(dhd_key->str) + ft_strlen(hd_val);
 	ft_dstrdel_n(lex->scope, -1, 1);
 	ft_dastrdel_n(lex->hd_key, -1, 1);
+	FT_MEMDEL(hd_val)
 	return (1);
 }
 

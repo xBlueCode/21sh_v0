@@ -29,13 +29,9 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 	p.hd_val = lex->hd_val;
 	p.lev = 0;
 	ft_btreeinit(&ast, NULL, 0, SH_GR_START);
-	//ft_printf("\nOups !!!\n");
-	//sleep(10);
-	//ft_printf("\nOups prog 0!!!\n");
-	//sleep(8);
+	//DF_PFWAIT("prog <", 8)
 	sh_p_program(&p, &(ast->left));
-	ft_printf("\nOups prog 1!!!\n");
-	sleep(8);
+	//DF_PFWAIT("prog >", 8)
 	if (p.tlook && p.tlook->content)
 	{
 		ft_printf(C_RED"\nParsing Error at: %d\n"T_END,
@@ -49,10 +45,12 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 		//ft_btreeapp_prefix(ast, test_sh_p_astapp);
 		if (!ast || !ast->left || !ast->left->left)
 			return (NULL);
+		//DF_PFWAIT("gram <", 8)
 		com_cmds = sh_g_com_cmds(ast->left->left);
+		//DF_PFWAIT("gram >", 8)
 		//sh_g_com_cmds_put(com_cmds, 0);
 		//ft_btreefree(&ast, (t_free)sh_lex_tok_free);
-		ft_btreefree(&ast, (t_free)&sh_lex_tok_tfree);
+		ft_btreefree(&ast, (t_free)&sh_lex_tok_tfree); // TODO: delay freeing
 		return (com_cmds);
 	}
 	return (NULL);

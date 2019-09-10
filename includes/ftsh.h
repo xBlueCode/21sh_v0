@@ -29,6 +29,10 @@
 //# define DF0 ft_dprintf(2, "%s\n", __FUNCTION__);
 # define DF0
 
+# define D_INSTWAIT(inst, t) {inst; sleep(t);}
+
+# define DF_PFWAIT(m, t) D_INSTWAIT(ft_printf("%s: %s\n", __FUNCTION__, m), t)
+
 # define TEST_LEAKS 0
 
 # define EXIT -2

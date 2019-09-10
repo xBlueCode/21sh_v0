@@ -23,9 +23,10 @@ static void		sh_g_simp_cmd_prefsuff(t_simp_cmd *simp_cmd, t_btree *fix)
 		}
 		if (fix->left && (redir = sh_g_redir(fix->left)))
 			SHG_LSTADD(simp_cmd, lst_redir, redir);
-		redir = NULL;
+		FT_MEMDEL(redir)
 		fix = fix->right;
 	}
+	//DF_PFWAIT("simp prefsuff i >", 8)
 }
 
 void			sh_g_wordput(t_list *elem)
@@ -87,6 +88,7 @@ void			*sh_g_simp_cmd(t_btree *ast)
 	sh_g_simp_cmd_prefsuff(simp_cmd, ast->right);
 	if (!simp_cmd->lst_words)
 		return (NULL);
+	//DF_PFWAIT("simp i >", 8)
 	return (simp_cmd);
 }
 

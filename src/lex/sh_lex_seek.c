@@ -1,5 +1,4 @@
-#include "libft.h"
-#include "sh_lex.h"
+#include "ftsh.h"
 
 int 		sh_lex_seek(t_lex *lex, int op)
 {

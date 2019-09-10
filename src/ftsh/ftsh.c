@@ -29,14 +29,19 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 		return (KO);
 	if (!lex->tlst)
 		return (KO);
-	ft_printf("\nOups lex!!!\n");
-	sleep(10);
+	//DF_PFWAIT("lex start >", 8);
 	if (!(com_cmds = sh_p_start(lex)))
+	{
+		sh_lex_free(&lex);
 		return (KO);
+	}
 	sh_lex_free(&lex);
 	//ft_printf(C_GRN"Parsed !!!\n"T_END);
 	//sh->hd_key = lex->hd_key; // Replace by dastrdup
 	//sh->hd_val = lex->hd_val; // Replace by dastrdup
+	//DF_PFWAIT("free com -", 8);
+	sh_g_com_cmds_free((void**)&com_cmds);
+	//DF_PFWAIT("free com +", 8);
 	return (0); // TODO: del
 	(void)sh;
 	//return (sh_e_com_cmds(sh, com_cmds));
