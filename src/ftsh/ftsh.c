@@ -18,8 +18,9 @@ int		sh_file_run(char *filename, char **envp)
 
 int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 {
-	t_lex *lex;
-	t_com_cmds *com_cmds;
+	t_lex		*lex;
+	t_com_cmds	*com_cmds;
+	int 		ret;
 
 	//ft_printf(C_CYN"\nScript:\n-------\n%s\n-------\n\n"T_END, script);
 	if (!script)
@@ -43,11 +44,13 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	//sh->hd_key = lex->hd_key; // Replace by dastrdup
 	//sh->hd_val = lex->hd_val; // Replace by dastrdup
 	//DF_PFWAIT("free com -", 8);
-	sh_g_com_cmds_free((void**)&com_cmds);
 	//DF_PFWAIT("free com +", 8);
-	return (0); // TODO: del
-	(void)sh;
-	//return (sh_e_com_cmds(sh, com_cmds));
+	//return (0); // TODO: del
+	//(void)sh;
+	ret = sh_e_com_cmds(sh, com_cmds);
+	sh_g_com_cmds_free((void**)&com_cmds);
+	//DF_PFWAIT("i >", 8)
+	return (ret);
 }
 
 int		sh_inter_read(char **line)

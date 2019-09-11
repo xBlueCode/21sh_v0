@@ -45,7 +45,11 @@ char		**sh_e_get_envp(t_sh *sh, t_dastr *assigns)
 	char 		**envp;
 
 	envt = ft_tabdup(sh->var);
+	//DF_PFWAIT("< tabdup <", 8);
 	sh_var_assign(envt, assigns);
+	//DF_PFWAIT("< var_assign <", 8);
 	envp = ft_tabto_arr(envt, &sh_var_tsel_glo, &sh_var_tbuild_env);
+	ft_tabfree(&envt);
+	//DF_PFWAIT("< tab_to_arr <", 8);
 	return (envp);
 }

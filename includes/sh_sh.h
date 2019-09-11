@@ -12,10 +12,10 @@
 # define SH_MODE_SSH	0x08
 # define SH_MODE_SCMD	0x10
 # define SH_MODE_ENV	0x20
-# define SH_MODE_M		0x77
+# define SH_MODE_M		0xff
 
 # define SH_NEST_INDQ	0x01
-# define SH_NEST_M		0x07
+# define SH_NEST_M		0x0f
 // TODO: max is 7
 
 /**

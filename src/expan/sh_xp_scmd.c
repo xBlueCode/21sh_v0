@@ -24,7 +24,7 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	nsh = sh_sh_clone(sh, SH_MODE_SCMD);
 	sh_script_run(nsh, script);
 	//ft_printf(C_RED"OLD SUBST: %s\n", word->str);
-	//ft_printf(C_RED"BQ SUBST: %s\n", nsh->sub_out->str);
+	//ft_printf(C_RED"BQ SUBST: %s\n"T_END, nsh->sub_out->str);
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
 	*j += ft_strlenz(nsh->sub_out->str);
 	//ft_printf(C_RED"NEW SUBST: %s\n", word->str);
@@ -51,7 +51,7 @@ int 	sh_xp_scmd(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_dstrdel_n(word, *j, lex->i);
 	nsh = sh_sh_clone(sh, SH_MODE_SCMD);
 	sh_script_run(nsh, script);
-	//ft_printf(C_GRN"RES SUBST:\n%s\n++++++++++++++++++\n", nsh->sub_out->str);
+	//ft_printf(C_GRN"RES SUBST:\n%s\n++++++++++++++++++\n"T_END, nsh->sub_out->str);
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
 	*j += ft_strlenz(nsh->sub_out->str);
 	// TODO: free lexer

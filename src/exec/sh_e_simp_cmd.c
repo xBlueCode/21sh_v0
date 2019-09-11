@@ -16,16 +16,20 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 		return (0);
 	simp_cmd = (t_simp_cmd*)gr;
 	sh_xp_word(sh, simp_cmd->lst_words);
+	//DF_PFWAIT("< xp_word <", 8);
 	sh_xp_assign(sh, simp_cmd->lst_assign);
+	//DF_PFWAIT("< xp_assign <", 8);
 	//ft_printf(C_GRN"Assignments:\n");
 	//ft_dastrprint_all(simp_cmd->lst_assign, "\n");
 	//ft_printf("\n"T_END);
 	if (!(simp_cmd->argv = sh_e_get_argv(sh, simp_cmd->lst_words))) // assign to current env
 	{
-		sh_var_assign(sh->var, simp_cmd->lst_assign);
+		sh_var_assign(sh->var, simp_cmd->lst_assign); // TODO: check leaks
 		return (0);
 	}
+	//DF_PFWAIT("< xp_get_envp >", 8);
 	simp_cmd->envp = sh_e_get_envp(sh, simp_cmd->lst_assign);
+	//DF_PFWAIT("< xp_get_envp <", 8);
 	//if (!ft_strcmp(simp_cmd->argv[0], "env"))
 	//	return (sh_e_run_env(sh, simp_cmd));
 	if (sh_e_check_built(simp_cmd->argv[0]) != -1)
