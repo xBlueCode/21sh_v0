@@ -42,9 +42,9 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	//ft_printf(C_GRN"Parsed !!!\n"T_END);
 	//sh->hd_key = lex->hd_key; // Replace by dastrdup
 	//sh->hd_val = lex->hd_val; // Replace by dastrdup
-	DF_PFWAIT("free com -", 8);
+	//DF_PFWAIT("free com -", 8);
 	sh_g_com_cmds_free((void**)&com_cmds);
-	DF_PFWAIT("free com +", 8);
+	//DF_PFWAIT("free com +", 8);
 	return (0); // TODO: del
 	(void)sh;
 	//return (sh_e_com_cmds(sh, com_cmds));
@@ -81,7 +81,7 @@ int		sh_term_run(char **envp)
 			 break;
 		ret = sh_script_run(g_sh, line);
 		ft_memdel((void**)&line);
-		DF_PFWAIT("i < srun >", 8)
+		//DF_PFWAIT("i < srun >", 8)
 	}
 	rl_hist_save(); // TODO: history_cleanup
 	rl_hist_free();
