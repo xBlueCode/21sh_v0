@@ -61,7 +61,10 @@ void			*sh_g_com_cmds(t_btree *ast)
 		//FT_MEMDEL(com_cmd);
 	}
 	if (!com_cmds->lst_com_cmd)
+	{
+		FT_MEMDEL(com_cmds);
 		return (NULL);
+	}
 	return (com_cmds);
 }
 

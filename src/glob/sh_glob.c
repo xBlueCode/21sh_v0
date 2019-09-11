@@ -18,6 +18,8 @@ t_list		*sh_glob_scandir(char *base, char *spath)
 		return (NULL);
 	while ((dent = readdir(dirp)))
 		ft_lstadd(&conds, ft_lstnew(dent->d_name, ft_strlenz(dent->d_name) + 1));
+	ft_dstrfree(&path);
+	closedir(dirp);
 //	ft_printf("+++> scanned: %s\n", conds->content);
 	return (conds);
 }
@@ -28,12 +30,17 @@ int				rl_glob_indir_lin(char *base, char *spath, char *pat,
 	t_list	*conds;
 	t_list	*cond;
 	char	*slash;
+	char 	*tmp;
 
 	//ft_printf("--> indir_lin: %s, %s, %s\n", base, spath, pat);
+	//DF_PFWAIT("indir_lin i <", 8)
+	tmp = NULL;
 	if ((slash = ft_strchr_inv(pat, '/')))
-		conds = sh_glob_scandir(base, ft_strndup(pat, slash++ - pat)); // TODO: clean after strdup
+		conds = sh_glob_scandir(base, (tmp = ft_strndup(pat, slash++ - pat))); // TODO: clean after strdup
 	else
 		conds = sh_glob_scandir(base, spath);
+	//DF_PFWAIT("indir_lin i <<", 8)
+	FT_MEMDEL(tmp)
 	cond = conds;
 	while (cond)
 	{
@@ -44,13 +51,16 @@ int				rl_glob_indir_lin(char *base, char *spath, char *pat,
 			continue ;
 		}
 		else if (!slash && !ft_strncmp(cond->content, pat, ft_strlenz(pat)))
-			ft_dastrins_str(res, -1, ft_strconnect(3, spath,
-												   *spath ? "/" : "", cond->content));
+			ft_dastrins_str(res, -1, (tmp = ft_strconnect(3, spath,
+					*spath ? "/" : "", cond->content)));
 		else if (slash && !ft_strncmp(cond->content, slash, ft_strlenz(slash)))
-			ft_dastrins_str(res, -1, ft_strconnect(3, spath,
-												   *spath ? "/" : "", cond->content));
+			ft_dastrins_str(res, -1, (tmp = ft_strconnect(3, spath,
+					*spath ? "/" : "", cond->content)));
+		FT_MEMDEL(tmp);
 		cond = cond->next;
 	}
+	ft_lst_free(&conds, &ft_memdel);
+	//DF_PFWAIT("indir_lin i >", 8)
 	return (0);
 }
 
@@ -61,11 +71,15 @@ int				rl_glob_indir(char *base, char *spath, char *pat,
 	t_list	*conds;
 	t_list	*cond;
 	char	*slash;
+	char 	*tmp0;
+	char 	*tmp1;
 
 	//ft_printf("--> indir: %s, %s, %s\n", base, spath, pat);
 	conds = sh_glob_scandir(base, spath);
 	cond = conds;
 	slash = ft_strchr(pat, '/');
+	tmp0 = NULL;
+	tmp1 = NULL;
 	while (cond)
 	{
 		if ((*(char*)cond->content == '.' && *pat != '.') ||
@@ -75,14 +89,17 @@ int				rl_glob_indir(char *base, char *spath, char *pat,
 			continue ;
 		}
 		else if (!slash && sh_glob_match(cond->content, pat))
-			ft_dastrins_str(res, -1, ft_strconnect(3, spath,
-												   *spath ? "/" : "", cond->content));
+			ft_dastrins_str(res, -1, (tmp0 = ft_strconnect(3, spath,
+					*spath ? "/" : "", cond->content)));
 		else if (slash && sh_glob_match(cond->content,
-										ft_strndup(pat, slash - pat)))
-			rl_glob_indir(base,
-						  ft_strconnect(3, spath, *spath ? "/" : "", cond->content),
-						  slash + 1, res);
+				(tmp1 = ft_strndup(pat, slash - pat))))
+			rl_glob_indir(base, (tmp0 = ft_strconnect(3, spath,
+					*spath ? "/" : "", cond->content)), slash + 1, res);
+		FT_MEMDEL(tmp0);
+		FT_MEMDEL(tmp1);
 		cond = cond->next;
 	}
+	ft_lst_free(&conds, &ft_memdel);
+	//DF_PFWAIT("i >", 8)
 	return (0);
 }

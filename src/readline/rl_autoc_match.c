@@ -42,11 +42,9 @@ t_dastr			*rl_autoc_match_glob(char *w)
 	t_dastr *res_single;
 	char	*base;
 
-	//ft_printf("match_glob\n");
-	// if wildcard exist, then match pattern
-	// else, search linear
 	if (!w)
 		return (NULL);
+	//DF_PFWAIT("mglob i <", 8)
 	res = ft_dastrnew_max(2);
 	if (*w == '/' && w++)
 		base = ft_strdup("");
@@ -62,5 +60,7 @@ t_dastr			*rl_autoc_match_glob(char *w)
 	}
 	else
 		rl_glob_indir_lin(base, "", w, res);
+	FT_MEMDEL(base)
+	//DF_PFWAIT("mglob i >", 8)
 	return (res);
 }

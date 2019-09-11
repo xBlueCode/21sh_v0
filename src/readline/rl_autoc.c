@@ -9,13 +9,16 @@ int				rl_autoc(int c)
 	char	*cw;
 	ssize_t	ilen[2];
 	char	*picked;
+	t_dastr	*res;
 
 	(void)c;
 	dline = g_rl.txt->a[g_rl.cl];
 	rl_autoc_get_cw(dline->str, g_rl.cc, ilen);
 	cw = ft_strndup(dline->str + ilen[0], ilen[1]);
 	cxt = rl_autoc_cxt_get(dline->str, ilen[0]);
-	if ((picked = rl_autoc_xmenu(rl_autoc_match(cw, cxt))))
+	if (!(res = rl_autoc_match(cw, cxt)))
+		FT_INST_RET(1, FT_MEMDEL(cw))
+	if ((picked = rl_autoc_xmenu(res)))
 	{
 		rl_cur_fromto(g_rl.cc, ilen[0]);
 		g_rl.cc = ilen[0];
@@ -24,7 +27,9 @@ int				rl_autoc(int c)
 		rl_putstr_wrap(dline->str, g_rl.cc);
 		g_rl.cc += ft_strlenz(picked);
 		rl_cur_fromto(ft_strlenz(dline->str), g_rl.cc);
+		ft_dastrfree(&res);
 	}
+	FT_MEMDEL(cw);
 	//ft_printf("\nCW: _%s_\t\tCXT: %d\n", cw, cxt);
 	return (1);
 }

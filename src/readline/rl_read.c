@@ -78,8 +78,6 @@ char		*rl_start(void)
 		if (ft_dstrget_ch(g_rl.scope, -1) == RL_SCP_JOIN)
 			ft_dstrdel_n(g_rl.scope, -1, 1);
 		xrl_read();
-		//ft_printf("\nxrl_end\n");
-		//sleep(8);
 		if (!g_rl.txt->a[g_rl.cl]->str)
 			ft_putendl("NULL line");
 		//ft_putstr(g_rl.txt->a[g_rl.cl]->str);

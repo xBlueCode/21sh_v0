@@ -44,8 +44,9 @@ t_com_cmds 	*sh_p_start(t_lex *lex)
 	{
 		//ft_btreeapp_prefix(ast, test_sh_p_astapp);
 		if (!ast || !ast->left || !ast->left->left)
-			return (NULL);
-		//DF_PFWAIT("gram <", 8)
+		FT_INST_RET(NULL, ft_btreefree(&ast, (t_free)&sh_lex_tok_tfree);)
+		//	return (NULL);
+		DF_PFWAIT("gram <", 8)
 		com_cmds = sh_g_com_cmds(ast->left->left);
 		DF_PFWAIT("gram >", 8)
 		//sh_g_com_cmds_put(com_cmds, 0);
