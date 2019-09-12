@@ -15,8 +15,9 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	simp_cmd = (t_simp_cmd*)gr;
+	//DF_PFWAIT("< ", 8);
 	sh_xp_word(sh, simp_cmd->lst_words);
-	//DF_PFWAIT("< xp_word <", 8);
+	DF_PFWAIT("< xp_word >", 8);
 	sh_xp_assign(sh, simp_cmd->lst_assign);
 	//DF_PFWAIT("< xp_assign <", 8);
 	//ft_printf(C_GRN"Assignments:\n");

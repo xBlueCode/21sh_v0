@@ -89,7 +89,6 @@ typedef enum	e_grammar_rules
 	SH_GR_SEQ_SEP
 }				t_grammar_rules;
 
-
 typedef void *(t_g_new)(void);
 typedef void *(t_g_seek)(t_btree*);
 typedef void (put)(void*, int);

@@ -55,5 +55,8 @@ int 	sh_xp_scmd(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
 	*j += ft_strlenz(nsh->sub_out->str);
 	// TODO: free lexer
+	FT_MEMDEL(script)
+	sh_lex_free(&lex);
+	sh_sh_free(&nsh);
 	return (1);
 }

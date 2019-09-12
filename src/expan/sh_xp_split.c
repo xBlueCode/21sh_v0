@@ -14,6 +14,8 @@ int		sh_xp_word_split(t_sh *sh, t_dastr *words)
 
 	if (!(ifs = sh_var_getval(sh->var, "IFS")) || !*ifs)
 		return (0);
+	//(void)sh;
+	//ifs = NULL; //"\n "; // TODO: check leaks when ifs is not NULL
 	i = -1;
 	si = -1;
 	split = ft_dastrnew_max(2);
