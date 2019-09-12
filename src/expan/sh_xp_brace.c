@@ -20,7 +20,7 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	pref = ft_strndup(words->a[*i]->str, *j - 1);
 	sh_lex_init(&lex, word + off);
 	off = 0;
-	inp = lex->in->str;
+	inp = lex->in->str; // TODO: move to lex->in:
 	res = ft_dastrnew_max(2);
 	while (inp[lex->i] && lex->st != TSBLANK && inp[lex->i] != '}')
 	{
@@ -52,6 +52,7 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_dastrins_str(res, -1, inp + off);
 	*j = lex->i;
 	suff = ft_strdup(lex->in->str + *j);
+	sh_lex_free(&lex);
 	if (res->len)
 		ft_dastrdel_n(words, *i, 1);
 	k = -1;
@@ -63,6 +64,9 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	}
 	if (res->len)
 		*i -= 1;
+	FT_MEMDEL(pref)
+	FT_MEMDEL(suff)
+	ft_dastrfree(&res);
 	//ft_putstr(C_MGN);
 	//ft_dastrprint_all(res, "\n");
 	//ft_putstr(T_END"\n");
