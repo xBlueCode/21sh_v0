@@ -10,17 +10,13 @@ int 	sh_blt_cd_setwd(t_sh *sh, char *dir)
 	if (!(cwd = ft_getcwd()))
 		return (1);
 	if (access(dir, F_OK))
-		FT_INST_RET(1,
-			ft_dprintf(2, "ftsh: cd: %s: No such file or directory !\n", dir))
+		FT_INST_RET(1, FT_STDEPF("ftsh: cd: %s: No such file or directory !\n", dir))
 	else if (ft_stat_is(dir, S_IFDIR) != OK)
-		FT_INST_RET(1,
-				ft_dprintf(2, "ftsh: cd: %s: Not a directory !\n", dir))
+		FT_INST_RET(1, FT_STDEPF("ftsh: cd: %s: Not a directory !\n", dir))
 	else if (access(dir, X_OK))
-		FT_INST_RET(1,
-				ft_dprintf(2, "ftsh: cd: %s: Permission denied !\n", dir))
+		FT_INST_RET(1, FT_STDEPF("ftsh: cd: %s: Permission denied !\n", dir))
 	else if (chdir(dir))
-		FT_INST_RET(1,
-				ft_dprintf(2, "ftsh: cd: %s: Unable to change dir !\n", dir))
+		FT_INST_RET(1, FT_STDEPF("ftsh: cd: %s: Unable to change dir !\n", dir))
 	ft_tabins(sh->var, ft_tabrow_set(-1, "PWD", dir, SH_VO_GLO), 1);
 	ft_tabins(sh->var, ft_tabrow_set(-1, "OLDPWD", cwd, SH_VO_GLO), 1);
 	return (0);
