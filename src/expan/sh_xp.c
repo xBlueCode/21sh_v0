@@ -46,7 +46,7 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 			if (!sh_xp_dq(sh, words, &i, &j))
 				j++;
 	}
-	DF_PFWAIT(" >", 8);
+	//DF_PFWAIT(" >", 8);
 	return (1);
 }
 

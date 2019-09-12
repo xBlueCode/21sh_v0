@@ -81,11 +81,15 @@ t_sh 			*sh_sh_clone(t_sh *sh, int mode)
 
 int 			sh_sh_free(t_sh **sh)
 {
+	//DF0
 	if (!sh || !*sh)
 		return (1);
 	// TODO: free jobc
-	ft_hset_free(&(*sh)->bin_ht);
-	ft_dastrfree(&(*sh)->bin_nl);
+	if (!BIT_IS((*sh)->mode, SH_MODE_SSH) && !BIT_IS((*sh)->mode, SH_MODE_SCMD))
+	{ // TODO: deprecate condition if bins are duplicated by clone
+		ft_hset_free(&(*sh)->bin_ht);
+		ft_dastrfree(&(*sh)->bin_nl);
+	}
 	ft_tabfree(&(*sh)->var);
 	FT_MEMDEL((*sh)->sub_pipe);
 	ft_dstrfree(&(*sh)->sub_out);

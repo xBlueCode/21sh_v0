@@ -30,6 +30,7 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 		return (KO);
 	if (!lex->tlst)
 		return (KO);
+	//ft_printf("lexed !\n");
 	//DF_PFWAIT("lex start >", 8);
 	if (!(com_cmds = sh_p_start(lex)))
 	{
@@ -47,8 +48,10 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	//DF_PFWAIT("free com +", 8);
 	//return (0); // TODO: del
 	//(void)sh;
+	//ft_printf("parsed !\n");
 	ret = sh_e_com_cmds(sh, com_cmds);
 	sh_g_com_cmds_free((void**)&com_cmds);
+	//ft_printf("execed !\n");
 	//DF_PFWAIT("i >", 8)
 	return (ret);
 }

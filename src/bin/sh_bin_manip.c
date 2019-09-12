@@ -1,5 +1,4 @@
-#include "libft.h"
-#include "sh_bin.h"
+#include "ftsh.h"
 
 int 	sh_bin_update(t_hset *htbin, t_dastr *bin_names, char *paths)
 {
@@ -47,9 +46,10 @@ char	*sh_bin_getpath(t_hset *htbin, char *bin)
 {
 	char 	*path;
 
+	DF0
 	if (!htbin || !bin)
 		return (NULL);
-	if (!(path = (char*)ft_htab_getval(htbin, bin, ft_strlen(bin) + 1)))
+	if (!(path = (char*)ft_htab_getval(htbin, bin, ft_strlenz(bin) + 1)))
 		return (NULL);
 	return (ft_strdup(path)); // check the possibility of skipping strdup
 }

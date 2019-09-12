@@ -5,6 +5,8 @@ int 	sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 	pid_t	pid;
 	int 	wstat;
 
+	//ft_printf("run exec");
+	//DF0
 	if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		pipe(sh->sub_pipe);
 	if ((pid = fork()) < 0)
