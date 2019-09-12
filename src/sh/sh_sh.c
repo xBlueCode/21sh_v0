@@ -78,3 +78,17 @@ t_sh 			*sh_sh_clone(t_sh *sh, int mode)
 	}
 	return (nsh);
 }
+
+int 			sh_sh_free(t_sh **sh)
+{
+	if (!sh || !*sh)
+		return (1);
+	// TODO: free jobc
+	ft_hset_free(&(*sh)->bin_ht);
+	ft_dastrfree(&(*sh)->bin_nl);
+	ft_tabfree(&(*sh)->var);
+	FT_MEMDEL((*sh)->sub_pipe);
+	ft_dstrfree(&(*sh)->sub_out);
+	FT_MEMDEL(*sh)
+	return (0);
+}
