@@ -21,6 +21,7 @@ int 	sh_xp_var(t_sh *sh, t_dastr *words, int *i, int *j)
 	val = sh_var_getval(sh->var, key);
 	(*j) = off - 1 + ft_strlenz(val);
 	ft_dstrins_str(word, off - 1, val);
+	FT_MEMDEL(key)
 	return (1); // TODO: don't free val (it still point in the env)
 }
 
