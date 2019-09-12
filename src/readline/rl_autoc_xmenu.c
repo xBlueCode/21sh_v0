@@ -17,7 +17,8 @@ char			*rl_autoc_xmenu(t_dastr *res)
 	dline = g_rl.txt->a[g_rl.cl];
 	rl_cur_fromto(g_rl.cc, ft_strlenz(dline->str));
 	ft_putchar('\n');
-	picked = rl_autoc_xmenu_select(res);
+	if (!(picked = rl_autoc_xmenu_select(res)))
+		ft_dastrfree(&res);
 	RL_TPUTS("up");
 	slen = ft_strlenz(dline->str);
 	rl_cur_fromto(slen- slen % (g_rl.wc) - g_rl.plen, g_rl.cc);
@@ -61,7 +62,7 @@ char			*rl_autoc_xmenu_select(t_dastr *res)
 			break ;
 		}
 		else if (c == KESC)
-			break ;
+			break;
 	rl_autoc_xmenu_clear(curl % (g_rl.wl - rl_get_header()));
 	return (picked);
 }
