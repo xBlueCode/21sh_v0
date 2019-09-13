@@ -7,13 +7,18 @@ int		sh_file_run(char *filename, char **envp)
 {
 	t_dstr	*dscript;
 	t_sh	*sh;
+	int		ret;
 
 	DF0
-	ft_putendl(filename);
+	//ft_putendl(filename);
 	if (!(dscript = ft_read_file(filename)))
 		return (KO);
 	sh_sh_init(&sh, envp, SH_MODE_SCR); // TODO: specify correct sh-mode
-	return (sh_script_run(sh, dscript->str));
+	ret = sh_script_run(sh, dscript->str);
+	ft_dstrfree(&dscript);
+	sh_sh_free(&sh);
+	//DF_PFWAIT(">", 8);
+	return (ret);
 }
 
 int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
@@ -27,9 +32,9 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 		return (1);
 	sh_lex_init(&lex, script);
 	if (sh_lex_start(lex) == KO)
-		return (KO);
+		FT_INST_RET(KO, sh_lex_free(&lex));
 	if (!lex->tlst)
-		return (KO);
+		FT_INST_RET(KO, sh_lex_free(&lex));
 	//ft_printf("lexed !\n");
 	//DF_PFWAIT("lex start >", 8);
 	if (!(com_cmds = sh_p_start(lex)))
@@ -77,18 +82,21 @@ int		sh_term_run(char **envp)
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
+	line = NULL;
+	ret = 0;
 	while (1)
 	{
 		ret = 0;
 		sh_inter_read(&line);
 		//DF_PFWAIT("i < iread >", 8)
-		rl_hist_add(line);
 		if (!ft_strncmp("exit", line, 4))
 			 break;
+		rl_hist_add(line);
 		ret = sh_script_run(g_sh, line);
-		ft_memdel((void**)&line);
+		FT_MEMDEL(line)
 		//DF_PFWAIT("i < srun >", 8)
 	}
+	FT_MEMDEL(line)
 	rl_hist_save(); // TODO: history_cleanup
 	rl_hist_free();
 	return (ret);
@@ -103,9 +111,11 @@ int		main(int ac, char **av, char **envp)
 	else
 	{
 		sh_est = sh_term_run(envp);
+		//DF_PFWAIT("term run >", 8)
 		sh_termconfig_reset(&sh_sh()->term); // replace with sh_free
 	}
-	// TODO: sh_cleanup
+	//DF_PFWAIT(">", 8);
+	system("leaks -q 21sh");
 	return (sh_est);
 }
 

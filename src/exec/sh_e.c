@@ -32,17 +32,21 @@ int			sh_e_com_cmd(t_sh *sh, void *gr) // map to group exec (subsh)
 		return (0);
 	com_cmd = (t_com_cmd*)gr;
 	and_or_lst = com_cmd->lst_and_or;
+	/*
 	if (com_cmd->gr == SH_GR_SUBSH)
 	{
 		nsh = sh_sh_clone(sh, SH_MODE_SSH);
 		sh = nsh;
 	}
+	 */
+	nsh = (com_cmd->gr == SH_GR_SUBSH) ? sh_sh_clone(sh, SH_MODE_SSH) : NULL;
 	while (and_or_lst)
 	{
 		ft_dstrdel_n(com_cmd->sep, -1, 1);
-		ret = sh_e_and_or(sh, and_or_lst->content);
+		ret = sh_e_and_or(nsh ? nsh : sh, and_or_lst->content);
 		and_or_lst = and_or_lst->next;
 	}
+	sh_sh_free(&nsh);
 	return (ret);
 }
 
