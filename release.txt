@@ -1,3 +1,6 @@
+v 1.01
+	- wait for childs right after forking
+======
 v 0.08
     - Complete lexer fonctionality
 ======
