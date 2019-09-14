@@ -3,7 +3,7 @@
 int 	sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 {
 	pid_t	pid;
-	int 	wstat;
+	//int 	wstat;
 
 	//ft_printf("run exec");
 	//DF0
@@ -24,11 +24,13 @@ int 	sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 			execve(simp_cmd->argv[0], simp_cmd->argv, simp_cmd->envp);
 		exit(1);
 	}
-	wait(&wstat);
+	//wait(&wstat);
 	if (BIT_IS(sh->mode, SH_MODE_SCMD) && !close(sh->sub_pipe[1]))
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
-	sh->exit = WEXITSTATUS(wstat);
-	return (WEXITSTATUS(wstat));
+	simp_cmd->pid = pid;
+	//sh->exit = WEXITSTATUS(wstat);
+	//return (WEXITSTATUS(wstat));
+	return (0);
 }
 
 int 	sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd) // TODO: redirect cmd-sub

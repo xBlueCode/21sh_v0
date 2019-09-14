@@ -1,5 +1,6 @@
 #include "ftsh.h"
 #include <sys/wait.h>
+
 //#include <sys/types.h>
 
 int 		sh_e_simp_cmd(t_sh *sh, void *gr)
@@ -38,4 +39,34 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	if ((ret = sh_e_check_exec(simp_cmd->argv[0])) == OK)
 		return (sh_e_run_exec(sh, simp_cmd));
 	return (ret);
+}
+
+int 		sh_e_simp_cmd_wait(t_sh *sh, void *gr, int op, int *state)
+{
+	t_simp_cmd	*simp_cmd;
+	int 		wstat;
+
+	DF0
+	if (!sh || !gr)
+		return (-1);
+	simp_cmd = (t_simp_cmd*)gr;
+	waitpid(simp_cmd->pid, &wstat, op);
+	if (WIFEXITED(wstat) || WIFSIGNALED(wstat))
+		*state = SH_E_STATE_DONE;
+	simp_cmd->state = *state;
+	simp_cmd->wstat = wstat;
+	return (WEXITSTATUS(simp_cmd->wstat));
+}
+
+int			sh_e_simp_cmd_kill(t_sh *sh, void *gr, int sig)
+{
+	t_simp_cmd	*simp_cmd;
+
+	DF0
+	if (!sh || !gr)
+		return (-1);
+	simp_cmd = (t_simp_cmd*)gr;
+	if (simp_cmd->pid > 0)
+	    return (kill(simp_cmd->pid, sig));
+	return (-1);
 }

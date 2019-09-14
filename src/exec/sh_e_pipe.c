@@ -1,7 +1,5 @@
 #include "ftsh.h"
 
-
-
 int			sh_e_pipe(t_sh *sh, void *gr)
 {
 	t_pipe	*pip;
@@ -9,6 +7,7 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 	t_cmd	*cmd;
 	int 	fifo[2];
 	int 	ret;
+	int		state;
 
 	DF0
 	if ((ret = 0) || !sh || !gr)
@@ -39,7 +38,48 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 		ret = sh_e_cmd(sh, cmd);
 		cmd_lst = cmd_lst->next;
 	}
-	ret = pip->neg ? pip->neg - ret : ret;
+	//while (wait(&ret) > -1)
+	//	ret = WEXITSTATUS(ret);
+	//ret = pip->neg ? pip->neg - ret : ret; // TODO: recheck
+	ret = sh_e_pipe_wait(sh, gr, WUNTRACED, &state);
+	return (ret);
+}
+
+int			sh_e_pipe_wait(t_sh *sh, void *gr, int op, int *state)
+{
+	t_pipe	*pip;
+//	t_list	*cmd_lst;
+//	t_cmd	*cmd;
+//	int 	fifo[2];
+	int 	ret;
+
+	DF0
+	if ((ret = 0) || !sh || !gr)
+		return (0);
+	pip = (t_pipe*)gr;
+	return (sh_e_cmd_lst_wait(sh, pip->lst_cmd, op, state)); // TODO: check neg
+	//if (state == SH_E_STATE_DONE)
+}
+
+
+int			sh_e_cmd_lst_wait(t_sh *sh, t_list *cmd_lst, int op, int *state)
+{
+	int		nstate;
+	int 	ret;
+
+	DF0
+	if (!cmd_lst) // TODO: recheck condition
+	{
+		*state = SH_E_STATE_EXEC;
+		return (0);
+	}
+	ret = sh_e_cmd_lst_wait(sh, cmd_lst->next, op, &nstate);
+	if (nstate == SH_E_STATE_EXEC)
+		ret = sh_e_cmd_wait(sh, cmd_lst->content, op, state);
+	else if (nstate == SH_E_STATE_STOP)
+		sh_e_cmd_kill(sh, cmd_lst->content, SIGSTOP);
+	else
+		sh_e_cmd_kill(sh, cmd_lst->content, SIGKILL);
 	return (ret);
 }
 
@@ -68,4 +108,26 @@ int			sh_e_cmd(t_sh *sh, void *gr)
 		return (ret);
 	}
 	 */
+}
+
+int			sh_e_cmd_wait(t_sh *sh, void *gr, int op, int *state)
+{
+	t_cmd	*cmd;
+
+	DF0
+	if (!gr)
+		return (0); // TODO: check
+	cmd = (t_cmd*)gr;
+	return (cmd->wait(sh, cmd->core, op, state)); // TODO: store state in cmd->state
+}
+
+int			sh_e_cmd_kill(t_sh *sh, void *gr, int sig)
+{
+	t_cmd	*cmd;
+
+	DF0
+	if (!gr)
+		return (0); // TODO: check
+	cmd = (t_cmd*)gr;
+	return (cmd->kill(sh, cmd->core, sig)); // TODO: store state in cmd->state
 }
