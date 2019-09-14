@@ -164,5 +164,7 @@ void			sh_g_wordput(t_list *elem);
 
 int 			sh_g_cmd_core_type(int gr_enum);
 t_exec			*sh_g_cmd_core_get_exec(int grt);
+t_wait			*sh_g_cmd_core_get_wait(int grt);
+t_kill			*sh_g_cmd_core_get_kill(int grt);
 t_free			sh_g_cmd_core_get_free(int grt);
 #endif

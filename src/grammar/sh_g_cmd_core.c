@@ -53,6 +53,28 @@ static void	*g_cmd_core_exec[] = {
 		NULL
 };
 
+static void	*g_cmd_core_wait[] = {
+		&sh_e_simp_cmd_wait,
+		//sh_e_com_cmd_wait,
+		//sh_e_com_cmd_wait,
+		//sh_e_com_cmd_wait,
+//		sh_e_for_wait,
+//		sh_e_loop_wait,
+//		sh_e_loop_wait,
+		NULL
+};
+
+static void	*g_cmd_core_kill[] = {
+		&sh_e_simp_cmd_kill,
+		//sh_e_com_cmd_kill,
+		//sh_e_com_cmd_kill,
+		//sh_e_com_cmd_kill,
+//		sh_e_for_kill,
+//		sh_e_loop_kill,
+//		sh_e_loop_kill,
+		NULL
+};
+
 static void	*g_cmd_core_free[] = {
 		&sh_g_simp_cmd_free,
 		sh_g_com_cmd_free,
@@ -116,6 +138,24 @@ t_exec		*sh_g_cmd_core_get_exec(int grt)
 	if ((type = sh_g_cmd_core_type(grt)) < 0)
 		return (NULL);
 	return (g_cmd_core_exec[type]);
+}
+
+t_wait		*sh_g_cmd_core_get_wait(int grt)
+{
+	int type;
+
+	if ((type = sh_g_cmd_core_type(grt)) < 0)
+		return (NULL);
+	return (g_cmd_core_wait[type]);
+}
+
+t_kill		*sh_g_cmd_core_get_kill(int grt)
+{
+	int type;
+
+	if ((type = sh_g_cmd_core_type(grt)) < 0)
+		return (NULL);
+	return (g_cmd_core_kill[type]);
 }
 
 t_free		sh_g_cmd_core_get_free(int grt)

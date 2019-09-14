@@ -42,6 +42,8 @@ void			*sh_g_cmd(t_btree *ast)
 	cmd->type = ast_core->op;
 	cmd->core = ((void*(*)(t_btree*))sh_g_cmd_core(cmd->type))(ast_core);
 	cmd->exec = sh_g_cmd_core_get_exec(cmd->type);
+	cmd->wait = sh_g_cmd_core_get_wait(cmd->type);
+	cmd->kill = sh_g_cmd_core_get_kill(cmd->type);
 	cmd->tfree = sh_g_cmd_core_get_free(cmd->type);
 	ast_redirlist = ast->right;
 	while (ast_redirlist)

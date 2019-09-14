@@ -55,6 +55,8 @@ void			*sh_g_simp_cmd_new(void)
 	simp_cmd->lst_words = ft_dastrnew_max(2);
 	simp_cmd->envp = NULL;
 	simp_cmd->argv = NULL;
+	simp_cmd->pid = -1;
+	simp_cmd->state = -1;
 	return (simp_cmd);
 }
 

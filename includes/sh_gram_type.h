@@ -3,8 +3,11 @@
 
 #include "libft.h"
 #include "sh_sh.h"
+//#include "sh_exec.h"
 
 typedef int (t_exec)(t_sh*, void*);
+typedef int (t_wait)(t_sh*, void*, int op, int *state);
+typedef int (t_kill)(t_sh*, void*, int sig);
 
 typedef struct	s_redir
 {
@@ -21,8 +24,8 @@ typedef struct	s_simp_cmd // process
 	char 	**argv;
 	t_list	*lst_redir;
 	pid_t 	pid;
-	char 	state;
-	int 	status;
+	int 	wstat;
+	int 	state;
 //	int 	cnt_op;
 }				t_simp_cmd;
 
@@ -32,8 +35,11 @@ typedef struct	s_cmd
 	t_list	*lst_redir;
 	int16_t	type;
 	t_exec	*exec;
+	t_wait	*wait;
+	t_kill	*kill;
 	t_free	tfree;
 	int 	stdioe[3];
+	int 	state;
 //	int 	stdi;
 //	int 	stdo;
 //	int 	stde;

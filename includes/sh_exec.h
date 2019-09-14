@@ -1,10 +1,14 @@
 #ifndef SH_EXEC_H
 # define SH_EXEC_H
 
-#include "sh_parser.h"
-#include "sh_grammar.h"
-#include "sh_sh.h"
+# include "sh_parser.h"
+# include "sh_grammar.h"
+# include "sh_sh.h"
+# include <signal.h>
 
+# define SH_E_STATE_DONE 1
+# define SH_E_STATE_STOP 2
+# define SH_E_STATE_EXEC 3
 
 /*
 int			sh_e_loop(void *gr);
@@ -32,6 +36,31 @@ t_exec			sh_e_simp_cmd;
 t_exec			sh_e_comp_cmd;
 t_exec			sh_e_group;
 int				sh_e_cmd_core(int t); // what's wrong with you
+
+typedef int (t_wait)(t_sh*, void*, int op, int *state);
+t_wait			sh_e_loop_wait;
+t_wait			sh_e_for_wait;
+t_wait			sh_e_com_cmds_wait;
+t_wait			sh_e_com_cmd_wait;
+t_wait			sh_e_and_or_wait;
+t_wait			sh_e_pipe_wait;
+t_wait			sh_e_cmd_wait;
+t_wait			sh_e_simp_cmd_wait;
+t_wait			sh_e_comp_cmd_wait;
+t_wait			sh_e_group_wait;
+int				sh_e_cmd_lst_wait(t_sh *sh, t_list *cmd_lst, int op, int *state);
+
+typedef int (t_kill)(t_sh*, void*, int sig);
+t_kill			sh_e_loop_kill;
+t_kill			sh_e_for_kill;
+t_kill			sh_e_com_cmds_kill;
+t_kill			sh_e_com_cmd_kill;
+t_kill			sh_e_and_or_kill;
+t_kill			sh_e_pipe_kill;
+t_kill			sh_e_cmd_kill;
+t_kill			sh_e_simp_cmd_kill;
+t_kill			sh_e_comp_cmd_kill;
+t_kill			sh_e_group_kill;
 
 /*
 int			sh_e_loop(t_sh *sh, void *gr);
