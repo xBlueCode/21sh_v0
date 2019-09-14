@@ -16,6 +16,7 @@ void			sh_g_pipe_free(void**g)
 {
 	t_pipe	**pipe;
 
+	DF0
 	pipe = (t_pipe**)g;
 	ft_lst_free(&(*pipe)->lst_cmd, &sh_g_cmd_free);
 	ft_dstrfree(&(*pipe)->op);

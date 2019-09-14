@@ -41,6 +41,7 @@ int 	sh_xp_scmd(t_sh *sh, t_dastr *words, int *i, int *j)
 	t_sh	*nsh;
 	char 	*script;
 	t_lex	*lex;
+//	int 	sstat;
 
 	DF0
 	word = words->a[*i];
@@ -54,12 +55,16 @@ int 	sh_xp_scmd(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_dstrdel_n(word, *j, lex->i);
 	nsh = sh_sh_clone(sh, SH_MODE_SCMD);
 	ft_printf("sh cloned !\n");
+	//ft_dup_stdioe_copy(std, 0);
+	//pipe(sh->sub_pipe);
+	//ft_dup2(sh->sub_pipe[1], STDOUT_FILENO, 0);
 	sh_script_run(nsh, script);
+    //ft_read_fd_in(spipe[0], sh->sub_out);
+    //ft_dup_stdioe_set(std, 1);
 	ft_printf("sh scr run !\n");
-	//ft_printf(C_GRN"RES SUBST:\n%s\n++++++++++++++++++\n"T_END, nsh->sub_out->str);
+	ft_printf(C_GRN"RES SUBST:\n%s\n-----------\n"T_END, nsh->sub_out->str);
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
 	*j += ft_strlenz(nsh->sub_out->str);
-	// TODO: free lexer
 	FT_MEMDEL(script)
 	sh_lex_free(&lex);
 	sh_sh_free(&nsh);

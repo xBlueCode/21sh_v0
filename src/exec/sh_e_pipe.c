@@ -77,9 +77,9 @@ int			sh_e_cmd_lst_wait(t_sh *sh, t_list *cmd_lst, int op, int *state)
 	if (nstate == SH_E_STATE_EXEC)
 		ret = sh_e_cmd_wait(sh, cmd_lst->content, op, state);
 	else if (nstate == SH_E_STATE_STOP)
-		sh_e_cmd_kill(sh, cmd_lst->content, SIGSTOP);
+		sh_e_cmd_kill(sh, cmd_lst->content, SIGQUIT);
 	else
-		sh_e_cmd_kill(sh, cmd_lst->content, SIGKILL);
+		sh_e_cmd_kill(sh, cmd_lst->content, SIGQUIT);
 	return (ret);
 }
 

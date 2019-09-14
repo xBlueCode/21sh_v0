@@ -64,6 +64,7 @@ void			sh_g_simp_cmd_free(void**g)
 {
 	t_simp_cmd	**simp_cmd;
 
+	DF0
 	simp_cmd = (t_simp_cmd**)g;
 	ft_dastrfree(&(*simp_cmd)->lst_assign);
 	ft_dastrfree(&(*simp_cmd)->lst_words);

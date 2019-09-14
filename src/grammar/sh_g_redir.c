@@ -17,6 +17,9 @@ void			sh_g_redir_free(void**g)
 {
 	t_redir		**redir;
 
+	DF0
+	if (!g || *g)
+	    return;
 	redir = (t_redir**)g;
 	FT_MEMDEL((*redir)->word)
 	FT_MEMDEL(*g)
