@@ -68,5 +68,7 @@ int			sh_e_simp_cmd_kill(t_sh *sh, void *gr, int sig)
 	simp_cmd = (t_simp_cmd*)gr;
 	if (simp_cmd->pid > 0)
 	    return (kill(simp_cmd->pid, sig));
+	else if (BIT_IS(sh->mode, SH_MODE_SCMD))
+		return (kill(simp_cmd->pid, sig));
 	return (-1);
 }

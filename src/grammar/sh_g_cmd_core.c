@@ -55,9 +55,9 @@ static void	*g_cmd_core_exec[] = {
 
 static void	*g_cmd_core_wait[] = {
 		&sh_e_simp_cmd_wait,
-		//sh_e_com_cmd_wait,
-		//sh_e_com_cmd_wait,
-		//sh_e_com_cmd_wait,
+		sh_e_com_cmd_wait,
+		sh_e_com_cmd_wait,
+		sh_e_com_cmd_wait,
 //		sh_e_for_wait,
 //		sh_e_loop_wait,
 //		sh_e_loop_wait,
@@ -66,9 +66,9 @@ static void	*g_cmd_core_wait[] = {
 
 static void	*g_cmd_core_kill[] = {
 		&sh_e_simp_cmd_kill,
-		//sh_e_com_cmd_kill,
-		//sh_e_com_cmd_kill,
-		//sh_e_com_cmd_kill,
+		sh_e_com_cmd_kill,
+		sh_e_com_cmd_kill,
+		sh_e_com_cmd_kill,
 //		sh_e_for_kill,
 //		sh_e_loop_kill,
 //		sh_e_loop_kill,

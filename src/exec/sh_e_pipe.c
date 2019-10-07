@@ -115,7 +115,7 @@ int			sh_e_cmd_wait(t_sh *sh, void *gr, int op, int *state)
 	t_cmd	*cmd;
 
 	DF0
-	if (!gr)
+	if (!gr || !sh)
 		return (0); // TODO: check
 	cmd = (t_cmd*)gr;
 	return (cmd->wait(sh, cmd->core, op, state)); // TODO: store state in cmd->state

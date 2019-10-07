@@ -75,3 +75,27 @@ int 		sh_e_and_or(t_sh *sh, void *gr)
 	return (ret);
 }
 
+int 		sh_e_com_cmd_wait(t_sh *sh, void *gr, int op, int *state)
+{
+//	t_com_cmd	*com_cmd;
+//	int 		wstat;
+/*
+	DF0
+	if (!sh || !gr)
+		return (-1);
+	com_cmd = (t_com_cmd*)gr;
+*/
+	(void)sh;
+	(void)gr;
+	(void)op;
+	(void)state;
+	return (0);
+}
+
+int			sh_e_com_cmd_kill(t_sh *sh, void *gr, int sig)
+{
+	(void)sh;
+	(void)gr;
+	(void)sig;
+	return (0);
+}

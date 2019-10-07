@@ -6,6 +6,8 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	t_sh	*nsh;
 	char 	*script;
 	int 	off;
+	//pid_t	xpid;
+	//int 	xstat;
 
 	DF0
 	word = words->a[*i];
@@ -22,7 +24,21 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	//ft_printf(C_YLW"after deleting BQ: %s\n"T_END, word->str);
 	*j = off;
 	nsh = sh_sh_clone(sh, SH_MODE_SCMD);
-	sh_script_run(nsh, script);
+	//if ((xpid = fork())
+	//pipe(nsh->sub_pipe);
+	//ft_dup2(nsh->sub_pipe[1], STDOUT_FILENO, 1);
+	//if (!(xpid = fork()))
+	//{
+	//	close(nsh->sub_pipe[0]);
+		sh_script_run(nsh, script);
+	//	exit(0);
+	//}
+	//else
+	//{
+	//	close(nsh->sub_pipe[1]);
+	//	ft_read_fd_in(nsh->sub_pipe[0], sh->sub_out);
+	//	waitpid(xpid, &xstat, WUNTRACED);
+	//}
 	//ft_printf(C_RED"OLD SUBST: %s\n", word->str);
 	//ft_printf(C_RED"BQ SUBST: %s\n"T_END, nsh->sub_out->str);
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
