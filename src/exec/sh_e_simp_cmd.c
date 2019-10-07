@@ -24,7 +24,7 @@ int 		sh_e_simp_cmd(t_sh *sh, void *gr)
 	//pid_t		pid;
 	//int 		wstat;
 
-	DF0
+	DF0;
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	simp_cmd = (t_simp_cmd*)gr;
@@ -58,7 +58,7 @@ int 		sh_e_simp_cmd_wait(t_sh *sh, void *gr, int op, int *state)
 	t_simp_cmd	*simp_cmd;
 	int 		wstat;
 
-	DF0
+	DF0;
 	if (!sh || !gr)
 		return (-1);
 	simp_cmd = (t_simp_cmd*)gr;
@@ -74,7 +74,7 @@ int			sh_e_simp_cmd_kill(t_sh *sh, void *gr, int sig)
 {
 	t_simp_cmd	*simp_cmd;
 
-	DF0
+	DF0;
 	if (!sh || !gr)
 		return (-1);
 	simp_cmd = (t_simp_cmd*)gr;

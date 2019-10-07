@@ -14,7 +14,7 @@
 #include "sys/stat.h"
 #include <fcntl.h>
 
-int 	sh_e_redirect(t_list *redir_lst)
+int		sh_e_redirect(t_list *redir_lst)
 {
 	t_redir	*redir;
 
@@ -33,12 +33,12 @@ int 	sh_e_redirect(t_list *redir_lst)
 	return (OK);
 }
 
-int 	sh_e_redirect_g(t_redir *redir)
+int		sh_e_redirect_g(t_redir *redir)
 {
 	int fdo;
 	int fdf;
 
-	DF0
+	DF0;
 	if (!redir)
 		return (KO);
 	if (!access(redir->word, F_OK) && access(redir->word, W_OK))
@@ -50,7 +50,7 @@ int 	sh_e_redirect_g(t_redir *redir)
 	return (OK);
 }
 
-int 	sh_e_redirect_l(t_redir *redir)
+int		sh_e_redirect_l(t_redir *redir)
 {
 	int fdi;
 	int fdf;
@@ -66,8 +66,7 @@ int 	sh_e_redirect_l(t_redir *redir)
 	return (OK);
 }
 
-
-int 	sh_e_redirect_l2(t_redir *redir)
+int		sh_e_redirect_l2(t_redir *redir)
 {
 	int		hdpipe[2];
 

@@ -12,16 +12,16 @@
 
 #include "ftsh.h"
 
-int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
+int		sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	t_dastr	*res;
-	char 	*word;
-	t_dstr 	*dinp;
+	char	*word;
+	t_dstr	*dinp;
 	t_lex	*lex;
 	int		off;
 	int		k;
-	char 	*pref;
-	char 	*suff;
+	char	*pref;
+	char	*suff;
 
 	(void)sh;
 	word = words->a[*i]->str;
@@ -45,9 +45,7 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 			|| sh_lex_seek_bq(lex, 0)
 			|| sh_lex_seek_param(lex, 0)
 			|| sh_lex_seek_smath(lex, 0)
-			|| sh_lex_seek_scmd(lex, 0)
-			//|| sh_xp_brace(sh, words, i, j, 0)
-			)
+			|| sh_lex_seek_scmd(lex, 0))
 			continue;
 		if (dinp->str[lex->i] == ',')
 		{
@@ -76,8 +74,8 @@ int 	sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	}
 	if (res->len)
 		*i -= 1;
-	FT_MEMDEL(pref)
-	FT_MEMDEL(suff)
+	FT_MEMDEL(pref);
+	FT_MEMDEL(suff);
 	ft_dastrfree(&res);
 	return (1);
 }

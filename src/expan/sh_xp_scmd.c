@@ -21,7 +21,7 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	//pid_t	xpid;
 	//int 	xstat;
 
-	DF0
+	DF0;
 	word = words->a[*i];
 	if (word->str[*j] != '`')
 		return (0);
@@ -57,7 +57,7 @@ int 	sh_xp_bq(t_sh *sh, t_dastr *words, int *i, int *j)
 	*j += ft_strlenz(nsh->sub_out->str);
 	//ft_printf(C_RED"NEW SUBST: %s\n", word->str);
 	// TODO: free nsh
-	FT_MEMDEL(script)
+	FT_MEMDEL(script);
 	//sh_lex_free(&lex);
 	sh_sh_free(&nsh);
 	return (1);
@@ -71,7 +71,7 @@ int 	sh_xp_scmd(t_sh *sh, t_dastr *words, int *i, int *j)
 	t_lex	*lex;
 //	int 	sstat;
 
-	DF0
+	DF0;
 	word = words->a[*i];
 	if (ft_strncmp(word->str + *j, "$(", 2)) // check for smath
 		return (0);
@@ -93,7 +93,7 @@ int 	sh_xp_scmd(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_printf(C_GRN"RES SUBST:\n%s\n-----------\n"T_END, nsh->sub_out->str);
 	ft_dstrins_str(word, *j, nsh->sub_out->str);
 	*j += ft_strlenz(nsh->sub_out->str);
-	FT_MEMDEL(script)
+	FT_MEMDEL(script);
 	sh_lex_free(&lex);
 	sh_sh_free(&nsh);
 	return (1);

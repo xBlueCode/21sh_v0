@@ -22,7 +22,7 @@ C_END = \033[0m
 
 FTSH := ftsh.c
 
-ALIAS := sh_als.c
+ALIAS := sh_als.c sh_als_print.c
 
 VAR := sh_var.c sh_var_utils.c sh_var_get.c sh_env.c
 

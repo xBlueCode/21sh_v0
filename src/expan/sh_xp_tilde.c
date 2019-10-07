@@ -12,16 +12,16 @@
 
 #include "ftsh.h"
 
-static int sh_is_tilde_delim(char c)
+static int	sh_is_tilde_delim(char c)
 {
 	return (c == '\0' || c == '/' || c == ':');
 }
 
-int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
+int			sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	t_dstr	*word;
-	char 	*rep;
-	int 	k;
+	char	*rep;
+	int		k;
 
 	word = words->a[*i];
 	if (word->str[*j] != '~')
@@ -39,7 +39,7 @@ int 	sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 	while (!sh_is_tilde_delim(word->str[k]))
 	{
 		if (word->str[k] != '_' && !ft_isalnum(word->str[k]))
-			break;
+			break ;
 		k++;
 	}
 	if (word->str[k] && !sh_is_tilde_delim(word->str[k]))

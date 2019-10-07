@@ -22,9 +22,11 @@ int			sh_blt_setenv(t_sh *sh, char **argv, char **envp)
 		return (1);
 	ac = ft_arr_len((void**)argv);
 	if (ac != 3 && ac != 4)
-		FT_INST_RET(1, FT_STDEPF("ftsh: setenv: Bad arguments number !\n", NULL))
+		FT_INST_RET(1, FT_STDEPF("ftsh: setenv: Bad arguments number !\n",
+			NULL));
 	if (!sh_tok_isname_till(argv[1], '\0'))
-		FT_INST_RET(1, FT_STDEPF("ftsh: setenv: %s: Bad var name !\n", argv[1]))
+		FT_INST_RET(1, FT_STDEPF("ftsh: setenv: %s: Bad var name !\n",
+			argv[1]));
 	m = !argv[3] ? 0 : ft_atoi(argv[3]);
 	ft_tabins(sh->var, ft_tabrow_set(-1, argv[1], argv[2], SH_VO_GLO), m);
 	return (0);
@@ -39,7 +41,8 @@ int			sh_blt_unsetenv(t_sh *sh, char **argv, char **envp)
 		return (1);
 	ac = ft_arr_len((void**)argv);
 	if (ac < 2)
-		FT_INST_RET(1, FT_STDEPF("ftsh: unsetenv: Bad arguments number !\n", NULL))
+		FT_INST_RET(1, FT_STDEPF("ftsh: unsetenv: Bad arguments number !\n",
+			NULL));
 	ac = 0;
 	while (argv[++ac])
 		ft_tabdel_n(sh->var, argv[ac]);

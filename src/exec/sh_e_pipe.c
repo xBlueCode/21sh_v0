@@ -21,7 +21,7 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 	int 	ret;
 	int		state;
 
-	DF0
+	DF0;
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	pip = (t_pipe*)gr;
@@ -65,7 +65,7 @@ int			sh_e_pipe_wait(t_sh *sh, void *gr, int op, int *state)
 //	int 	fifo[2];
 	int 	ret;
 
-	DF0
+	DF0;
 	if ((ret = 0) || !sh || !gr)
 		return (0);
 	pip = (t_pipe*)gr;
@@ -79,7 +79,7 @@ int			sh_e_cmd_lst_wait(t_sh *sh, t_list *cmd_lst, int op, int *state)
 	int		nstate;
 	int 	ret;
 
-	DF0
+	DF0;
 	if (!cmd_lst) // TODO: recheck condition
 	{
 		*state = SH_E_STATE_EXEC;
@@ -101,7 +101,7 @@ int			sh_e_cmd(t_sh *sh, void *gr)
 	int 	ret;
 	int 	stdioe[3];
 
-	DF0
+	DF0;
 	if (!sh || !gr)
 		return (0);
 	cmd = (t_cmd*)gr;
@@ -126,7 +126,7 @@ int			sh_e_cmd_wait(t_sh *sh, void *gr, int op, int *state)
 {
 	t_cmd	*cmd;
 
-	DF0
+	DF0;
 	if (!gr || !sh)
 		return (0); // TODO: check
 	cmd = (t_cmd*)gr;
@@ -137,7 +137,7 @@ int			sh_e_cmd_kill(t_sh *sh, void *gr, int sig)
 {
 	t_cmd	*cmd;
 
-	DF0
+	DF0;
 	if (!gr)
 		return (0); // TODO: check
 	cmd = (t_cmd*)gr;

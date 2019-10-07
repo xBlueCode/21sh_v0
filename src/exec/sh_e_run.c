@@ -8,7 +8,7 @@ int 	sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 	//struct termios tconfig;
 
 	//ft_printf("run exec");
-	DF0
+	DF0;
     ft_dprintf(2, C_RED"run_exec: %s\n"T_END, simp_cmd->argv[0]);
 	if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		pipe(sh->sub_pipe);
@@ -47,7 +47,7 @@ int 	sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd) // TODO: redirect cmd-sub
 	int 		ret;
 	t_sh_blt	bi;
 
-	DF0
+	DF0;
 	if (!(bi = sh_e_get_blt(simp_cmd->argv[0])))
 		return (-1);
 	if (BIT_IS(sh->mode, SH_MODE_SCMD))
@@ -72,7 +72,7 @@ int 	sh_e_run_env(t_sh *sh, t_simp_cmd *simp_cmd)
 
 	int i, ret;
 
-	DF0
+	DF0;
 	i = 1;
 	if (!simp_cmd->argv[i])
 		return (sh_blt_printenv(sh, simp_cmd->argv + i, simp_cmd->envp));

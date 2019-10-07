@@ -19,7 +19,7 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 	int dql;
 	int indq;
 
-	DF0
+	DF0;
 	i = -1;
 	//indq = BIT_IS(sh->mode, SH_MODE_INDQ);
 	//BIT_USET(sh->mode, SH_MODE_INDQ);
@@ -38,9 +38,8 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 				|| sh_xp_sq(sh, words, &i, &j)
 				|| sh_xp_bq(sh, words, &i, &j)
 				|| sh_xp_scmd(sh, words, &i, &j)
-				|| sh_xp_esc(sh, words, &i, &j)
-			)
-				continue;
+				|| sh_xp_esc(sh, words, &i, &j))
+				continue ;
 			else if (words->a[i]->str[j] == '"'
 				&& sh_lex_skip(words->a[i]->str + j, &sh_lex_seek_dq, &dql))
 				j += dql;
@@ -79,7 +78,7 @@ int		sh_xp_assign(t_sh *sh, t_dastr *assigns)
 		sh_xp_tilde(sh, assigns, &i, &j);
 		while (j < assigns->a[i]->len)
 		{
-			if (//sh_xp_brace(sh, assigns, &i, &j)
+			if (
 				sh_xp_param(sh, assigns, &i, &j)
 				|| sh_xp_var(sh, assigns, &i, &j)
 				|| sh_xp_dq(sh, assigns, &i, &j)
@@ -87,12 +86,11 @@ int		sh_xp_assign(t_sh *sh, t_dastr *assigns)
 				|| sh_xp_bq(sh, assigns, &i, &j)
 				|| sh_xp_scmd(sh, assigns, &i, &j)
 				|| sh_xp_esc(sh, assigns, &i, &j)
-				|| (assigns->a[i]->str[j] == ':' && ++j && sh_xp_tilde(sh, assigns, &i, &j))
-				)
-				continue;
+				|| (assigns->a[i]->str[j] == ':' && ++j
+				&& sh_xp_tilde(sh, assigns, &i, &j)))
+				continue ;
 			j++;
 		}
 	}
 	return (1);
 }
-

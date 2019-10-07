@@ -58,7 +58,7 @@ char	*sh_bin_getpath(t_hset *htbin, char *bin)
 {
 	char	*path;
 
-	//DF0
+	DF0;
 	//ft_dprintf(2, "%s %s\n", !htbin? "N":"NN", bin);
 	if (!htbin || !bin)
 		return (NULL);

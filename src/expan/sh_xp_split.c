@@ -17,12 +17,12 @@ int		sh_xp_word_split(t_sh *sh, t_dastr *words)
 	char	*ifs;
 	t_dastr	*split;
 	t_dstr	*word;
-	int 	si;
-	int 	new;
-	int 	off;
-	int 	i;
+	int		si;
+	int		new;
+	int		off;
+	int		i;
 	int		j;
-	int 	dql;
+	int		dql;
 
 	if (!(ifs = sh_var_getval(sh->var, "IFS")) || !*ifs)
 		return (0);

@@ -39,7 +39,7 @@
 # include "sh_builtin.h"
 
 # define DF0 ft_dprintf(2, C_YLW"%s\n"T_END, __FUNCTION__);
-//# define DF0
+//# define DF0 ft_printf("");
 
 # define D_INSTWAIT(inst, t) {inst; sleep(t);}
 
