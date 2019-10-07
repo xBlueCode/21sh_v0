@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sh_blt_env.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/07 19:06:22 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/10/07 19:07:18 by abbesbes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ftsh.h"
 
 int			sh_blt_setenv(t_sh *sh, char **argv, char **envp)
@@ -27,14 +39,14 @@ int			sh_blt_unsetenv(t_sh *sh, char **argv, char **envp)
 		return (1);
 	ac = ft_arr_len((void**)argv);
 	if (ac < 2)
-	FT_INST_RET(1, FT_STDEPF("ftsh: unsetenv: Bad arguments number !\n", NULL))
+		FT_INST_RET(1, FT_STDEPF("ftsh: unsetenv: Bad arguments number !\n", NULL))
 	ac = 0;
 	while (argv[++ac])
 		ft_tabdel_n(sh->var, argv[ac]);
 	return (0);
 }
 
-int 		sh_blt_printenv(t_sh *sh, char **argv, char **envp)
+int			sh_blt_printenv(t_sh *sh, char **argv, char **envp)
 {
 	(void)sh;
 	(void)argv;
@@ -43,9 +55,3 @@ int 		sh_blt_printenv(t_sh *sh, char **argv, char **envp)
 	ft_arr_print(envp, ft_arr_len((void**)envp));
 	return (0);
 }
-/*
-int			sh_blt_env(t_sh *sh, char **argv, char **envp)
-{
-	return (0);
-}
-*/

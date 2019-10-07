@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sh_bin_manip.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/07 19:07:00 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/10/07 19:07:03 by abbesbes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ftsh.h"
 
-int 	sh_bin_update(t_hset *htbin, t_dastr *bin_names, char *paths)
+int		sh_bin_update(t_hset *htbin, t_dastr *bin_names, char *paths)
 {
-	char 	**path_arr;
+	char	**path_arr;
 	t_dastr	*bins;
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 
 	if (!htbin || !paths || !(path_arr = ft_strsplit(paths, ':')))
 		return (KO);
@@ -26,7 +38,7 @@ int 	sh_bin_update(t_hset *htbin, t_dastr *bin_names, char *paths)
 int		sh_bin_add_abs(t_hset *htbin, t_dastr *bin_names, char *bin_path)
 {
 	t_htabent	htent;
-	char 		*bin_name;
+	char		*bin_name;
 
 	if (!htbin || !bin_path)
 		return (KO);
@@ -44,9 +56,9 @@ int		sh_bin_add_abs(t_hset *htbin, t_dastr *bin_names, char *bin_path)
 
 char	*sh_bin_getpath(t_hset *htbin, char *bin)
 {
-	char 	*path;
+	char	*path;
 
-	DF0
+	//DF0
 	//ft_dprintf(2, "%s %s\n", !htbin? "N":"NN", bin);
 	if (!htbin || !bin)
 		return (NULL);

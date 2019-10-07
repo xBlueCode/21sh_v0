@@ -6,16 +6,16 @@
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:00:36 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/10/07 19:00:41 by abbesbes         ###   ########.fr       */
+/*   Updated: 2019/10/07 19:07:10 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ftsh.h"
 #include <sys/stat.h>
 
-int 	sh_blt_cd_setwd(t_sh *sh, char *dir)
+int		sh_blt_cd_setwd(t_sh *sh, char *dir)
 {
-	char 	*cwd;
+	char	*cwd;
 
 	if (!sh || !dir)
 		return (1);
@@ -34,7 +34,7 @@ int 	sh_blt_cd_setwd(t_sh *sh, char *dir)
 	return (0);
 }
 
-int 	sh_blt_cd(t_sh *sh, char **argv, char **envp)
+int		sh_blt_cd(t_sh *sh, char **argv, char **envp)
 {
 	int		ac;
 	char	*dir;

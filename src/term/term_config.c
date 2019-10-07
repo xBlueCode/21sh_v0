@@ -13,8 +13,6 @@
 #include "libft.h"
 #include "ftsh.h"
 
-//extern	t_term g_term;
-
 int			ter_putchar(int ch)
 {
 	ft_putchar_fd(ch, STDERR_FILENO);
