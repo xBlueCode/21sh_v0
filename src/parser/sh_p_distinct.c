@@ -12,29 +12,28 @@
 
 #include "ftsh.h"
 
-char 	*g_reserved[] =
-		{
-			"if",
-			"then",
-			"else",
-			"elif",
-			"fi",
-			"do",
-			"done",
-			"case",
-			"esac",
-			"while",
-			"until",
-			"for",
-			"in",
-			NULL
-		};
+char	*g_reserved[] = {
+	"if",
+	"then",
+	"else",
+	"elif",
+	"fi",
+	"do",
+	"done",
+	"case",
+	"esac",
+	"while",
+	"until",
+	"for",
+	"in",
+	NULL
+};
 
-int 	sh_tok_distinct(t_token *token, int target)
+int		sh_tok_distinct(t_token *token, int target)
 {
 	if (!token || token->t != TSTOK)
 		return (0);
-	if (target == TSTOK_WORD || target == SH_GR_CMD_WORD) // TODO: handle cmd_word separately
+	if (target == TSTOK_WORD || target == SH_GR_CMD_WORD)
 		return (1 + 0 * (token->t = TSTOK_WORD));
 	if (target == TSTOK_ASS_WORD
 		&& token->assi > 0 && sh_tok_isname_till(token->val->str, '='))
@@ -50,8 +49,6 @@ int 	sh_tok_distinct(t_token *token, int target)
 			return (1 + 0 * (token->t = TSTOK_WORD));
 		return (0);
 	}
-//	else if (target == SH_GR_NAME && sh_tok_isname(token->val->str))
-//		return (1 + 0 * (token->t = target));
 	else if (target > TSRW && target < TSRW_MAX
 		&& target == sh_tok_getrw(token->val->str))
 		return (1 + 0 * (token->t = target));
@@ -66,14 +63,14 @@ int		sh_tok_isname_till(char *val, char delim)
 	while (val[++i])
 	{
 		if (val[i] != '_' && !ft_isalnum(val[i]))
-			break;
+			break ;
 	}
 	if (val[i] == delim)
 		return (1);
 	return (0);
 }
 
-int 	sh_tok_getrw(char *tokval)
+int		sh_tok_getrw(char *tokval)
 {
 	int i;
 
@@ -84,7 +81,7 @@ int 	sh_tok_getrw(char *tokval)
 	return (0);
 }
 
-int		sh_tok_distinct_rw(t_token *token, int target) // d_rule 1
+int		sh_tok_distinct_rw(t_token *token, int target)
 {
 	int i;
 
