@@ -13,26 +13,25 @@
 #include "libft.h"
 #include "sh_lex.h"
 
-char 	*g_res_words[] =
-		{
-		"if",
-		"then",
-		"else",
-		"elif",
-		"fi",
-		"do",
-		"done",
-		"case",
-		"esac",
-		"while",
-		"until",
-		"for",
-		"in",
-		"!",
-		"{",
-		"}",
-		NULL
-		};
+char	*g_res_words[] = {
+	"if",
+	"then",
+	"else",
+	"elif",
+	"fi",
+	"do",
+	"done",
+	"case",
+	"esac",
+	"while",
+	"until",
+	"for",
+	"in",
+	"!",
+	"{",
+	"}",
+	NULL
+};
 
 int		sh_lex_seek_rw(t_token *token, int ctx)
 {

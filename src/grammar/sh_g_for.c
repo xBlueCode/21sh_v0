@@ -12,7 +12,7 @@
 
 #include "ftsh.h"
 
-extern int 		g_g_putlev;
+extern int		g_g_putlev;
 
 void			*sh_g_for_new(void)
 {
@@ -30,13 +30,12 @@ void			*sh_g_for(t_btree *ast_for)
 	t_for	*for_clause;
 	t_btree	*wordlist;
 
-	SHG_CHECK_AST(ast_for, SH_GR_FOR_CLAUSE)
+	SHG_CHECK_AST(ast_for, SH_GR_FOR_CLAUSE);
 	for_clause = sh_g_for_new();
 	if (!ast_for->data || !ast_for->right) // TODO: if true, free for_clause
 		return (NULL);
 	for_clause->name = SHG_AST_TOK(ast_for)->val; // TODO: alloc mem
-	//if (!(for_clause->do_group = sh_g_com_cmd(ast_for->right))) // TODO: free if true
-	if (!(for_clause->do_group = sh_g_group(ast_for->right))) // TODO: free if true
+	if (!(for_clause->do_group = sh_g_group(ast_for->right))) // TODO: free if
 		return (NULL);
 	wordlist = ast_for->left;
 	while (wordlist)
@@ -48,7 +47,7 @@ void			*sh_g_for(t_btree *ast_for)
 	return (for_clause);
 }
 
-void			sh_g_for_put(void*g, int op)
+void			sh_g_for_put(void *g, int op)
 {
 	t_for		*for_clause;
 	t_com_cmd	*do_group;
@@ -56,7 +55,7 @@ void			sh_g_for_put(void*g, int op)
 	if (!g)
 		return ;
 	g_g_putlev++;
-	SHG_PUT_CASTVAR(for_clause, g, t_for*, op)
+	SHG_PUT_CASTVAR(for_clause, g, t_for*, op);
 	do_group = for_clause->do_group;
 	SHG_PUT_PRINTF("for_clause:\n", g_g_putlev++);
 	SHG_PUT_PRINTF("name: ", g_g_putlev);
@@ -65,6 +64,5 @@ void			sh_g_for_put(void*g, int op)
 	ft_lstiter(for_clause->lst_wordlist, &sh_g_wordput);
 	SHG_PUT_PRINTF("do_group:\n", g_g_putlev);
 	sh_g_com_cmd_put(do_group, 0);
-	//((void(*)(void*, int))sh_g_cmd(do_group))(do_group->core, 0);
 	g_g_putlev -= 2;
 }

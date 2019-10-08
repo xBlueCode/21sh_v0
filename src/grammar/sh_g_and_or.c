@@ -6,13 +6,13 @@
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:12:55 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/10/07 19:12:56 by abbesbes         ###   ########.fr       */
+/*   Updated: 2019/10/08 22:19:21 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ftsh.h"
 
-extern int 		g_g_putlev;
+extern int		g_g_putlev;
 
 void			*sh_g_and_or_new(void)
 {
@@ -24,7 +24,7 @@ void			*sh_g_and_or_new(void)
 	return (and_or);
 }
 
-void			sh_g_and_or_free(void**g)
+void			sh_g_and_or_free(void **g)
 {
 	t_and_or	**and_or;
 
@@ -41,32 +41,32 @@ void			*sh_g_and_or(t_btree *ast_ao)
 
 	SHG_CHECK_AST(ast_ao, SH_GR_AND_OR);
 	and_or = sh_g_and_or_new();
-	//pipe = NULL; // TODO: recheck
 	while (ast_ao)
 	{
 		if (ast_ao->data)
 			ft_dstrins_ch(and_or->sep, -1, SHG_AST_TOK(ast_ao)->t);
 		if ((pipe = sh_g_pipe(ast_ao->left)))
-			SHG_LSTADD_FREE(and_or, lst_pipe, pipe)
+		{
+			SHG_LSTADD_FREE(and_or, lst_pipe, pipe);
+		}
 		else
-			break;
+			break ;
 		ast_ao = ast_ao->right;
-		//FT_MEMDEL(pipe);
 	}
 	if (!and_or->lst_pipe)
 		return (NULL);
 	return (and_or);
 }
 
-void			sh_g_and_or_put(void*g, int op)
+void			sh_g_and_or_put(void *g, int op)
 {
 	t_and_or	*and_or;
-	int 		i;
+	int			i;
 
 	if (!g)
 		return ;
 	g_g_putlev++;
-	SHG_PUT_CASTVAR(and_or, g, t_and_or*, op)
+	SHG_PUT_CASTVAR(and_or, g, t_and_or*, op);
 	SHG_PUT_PRINTF("and_or:\n", g_g_putlev++);
 	SHG_PUT_PRINTF("pipe_list:\n", g_g_putlev);
 	ft_lstiterop(and_or->lst_pipe, SHG_PUT_CASTFUN(sh_g_pipe_put), 1);

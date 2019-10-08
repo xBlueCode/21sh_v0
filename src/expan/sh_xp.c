@@ -21,8 +21,6 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 
 	DF0;
 	i = -1;
-	//indq = BIT_IS(sh->mode, SH_MODE_INDQ);
-	//BIT_USET(sh->mode, SH_MODE_INDQ);
 	indq = BIT_MIS(sh->nest, SH_NEST_M, SH_NEST_INDQ);
 	BIT_MUSET(sh->nest, SH_NEST_M);
 	while (++i < words->len)
@@ -34,7 +32,6 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 			if (sh_xp_brace(sh, words, &i, &j)
 				|| sh_xp_param(sh, words, &i, &j)
 				|| sh_xp_var(sh, words, &i, &j)
-				//|| sh_xp_dq(sh, words, &i, &j) // TODO: perform it after splitting
 				|| sh_xp_sq(sh, words, &i, &j)
 				|| sh_xp_bq(sh, words, &i, &j)
 				|| sh_xp_scmd(sh, words, &i, &j)
@@ -57,7 +54,6 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 			if (!sh_xp_dq(sh, words, &i, &j))
 				j++;
 	}
-	//DF_PFWAIT(" >", 8);
 	return (1);
 }
 

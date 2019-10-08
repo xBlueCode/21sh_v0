@@ -15,7 +15,7 @@
 
 int		sh_lex_seek_ion(t_lex *lex, int op)
 {
-	int pos;
+	int	pos;
 
 	(void)op;
 	if (!ft_isdigit(lex->in->str[lex->i]))

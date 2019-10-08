@@ -15,6 +15,12 @@
 
 t_sh	*g_sh;
 
+/**
+ * Run from a script file
+ * @param filename
+ * @param envp
+ * @return
+ */
 int		sh_file_run(char *filename, char **envp)
 {
 	t_dstr	*dscript;
@@ -31,6 +37,12 @@ int		sh_file_run(char *filename, char **envp)
 	return (ret);
 }
 
+/**
+ * Executes the script string
+ * @param sh
+ * @param script
+ * @return
+ */
 int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 {
 	t_lex		*lex;
@@ -56,6 +68,11 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	return (ret);
 }
 
+/**
+ * Readline routine trigger
+ * @param line
+ * @return
+ */
 int		sh_inter_read(char **line)
 {
 	//DF0
@@ -67,6 +84,11 @@ int		sh_inter_read(char **line)
 	return (0);
 }
 
+/**
+ * Run from terminal
+ * @param envp
+ * @return
+ */
 int		sh_term_run(char **envp)
 {
 	char	*line;
@@ -95,6 +117,13 @@ int		sh_term_run(char **envp)
 	return (ret);
 }
 
+/**
+ *
+ * @param ac
+ * @param av
+ * @param envp
+ * @return
+ */
 int		main(int ac, char **av, char **envp)
 {
 	int sh_est;

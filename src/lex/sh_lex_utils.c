@@ -18,7 +18,7 @@ int		sh_lex_isinname(char c)
 	return (c == '_' || ft_isalnum(c));
 }
 
-int 	sh_lex_tok_isdelim(char c)
+int		sh_lex_tok_isdelim(char c)
 {
 	if (!c)
 		return (1);
@@ -37,5 +37,5 @@ t_token	*sh_lex_tokdup(t_token *t)
 	if (!t)
 		return (NULL);
 	return (sh_lex_tok_new(t->t, t->p, t->l,
-		!t->val ? NULL : t->val->str)); // TODO: check memory leaks
+		!t->val ? NULL : t->val->str));
 }

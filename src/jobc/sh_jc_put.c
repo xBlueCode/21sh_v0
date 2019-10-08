@@ -15,7 +15,7 @@
 
 int 			sh_jc_put_in_forg(t_sh *sh, int cont)
 {
-	DF0
+	DF0;
 	tcsetpgrp(sh->term_std, sh->jc->cjob->pgid);
 	if (cont)
 	{
@@ -36,7 +36,7 @@ int 			sh_jc_put_in_forg(t_sh *sh, int cont)
 
 int 			sh_jc_put_in_back(t_sh *sh, int cont)
 {
-	DF0
+	DF0;
 	if (cont)
 	{
 		if (kill (-sh->jc->cjob->pgid, SIGCONT) < 0)

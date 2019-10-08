@@ -13,25 +13,25 @@
 #include "libft.h"
 #include "sh_lex.h"
 
-int				sh_lex_print(t_lex *lex)
+int		sh_lex_print(t_lex *lex)
 {
-	t_list 	*lstHead;
+	t_list	*lst_head;
 	t_token	*token;
 	int		i;
 
 	if (!lex)
 		ft_printf("Invalid Lexer !\n");
-	else if (!(lstHead = lex->tlst))
+	else if (!(lst_head = lex->tlst))
 		ft_printf("No token found !");
 	else
 	{
 		i = 0;
-		while (lstHead)
+		while (lst_head)
 		{
-			if ((token = (t_token*)lstHead->content))
+			if ((token = (t_token*)lst_head->content))
 				ft_printf("-%d\tT: <%-02d>\tV: <%s>",
 					i, token->t, token->val);
-			lstHead = lstHead->next;
+			lst_head = lst_head->next;
 		}
 	}
 	return (0);

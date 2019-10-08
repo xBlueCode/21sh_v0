@@ -12,23 +12,20 @@
 
 #include "ftsh.h"
 
-extern int 		g_g_putlev;
+extern int		g_g_putlev;
 
 void			*sh_g_cmd_new(void)
 {
 	t_cmd *cmd;
 
-	SHG_CHECK_MALL(cmd)
+	SHG_CHECK_MALL(cmd);
 	cmd->core = NULL;
 	cmd->lst_redir = NULL;
 	cmd->type = -1;
-	//cmd->stdi = STDIN_FILENO;
-	//cmd->stdo = STDOUT_FILENO;
-	//cmd->stde = STDERR_FILENO;
 	return (cmd);
 }
 
-void			sh_g_cmd_free(void**g)
+void			sh_g_cmd_free(void **g)
 {
 	t_cmd **cmd;
 
@@ -45,7 +42,7 @@ void			*sh_g_cmd(t_btree *ast)
 	t_btree	*ast_core;
 	t_redir	*redir;
 
-	SHG_CHECK_AST(ast, SH_GR_CMD)
+	SHG_CHECK_AST(ast, SH_GR_CMD);
 	cmd = sh_g_cmd_new();
 	if (!ast->left)
 		return (NULL); // TODO: free cmd
@@ -75,9 +72,9 @@ void			sh_g_cmd_put(void *g, int op)
 	t_cmd *cmd;
 
 	if (!g)
-		return;
+		return ;
 	g_g_putlev++;
-	SHG_PUT_CASTVAR(cmd, g, t_cmd*, op)
+	SHG_PUT_CASTVAR(cmd, g, t_cmd*, op);
 	SHG_PUT_PRINTF("command:\n", g_g_putlev++);
 	SHG_PUT_PRINTF("command_core:\n", g_g_putlev);
 	((void(*)(void*, int))sh_g_cmd_core_put(cmd->type))(cmd->core, 0);

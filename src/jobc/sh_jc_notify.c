@@ -19,7 +19,7 @@ int 			sh_jc_notify(t_jcon *jc)
 	t_list	*jnext;
 	t_job	*cjob;
 
-	DF0
+	DF0;
 //	sh_jc_wait(jc, jc->cjob); // TODO: del
 	sh_jc_update_status(jc);
 	jlist = jc->jobs;
@@ -59,7 +59,7 @@ int 			sh_jc_update_status(t_jcon *jc)
 	int		wstatus;
 	pid_t 	pid;
 
-	DF0
+	DF0;
 	pid = waitpid(WAIT_ANY, &wstatus, WUNTRACED | WNOHANG);
 	ft_printf("-------> update status: %d\n", pid);
 	while (!sh_jc_mark_status(jc, pid, wstatus))

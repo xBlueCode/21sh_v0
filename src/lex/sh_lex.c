@@ -15,18 +15,17 @@
 
 t_lex		g_lex;
 
-t_lex 		sh_lex(void)
+t_lex		sh_lex(void)
 {
 	return (g_lex);
 }
 
-t_lex 		*sh_lex_new(char *input)
+t_lex		*sh_lex_new(char *input)
 {
 	t_lex	*lex;
 
 	if (!input || !(lex = (t_lex*)ft_memalloc(sizeof(t_lex))))
 		return (NULL);
-//	ft_printf(C_CYN"LEX INIT:\n%s\n"T_END, input);
 	lex->in = ft_dstrnew_str(input);
 	lex->i = 0;
 	lex->scope = ft_dstrnew_max(1);
@@ -42,16 +41,14 @@ t_lex 		*sh_lex_new(char *input)
 	lex->alias_off = 0;
 	lex->alias_rec = 0;
 	lex->assi = -1;
-//	sh_lex_tok_add(*plex, sh_lex_tok_new(TSNONE, -1, 0, NULL));
 	lex->tokend = &((t_token){.t = TSNONE, .p = -1, .l = 0, .val = NULL});
 	return (0);
 }
 
-int 		sh_lex_init(t_lex **plex, char *input)
+int			sh_lex_init(t_lex **plex, char *input)
 {
 	if (!input || !(*plex = (t_lex*)ft_memalloc(sizeof(t_lex))))
 		return (-1);
-//	ft_printf(C_CYN"LEX INIT:\n%s\n"T_END, input);
 	(*plex)->in = ft_dstrnew_str(input);
 	(*plex)->i = 0;
 	(*plex)->scope = ft_dstrnew_max(1);
@@ -59,7 +56,7 @@ int 		sh_lex_init(t_lex **plex, char *input)
 	(*plex)->ctx = TCTX_FIRSTW;
 	(*plex)->tlst = NULL;
 	(*plex)->toff = (*plex)->tlst;
-    (*plex)->tclass = (*plex)->tlst;
+	(*plex)->tclass = (*plex)->tlst;
 	(*plex)->hd_key = ft_dastrnew_max(1);
 	(*plex)->hd_val = ft_dastrnew_max(1);
 	(*plex)->alias_chain =
@@ -67,12 +64,11 @@ int 		sh_lex_init(t_lex **plex, char *input)
 	(*plex)->alias_off = 0;
 	(*plex)->alias_rec = 0;
 	(*plex)->assi = -1;
-//	sh_lex_tok_add(*plex, sh_lex_tok_new(TSNONE, -1, 0, NULL));
 	(*plex)->tokend = &((t_token){.t = TSNONE, .p = -1, .l = 0, .val = NULL});
 	return (0);
 }
 
-int 		sh_lex_free(t_lex **plex)
+int			sh_lex_free(t_lex **plex)
 {
 	if (!plex || !*plex)
 		return (-1);
@@ -86,7 +82,7 @@ int 		sh_lex_free(t_lex **plex)
 	return (0);
 }
 
-int 		sh_lex_start(t_lex *lex)
+int			sh_lex_start(t_lex *lex)
 {
 	return (sh_lex_seek(lex, 1));
 }

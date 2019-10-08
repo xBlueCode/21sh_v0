@@ -27,7 +27,7 @@ t_job 			*sh_jc_new_job(int ind, int bg)
 {
 	t_job *job;
 
-	DF0
+	DF0;
 	job = ft_memalloc(sizeof(t_job));
 	job->ind = ind;
 	job->bg = bg;
@@ -42,7 +42,7 @@ t_job 			*sh_jc_new_job(int ind, int bg)
 
 void			sh_jc_free_job(void **pjob) // TODO: intern free
 {
-	DF0
+	DF0;
 	ft_memdel(pjob);
 }
 
@@ -51,7 +51,7 @@ int 			sh_jc_add(t_jcon *jc, int bg)
 	t_job	*new_job;
 	t_list	*jlast;
 
-	DF0
+	DF0;
 	if (!jc && ft_printf("JC NULL\n"))
 		return (KO);
 	if (!jc->jobs)
@@ -72,7 +72,7 @@ int 			sh_jc_wait(t_jcon *jc, t_job *job)
 	int wstatus;
 	pid_t pid;
 
-	DF0
+	DF0;
 //	pid = waitpid (WAIT_ANY, &wstatus, WUNTRACED);
 //	ft_printf("----> pid got from wait: %d\n", pid);
 	pid = waitpid(WAIT_ANY, &wstatus, WUNTRACED); // TODO: WAIT_ANY

@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "sh_lex.h"
 
-int 	sh_lex_seek_hash(t_lex *lex, int op)
+int		sh_lex_seek_hash(t_lex *lex, int op)
 {
 	int clen;
 

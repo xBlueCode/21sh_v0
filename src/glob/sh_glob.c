@@ -44,7 +44,7 @@ int			rl_glob_indir_lin(char *base, char *spath, char *pat, t_dastr *res)
 
 	tmp = NULL;
 	if ((slash = ft_strchr_inv(pat, '/')))
-		conds = sh_glob_scandir(base, (tmp = ft_strndup(pat, slash++ - pat))); // TODO: clean after strdup
+		conds = sh_glob_scandir(base, (tmp = ft_strndup(pat, slash++ - pat)));
 	else
 		conds = sh_glob_scandir(base, spath);
 	FT_MEMDEL(tmp);

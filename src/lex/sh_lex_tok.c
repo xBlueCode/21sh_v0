@@ -53,7 +53,7 @@ int				sh_lex_tok_free(t_token **ptok)
 void			sh_lex_tok_tfree(t_token **ptok)
 {
 	if (!ptok || !*ptok)
-		return;
+		return ;
 	ft_dstrfree(&(*ptok)->val);
 	ft_memdel((void**)ptok);
 }

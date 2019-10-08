@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sh_glob_match.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/08 22:12:57 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/10/08 22:12:58 by abbesbes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ftsh.h"
 
 int		sh_glob_match(char *str, char *pat)
@@ -35,8 +47,6 @@ int		sh_glob_match_range(int c, char *ran)
 
 	if (*ran != '[')
 		return (0);
-	//if ((class = sh_glob_cget(ran)) > -1)
-	//  return (sh_g_caction[class](c));
 	neg = ran[1] == '^';
 	i = neg ? 1 : 0;
 	while (ran[++i] && ran[i] != ']')

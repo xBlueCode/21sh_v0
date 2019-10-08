@@ -18,7 +18,7 @@ void			*sh_g_com_cmds_new(void)
 {
 	t_com_cmds	*com_cmds;
 
-	SHG_CHECK_MALL(com_cmds)
+	SHG_CHECK_MALL(com_cmds);
 	com_cmds->lst_com_cmd = NULL;
 	return (com_cmds);
 }
@@ -27,7 +27,7 @@ void			*sh_g_com_cmd_new(void)
 {
 	t_com_cmd	*com_cmd;
 
-	SHG_CHECK_MALL(com_cmd)
+	SHG_CHECK_MALL(com_cmd);
 	com_cmd->lst_and_or = NULL;
 	com_cmd->sep = ft_dstrnew_max(2);
 	com_cmd->gr = -1;
@@ -68,7 +68,7 @@ void			*sh_g_com_cmds(t_btree *ast)
 		if (!(com_cmd = sh_g_com_cmd(ast->left)))
 			break ;
 		com_cmd->gr = SH_GR_COMPLETE_CMD;
-		SHG_LSTADD_FREE(com_cmds, lst_com_cmd, com_cmd)
+		SHG_LSTADD_FREE(com_cmds, lst_com_cmd, com_cmd);
 		ast = ast->right;
 		//FT_MEMDEL(com_cmd);
 	}
@@ -94,7 +94,7 @@ void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
 	while (list)
 	{
 		if ((and_or = sh_g_and_or(list->left)))
-			SHG_LSTADD_FREE(com_cmd, lst_and_or, and_or)
+			SHG_LSTADD_FREE(com_cmd, lst_and_or, and_or);
 		if (list->data) // list & term_std must store the sep in data
 			ft_dstrins_ch(com_cmd->sep, -1, SHG_AST_TOK(list)->t);
 		else // TODO: FOR COMP_LIST but it must be compatible with complete_cmd
@@ -114,7 +114,7 @@ void			sh_g_com_cmds_put(void*g, int op)
 	if (!g)
 		return ;
 	//com_cmds = (t_com_cmds*)g;
-	SHG_PUT_CASTVAR(com_cmds, g, t_com_cmds*, op)
+	SHG_PUT_CASTVAR(com_cmds, g, t_com_cmds*, op);
 	SHG_PUT_PRINTF("complete_commands:\n", g_g_putlev);
 	ft_lstiterop(com_cmds->lst_com_cmd, SHG_PUT_CASTFUN(sh_g_com_cmd_put), 1);
 }

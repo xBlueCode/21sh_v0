@@ -27,12 +27,12 @@ int			sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 	if (word->str[*j] != '~')
 		return (0);
 	k = *j + 1;
-	if ((word->str[k] == '+' || word->str[k] == '-') && sh_is_tilde_delim(word->str[k + 1]))
-		//	&& (!word->str[k + 1] || word->str[k + 1] == '/' || word->str[k + 1] == ':'))
+	if ((word->str[k] == '+' || word->str[k] == '-')
+		&& sh_is_tilde_delim(word->str[k + 1]))
 	{
 		rep = sh_var_getval(sh->var, word->str[k] == '+' ? "PWD" : "OLDPWD");
 		ft_dstrdel_n(words->a[*i], *j, 2);
-		ft_dstrins_str(words->a[*i], *j, rep); // TODO: free rep
+		ft_dstrins_str(words->a[*i], *j, rep);
 		*j += ft_strlenz(rep);
 		return (1);
 	}

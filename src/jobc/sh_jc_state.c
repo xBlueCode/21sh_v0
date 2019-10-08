@@ -17,7 +17,7 @@ int 			sh_jc_is_stop(t_job *job)
 	t_list		*plist;
 	t_process	*process;
 
-	DF0
+	DF0;
 	ft_printf(C_RED"job in %s is %s\n"T_END, __FUNCTION__, !job ? "0" : "1");
 	if (!job || !job->process)
 		return (1);
@@ -41,7 +41,7 @@ int 			sh_jc_is_done(t_job *job)
 	t_list		*plist;
 	t_process	*process;
 
-	DF0
+	DF0;
 	ft_printf(C_RED"job in %s is %s\n"T_END, __FUNCTION__, !job ? "0" : "1");
 	if (!job)
 		return (1);
@@ -67,7 +67,7 @@ int 			sh_jc_mark_status(t_jcon *jc, pid_t pid, int status)
 	t_list		*plist;
 	t_process	*p;
 
-	DF0
+	DF0;
 	if (!jc || !jc->jobs)
 		return (-1);
 	jlist = jc->jobs;

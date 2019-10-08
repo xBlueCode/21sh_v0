@@ -12,7 +12,7 @@
 
 #include "ftsh.h"
 
-extern int 		g_g_putlev;
+extern int		g_g_putlev;
 
 void			*sh_g_pipe_new(void)
 {
@@ -24,15 +24,15 @@ void			*sh_g_pipe_new(void)
 	return (pipe);
 }
 
-void			sh_g_pipe_free(void**g)
+void			sh_g_pipe_free(void **g)
 {
 	t_pipe	**pipe;
 
-	DF0
+	DF0;
 	pipe = (t_pipe**)g;
 	ft_lst_free(&(*pipe)->lst_cmd, &sh_g_cmd_free);
 	ft_dstrfree(&(*pipe)->op);
-	FT_MEMDEL(*g)
+	FT_MEMDEL(*g);
 }
 
 void			*sh_g_pipe(t_btree *ast)
@@ -41,7 +41,7 @@ void			*sh_g_pipe(t_btree *ast)
 	t_btree	*ast_pipesec;
 	t_cmd	*cmd;
 
-	SHG_CHECK_AST(ast, SH_GR_PIPELINE)
+	SHG_CHECK_AST(ast, SH_GR_PIPELINE);
 	pipe = sh_g_pipe_new();
 	pipe->neg = ast->data ? 1 : 0;
 	ast_pipesec = ast->left;
@@ -57,14 +57,14 @@ void			*sh_g_pipe(t_btree *ast)
 	return (pipe);
 }
 
-void			sh_g_pipe_put(void*g, int op)
+void			sh_g_pipe_put(void *g, int op)
 {
 	t_pipe *pipe;
 
 	if (!g)
-		return;
+		return ;
 	g_g_putlev++;
-	SHG_PUT_CASTVAR(pipe, g, t_pipe*, op)
+	SHG_PUT_CASTVAR(pipe, g, t_pipe*, op);
 	SHG_PUT_PRINTF("pipe: ", g_g_putlev++);
 	ft_printf("(neg = %d)\n", pipe->neg);
 	SHG_PUT_PRINTF("command_list:\n", g_g_putlev);

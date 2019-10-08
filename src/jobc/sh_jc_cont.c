@@ -17,7 +17,7 @@ int				sh_jc_mark_as_running(t_job *job)
 	t_list		*plist;
 	t_process	*p;
 
-	DF0
+	DF0;
 	if (!job)
 		return (KO);
 	plist = job->process;
