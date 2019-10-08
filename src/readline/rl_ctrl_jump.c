@@ -18,7 +18,7 @@ int				rl_ctrl_jump_end(int c)
 {
 	(void)c;
 	if (g_rl.cc != (ssize_t)ft_strlenz(g_rl.txt->a[g_rl.cl]->str))
-	{	
+	{
 		rl_cur_fromto(g_rl.cc, ft_strlenz(g_rl.txt->a[g_rl.cl]->str));
 		g_rl.cc = ft_strlenz(g_rl.txt->a[g_rl.cl]->str);
 		return (0);
@@ -30,7 +30,7 @@ int				rl_ctrl_jump_beg(int c)
 {
 	(void)c;
 	if (g_rl.cc)
-	{	
+	{
 		rl_cur_fromto(g_rl.cc, 0);
 		g_rl.cc = 0;
 		return (0);
@@ -52,7 +52,6 @@ int				rl_ctrl_jump_w_next_end(int c)
 	g_rl.cc = to;
 	return (0);
 }
-
 
 int				rl_ctrl_jump_w_next_beg(int c)
 {

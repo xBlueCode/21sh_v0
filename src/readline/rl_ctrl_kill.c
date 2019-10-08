@@ -64,7 +64,7 @@ int				rl_ctrl_kill_w(int c)
 		ft_putchar(0x07);
 		return (1);
 	}
-	rl_cur_fromto(g_rl.cc, ilen[0]);	
+	rl_cur_fromto(g_rl.cc, ilen[0]);
 	rl_putnchar_wrap(' ', ft_strlenz(dline->str + ilen[0]), ilen[0]);
 	rl_cur_fromto(ft_strlenz(dline->str), (g_rl.cc = ilen[0]));
 	ft_dstrdel_n(dline, g_rl.cc, ilen[1]);

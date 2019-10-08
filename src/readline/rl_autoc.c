@@ -29,7 +29,10 @@ int				rl_autoc(int c)
 	cw = ft_strndup(dline->str + ilen[0], ilen[1]);
 	cxt = rl_autoc_cxt_get(dline->str, ilen[0]);
 	if (!(res = rl_autoc_match(cw, cxt)) || !res->len)
-		FT_INST_RET(1, {FT_MEMDEL(cw); ft_dastrfree(&res);})
+	{
+		FT_MEMDEL(cw);
+		FT_INST_RET(1, ft_dastrfree(&res));
+	}
 	if ((picked = rl_autoc_xmenu(res)))
 	{
 		rl_cur_fromto(g_rl.cc, ilen[0]);
@@ -42,7 +45,6 @@ int				rl_autoc(int c)
 		ft_dastrfree(&res);
 	}
 	FT_MEMDEL(cw);
-	//ft_printf("\nCW: _%s_\t\tCXT: %d\n", cw, cxt);
 	return (1);
 }
 
@@ -71,10 +73,8 @@ int				rl_autoc_cxt_get(const char *line, ssize_t pos)
 	return (cxt);
 }
 
-t_dastr		*rl_autoc_match(char *w, int cxt) // replace by array
+t_dastr		*rl_autoc_match(char *w, int cxt)
 {
-	//(void)cxt;
-	//ft_printf("autoc_match\n");
 	if (cxt == RL_CXT_VAR)
 		return (rl_autoc_match_var(w));
 	else if (cxt == RL_CXT_BIN)

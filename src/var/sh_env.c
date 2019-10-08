@@ -12,7 +12,7 @@
 
 #include "ftsh.h"
 
-char 	*sh_env_getval(char **envp, char *name)
+char	*sh_env_getval(char **envp, char *name)
 {
 	int		i;
 	int		eqi;

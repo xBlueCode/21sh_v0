@@ -24,7 +24,7 @@ int				rl_ctrl_move_ri(int c)
 int				rl_ctrl_move_le(int c)
 {
 	if (c == KLEFT && g_rl.cc && g_rl.cc--)
-			rl_cur_fromto(g_rl.cc + 1, g_rl.cc);
+		rl_cur_fromto(g_rl.cc + 1, g_rl.cc);
 	return (0);
 }
 
@@ -42,7 +42,7 @@ int				rl_ctrl_move_do(int c)
 {
 	if (c == KDOWN)
 	{
-		if (ft_strlenz(g_rl.txt->a[g_rl.cl]->str) 
+		if (ft_strlenz(g_rl.txt->a[g_rl.cl]->str)
 				>= (size_t)(g_rl.cc + g_rl.wc))
 		{
 			rl_cur_fromto(g_rl.cc, g_rl.cc + g_rl.wc);

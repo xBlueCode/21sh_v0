@@ -57,7 +57,7 @@ int				rl_cur_move(int from, int to, int plen)
 
 	wc = g_rl.wc;
 	nl = (from + plen) / wc + (((from + plen) % wc) ? 1 : 0)
-		 - (to + plen) / wc - (((to + plen) % wc) ? 1 : 0);
+		- (to + plen) / wc - (((to + plen) % wc) ? 1 : 0);
 	if (!((from + plen) % wc))
 		nl++;
 	if (!((to + plen) % wc))

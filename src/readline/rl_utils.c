@@ -22,7 +22,7 @@ int			rl_ter_putchar(int ch)
 	return (0);
 }
 
-int		rl_update_win(void)
+int			rl_update_win(void)
 {
 	struct winsize ws;
 

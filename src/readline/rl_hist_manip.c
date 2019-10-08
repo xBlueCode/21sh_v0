@@ -17,18 +17,16 @@ extern t_hist	g_his;
 int				rl_hist_parse(char *str, int num)
 {
 	t_dastr		*ent;
-	char 		*line;
+	char		*line;
 	ssize_t		etx;
 
-	//ft_printf("hist_parsing str: <%s>, num <%d>\n", str, num);
 	if (!str || num < 1)
 		return (-1);
-	//ent = ft_dastrnew_max(num);
 	ent = g_his.ent;
 	while (--num > -1)
 	{
 		if ((etx = ft_strichr(str, 0x03)) < 0)
-			break;
+			break ;
 		line = ft_strndup(str, etx);
 		str = str + etx + 1;
 		ft_dastrins_str(ent, -1, line);
@@ -41,9 +39,9 @@ int				rl_hist_parse(char *str, int num)
 t_dastr			*rl_hist_get_txt(int cur)
 {
 	t_dstr		*cmd;
-	char 		*cmdstr;
+	char		*cmdstr;
 	char		*nl;
-	char 		*tmp;
+	char		*tmp;
 	t_dastr		*txt;
 
 	if (cur < 0 && (txt = g_his.back))
@@ -66,7 +64,7 @@ t_dastr			*rl_hist_get_txt(int cur)
 	return (txt);
 }
 
-int 			rl_hist_add(char *line)
+int				rl_hist_add(char *line)
 {
 	if (!line)
 		return (-1);

@@ -23,8 +23,6 @@ static int	termconfig_attr(t_term *term)
 {
 	struct termios tconfig;
 
-	//tputs(tgetstr("ti", NULL), 1, ter_putchar);
-	//tputs(tgetstr("vi", NULL), 1, ter_putchar);
 	tcgetattr(STDERR_FILENO, &(term->tconfig_def));
 	if (tcgetattr(STDERR_FILENO, &tconfig))
 	{
@@ -50,7 +48,8 @@ int			sh_termconfig_init(t_term *term)
 	char			buff[2048];
 	int				r;
 
-	if (!(tname = getenv("TER"))) // TODO: replace with ft_getenv
+	// TODO: replace with ft_getenv
+	if (!(tname = getenv("TER")))
 	{
 		if (!(tname = TER_DEF) || !isatty(STDIN_FILENO))
 		{
@@ -73,8 +72,6 @@ int			sh_termconfig_init(t_term *term)
 
 int			sh_termconfig_reset(t_term *term)
 {
-	//tputs(tgetstr("te", NULL), 1, ter_putchar);
-	//tputs(tgetstr("ve", NULL), 1, ter_putchar);
 	if (tcsetattr(STDERR_FILENO, TCSANOW, &(term->tconfig_def)))
 	{
 		ft_putendl_fd("ftsh: tcsetattr: Failed !", STDERR_FILENO);

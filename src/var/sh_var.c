@@ -13,30 +13,21 @@
 #include "libft.h"
 #include "ftsh.h"
 
-//t_table		*g_var;
-
-
-t_table		*sh_var(void)
-{
-	return (sh_sh()->var);
-}
-
-int 		sh_var_start(t_table **var, char **envp)
+int			sh_var_start(t_table **var, char **envp)
 {
 	if (!(*var = ft_tabnew_max(SH_VAR_MAX)))
 		ft_printf("sh_var_init: Failed to create Env Table\n");
 	(void)envp;
 	sh_var_inherit(*var, envp);
-	//sh_var_init(*var);
 	return (0);
 }
 
-int 		sh_var_inherit(t_table *var, char **envp)
+int			sh_var_inherit(t_table *var, char **envp)
 {
 	int		i;
-	char 	*eq;
+	char	*eq;
 	t_trow	trow;
-	char 	*name;
+	char	*name;
 
 	if (!envp)
 		return (-1);
@@ -46,26 +37,23 @@ int 		sh_var_inherit(t_table *var, char **envp)
 		if (!(eq = ft_strchr(envp[i], '=')))
 			continue;
 		name = ft_strndup(envp[i], eq - envp[i]);
-		trow = ft_tabrow_set(i, name , eq + 1, SH_VO_GLO);
-		ft_tabins(var, trow, 0); // TODO: memory leaks
-		//FT_MEMDEL(name);
+		trow = ft_tabrow_set(i, name, eq + 1, SH_VO_GLO);
+		ft_tabins(var, trow, 0);
 		ft_memdel((void**)&(trow.name));
 	}
-	//ft_printf("tab inserted !\n");
-	//sleep(5);
 	return (OK);
 }
 
-int 		sh_var_init(t_table *var)
+int			sh_var_init(t_table *var)
 {
 	sh_var_init_ftsh(var);
 	sh_var_init_id(var);
 	return (0);
 }
 
-int 		sh_var_init_id(t_table *var)
+int			sh_var_init_id(t_table *var)
 {
-	char 	*vpid;
+	char	*vpid;
 
 	vpid = ft_itoa((int)getpid());
 	ft_tabins(var, ft_tabrow_set(-1, SH_VN_SHPID, vpid, SH_VO_SHPID), 1);
@@ -74,10 +62,10 @@ int 		sh_var_init_id(t_table *var)
 	return (OK);
 }
 
-int 		sh_var_init_ftsh(t_table *var)
+int			sh_var_init_ftsh(t_table *var)
 {
 	t_trow	trow;
-	char 	*vshlvl;
+	char	*vshlvl;
 
 	trow = ft_tabget_n(var, SH_VN_FTSH);
 	if (trow.i < 0)
@@ -87,7 +75,8 @@ int 		sh_var_init_ftsh(t_table *var)
 	}
 	trow = ft_tabget_n(var, SH_VN_SHLVL);
 	if (trow.i < 0 || !vshlvl)
-		ft_tabins(var, ft_tabrow_set(-1, SH_VN_SHLVL, SH_VV_SHLVL, SH_VO_LOC), 1);
+		ft_tabins(var,
+			ft_tabrow_set(-1, SH_VN_SHLVL, SH_VV_SHLVL, SH_VO_LOC), 1);
 	else if ((vshlvl = ft_itoa(ft_atoi(trow.value) + 1)))
 		ft_tabins(var, ft_tabrow_set(-1, SH_VN_SHLVL, vshlvl, SH_VO_LOC), 1);
 	ft_memdel((void**)&vshlvl);

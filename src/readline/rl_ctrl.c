@@ -22,7 +22,6 @@ int				rl_ctrl_perform(int c)
 	while (g_rl_ctrl_keymap[++i])
 		if (g_rl_ctrl_keymap[i] == c)
 			return (g_rl_ctrl_action[i](c) + 1);
-	//ft_printf("\n%#x", c);
 	return (0);
 }
 
@@ -33,7 +32,6 @@ int				rl_vim_perform(int c)
 
 	if (g_rl.mode != RL_MODE_VIM || c == '\n')
 		return (0);
-	//c = ft_tolower(c);
 	i = -1;
 	while (g_rl_vim_keymap[++i])
 	{

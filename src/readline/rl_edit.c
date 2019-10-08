@@ -19,12 +19,12 @@
 extern t_rl		g_rl;
 
 int				rl_insert_nl(int c)
-{	
+{
 	if (c != '\n')
 		return (1);
 	ft_dstrins_ch(g_rl.txt->a[g_rl.cl], -1, c);
 	rl_cur_fromto(g_rl.cc, ft_strlenz(g_rl.txt->a[g_rl.cl]->str) - 1);
-	ft_putchar('\n'); // putchar c
+	ft_putchar('\n');
 	return (0);
 }
 

@@ -56,8 +56,6 @@ ssize_t		ft_strind_w_prev_beg(char *str, ssize_t cc)
 	if (!str || i <= 0 || (s = (ssize_t)ft_strlenz(str)) < i)
 		return (-1);
 	i = i - (s == i ? 1 : 0);
-	//if (!str || i <= 0 || (ssize_t)ft_strlenz(str) < i + 1)
-	//	return (-1);
 	if (!ft_isspace(str[i]) && ft_isspace(str[i - 1]))
 		return (ft_strind_w_prev_beg(str, cc - 1));
 	while (i > -1 && ft_isspace(str[i]))

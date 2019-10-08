@@ -18,7 +18,7 @@ t_dastr			*rl_autoc_match_bin(char *w)
 {
 	t_dastr		*res;
 	t_dastr		*bin_names;
-	int 		i;
+	int			i;
 
 	bin_names = sh_bin_names();
 	res = ft_dastrnew_max(2);
@@ -34,9 +34,9 @@ t_dastr			*rl_autoc_match_var(char *w)
 	t_dastr	*res;
 	t_trow	trow;
 	t_table	*vars;
-	int 	i;
+	int		i;
 
-	vars = sh_var();
+	vars = sh_sh()->var;
 	res = ft_dastrnew_max(2);
 	i = -1;
 	while (++i < vars->len)
@@ -56,12 +56,11 @@ t_dastr			*rl_autoc_match_glob(char *w)
 
 	if (!w)
 		return (NULL);
-	//DF_PFWAIT("mglob i <", 8)
 	res = ft_dastrnew_max(2);
 	if (*w == '/' && w++)
 		base = ft_strdup("");
 	else
-		base = ft_strdup("."); // get working dir
+		base = ft_strdup(".");
 	if (ft_strchr(w, '[') || ft_strchr(w, '*') || ft_strchr(w, '?'))
 	{
 		rl_glob_indir(base, "", w, res);
@@ -72,7 +71,6 @@ t_dastr			*rl_autoc_match_glob(char *w)
 	}
 	else
 		rl_glob_indir_lin(base, "", w, res);
-	FT_MEMDEL(base)
-	//DF_PFWAIT("mglob i >", 8)
+	FT_MEMDEL(base);
 	return (res);
 }

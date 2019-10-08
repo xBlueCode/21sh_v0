@@ -45,7 +45,6 @@ int				rl_ctrl_xo_before(int c)
 	}
 	dline = g_rl.txt->a[g_rl.cl];
 	ft_dstrins_str(dline, !g_rl.cc ? 0 : g_rl.cc, g_rl.reg->a[g_rl.regi]->str);
-	//rl_cur_fromto(g_rl.cc, g_rl.cc);
 	rl_putstr_wrap(dline->str, g_rl.cc);
 	g_rl.cc += ft_strlenz(g_rl.reg->a[g_rl.regi]->str);
 	rl_cur_fromto(ft_strlenz(dline->str), g_rl.cc);

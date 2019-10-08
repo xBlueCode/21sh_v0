@@ -18,7 +18,6 @@ char			*rl_autoc_menu(t_dastr *res)
 {
 	t_dstr	*dline;
 	char	*picked;
-//	int		i;
 
 	if (!res || !ft_arr_len((void**)res->a))
 		return (NULL);
@@ -48,7 +47,7 @@ int				rl_autoc_menu_clear(t_dstr **list, int i)
 	RL_TPUTS("cd");
 	RL_TPUTS_GO("UP", 1, 1);
 	slen = ft_strlenz(dline->str);
-	rl_cur_fromto(slen- slen % (g_rl.wc) - g_rl.plen, g_rl.cc);
+	rl_cur_fromto(slen - slen % (g_rl.wc) - g_rl.plen, g_rl.cc);
 	return (0);
 }
 
@@ -65,7 +64,8 @@ char			*rl_autoc_menu_select(t_dastr *res)
 	rl_autoc_menu_putlist(res->a);
 	while (!(c = '\0') && read(0, &c, sizeof(int)))
 		if (c == KUP || c == KDOWN)
-			rl_autoc_menu_move(res->a, &curl, 1 * (c == KDOWN) - 1 * (c == KUP));
+			rl_autoc_menu_move(res->a,
+				&curl, 1 * (c == KDOWN) - 1 * (c == KUP));
 		else if (c == '\n')
 		{
 			picked = (res->a[curl]->str);
@@ -106,11 +106,10 @@ int				rl_autoc_menu_putlist(t_dstr **list)
 
 int				rl_autoc_menu_move(t_dstr **list, int *curl, int action)
 {
-	int		len;
 	ssize_t	slen;
 
-	len = ft_arr_len((void**)list);
-	if ((action == 1 && *curl < len - 1) || (action == -1 && *curl > 0))
+	if ((action == 1 && *curl < ft_arr_len((void**)list) - 1)
+		|| (action == -1 && *curl > 0))
 	{
 		rl_cur_move(ft_strlenz(list[*curl]->str), 0, 0);
 		rl_putstr_wrapx(list[*curl]->str, 0, 0);

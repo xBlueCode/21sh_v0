@@ -16,14 +16,13 @@
 
 extern t_hist	g_his;
 
-int 		rl_hist_upload(void)
+int				rl_hist_upload(void)
 {
 	int fd;
 	int ret;
 
 	if ((fd = open(g_his.filename, O_RDONLY)) < 0)
 	{
-//		g_his.ent = ft_dastrnew_max(120);
 		return (-1);
 	}
 	ret = rl_hist_read(fd);
@@ -31,26 +30,27 @@ int 		rl_hist_upload(void)
 	return (ret);
 }
 
-int 		rl_hist_save(void)
+int				rl_hist_save(void)
 {
 	int fd;
 	int ret;
 
 	if (!g_his.ent)
 		return (0);
-	if ((fd = open(g_his.filename, O_APPEND | O_WRONLY | O_CREAT, S_IRWXU | S_IRWXG)) < 0)
+	if ((fd = open(g_his.filename,
+		O_APPEND | O_WRONLY | O_CREAT, S_IRWXU | S_IRWXG)) < 0)
 		return (-1);
 	ret = rl_hist_write(fd);
 	close(fd);
 	return (ret);
 }
 
-int			rl_hist_read(int fd)
+int				rl_hist_read(int fd)
 {
 	t_dstr		*data;
 	int			c;
-	int 		num;
-	int 		ret;
+	int			num;
+	int			ret;
 
 	num = 0;
 	data = ft_dstrnew_max(1024);
@@ -68,7 +68,7 @@ int			rl_hist_read(int fd)
 	return (ret);
 }
 
-int			rl_hist_write(int fd)
+int				rl_hist_write(int fd)
 {
 	int		i;
 
