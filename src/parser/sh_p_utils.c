@@ -45,6 +45,7 @@ int		sh_p_match(t_parser *p, t_btree **ast, int target)
 {
 	t_token *token;
 
+	DF0;
 	DPM0;
 	if (!p->tlook || !(token = (t_token*)p->tlook->content))
 		PMRET(0);

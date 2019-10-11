@@ -12,14 +12,29 @@
 
 #include "ftsh.h"
 
-int		sh_p_simp_cmd(t_parser *p, t_btree **ast)
+static int	sh_p_simp_cmd_norm(t_parser *p, t_btree **ast,
+		t_btree *cast, t_btree **fast)
+{
+	t_list	*back;
+
+	back = p->tlook;
+	cast->data = sh_lex_tokdup(SHG_AST_TOK(*fast));
+	cast->dsize = (*fast)->dsize;
+	ft_btreefree(fast, (t_free) & sh_lex_tok_tfree);
+	if (sh_p_cmd_suff(p, SHP_CAST_R))
+		PRET(1);
+	p->tlook = back;
+	PRET(1);
+}
+
+int			sh_p_simp_cmd(t_parser *p, t_btree **ast)
 {
 	t_list	*back0;
 	t_list	*back1;
-	t_list	*back2;
 	t_btree *cast;
 	t_btree *fast;
 
+	DF0;
 	DP0;
 	SHP_CAST_INIT(SH_GR_SIMP_CMD);
 	fast = NULL;
@@ -28,36 +43,18 @@ int		sh_p_simp_cmd(t_parser *p, t_btree **ast)
 	{
 		back1 = p->tlook;
 		if (sh_p_cmd_word(p, &fast))
-		{
-			back2 = p->tlook;
-			cast->data = sh_lex_tokdup(SHG_AST_TOK(fast));
-			cast->dsize = fast->dsize;
-			ft_btreefree(&fast, (t_free) & sh_lex_tok_tfree);
-			if (sh_p_cmd_suff(p, SHP_CAST_R))
-				PRET(1);
-			p->tlook = back2;
-			PRET(1);
-		}
+			return (sh_p_simp_cmd_norm(p, ast, cast, &fast));
 		ft_btreefree(&fast, (t_free) & sh_lex_tok_tfree);
 		p->tlook = back1;
 		PRET(1);
 	}
 	p->tlook = back0;
 	if (sh_p_cmd_name(p, &fast))
-	{
-		back1 = p->tlook;
-		cast->data = sh_lex_tokdup(SHG_AST_TOK(fast));
-		cast->dsize = fast->dsize;
-		ft_btreefree(&fast, (t_free) & sh_lex_tok_tfree);
-		if (sh_p_cmd_suff(p, SHP_CAST_R))
-			PRET(1);
-		p->tlook = back1;
-		PRET(1);
-	}
+		return (sh_p_simp_cmd_norm(p, ast, cast, &fast));
 	PRET(0);
 }
 
-int		sh_p_cmd_name(t_parser *p, t_btree **ast)
+int			sh_p_cmd_name(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
 
@@ -68,7 +65,7 @@ int		sh_p_cmd_name(t_parser *p, t_btree **ast)
 	PRET(0);
 }
 
-int		sh_p_cmd_word(t_parser *p, t_btree **ast)
+int			sh_p_cmd_word(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
 

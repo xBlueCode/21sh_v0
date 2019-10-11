@@ -17,6 +17,7 @@ int				sh_p_program(t_parser *p, t_btree **ast)
 	t_btree *cast;
 
 	p_lev = 0;
+	DF0;
 	DP0;
 	SHP_CAST_INIT(SH_GR_PROGRAM);
 	if (!sh_p_lbreak(p, NULL))

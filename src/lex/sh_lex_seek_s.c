@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "sh_lex.h"
 
-int		sh_lex_seek_param(t_lex *lex, int op)
+int			sh_lex_seek_param(t_lex *lex, int op)
 {
 	if (ft_strncmp(lex->in->str + lex->i, "${", 2))
 		return (0);
@@ -41,7 +41,18 @@ int		sh_lex_seek_param(t_lex *lex, int op)
 	return (1);
 }
 
-int		sh_lex_seek_scmd(t_lex *lex, int op)
+static int	sh_lex_seek_scmd_inner(t_lex *lex, int op)
+{
+	return (sh_lex_seek_rescope(lex, op) || sh_lex_seek_join(lex, op)
+		|| sh_lex_seek_escape(lex, op) || sh_lex_seek_hash(lex, op)
+		|| sh_lex_seek_hd(lex, op) || sh_lex_seek_op(lex, op)
+		|| sh_lex_seek_p(lex, op) || sh_lex_seek_cb(lex, op)
+		|| sh_lex_seek_sq(lex, op) || sh_lex_seek_dq(lex, op)
+		|| sh_lex_seek_bq(lex, op) || sh_lex_seek_param(lex, op)
+		|| sh_lex_seek_smath(lex, op) || sh_lex_seek_scmd(lex, op));
+}
+
+int			sh_lex_seek_scmd(t_lex *lex, int op)
 {
 	if (ft_strncmp(lex->in->str + lex->i, "$(", 2))
 		return (0);
@@ -56,13 +67,7 @@ int		sh_lex_seek_scmd(t_lex *lex, int op)
 				sh_lex_seek_ctx(lex, op);
 			break ;
 		}
-		else if (sh_lex_seek_rescope(lex, op) || sh_lex_seek_join(lex, op)
-			|| sh_lex_seek_escape(lex, op) || sh_lex_seek_hash(lex, op)
-			|| sh_lex_seek_hd(lex, op) || sh_lex_seek_op(lex, op)
-			|| sh_lex_seek_p(lex, op) || sh_lex_seek_cb(lex, op)
-			|| sh_lex_seek_sq(lex, op) || sh_lex_seek_dq(lex, op)
-			|| sh_lex_seek_bq(lex, op) || sh_lex_seek_param(lex, op)
-			|| sh_lex_seek_smath(lex, op) || sh_lex_seek_scmd(lex, op))
+		else if (sh_lex_seek_scmd_inner(lex, op))
 			sh_lex_seek_ctx(lex, op);
 		else
 			lex->i++;
@@ -73,7 +78,7 @@ int		sh_lex_seek_scmd(t_lex *lex, int op)
 	return (1);
 }
 
-int		sh_lex_seek_smath(t_lex *lex, int op)
+int			sh_lex_seek_smath(t_lex *lex, int op)
 {
 	if (ft_strncmp(lex->in->str + lex->i, "$((", 3))
 		return (0);

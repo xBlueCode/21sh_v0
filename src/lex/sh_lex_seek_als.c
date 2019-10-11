@@ -14,22 +14,41 @@
 #include "sh_lex.h"
 #include "sh_alias.h"
 
-int 	sh_lex_seek_als_start(t_lex *lex, int op);
-
-int 	sh_lex_seek_als(t_lex *lex, int op)
+static int	sh_lex_seek_als_prepare_lex(t_lex *lex, int op, int pos, char *word)
 {
-	int pos;
-	char *word;
-	t_lex *alex;
-	t_list *keys;
+	t_list	*keys;
+	t_lex	*alex;
 
-	(void) op;
+	sh_lex_init(&alex, ft_htab_getval(sh_als(), word, ft_strlen(word) + 1));
+	ft_hset_add(alex->alias_chain, word, ft_strlen(word) + 1);
+	keys = ft_hset_tolst(lex->alias_chain);
+	while (keys)
+	{
+		ft_hset_add(alex->alias_chain, keys->content,
+				ft_strlenz(keys->content) + 1);
+		keys = keys->next;
+	}
+	if (sh_lex_seek_als_start(alex, op) < 0)
+		return (0);
+	ft_dstrdel_n(lex->in, lex->i, pos);
+	ft_dstrins_str(lex->in, lex->i, alex->in->str);
+	lex->alias_off = lex->i + ft_strlen(alex->in->str);
+	sh_lex_free(&alex);
+	return (0);
+}
+
+int			sh_lex_seek_als(t_lex *lex, int op)
+{
+	int		pos;
+	char	*word;
+
 	if (lex->i < lex->alias_off
 		|| (lex->ctx != TCTX_ALIAS && lex->ctx != TCTX_FIRSTW)
 		|| !sh_lex_isinname(lex->in->str[lex->i]))
 		return (0);
 	pos = lex->i;
-	while (sh_lex_isinname(lex->in->str[++pos]));
+	while (sh_lex_isinname(lex->in->str[++pos]))
+		;
 	if (!ft_strchr(SH_LEX_SEPSET_X, lex->in->str[pos])
 		&& !ft_isblank(lex->in->str[pos]))
 		return (0);
@@ -38,26 +57,12 @@ int 	sh_lex_seek_als(t_lex *lex, int op)
 		FT_INST_RET(0, FT_MEMDEL(word));
 	if (ft_hset_contains(lex->alias_chain, word))
 		FT_INST_RET(0, FT_MEMDEL(word));
-	sh_lex_init(&alex, ft_htab_getval(sh_als(), word, ft_strlen(word) + 1));
-	ft_hset_add(alex->alias_chain, word, ft_strlen(word) + 1);
-	keys = ft_hset_tolst(lex->alias_chain);
-	while (keys)
-	{
-		ft_hset_add(alex->alias_chain, keys->content, ft_strlenz(keys->content) + 1);
-		keys = keys->next;
-	}
-	if (sh_lex_seek_als_start(alex, op) < 0)
-		return (0);
-	ft_dstrdel_n(lex->in, lex->i, pos);
-	ft_dstrins_str(lex->in, lex->i, alex->in->str);
-	lex->alias_off = lex->i + ft_strlen(alex->in->str);
+	sh_lex_seek_als_prepare_lex(lex, op, pos, word);
 	FT_MEMDEL(word);
-	sh_lex_free(&alex);
-	sleep(8);
 	return (1);
 }
 
-int 	sh_lex_seek_als_start(t_lex *lex, int op)
+int			sh_lex_seek_als_start(t_lex *lex, int op)
 {
 	while (lex->in->str[lex->i])
 	{

@@ -16,6 +16,7 @@ int		sh_p_complete_cmds(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
 
+	DF0;
 	DP0;
 	SHP_CAST_INIT(SH_GR_COMPLETE_CMDS);
 	if (sh_p_complete_cmd(p, SHP_CAST_L)
@@ -51,6 +52,7 @@ int		sh_p_complete_cmd(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
 
+	DF0;
 	DP0;
 	SHP_CAST_INIT(SH_GR_COMPLETE_CMD);
 	if (sh_p_list(p, SHP_CAST_L))

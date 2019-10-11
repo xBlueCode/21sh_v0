@@ -48,7 +48,6 @@ int			sh_termconfig_init(t_term *term)
 	char			buff[2048];
 	int				r;
 
-	// TODO: replace with ft_getenv
 	if (!(tname = getenv("TER")))
 	{
 		if (!(tname = TER_DEF) || !isatty(STDIN_FILENO))

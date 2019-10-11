@@ -16,6 +16,7 @@ int		sh_p_and_or(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
 
+	DF0;
 	DP0;
 	SHP_CAST_INIT(SH_GR_AND_OR);
 	if (sh_p_pipeline(p, SHP_CAST_L) && sh_p_and_or_sub(p, SHP_CAST_R))

@@ -16,6 +16,7 @@ int		sh_p_pipeline(t_parser *p, t_btree **ast)
 {
 	t_btree *cast;
 
+	DF0;
 	DP0;
 	SHP_CAST_INIT(SH_GR_PIPELINE);
 	if (sh_p_match(p, &cast, TSBANG))

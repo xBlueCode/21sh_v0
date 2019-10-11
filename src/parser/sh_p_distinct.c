@@ -31,6 +31,7 @@ char	*g_reserved[] = {
 
 int		sh_tok_distinct(t_token *token, int target)
 {
+	DF0;
 	if (!token || token->t != TSTOK)
 		return (0);
 	if (target == TSTOK_WORD || target == SH_GR_CMD_WORD)
@@ -59,6 +60,7 @@ int		sh_tok_isname_till(char *val, char delim)
 {
 	int i;
 
+	DF0;
 	i = -1;
 	while (val[++i])
 	{
@@ -74,6 +76,7 @@ int		sh_tok_getrw(char *tokval)
 {
 	int i;
 
+	DF0;
 	i = -1;
 	while (g_reserved[++i])
 		if (!ft_strcmp(g_reserved[i], tokval))

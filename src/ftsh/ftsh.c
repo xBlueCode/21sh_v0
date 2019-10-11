@@ -49,6 +49,7 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	t_com_cmds	*com_cmds;
 	int 		ret;
 
+	DF0;
 	if (!script)
 		return (1);
 	sh_lex_init(&lex, script);
@@ -80,6 +81,7 @@ int		sh_inter_read(char **line)
 	//prompt_display();
 	//signal(SIGINT, sighand_parent);
 	//get_inline(line);
+	DF0;
 	*line = rl_start();
 	return (0);
 }

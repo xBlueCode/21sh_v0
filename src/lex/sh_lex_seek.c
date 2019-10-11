@@ -16,6 +16,7 @@ int		sh_lex_seek(t_lex *lex, int op)
 {
 	int lexret;
 
+	DF0;
 	lexret = sh_lex_seek_start(lex, op);
 	if (lexret == OK && !*lex->scope->str)
 		return (OK);
