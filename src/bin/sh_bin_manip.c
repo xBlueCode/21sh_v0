@@ -59,12 +59,9 @@ char	*sh_bin_getpath(t_hset *htbin, char *bin)
 	char	*path;
 
 	DF0;
-	//ft_dprintf(2, "%s %s\n", !htbin? "N":"NN", bin);
 	if (!htbin || !bin)
 		return (NULL);
-	//ft_dprintf(2, "bin: %s\n", bin);
 	if (!(path = (char*)ft_htab_getval(htbin, bin, ft_strlenz(bin) + 1)))
 		return (NULL);
-	//ft_dprintf(2, "path: %s\n", path);
-	return (ft_strdup(path)); // check the possibility of skipping strdup
+	return (ft_strdup(path));
 }

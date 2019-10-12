@@ -17,6 +17,26 @@ static int	sh_is_tilde_delim(char c)
 	return (c == '\0' || c == '/' || c == ':');
 }
 
+static int	sh_xp_tilde_delim(t_dstr *word, int *k)
+{
+	while (!sh_is_tilde_delim(word->str[*k]))
+	{
+		if (word->str[*k] != '_' && !ft_isalnum(word->str[*k]))
+			break ;
+		k++;
+	}
+	if (word->str[*k] && !sh_is_tilde_delim(word->str[*k]))
+		return (0);
+	return (1);
+}
+
+static int	sh_xp_tilde_rep(t_dastr *words, int *i, int *j, char *rep)
+{
+	ft_dstrins_str(words->a[*i], *j, rep);
+	*j += ft_strlenz(rep);
+	return (1);
+}
+
 int			sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 {
 	t_dstr	*word;
@@ -28,28 +48,20 @@ int			sh_xp_tilde(t_sh *sh, t_dastr *words, int *i, int *j)
 		return (0);
 	k = *j + 1;
 	if ((word->str[k] == '+' || word->str[k] == '-')
-		&& sh_is_tilde_delim(word->str[k + 1]))
+	&& sh_is_tilde_delim(word->str[k + 1]))
 	{
 		rep = sh_var_getval(sh->var, word->str[k] == '+' ? "PWD" : "OLDPWD");
 		ft_dstrdel_n(words->a[*i], *j, 2);
-		ft_dstrins_str(words->a[*i], *j, rep);
-		*j += ft_strlenz(rep);
+		sh_xp_tilde_rep(words, i, j, rep);
 		return (1);
 	}
-	while (!sh_is_tilde_delim(word->str[k]))
-	{
-		if (word->str[k] != '_' && !ft_isalnum(word->str[k]))
-			break ;
-		k++;
-	}
-	if (word->str[k] && !sh_is_tilde_delim(word->str[k]))
+	if (!sh_xp_tilde_delim(word, &k))
 		return (0);
-	ft_dstrdel_n(words->a[*i], *j, k - *j);
 	if (*j + 1 == k)
 		rep = sh_var_getval(sh->var, "HOME");
 	else
 		rep = "USERPATH";
-	ft_dstrins_str(words->a[*i], *j, rep);
-	*j += ft_strlenz(rep);
+	ft_dstrdel_n(words->a[*i], *j, k - *j);
+	sh_xp_tilde_rep(words, i, j, rep);
 	return (1);
 }

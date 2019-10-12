@@ -35,6 +35,16 @@ void			sh_g_cmd_free(void **g)
 	FT_MEMDEL(*g);
 }
 
+static void		sh_g_cmd_update(t_cmd *cmd, t_btree *ast_core)
+{
+	cmd->type = ast_core->op;
+	cmd->core = ((void*(*)(t_btree*))sh_g_cmd_core(cmd->type))(ast_core);
+	cmd->exec = sh_g_cmd_core_get_exec(cmd->type);
+	cmd->wait = sh_g_cmd_core_get_wait(cmd->type);
+	cmd->kill = sh_g_cmd_core_get_kill(cmd->type);
+	cmd->tfree = sh_g_cmd_core_get_free(cmd->type);
+}
+
 void			*sh_g_cmd(t_btree *ast)
 {
 	t_cmd	*cmd;
@@ -45,15 +55,11 @@ void			*sh_g_cmd(t_btree *ast)
 	SHG_CHECK_AST(ast, SH_GR_CMD);
 	cmd = sh_g_cmd_new();
 	if (!ast->left)
-		return (NULL); // TODO: free cmd
-	if (!(ast_core = ast->left->op == SH_GR_COMP_CMD ? ast->left->left : ast->left))
-		return (NULL); // TODO: free cmd
-	cmd->type = ast_core->op;
-	cmd->core = ((void*(*)(t_btree*))sh_g_cmd_core(cmd->type))(ast_core);
-	cmd->exec = sh_g_cmd_core_get_exec(cmd->type);
-	cmd->wait = sh_g_cmd_core_get_wait(cmd->type);
-	cmd->kill = sh_g_cmd_core_get_kill(cmd->type);
-	cmd->tfree = sh_g_cmd_core_get_free(cmd->type);
+		return (NULL);
+	if (!(ast_core = ast->left->op == SH_GR_COMP_CMD
+		? ast->left->left : ast->left))
+		return (NULL);
+	sh_g_cmd_update(cmd, ast_core);
 	ast_redirlist = ast->right;
 	while (ast_redirlist)
 	{

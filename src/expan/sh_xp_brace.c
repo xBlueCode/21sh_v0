@@ -32,19 +32,15 @@ int		sh_xp_brace(t_sh *sh, t_dastr *words, int *i, int *j)
 	pref = ft_strndup(words->a[*i]->str, *j - 1);
 	sh_lex_init(&lex, word + off);
 	off = 0;
-	dinp = lex->in; // TODO: move to lex->in:
+	dinp = lex->in;
 	res = ft_dastrnew_max(2);
 	while (dinp->str[lex->i] && lex->st != TSBLANK && dinp->str[lex->i] != '}')
 	{
 		*j += lex->i;
-		if (sh_lex_seek_blank(lex, 0)
-			|| sh_lex_seek_brace(lex, 0)
-			|| sh_lex_seek_escape(lex, 0)
-			|| sh_lex_seek_sq(lex, 0)
-			|| sh_lex_seek_dq(lex, 0)
-			|| sh_lex_seek_bq(lex, 0)
-			|| sh_lex_seek_param(lex, 0)
-			|| sh_lex_seek_smath(lex, 0)
+		if (sh_lex_seek_blank(lex, 0) || sh_lex_seek_brace(lex, 0)
+			|| sh_lex_seek_escape(lex, 0) || sh_lex_seek_sq(lex, 0)
+			|| sh_lex_seek_dq(lex, 0) || sh_lex_seek_bq(lex, 0)
+			|| sh_lex_seek_param(lex, 0) || sh_lex_seek_smath(lex, 0)
 			|| sh_lex_seek_scmd(lex, 0))
 			continue;
 		if (dinp->str[lex->i] == ',')

@@ -26,7 +26,7 @@ static void		sh_g_simp_cmd_prefsuff(t_simp_cmd *simp_cmd, t_btree *fix)
 		if (fix->data)
 		{
 			tok = SHG_AST_TOK(fix);
-			if (tok->t == TSTOK_WORD) // TODO: orgin: TOK_WORD
+			if (tok->t == TSTOK_WORD)
 				ft_dastrins_str(simp_cmd->lst_words, -1, tok->val->str);
 			else if (tok->t == TSTOK_ASS_WORD)
 				ft_dastrins_str(simp_cmd->lst_assign, -1, tok->val->str);

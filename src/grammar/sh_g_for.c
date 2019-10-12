@@ -32,10 +32,10 @@ void			*sh_g_for(t_btree *ast_for)
 
 	SHG_CHECK_AST(ast_for, SH_GR_FOR_CLAUSE);
 	for_clause = sh_g_for_new();
-	if (!ast_for->data || !ast_for->right) // TODO: if true, free for_clause
+	if (!ast_for->data || !ast_for->right)
 		return (NULL);
-	for_clause->name = SHG_AST_TOK(ast_for)->val; // TODO: alloc mem
-	if (!(for_clause->do_group = sh_g_group(ast_for->right))) // TODO: free if
+	for_clause->name = SHG_AST_TOK(ast_for)->val;
+	if (!(for_clause->do_group = sh_g_group(ast_for->right)))
 		return (NULL);
 	wordlist = ast_for->left;
 	while (wordlist)

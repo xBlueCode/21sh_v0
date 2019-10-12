@@ -49,11 +49,11 @@ void			*sh_g_redir(t_btree *ast)
 		redir->ion = ft_atoi(SHG_AST_TOK(ast)->val->str);
 	else
 		redir->ion = -1;
-	if (!(ast_iofh = ast->left)) // TODO: free redir
+	if (!(ast_iofh = ast->left))
 		return (NULL);
 	if (ast_iofh->data)
 		redir->op = SHG_AST_TOK(ast_iofh)->t;
-	if (!(ast_fh = ast_iofh->left)) // TODO: free redir
+	if (!(ast_fh = ast_iofh->left))
 		return (NULL);
 	if (ast_fh->data)
 	{

@@ -12,7 +12,7 @@
 
 #include "ftsh.h"
 
-int 			g_g_putlev = 0;
+int				g_g_putlev = 0;
 
 void			*sh_g_com_cmds_new(void)
 {
@@ -34,7 +34,7 @@ void			*sh_g_com_cmd_new(void)
 	return (com_cmd);
 }
 
-void			sh_g_com_cmds_free(void**g)
+void			sh_g_com_cmds_free(void **g)
 {
 	t_com_cmds	**com_cmds;
 
@@ -43,7 +43,7 @@ void			sh_g_com_cmds_free(void**g)
 	FT_MEMDEL(*g);
 }
 
-void			sh_g_com_cmd_free(void**g)
+void			sh_g_com_cmd_free(void **g)
 {
 	t_com_cmd	**com_cmd;
 
@@ -80,24 +80,23 @@ void			*sh_g_com_cmds(t_btree *ast)
 	return (com_cmds);
 }
 
-void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
+void			*sh_g_com_cmd(t_btree *ast)
 {
 	t_com_cmd	*com_cmd;
 	t_and_or	*and_or;
 	t_btree		*list;
 
-	//SHG_CHECK_AST(ast, SH_GR_COMPLETE_CMD) // TODO: || _COMP_LIST
 	if (!ast || (ast->op != SH_GR_COMPLETE_CMD && ast->op != SH_GR_COMP_LIST))
 		return (NULL);
 	com_cmd = sh_g_com_cmd_new();
-	list = ast->left; // term_std
+	list = ast->left;
 	while (list)
 	{
 		if ((and_or = sh_g_and_or(list->left)))
 			SHG_LSTADD_FREE(com_cmd, lst_and_or, and_or);
-		if (list->data) // list & term_std must store the sep in data
+		if (list->data)
 			ft_dstrins_ch(com_cmd->sep, -1, SHG_AST_TOK(list)->t);
-		else // TODO: FOR COMP_LIST but it must be compatible with complete_cmd
+		else
 			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);
 		list = list->right;
 		//FT_MEMDEL(and_or);
@@ -107,22 +106,21 @@ void			*sh_g_com_cmd(t_btree *ast) // takes com_cmd, and com_list
 	return (com_cmd);
 }
 
-void			sh_g_com_cmds_put(void*g, int op)
+void			sh_g_com_cmds_put(void *g, int op)
 {
 	t_com_cmds *com_cmds;
 
 	if (!g)
 		return ;
-	//com_cmds = (t_com_cmds*)g;
 	SHG_PUT_CASTVAR(com_cmds, g, t_com_cmds*, op);
 	SHG_PUT_PRINTF("complete_commands:\n", g_g_putlev);
 	ft_lstiterop(com_cmds->lst_com_cmd, SHG_PUT_CASTFUN(sh_g_com_cmd_put), 1);
 }
 
-void			sh_g_com_cmd_put(void*g, int op)
+void			sh_g_com_cmd_put(void *g, int op)
 {
 	t_com_cmd	*com_cmd;
-	int 		i;
+	int			i;
 
 	if (!g)
 		return ;

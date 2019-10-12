@@ -32,7 +32,7 @@ int		sh_e_com_cmds(t_sh *sh, void *gr)
 	return (ret);
 }
 
-int		sh_e_com_cmd(t_sh *sh, void *gr) // map to group exec (subsh)
+int		sh_e_com_cmd(t_sh *sh, void *gr)
 {
 	t_list		*and_or_lst;
 	t_com_cmd	*com_cmd;

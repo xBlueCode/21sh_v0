@@ -33,7 +33,7 @@ int		sh_xp_var(t_sh *sh, t_dastr *words, int *i, int *j)
 	(*j) = off - 1 + ft_strlenz(val);
 	ft_dstrins_str(word, off - 1, val);
 	FT_MEMDEL(key);
-	return (1); // TODO: don't free val (it still point in the env)
+	return (1);
 }
 
 int		sh_xp_param(t_sh *sh, t_dastr *words, int *i, int *j)
@@ -62,5 +62,5 @@ int		sh_xp_param(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_dstrins_str(words->a[*i], off, val);
 	if (val)
 		*j = off + ft_strlenz(val);
-	return (1); // TODO: free param
+	return (1);
 }

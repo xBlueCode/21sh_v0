@@ -12,38 +12,13 @@
 
 #include "ftsh.h"
 
-int		sh_xp_word(t_sh *sh, t_dastr *words)
+static int	sh_xp_word_split_dq(t_sh *sh, t_dastr *words)
 {
 	int i;
 	int j;
-	int dql;
 	int indq;
 
-	DF0;
-	i = -1;
 	indq = BIT_MIS(sh->nest, SH_NEST_M, SH_NEST_INDQ);
-	BIT_MUSET(sh->nest, SH_NEST_M);
-	while (++i < words->len)
-	{
-		j = 0;
-		sh_xp_tilde(sh, words, &i, &j);
-		while (j < words->a[i]->len)
-		{
-			if (sh_xp_brace(sh, words, &i, &j)
-				|| sh_xp_param(sh, words, &i, &j)
-				|| sh_xp_var(sh, words, &i, &j)
-				|| sh_xp_sq(sh, words, &i, &j)
-				|| sh_xp_bq(sh, words, &i, &j)
-				|| sh_xp_scmd(sh, words, &i, &j)
-				|| sh_xp_esc(sh, words, &i, &j))
-				continue ;
-			else if (words->a[i]->str[j] == '"'
-				&& sh_lex_skip(words->a[i]->str + j, &sh_lex_seek_dq, &dql))
-				j += dql;
-			else
-				j++;
-		}
-	}
 	if (!indq)
 		sh_xp_word_split(sh, words);
 	i = -1;
@@ -57,33 +32,57 @@ int		sh_xp_word(t_sh *sh, t_dastr *words)
 	return (1);
 }
 
-int		sh_xp_assign(t_sh *sh, t_dastr *assigns)
+int			sh_xp_word(t_sh *sh, t_dastr *words)
+{
+	int i;
+	int j;
+	int dql;
+
+	DF0;
+	i = -1;
+	BIT_MUSET(sh->nest, SH_NEST_M);
+	while (++i < words->len && !(j = 0))
+	{
+		sh_xp_tilde(sh, words, &i, &j);
+		while (j < words->a[i]->len)
+		{
+			if (sh_xp_brace(sh, words, &i, &j) || sh_xp_param(sh, words, &i, &j)
+				|| sh_xp_var(sh, words, &i, &j) || sh_xp_sq(sh, words, &i, &j)
+				|| sh_xp_bq(sh, words, &i, &j) || sh_xp_scmd(sh, words, &i, &j)
+				|| sh_xp_esc(sh, words, &i, &j))
+				continue ;
+			else if (words->a[i]->str[j] == '"'
+				&& sh_lex_skip(words->a[i]->str + j, &sh_lex_seek_dq, &dql))
+				j += dql;
+			else
+				j++;
+		}
+	}
+	return (sh_xp_word_split_dq(sh, words));
+}
+
+int			sh_xp_assign(t_sh *sh, t_dastr *ass)
 {
 	int i;
 	int j;
 
 	i = -1;
-	while (++i < assigns->len)
+	while (++i < ass->len && !(j = 0))
 	{
-		j = 0;
-		while (sh_lex_isinname(assigns->a[i]->str[j]))
+		while (sh_lex_isinname(ass->a[i]->str[j]))
 			j++;
-		if (assigns->a[i]->str[j] != '=')
+		if (ass->a[i]->str[j] != '=')
 			return (-1);
 		j++;
-		sh_xp_tilde(sh, assigns, &i, &j);
-		while (j < assigns->a[i]->len)
+		sh_xp_tilde(sh, ass, &i, &j);
+		while (j < ass->a[i]->len)
 		{
 			if (
-				sh_xp_param(sh, assigns, &i, &j)
-				|| sh_xp_var(sh, assigns, &i, &j)
-				|| sh_xp_dq(sh, assigns, &i, &j)
-				|| sh_xp_sq(sh, assigns, &i, &j)
-				|| sh_xp_bq(sh, assigns, &i, &j)
-				|| sh_xp_scmd(sh, assigns, &i, &j)
-				|| sh_xp_esc(sh, assigns, &i, &j)
-				|| (assigns->a[i]->str[j] == ':' && ++j
-				&& sh_xp_tilde(sh, assigns, &i, &j)))
+				sh_xp_param(sh, ass, &i, &j) || sh_xp_var(sh, ass, &i, &j)
+				|| sh_xp_dq(sh, ass, &i, &j) || sh_xp_sq(sh, ass, &i, &j)
+				|| sh_xp_bq(sh, ass, &i, &j) || sh_xp_scmd(sh, ass, &i, &j)
+				|| sh_xp_esc(sh, ass, &i, &j) || (ass->a[i]->str[j] == ':'
+				&& ++j && sh_xp_tilde(sh, ass, &i, &j)))
 				continue ;
 			j++;
 		}
