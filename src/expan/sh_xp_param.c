@@ -62,5 +62,6 @@ int		sh_xp_param(t_sh *sh, t_dastr *words, int *i, int *j)
 	ft_dstrins_str(words->a[*i], off, val);
 	if (val)
 		*j = off + ft_strlenz(val);
+	FT_MEMDEL(param);
 	return (1);
 }

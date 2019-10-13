@@ -66,6 +66,7 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	sh_lex_free(&lex);
 	ret = sh_e_com_cmds(sh, com_cmds);
 	sh_g_com_cmds_free((void**)&com_cmds);
+	//DF_PFWAIT("after free g", 8);
 	return (ret);
 }
 
