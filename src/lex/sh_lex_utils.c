@@ -15,7 +15,7 @@
 
 int		sh_lex_isinname(char c)
 {
-	return (c == '_' || ft_isalnum(c));
+	return (c == '_' || c == '?' || ft_isalnum(c));
 }
 
 int		sh_lex_tok_isdelim(char c)
