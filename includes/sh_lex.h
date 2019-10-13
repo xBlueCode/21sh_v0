@@ -223,6 +223,7 @@ int				sh_lex_seek_hdk(t_lex *lex, int op);
 int				sh_lex_seek_hdv(t_lex *lex, int op);
 char 			*sh_lex_seek_hd_getval(t_lex *lex, char *hd_key, ssize_t off);
 
+int				sh_lex_seek_als_start(t_lex *lex, int op);
 int				sh_lex_seek_als(t_lex *lex, int op);
 int				sh_lex_seek_add(t_lex *lex, int op);
 

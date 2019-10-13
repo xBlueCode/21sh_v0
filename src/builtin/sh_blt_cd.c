@@ -46,11 +46,21 @@ int		sh_blt_cd(t_sh *sh, char **argv, char **envp)
 {
 	int		ac;
 	char	*dir;
+	int		lp;
 
 	(void)envp;
 	if (!argv)
 		return (1);
-	if ((ac = ft_arr_len((void**)argv)) > 2 || ac < 1)
+	lp = 0;
+	if ((ac = ft_arr_len((void**)argv)) > 3 || ac < 1)
+		FT_STDE_RET(-1, "ftsh: cd: Too many arguments !");
+	if (ac > 1 && (!ft_strcmp("-L", argv[1]) || !ft_strcmp("-P", argv[1])))
+	{
+		lp = !ft_strcmp("-L", argv[1]) ? 1 : 2;
+		ac--;
+		argv++;
+	}
+	if (ac > 2)
 		FT_STDE_RET(-1, "ftsh: cd: Too many arguments !");
 	if (ac == 1)
 	{
