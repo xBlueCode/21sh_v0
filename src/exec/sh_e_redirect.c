@@ -18,14 +18,19 @@ int		sh_e_redirect(t_list *redir_lst)
 {
 	t_redir	*redir;
 
+	DF0;
 	while (redir_lst)
 	{
 		if (!(redir = (t_redir*)redir_lst->content))
 			continue;
 		if (redir->op == TSG || redir->op == TSG_O || redir->op == TSG2)
 			sh_e_redirect_g(redir);
+		else if (redir->op == TSG_A)
+			sh_e_redirect_ga(redir);
 		else if (redir->op == TSL)
 			sh_e_redirect_l(redir);
+		else if (redir->op == TSL_A)
+			sh_e_redirect_la(redir);
 		else if (redir->op == TSL2)
 			sh_e_redirect_l2(redir);
 		redir_lst = redir_lst->next;
@@ -43,7 +48,8 @@ int		sh_e_redirect_g(t_redir *redir)
 		return (KO);
 	if (!access(redir->word, F_OK) && access(redir->word, W_OK))
 		return (KO);
-	if ((fdf = open(redir->word, O_CREAT | O_TRUNC | O_WRONLY, 0664)) < 0)
+	if (0 > (fdf = open(redir->word,
+		O_CREAT | (redir->op == TSG2 ? O_APPEND : O_TRUNC) | O_WRONLY, 0664)))
 		return (KO);
 	fdo = redir->ion < 0 ? STDOUT_FILENO : redir->ion;
 	ft_dup2(fdf, fdo, 1);

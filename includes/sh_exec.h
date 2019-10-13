@@ -102,7 +102,10 @@ int 		sh_e_run_env(t_sh *sh, t_simp_cmd *simp_cmd);
 int 		sh_e_prepare_file(char *fname, int exist, int read, int write);
 int 		sh_e_redirect(t_list *redir_lst);
 int			sh_e_redirect_g(t_redir *redir);
+int			sh_e_redirect_ga(t_redir *redir);
+int			sh_e_redirect_g2(t_redir *redir);
 int			sh_e_redirect_l(t_redir *redir);
+int			sh_e_redirect_la(t_redir *redir);
 int			sh_e_redirect_l2(t_redir *redir);
 
 #endif
