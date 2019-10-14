@@ -1,8 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sh_e_redirect_agg.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/14 01:20:37 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/10/14 01:20:39 by abbesbes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ftsh.h"
 #include "sys/stat.h"
 #include <fcntl.h>
 
-int		sh_e_redirect_ga(t_redir *redir)
+static void		aggregate(int ion, int fdf, int std)
+{
+	if (fdf < 0)
+		close(std);
+	else
+		ft_dup2(fdf, std, 1);
+	if (ion < 0)
+		ft_dup2(fdf, STDERR_FILENO, 1);
+}
+
+int				sh_e_redirect_ga(t_redir *redir)
 {
 	int fdo;
 	int fdf;
@@ -10,7 +32,7 @@ int		sh_e_redirect_ga(t_redir *redir)
 	DF0;
 	if (!redir)
 		return (KO);
-	if (ft_strcmp("-",redir->word))
+	if (ft_strcmp("-", redir->word))
 		fdf = -1;
 	else if (ft_isdigit(*redir->word) && !redir->word[1])
 		fdf = *redir->word - '0';
@@ -24,16 +46,11 @@ int		sh_e_redirect_ga(t_redir *redir)
 			return (KO);
 	}
 	fdo = redir->ion < 0 ? STDOUT_FILENO : redir->ion;
-	if (fdf < 0)
-		close(fdo);
-	else
-		ft_dup2(fdf, fdo, 1);
-	if (fdf == STDOUT_FILENO)
-		ft_dup2(fdf, STDERR_FILENO, 1);
+	aggregate(redir->ion, fdf, fdo);
 	return (OK);
 }
 
-int		sh_e_redirect_la(t_redir *redir)
+int				sh_e_redirect_la(t_redir *redir)
 {
 	int fdi;
 	int fdf;
@@ -41,7 +58,7 @@ int		sh_e_redirect_la(t_redir *redir)
 	DF0;
 	if (!redir)
 		return (KO);
-	if (ft_strcmp("-",redir->word))
+	if (ft_strcmp("-", redir->word))
 		fdf = -1;
 	else if (ft_isdigit(*redir->word) && !redir->word[1])
 		fdf = *redir->word - '0';
@@ -49,15 +66,11 @@ int		sh_e_redirect_la(t_redir *redir)
 	{
 		if (access(redir->word, F_OK) || access(redir->word, R_OK))
 			return (KO);
-		if ((fdf = open(redir->word, redir->op == TSL_G ? O_RDWR : O_RDONLY)) < 0)
+		if ((fdf = open(redir->word,
+				redir->op == TSL_G ? O_RDWR : O_RDONLY)) < 0)
 			return (KO);
 	}
 	fdi = redir->ion < 0 ? STDIN_FILENO : redir->ion;
-	if (fdf < 0)
-		close(fdi);
-	else
-		ft_dup2(fdf, fdi, 1);
-	if (fdf == STDIN_FILENO)
-		ft_dup2(fdf, STDERR_FILENO, 1);
+	aggregate(redir->ion, fdf, fdi);
 	return (OK);
 }
