@@ -37,7 +37,7 @@ void		rl_read(void)
 
 void		xrl_read(void)
 {
-	int		c;
+	char	c;
 	t_dstr	*rows;
 	t_lex	*lex;
 
@@ -46,7 +46,8 @@ void		xrl_read(void)
 		*g_rl.scope->str = '\0';
 	while (!(c = '\0') && read(0, &c, sizeof(int)))
 	{
-		if (!rl_ctrl_perform(c) && !rl_vim_perform(c) && ft_isascii(c))
+		if (!rl_ctrl_perform(c) && !rl_vim_perform(c)
+			&& (ft_isprint(c) || c == '\n'))
 			rl_insert_ch(c);
 		if (c == '\n')
 		{

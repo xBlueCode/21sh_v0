@@ -121,6 +121,8 @@ int			rl_ctrl_xo_before(int c);
 int			rl_ctrl_x_lend(int c);
 int			rl_ctrl_x_lbeg(int c);
 
+int			rl_ctrl_sig_d(int c);
+
 int			rl_scope_update(void);
 int			rl_scope_prompt(char *str);
 int 		rl_scope_prompt_ps(void);
@@ -235,7 +237,7 @@ static int	g_rl_ctrl_keymap[] =
 	KCA,
 	KCB,
 //	KCC,
-//	KCD,
+	KCD,
 	KCE,
 	KCF,
 //	KCG,
@@ -307,6 +309,7 @@ static t_rl_ctrl_action *g_rl_ctrl_action[] =
 {
 	&rl_ctrl_jump_beg,
 	&rl_ctrl_jump_w_prev_beg,
+	&rl_ctrl_sig_d,
 	&rl_ctrl_jump_end,
 	&rl_ctrl_jump_w_next_end,
 	&rl_ctrl_jump_w_next_beg,

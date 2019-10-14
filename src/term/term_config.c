@@ -32,6 +32,7 @@ static int	termconfig_attr(t_term *term)
 	}
 	term->tconfig_def = tconfig;
 	tconfig.c_lflag &= ~(ICANON | ECHO);
+	tconfig.c_lflag &= ISIG;
 	tconfig.c_cc[VTIME] = 0;
 	tconfig.c_cc[VMIN] = 1;
 	if (tcsetattr(STDERR_FILENO, TCSANOW, &tconfig))
