@@ -107,6 +107,7 @@ int		sh_term_run(char **envp)
 	while (1)
 	{
 		ret = 0;
+		signal(SIGINT, &rl_sighand_parent);
 		sh_inter_read(&line);
 		if (!ft_strncmp("exit", line, 4))
 			 break;

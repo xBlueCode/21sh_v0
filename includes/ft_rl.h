@@ -185,6 +185,9 @@ int				rl_tputsn(char *param, int n);
 
 int				rl_ter_putchar(int ch);
 int				rl_update_win(void);
+void			rl_sighand_parent(int sn);
+void			rl_sighand_child(int sn);
+void			rl_sigint(void);
 
 typedef int		t_rl_scp(char *line, ssize_t *pos);
 typedef int		t_rl_ctrl(int c);

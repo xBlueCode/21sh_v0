@@ -45,6 +45,19 @@ void		rl_reset(t_dastr *txt)
 	ft_dstrins_ch(g_rl.scope, 0, RL_SCP_START);
 }
 
+void		rl_sigint(void)
+{
+	rl_free();
+	rl_init();
+	g_rl.mode = RL_MODE_INS;
+	g_rl.cl++;
+	g_rl.cc = 0;
+	rl_scope_prompt(g_rl.scope->str);
+	g_rl.txt->a[g_rl.cl] = ft_dstrnew_max(100);
+	if (*g_rl.scope->str == RL_SCP_START)
+		*g_rl.scope->str = '\0';
+}
+
 t_rl		rl_get(void)
 {
 	return (g_rl);
