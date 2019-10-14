@@ -17,14 +17,7 @@
 # include "sh_grammar.h"
 # include "sh_lex.h"
 
-static int p_lev = 0;
-
-/*
-# define DP0 ft_printf("DP0\n");
-# define DPM0 ft_printf("  DPM0\n");
-# define DPM1 ft_printf("    DPM1\n");
-# define DPTOKPUT(tok) ft_printf("Tok");
-*/
+static int g_p_lev = 0;
 
 # define DPTEST if (p && p->tlook)
 # define DP0_STR(dstr) dstr ? dstr->str : "."
@@ -73,13 +66,9 @@ DP0_STR(((t_token*)p->tlook->content)->val), target); \
 
 typedef struct	s_parser
 {
-//	t_list		*tbase;
 	t_list		*tlook;
-//	t_list		*tlast;
 	int			lev;
-//	t_dastr		*hd_key;
 	t_dastr		*hd_val;
-	//t_btree	***ast;
 }				t_parser;
 
 t_com_cmds		*sh_p_start(t_lex *lex);
@@ -115,17 +104,6 @@ int				sh_p_in(t_parser *p, t_btree **ast);
 
 int				sh_p_wordlist(t_parser *p, t_btree **ast);
 int				sh_p_wordlist_sub(t_parser *p, t_btree **ast);
-/*
-int				sh_p_case_clause(t_parser *p, t_btree **ast);
-int				sh_p_case_list_ns(t_parser *p, t_btree **ast);
-int				sh_p_case_list(t_parser *p, t_btree **ast);
-int				sh_p_case_list_sub(t_parser *p, t_btree **ast);
-int				sh_p_case_item_ns(t_parser *p, t_btree **ast);
-int				sh_p_case_item(t_parser *p, t_btree **ast);
-
-int				sh_p_patt(t_parser *p, t_btree **ast);
-int				sh_p_patt_sub(t_parser *p, t_btree **ast);
-*/
 
 int				sh_p_if_clause(t_parser *p, t_btree **ast);
 int				sh_p_else_part(t_parser *p, t_btree **ast);
@@ -134,11 +112,6 @@ int				sh_p_ifbody(t_parser *p, t_btree **ast);
 int				sh_p_while_clause(t_parser *p, t_btree **ast);
 int				sh_p_until_clause(t_parser *p, t_btree **ast);
 
-/*
-int				sh_p_func_def(t_parser *p, t_btree **ast);
-int				sh_p_func_bod(t_parser *p, t_btree **ast);
-int				sh_p_fname(t_parser *p, t_btree **ast);
-*/
 int				sh_p_cb_group(t_parser *p, t_btree **ast);
 int				sh_p_do_group(t_parser *p, t_btree **ast);
 
@@ -166,18 +139,13 @@ int				sh_p_lbreak(t_parser *p, t_btree **ast);
 int				sh_p_sep_op(t_parser *p, t_btree **ast);
 int				sh_p_sep(t_parser *p, t_btree **ast);
 int				sh_p_seq_sep(t_parser *p, t_btree **ast);
-/*
-//int				sh_p_for(t_parser *p, t_btree **ast);
-int				sh_p_do_group(t_parser *p, t_btree **ast);
-*/
+
 int				sh_p_lookshift(t_parser *p);
 int				sh_p_match(t_parser *p, t_btree **ast, int toktype);
-
 
 int 			sh_tok_getrw(char *tokval);
 int				sh_tok_distinct(t_token *token, int target);
 int				sh_tok_isname_till(char *val, char delim);
-//int				sh_tok_isname(char *val);
 
 void			test_sh_p_astapp(t_btree *root);
 

@@ -17,12 +17,10 @@
 # include "sh_lex.h"
 # include "sh_parser.h"
 # include "sh_gram_type.h"
-//# include "sh_gr_type.h"
-//#include "sh_exec.h"
 
 # define SHG_CHECK_MALL(g) {if (!(g = ft_memalloc(sizeof(*g)))) return (NULL);};
 # define SHG_LSTADD(g, lst, ncont) ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));
-# define SHG_LSTADD_FREE(g, lst, ncont) {ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));FT_MEMDEL(ncont)}
+# define SHG_LSTADD_FREE(g, lst, ncont) {ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));FT_MEMDEL(ncont);}
 # define SHG_LSTADDS(g, lst, nc, ns) ft_lst_addlast(&(g->lst), ft_lstnew(nc, ns));
 
 # define SHG_CHECK_AST(node, gt) {if (!node || node->op != gt) return (NULL);};
@@ -113,15 +111,6 @@ typedef struct	s_gr
 	void	*(*parse)(t_btree*);
 	void	(*put)(void*, int);
 }				t_gr;
-
-/*
-int				sh_g_com_cmds(t_btree *ast, void *);
-int				sh_g_com_cmd(t_btree *ast, void *);
-int				sh_g_and_or(t_btree *ast, void *);
-int				sh_g_pipe(t_btree *ast, void *);
-int				sh_g_cmd(t_btree *ast, void *);
-int				sh_g_redir(t_btree *ast, void *);
-*/
 
 void			*sh_g_loop_new(void);
 void			*sh_g_for_new(void);

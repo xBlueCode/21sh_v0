@@ -23,7 +23,7 @@ typedef struct	s_term
 	struct termios		tconfig_def;
 }				t_term;
 
-int				sh_termconfig_init(t_term*);
-int				sh_termconfig_reset(t_term*);
+int				sh_termconfig_init(t_term *term);
+int				sh_termconfig_reset(t_term *term);
 
 #endif

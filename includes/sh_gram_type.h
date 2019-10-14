@@ -13,48 +13,43 @@
 #ifndef SH_GRAM_TYPE_H
 # define SH_GRAM_TYPE_H
 
-#include "libft.h"
-#include "sh_sh.h"
-//#include "sh_exec.h"
+# include "libft.h"
+# include "sh_sh.h"
 
-typedef int (t_exec)(t_sh*, void*);
-typedef int (t_wait)(t_sh*, void*, int op, int *state);
-typedef int (t_kill)(t_sh*, void*, int sig);
+typedef int	(t_exec)(t_sh*, void*);
+typedef int	(t_wait)(t_sh*, void*, int op, int *state);
+typedef int	(t_kill)(t_sh*, void*, int sig);
 
 typedef struct	s_redir
 {
-	int 	ion;
-	int 	op;
-	char 	*word;
+	int		ion;
+	int		op;
+	char	*word;
 }				t_redir;
 
-typedef struct	s_simp_cmd // process
+typedef struct	s_simp_cmd
 {
 	t_dastr	*lst_assign;
-	char 	**envp;
+	char	**envp;
 	t_dastr	*lst_words;
-	char 	**argv;
+	char	**argv;
 	t_list	*lst_redir;
-	pid_t 	pid;
-	int 	wstat;
-	int 	state;
-//	int 	cnt_op;
+	pid_t	pid;
+	int		wstat;
+	int		state;
 }				t_simp_cmd;
 
 typedef struct	s_cmd
 {
-	void 	*core; // simp_cmd, com_cmd, for, loop
+	void	*core;
 	t_list	*lst_redir;
 	int16_t	type;
 	t_exec	*exec;
 	t_wait	*wait;
 	t_kill	*kill;
 	t_free	tfree;
-	int 	stdioe[3];
-	int 	state;
-//	int 	stdi;
-//	int 	stdo;
-//	int 	stde;
+	int		stdioe[3];
+	int		state;
 }				t_cmd;
 
 typedef struct	s_pipe
@@ -67,14 +62,14 @@ typedef struct	s_pipe
 typedef struct	s_and_or
 {
 	t_list	*lst_pipe;
-	t_dstr	*sep; // &&, ||
+	t_dstr	*sep;
 }				t_and_or;
 
-typedef struct	s_com_cmd // comp_list
+typedef struct	s_com_cmd
 {
 	t_list	*lst_and_or;
-	int 	gr; // it can be _COM_CMD, _SUBSH, _CB_GROUP, _DO_GROUP  // gr=group
-	t_dstr	*sep; // ;, &
+	int		gr;
+	t_dstr	*sep;
 }				t_com_cmd;
 
 typedef struct	s_com_cmds
