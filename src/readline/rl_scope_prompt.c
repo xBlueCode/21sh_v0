@@ -18,6 +18,7 @@ extern t_rl g_rl;
 int			rl_scope_prompt(char *str) {
 	int i;
 
+	DF0;
 	g_rl.plen = 0;
 	if (*str == RL_SCP_START)
 		return (rl_scope_prompt_ps());
@@ -37,6 +38,7 @@ int 		rl_scope_prompt_ps(void)
 	t_dstr	*prompt;
 	int 	i;
 
+	DF0;
 	g_rl.plen = 0;
 	if (!(ps1 = sh_var_getval(sh_sh()->var, "PS1")))
 		ps1 = SH_VV_PS1;

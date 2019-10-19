@@ -37,10 +37,11 @@ void		rl_read(void)
 
 void		xrl_read(void)
 {
-	char	c;
+	int		c;
 	t_dstr	*rows;
 	t_lex	*lex;
 
+	DF0;
 	g_rl.txt->a[g_rl.cl] = ft_dstrnew_max(100);
 	if (*g_rl.scope->str == RL_SCP_START)
 		*g_rl.scope->str = '\0';
