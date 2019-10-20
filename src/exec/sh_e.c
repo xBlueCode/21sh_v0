@@ -29,6 +29,7 @@ int		sh_e_com_cmds(t_sh *sh, void *gr)
 		ret = sh_e_com_cmd(sh, com_cmd->content);
 		com_cmd = com_cmd->next;
 	}
+//	DF_PFWAIT("last coms", 8)
 	return (ret);
 }
 
@@ -76,6 +77,7 @@ int		sh_e_and_or(t_sh *sh, void *gr)
 			break ;
 		pipe_lst = pipe_lst->next;
 	}
+//	DF_PFWAIT("last and", 8)
 	return (ret);
 }
 

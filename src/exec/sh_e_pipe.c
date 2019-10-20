@@ -54,6 +54,7 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 	//	ret = WEXITSTATUS(ret);
 	//ret = pip->neg ? pip->neg - ret : ret; // TODO: recheck
 	ret = sh_e_pipe_wait(sh, gr, WUNTRACED, &state);
+	//DF_PFWAIT("after_wait00000000000000", 8);
 	return (ret);
 }
 

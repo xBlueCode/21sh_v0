@@ -23,19 +23,18 @@ void		rl_sighand_parent(int sn)
 		//prompt_display();
 		//rl_free();
 		//rl_start();
-		//signal(SIGINT, rl_sighand_parent);
+		signal(SIGINT, rl_sighand_parent);
 	}
 }
 
 void		rl_sighand_child(int sn)
 {
 	(void)sn;
-	/*
 	if (sn == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
-		signal(SIGINT, rl_sighand_child);
+		rl_free();
+		signal(SIGINT, rl_sighand_parent);
 	}
-	 */
-	exit(0);
+	//exit(0);
 }

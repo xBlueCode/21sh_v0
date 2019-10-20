@@ -71,6 +71,7 @@ char		*rl_start(void)
 	t_dstr	*dline;
 	char	*line;
 
+	DF0;
 	rl_init();
 	while (*g_rl.scope->str)
 	{
@@ -90,5 +91,6 @@ char		*rl_start(void)
 	line = !dline ? NULL : dline->str;
 	FT_MEMDEL(dline);
 	rl_free();
+	//DF_PFWAIT("after rl_free", 8)
 	return (line);
 }

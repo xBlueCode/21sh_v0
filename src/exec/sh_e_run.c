@@ -25,7 +25,7 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 		return (ft_printf("fork error\n"));
 	else if (!pid)
 	{
-		signal(SIGINT, &rl_sighand_child);
+		signal(SIGINT, SIG_DFL);
 		if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		{
 			ft_dup2(sh->sub_pipe[1], STDOUT_FILENO, 1);

@@ -114,6 +114,7 @@ int		sh_term_run(char **envp)
 		rl_hist_add(line);
 		ret = sh_script_run(g_sh, line);
 		FT_MEMDEL(line);
+		//DF_PFWAIT("after read", 8)
 	}
 	FT_MEMDEL(line);
 	rl_hist_save(); // TODO: history_cleanup
