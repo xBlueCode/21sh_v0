@@ -29,6 +29,11 @@ int			sh_blt_setenv(t_sh *sh, char **argv, char **envp)
 			argv[1]));
 	m = !argv[3] ? 0 : ft_atoi(argv[3]);
 	ft_tabins(sh->var, ft_tabrow_set(-1, argv[1], argv[2], SH_VO_GLO), m);
+	if (!ft_strcmp("PATH", argv[1]))
+	{
+		sh_bin_reset(&sh->bin_ht, &sh->bin_nl);
+		sh_bin_update(sh->bin_ht, sh->bin_nl, sh_var_getval(sh->var, "PATH"));
+	}
 	return (0);
 }
 
@@ -45,7 +50,11 @@ int			sh_blt_unsetenv(t_sh *sh, char **argv, char **envp)
 			NULL));
 	ac = 0;
 	while (argv[++ac])
+	{
 		ft_tabdel_n(sh->var, argv[ac]);
+		if (!ft_strcmp("PATH", argv[ac]))
+			sh_bin_reset(&sh->bin_ht, &sh->bin_nl);
+	}
 	return (0);
 }
 

@@ -13,13 +13,13 @@
 #include "ftsh.h"
 #include <sys/stat.h>
 
-int		sh_blt_cd_setwd(t_sh *sh, char *dir)
+int			sh_blt_cd_setwd(t_sh *sh, char *dir)
 {
-	char	*cwd;
+	char	cwd[FT_PATHNAME_MAX];
 
 	if (!sh || !dir)
 		return (1);
-	if (!(cwd = ft_getcwd()))
+	if (!(getcwd(cwd, FT_PATHNAME_MAX)))
 		return (1);
 	if (access(dir, F_OK))
 	{
@@ -42,21 +42,32 @@ int		sh_blt_cd_setwd(t_sh *sh, char *dir)
 	return (0);
 }
 
-int		sh_blt_cd(t_sh *sh, char **argv, char **envp)
+static int	sh_blt_cd_pwd(t_sh *sh, char **argv, char **envp)
+{
+	char *dir;
+
+	dir = argv[1];
+	if (!ft_strcmp(argv[1], "-"))
+	{
+		if (!(dir = sh_env_getval(envp, "OLDPWD")))
+			FT_STDE_RET(1, "ftsh: cd: OLDPWD not set !");
+		ft_putendl(dir);
+	}
+	return (sh_blt_cd_setwd(sh, dir));
+}
+
+int			sh_blt_cd(t_sh *sh, char **argv, char **envp)
 {
 	int		ac;
 	char	*dir;
-	int		lp;
 
 	(void)envp;
 	if (!argv)
 		return (1);
-	lp = 0;
 	if ((ac = ft_arr_len((void**)argv)) > 3 || ac < 1)
 		FT_STDE_RET(-1, "ftsh: cd: Too many arguments !");
 	if (ac > 1 && (!ft_strcmp("-L", argv[1]) || !ft_strcmp("-P", argv[1])))
 	{
-		lp = !ft_strcmp("-L", argv[1]) ? 1 : 2;
 		ac--;
 		argv++;
 	}
@@ -69,14 +80,5 @@ int		sh_blt_cd(t_sh *sh, char **argv, char **envp)
 		return (sh_blt_cd_setwd(sh, dir));
 	}
 	else
-	{
-		dir = argv[1];
-		if (!ft_strcmp(argv[1], "-"))
-		{
-			if (!(dir = sh_env_getval(envp, "OLDPWD")))
-				FT_STDE_RET(1, "ftsh: cd: OLDPWD not set !");
-			ft_putendl(dir);
-		}
-		return (sh_blt_cd_setwd(sh, dir));
-	}
+		return (sh_blt_cd_pwd(sh, argv, envp));
 }
