@@ -32,7 +32,7 @@ int				rl_hist_req_up(int c)
 int				rl_hist_req_do(int c)
 {
 	(void)c;
-	if (g_his.cur >= g_his.ent->len)
+	if (g_his.cur >= g_his.ent->len - 1)
 	{
 		if (g_his.back)
 			return (rl_hist_req_cur(-1));
@@ -40,7 +40,7 @@ int				rl_hist_req_do(int c)
 		return (1);
 	}
 	if (g_his.cur < 0)
-		g_his.cur = 1;
+		g_his.cur = 0;
 	return (rl_hist_req_cur(g_his.cur++));
 }
 
@@ -48,10 +48,13 @@ int				rl_hist_req_cur(int cur)
 {
 	t_dstr	*rows;
 	t_lex	*lex;
+	t_dastr	*ntxt;
 
 	if (!g_his.back)
 		g_his.back = rl_get().txt;
-	rl_reset(rl_hist_get_txt(cur));
+	ntxt = rl_hist_get_txt(cur);
+	//rl_reset(ntxt);
+	rl_update(ntxt);
 	rl_cur_fromto(g_rl.cc, 0);
 	RL_TPUTS("cr");
 	RL_TPUTS("cd");

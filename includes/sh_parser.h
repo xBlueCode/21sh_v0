@@ -60,7 +60,8 @@ DP0_STR(((t_token*)p->tlook->content)->val), target); \
 //# define PRET(ret) {*ast = (ret == 1 && ast) ? cast : NULL; DPLEV(-2); return (ret);}
 
 # define FREE_CAST ft_btreefree(&cast, (t_free)&sh_lex_tok_tfree);
-# define PRET(ret) {{if (ast && ret == 1) *ast = cast; else FREE_CAST} DPLEV(-2); return (ret);}
+//# define PRET(ret) {{if (ast && ret == 1) *ast = cast; else FREE_CAST} DPLEV(-2); return (ret);}
+# define PRET(ret) {{if (ast && ret == 1) *ast = cast;} DPLEV(-2); return (ret);}
 
 # define PMRET(ret) {DPLEV(-2); return (ret);}
 

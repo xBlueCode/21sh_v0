@@ -81,6 +81,7 @@ void			rl_free(void);
 void			rl_reset(t_dastr *ent);
 void			rl_read(void);
 void			xrl_read(void);
+void			rl_update(t_dastr *txt);
 
 int				rl_ctrl_perform(int c);
 int				rl_vim_perform(int c);
