@@ -27,6 +27,14 @@ int			sh_bin_init(t_hset **phtbin, t_dastr **bin_names)
 	return (OK);
 }
 
+int			sh_bin_reset(t_hset **bin_ht, t_dastr **bin_nl)
+{
+	ft_dastrfree(bin_nl);
+	ft_hset_free(bin_ht);
+	sh_bin_init(bin_ht, bin_nl);
+	return (0);
+}
+
 int			sh_bin_free(t_hset **phtbin)
 {
 	return (ft_hset_free(phtbin));

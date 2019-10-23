@@ -55,11 +55,9 @@ int			sh_lex_seek_add(t_lex *lex, int op)
 		if (sh_lex_tok_last(lex)->t == TSL2 && lex->st != TSTOK)
 		{
 			ft_dstrdel_n(lex->scope, -1, 1);
-			lex->st = TSERR;
-			return (-1);
+			FT_INST_RET(-1, lex->st = TSERR);
 		}
-		else
-			tok = sh_lex_tok_set(lex->st, lex->off, l, NULL);
+		tok = sh_lex_tok_set(lex->st, lex->off, l, NULL);
 	}
 	sh_lex_tok_add(lex, tok);
 	lex->st = TSNONE;

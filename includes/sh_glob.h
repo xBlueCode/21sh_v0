@@ -13,6 +13,11 @@
 #ifndef SH_GLOB_H
 # define SH_GLOB_H
 
+# define RL_GLOB_IF { cond = cond->next; continue ; }
+
+# define RL_GLOB_LOOP_PREP tmp0 = NULL; tmp1 = NULL; cond = conds;
+# define RL_GLOB_LOOP_INC FT_MEMDEL(tmp0); FT_MEMDEL(tmp1); cond = cond->next;
+
 int		rl_glob_indir(char *base, char *spath, char *pat, t_dastr *res);
 int		rl_glob_indir_lin(char *base, char *spath, char *pat, t_dastr *res);
 

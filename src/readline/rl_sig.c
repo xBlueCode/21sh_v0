@@ -20,7 +20,6 @@ void		rl_sighand_parent(int sn)
 	{
 		ft_putchar_fd('\n', 1);
 		rl_sigint();
-		//signal(SIGINT, rl_sighand_parent);
 	}
 }
 
@@ -30,7 +29,5 @@ void		rl_sighand_child(int sn)
 	if (sn == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
-		//rl_free();
-		//signal(SIGINT, &rl_sighand_child);
 	}
 }

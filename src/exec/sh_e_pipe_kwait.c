@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   sh_e_pipe_kwait.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abbesbes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/16 12:02:09 by abbesbes          #+#    #+#             */
-/*   Updated: 2019/03/16 14:39:09 by abbesbes         ###   ########.fr       */
+/*   Created: 2019/10/20 19:17:29 by abbesbes          #+#    #+#             */
+/*   Updated: 2019/10/20 19:17:36 by abbesbes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
-#include "libft.h"
 #include "ftsh.h"
 
-void		prompt_display(void)
+int			sh_e_cmd_wait(t_sh *sh, void *gr, int op, int *state)
 {
-	char	cwd[PATH_MAX];
+	t_cmd	*cmd;
 
-	getcwd(cwd, PATH_MAX);
-	if (PROMPT_LOGIN)
-	{
-		CFPUTSTR(C_CYN, getlogin(), 1);
-		ft_putwstr_fd(C_YLW""L" \u25C9  "T_END, 1);
-	}
+	DF0;
+	if (!gr || !sh)
+		return (0);
+	cmd = (t_cmd*)gr;
+	return (cmd->wait(sh, cmd->core, op, state));
+}
+
+int			sh_e_cmd_kill(t_sh *sh, void *gr, int sig)
+{
+	t_cmd	*cmd;
+
+	DF0;
+	if (!gr)
+		return (0);
+	cmd = (t_cmd*)gr;
+	return (cmd->kill(sh, cmd->core, sig));
 }

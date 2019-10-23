@@ -46,7 +46,7 @@ int			sh_xp_word(t_sh *sh, t_dastr *words)
 		sh_xp_tilde(sh, words, &i, &j);
 		while (j < words->a[i]->len)
 		{
-			if (sh_xp_brace(sh, words, &i, &j) || sh_xp_param(sh, words, &i, &j)
+			if (sh_xp_param(sh, words, &i, &j)
 				|| sh_xp_var(sh, words, &i, &j) || sh_xp_sq(sh, words, &i, &j)
 				|| sh_xp_bq(sh, words, &i, &j) || sh_xp_scmd(sh, words, &i, &j)
 				|| sh_xp_esc(sh, words, &i, &j))

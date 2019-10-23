@@ -46,8 +46,7 @@ int		sh_xp_param(t_sh *sh, t_dastr *words, int *i, int *j)
 	word = words->a[*i]->str;
 	if (ft_strncmp("${", word + *j, 2))
 		return (0);
-	ft_dstrdel_n(words->a[*i], *j, 2);
-	off = *j;
+	ft_dstrdel_n(words->a[*i], (off = *j), 2);
 	while (word[*j] && word[*j] != '}')
 	{
 		if (!sh_lex_isinname(word[*j]))

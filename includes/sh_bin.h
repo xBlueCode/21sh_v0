@@ -20,6 +20,7 @@
 t_dastr	*sh_bin_names(void);
 
 int		sh_bin_init(t_hset **phtbin, t_dastr **bin_names);
+int		sh_bin_reset(t_hset **phtbin, t_dastr **bin_names);
 int		sh_bin_update(t_hset *phtbin, t_dastr *bin_names, char *paths);
 
 char	*sh_bin_getpath(t_hset *htbin, char *bin);

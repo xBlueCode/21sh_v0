@@ -15,12 +15,13 @@
 
 t_sh	*g_sh;
 
-/**
- * Run from a script file
- * @param filename
- * @param envp
- * @return
- */
+/*
+** Run from a script file
+** @param filename
+** @param envp
+** @return
+*/
+
 int		sh_file_run(char *filename, char **envp)
 {
 	t_dstr	*dscript;
@@ -30,24 +31,25 @@ int		sh_file_run(char *filename, char **envp)
 	DF0;
 	if (!(dscript = ft_read_file(filename)))
 		return (KO);
-	sh_sh_init(&sh, envp, SH_MODE_SCR); // TODO: specify correct sh-mode
+	sh_sh_init(&sh, envp, SH_MODE_SCR);
 	ret = sh_script_run(sh, dscript->str);
 	ft_dstrfree(&dscript);
 	sh_sh_free(&sh);
 	return (ret);
 }
 
-/**
- * Executes the script string
- * @param sh
- * @param script
- * @return
- */
-int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
+/*
+** Executes the script string
+** @param sh
+** @param script
+** @return
+*/
+
+int		sh_script_run(t_sh *sh, char *script)
 {
 	t_lex		*lex;
 	t_com_cmds	*com_cmds;
-	int 		ret;
+	int			ret;
 
 	DF0;
 	if (!script)
@@ -66,39 +68,34 @@ int		sh_script_run(t_sh *sh, char *script) // TODO: add sh as param (subsh ...)
 	sh_lex_free(&lex);
 	ret = sh_e_com_cmds(sh, com_cmds);
 	sh_g_com_cmds_free((void**)&com_cmds);
-	//DF_PFWAIT("after free g", 8);
 	return (ret);
 }
 
-/**
- * Readline routine trigger
- * @param line
- * @return
- */
+/*
+** Readline routine trigger
+** @param line
+** @return
+*/
+
 int		sh_inter_read(char **line)
 {
-	//DF0
-	//(void)line;
-	//prompt_display();
-	//signal(SIGINT, sighand_parent);
-	//get_inline(line);
 	DF0;
 	*line = rl_start();
 	return (0);
 }
 
-/**
- * Run from terminal
- * @param envp
- * @return
- */
+/*
+** Run from terminal
+** @param envp
+** @return
+*/
+
 int		sh_term_run(char **envp)
 {
 	char	*line;
-	int 	ret;
+	int		ret;
 
-	DF0;
-	sh_sh_init(&g_sh, envp, SH_MODE_TER); // TODO: specify correct sh-mode
+	sh_sh_init(&g_sh, envp, SH_MODE_TER);
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	rl_hist_print();
@@ -110,25 +107,24 @@ int		sh_term_run(char **envp)
 		signal(SIGINT, &rl_sighand_parent);
 		sh_inter_read(&line);
 		if (!ft_strncmp("exit", line, 4))
-			 break;
+			break ;
 		rl_hist_add(line);
 		ret = sh_script_run(g_sh, line);
 		FT_MEMDEL(line);
-		//DF_PFWAIT("after read", 8)
 	}
 	FT_MEMDEL(line);
-	rl_hist_save(); // TODO: history_cleanup
+	rl_hist_save();
 	rl_hist_free();
 	return (ret);
 }
 
-/**
- *
- * @param ac
- * @param av
- * @param envp
- * @return
- */
+/*
+** @param ac
+** @param av
+** @param envp
+** @return
+*/
+
 int		main(int ac, char **av, char **envp)
 {
 	int sh_est;
@@ -138,7 +134,7 @@ int		main(int ac, char **av, char **envp)
 	else
 	{
 		sh_est = sh_term_run(envp);
-		sh_termconfig_reset(&sh_sh()->term); // replace with sh_free
+		sh_termconfig_reset(&sh_sh()->term);
 	}
 	system("leaks -q 21sh");
 	return (sh_est);

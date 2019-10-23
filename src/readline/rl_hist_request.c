@@ -44,16 +44,25 @@ int				rl_hist_req_do(int c)
 	return (rl_hist_req_cur(g_his.cur++));
 }
 
+static void		rl_hist_req_cur_inner(t_dstr *rows)
+{
+	t_lex	*lex;
+
+	sh_lex_init(&lex, rows->str);
+	ft_dstrfree(&rows);
+	if (sh_lex_seek_start(lex, 1) == OK)
+		ft_dstrins_str(g_rl.scope, 0, lex->scope->str);
+	sh_lex_free(&lex);
+}
+
 int				rl_hist_req_cur(int cur)
 {
 	t_dstr	*rows;
-	t_lex	*lex;
 	t_dastr	*ntxt;
 
 	if (!g_his.back)
 		g_his.back = rl_get().txt;
 	ntxt = rl_hist_get_txt(cur);
-	//rl_reset(ntxt);
 	rl_update(ntxt);
 	rl_cur_fromto(g_rl.cc, 0);
 	RL_TPUTS("cr");
@@ -68,11 +77,8 @@ int				rl_hist_req_cur(int cur)
 		rows = ft_dstrjoin_n(g_rl.txt->a, g_rl.cl + 1, NULL);
 		if (!rows || !rows->str)
 			continue;
-		sh_lex_init(&lex, rows->str);
+		rl_hist_req_cur_inner(rows);
 		ft_dstrfree(&rows);
-		if (sh_lex_seek_start(lex, 1) == OK)
-			ft_dstrins_str(g_rl.scope, 0, lex->scope->str);
-		sh_lex_free(&lex);
 	}
 	g_rl.cc = g_rl.txt->a[--g_rl.cl]->len;
 	return (0);

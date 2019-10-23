@@ -14,9 +14,22 @@
 
 extern t_rl		g_rl;
 
-int				rl_autoc(int c)
+static void		rl_autoc_replace(char *picked, ssize_t *ilen)
 {
 	t_dstr	*dline;
+
+	dline = g_rl.txt->a[g_rl.cl];
+	rl_cur_fromto(g_rl.cc, ilen[0]);
+	g_rl.cc = ilen[0];
+	ft_dstrdel_n(dline, g_rl.cc, ilen[1]);
+	ft_dstrins_str(dline, g_rl.cc, picked);
+	rl_putstr_wrap(dline->str, g_rl.cc);
+	g_rl.cc += ft_strlenz(picked);
+	rl_cur_fromto(ft_strlenz(dline->str), g_rl.cc);
+}
+
+int				rl_autoc(int c)
+{
 	int		cxt;
 	char	*cw;
 	ssize_t	ilen[2];
@@ -24,10 +37,9 @@ int				rl_autoc(int c)
 	t_dastr	*res;
 
 	(void)c;
-	dline = g_rl.txt->a[g_rl.cl];
-	rl_autoc_get_cw(dline->str, g_rl.cc, ilen);
-	cw = ft_strndup(dline->str + ilen[0], ilen[1]);
-	cxt = rl_autoc_cxt_get(dline->str, ilen[0]);
+	rl_autoc_get_cw(g_rl.txt->a[g_rl.cl]->str, g_rl.cc, ilen);
+	cw = ft_strndup(g_rl.txt->a[g_rl.cl]->str + ilen[0], ilen[1]);
+	cxt = rl_autoc_cxt_get(g_rl.txt->a[g_rl.cl]->str, ilen[0]);
 	if (!(res = rl_autoc_match(cw, cxt)) || !res->len)
 	{
 		FT_MEMDEL(cw);
@@ -35,13 +47,7 @@ int				rl_autoc(int c)
 	}
 	if ((picked = rl_autoc_xmenu(res)))
 	{
-		rl_cur_fromto(g_rl.cc, ilen[0]);
-		g_rl.cc = ilen[0];
-		ft_dstrdel_n(dline, g_rl.cc, ilen[1]);
-		ft_dstrins_str(dline, g_rl.cc, picked);
-		rl_putstr_wrap(dline->str, g_rl.cc);
-		g_rl.cc += ft_strlenz(picked);
-		rl_cur_fromto(ft_strlenz(dline->str), g_rl.cc);
+		rl_autoc_replace(picked, ilen);
 		ft_dastrfree(&res);
 	}
 	FT_MEMDEL(cw);
@@ -73,7 +79,7 @@ int				rl_autoc_cxt_get(const char *line, ssize_t pos)
 	return (cxt);
 }
 
-t_dastr		*rl_autoc_match(char *w, int cxt)
+t_dastr			*rl_autoc_match(char *w, int cxt)
 {
 	if (cxt == RL_CXT_VAR)
 		return (rl_autoc_match_var(w));

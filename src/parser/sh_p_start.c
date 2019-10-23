@@ -36,7 +36,6 @@ t_com_cmds	*sh_p_start(t_lex *lex)
 	t_btree		*ast;
 	t_com_cmds	*com_cmds;
 
-	DF0;
 	p.tlook = lex->tlst;
 	p.hd_val = lex->hd_val;
 	p.lev = 0;

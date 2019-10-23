@@ -35,23 +35,10 @@ void		rl_free(void)
 	ft_dastrfree(&g_rl.hd);
 }
 
-void		rl_reset(t_dastr *txt)
-{
-	if (!txt)
-		return ;
-	ft_dastrfree(&g_rl.txt);
-	g_rl.txt = txt;
-	g_rl.cl = -1;
-	g_rl.cc = 0;
-	ft_dstrdel_n(g_rl.scope, 0, g_rl.scope->max);
-	ft_dstrins_ch(g_rl.scope, 0, RL_SCP_START);
-}
-
 void		rl_update(t_dastr *txt)
 {
 	if (!txt)
 		return ;
-	//ft_dastrfree(&g_rl.txt);
 	g_rl.txt = txt;
 	g_rl.cl = -1;
 	g_rl.cc = 0;

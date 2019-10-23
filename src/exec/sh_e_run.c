@@ -18,7 +18,6 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 {
 	pid_t	pid;
 
-	DF0;
 	if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		pipe(sh->sub_pipe);
 	if ((pid = fork()) < 0)
@@ -41,12 +40,10 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 	if (BIT_IS(sh->mode, SH_MODE_SCMD) && !close(sh->sub_pipe[1]))
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
 	simp_cmd->pid = pid;
-	//sh->exit = WEXITSTATUS(wstat);
-	//return (WEXITSTATUS(wstat));
 	return (0);
 }
 
-int		sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd) // TODO: redirect cmd-sub
+int		sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd)
 {
 	int			ret;
 	t_sh_blt	bi;
@@ -64,7 +61,7 @@ int		sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd) // TODO: redirect cmd-sub
 	}
 	sh_e_redirect(simp_cmd->lst_redir);
 	ret = bi(sh, simp_cmd->argv, simp_cmd->envp);
-	if (BIT_IS(sh->mode, SH_MODE_SCMD))// && !close(sh->sub_pipe[1]))
+	if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
 	return (ret);
 }

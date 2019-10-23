@@ -35,6 +35,16 @@ t_list		*sh_glob_scandir(char *base, char *spath)
 	return (conds);
 }
 
+static void	get_conds(char *base, char *spath, char *pat, t_list **conds)
+{
+	char *slash;
+
+	if ((slash = ft_strchr_inv(pat, '/')))
+		*conds = sh_glob_scandir(base, ft_strndup(pat, slash++ - pat));
+	else
+		*conds = sh_glob_scandir(base, spath);
+}
+
 int			rl_glob_indir_lin(char *base, char *spath, char *pat, t_dastr *res)
 {
 	t_list	*conds;
@@ -42,22 +52,16 @@ int			rl_glob_indir_lin(char *base, char *spath, char *pat, t_dastr *res)
 	char	*slash;
 	char	*tmp;
 
-	tmp = NULL;
-	if ((slash = ft_strchr_inv(pat, '/')))
-		conds = sh_glob_scandir(base, (tmp = ft_strndup(pat, slash++ - pat)));
-	else
-		conds = sh_glob_scandir(base, spath);
-	FT_MEMDEL(tmp);
+	slash = ft_strchr_inv(pat, '/');
+	get_conds(base, spath, pat, &conds);
 	cond = conds;
+	tmp = NULL;
 	while (cond)
 	{
 		if ((*(char*)cond->content == '.' && *pat != '.') ||
 			(!ft_strcmp(cond->content, "..") && ft_strncmp(pat, "..", 2)))
-		{
-			cond = cond->next;
-			continue ;
-		}
-		else if (!slash && !ft_strncmp(cond->content, pat, ft_strlenz(pat)))
+			RL_GLOB_IF;
+		if (!slash && !ft_strncmp(cond->content, pat, ft_strlenz(pat)))
 			ft_dastrins_str(res, -1, (tmp = ft_strconnect(3, spath,
 					*spath ? "/" : "", cond->content)));
 		else if (slash && !ft_strncmp(cond->content, slash, ft_strlenz(slash)))
@@ -70,8 +74,6 @@ int			rl_glob_indir_lin(char *base, char *spath, char *pat, t_dastr *res)
 	return (0);
 }
 
-// TODO: check memory leaks + Refactoring to ft
-
 int			rl_glob_indir(char *base, char *spath, char *pat, t_dastr *res)
 {
 	t_list	*conds;
@@ -81,28 +83,21 @@ int			rl_glob_indir(char *base, char *spath, char *pat, t_dastr *res)
 	char	*tmp1;
 
 	conds = sh_glob_scandir(base, spath);
-	cond = conds;
 	slash = ft_strchr(pat, '/');
-	tmp0 = NULL;
-	tmp1 = NULL;
+	RL_GLOB_LOOP_PREP;
 	while (cond)
 	{
 		if ((*(char*)cond->content == '.' && *pat != '.') ||
 			(!ft_strcmp(cond->content, "..") && ft_strncmp(pat, "..", 2)))
-		{
-			cond = cond->next;
-			continue ;
-		}
-		else if (!slash && sh_glob_match(cond->content, pat))
+			RL_GLOB_IF;
+		if (!slash && sh_glob_match(cond->content, pat))
 			ft_dastrins_str(res, -1, (tmp0 = ft_strconnect(3, spath,
 					*spath ? "/" : "", cond->content)));
 		else if (slash && sh_glob_match(cond->content,
 				(tmp1 = ft_strndup(pat, slash - pat))))
 			rl_glob_indir(base, (tmp0 = ft_strconnect(3, spath,
 					*spath ? "/" : "", cond->content)), slash + 1, res);
-		FT_MEMDEL(tmp0);
-		FT_MEMDEL(tmp1);
-		cond = cond->next;
+		RL_GLOB_LOOP_INC;
 	}
 	ft_lst_free(&conds, &ft_memdel);
 	return (0);

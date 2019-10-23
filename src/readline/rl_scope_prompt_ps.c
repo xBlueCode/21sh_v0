@@ -26,8 +26,6 @@ int 		rl_scope_prompt_ps_u(t_dstr *prompt, int i)
 
 int 		rl_scope_prompt_ps_w(t_dstr *prompt, int i)
 {
-	//char *pwd;
-
 	if (ft_strncmp(prompt->str + i, "\\w", 2))
 		return (KO);
 	ft_dstrdel_n(prompt, i, 2);
