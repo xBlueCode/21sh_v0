@@ -7,6 +7,7 @@ LIBFT := $(addprefix $(LIBFT_DIR), libft.a)
 INC_DIR = $(LIBFT_DIR)includes/ ./includes/
 
 CC = gcc
+#CC_FLAGS = -W -Wall -Werror -Wextra -fsanitize="address"
 CC_FLAGS = -W -Wall -Werror -Wextra
 
 T_BLK = \033[5m
@@ -32,10 +33,7 @@ TERM := term_config.c
 
 PROMPT := prompt.c
 
-READLINE := rl.c rl_read.c rl_scope.c  rl_scope_scan.c \
-	rl_scope_scan_q.c rl_scope_scan_s.c rl_scope_scan_h.c \
-	rl_scope_scan_op.c rl_scope_scan_ssh.c \
-	rl_scope_prompt.c rl_scope_prompt_ps.c \
+READLINE := rl.c rl_read.c rl_scope_prompt.c rl_scope_prompt_ps.c \
 	rl_ctrl.c rl_ctrl_move.c rl_ctrl_jump.c rl_ctrl_kill.c rl_ctrl_kill_w.c \
 	rl_ctrl_save.c rl_ctrl_paste.c rl_ctrl_reg.c rl_ctrl_sig.c \
 	rl_edit.c rl_edit_utils.c\
@@ -64,9 +62,10 @@ PARSER := sh_p_and_or.c sh_p_cmd.c sh_p_cmd_pref.c sh_p_cmd_suff.c \
 
 GRAMMAR := sh_g_cmd.c sh_g_and_or.c sh_g_com_cmd.c sh_g_pipe.c sh_g_redir.c \
     sh_g_cmd_core.c sh_g_simp_cmd.c sh_g_group.c sh_g_for.c sh_g_loop.c \
+    sh_g_simp_cmd2.c sh_g_cmd_core2.c sh_g_com_cmd2.c
 
 EXEC := sh_e.c sh_e_pipe.c sh_e_simp_cmd.c sh_e_utils.c sh_e_redirect.c \
-	sh_e_check.c sh_e_run.c sh_e_redirect_agg.c
+	sh_e_check.c sh_e_run.c sh_e_redirect_agg.c sh_e_pipe_kwait.c
 
 BUILTIN := sh_blt_echo.c sh_blt_cd.c sh_blt_env.c
 

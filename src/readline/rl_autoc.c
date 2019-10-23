@@ -49,6 +49,7 @@ int				rl_autoc(int c)
 	{
 		rl_autoc_replace(picked, ilen);
 		ft_dastrfree(&res);
+		FT_MEMDEL(cw);
 	}
 	FT_MEMDEL(cw);
 	return (1);

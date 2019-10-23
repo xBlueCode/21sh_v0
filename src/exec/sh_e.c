@@ -61,6 +61,7 @@ int		sh_e_and_or(t_sh *sh, void *gr)
 	t_list		*pipe_lst;
 	int			ret;
 	int			sep_ao;
+	char		*strret;
 
 	DF0;
 	if ((ret = 0) || !sh || !gr)
@@ -72,6 +73,9 @@ int		sh_e_and_or(t_sh *sh, void *gr)
 		sep_ao = ft_dstrget_ch(and_or->sep, -1);
 		ft_dstrdel_n(and_or->sep, -1, 1);
 		ret = sh_e_pipe(sh, pipe_lst->content);
+		strret = ft_itoa(ret);
+		ft_tabins(sh->var, ft_tabrow_set(-1, "?", strret, SH_VO_ESTAT), 1);
+		FT_MEMDEL(strret);
 		if ((ret && sep_ao == TSA2) || (!ret && sep_ao == TSO2))
 			break ;
 		pipe_lst = pipe_lst->next;

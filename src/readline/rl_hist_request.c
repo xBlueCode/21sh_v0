@@ -49,7 +49,6 @@ static void		rl_hist_req_cur_inner(t_dstr *rows)
 	t_lex	*lex;
 
 	sh_lex_init(&lex, rows->str);
-	ft_dstrfree(&rows);
 	if (sh_lex_seek_start(lex, 1) == OK)
 		ft_dstrins_str(g_rl.scope, 0, lex->scope->str);
 	sh_lex_free(&lex);
@@ -80,6 +79,7 @@ int				rl_hist_req_cur(int cur)
 		rl_hist_req_cur_inner(rows);
 		ft_dstrfree(&rows);
 	}
+	ft_dastrfree(&ntxt);
 	g_rl.cc = g_rl.txt->a[--g_rl.cl]->len;
 	return (0);
 }

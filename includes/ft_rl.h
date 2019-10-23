@@ -25,7 +25,9 @@
 # define RL_MODE_VIM 2
 
 # define RL_TPUTS(str) tputs(tgetstr(str, NULL), 1, rl_ter_putchar);
-# define RL_TPUTS_GO(str, x, y) tputs(tgoto(tgetstr(str, NULL), x, y), 1, rl_ter_putchar)
+
+# define TMP0 rl_ter_putchar
+# define RL_TPUTS_GO(str, x, y) tputs(tgoto(tgetstr(str, NULL), x, y), 1, TMP0)
 
 # define RL_PUTSTR_STY(style, inst) {ft_putstr(style); inst; ft_putstr(T_END);}
 

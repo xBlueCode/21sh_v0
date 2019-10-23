@@ -38,11 +38,17 @@ t_list		*sh_glob_scandir(char *base, char *spath)
 static void	get_conds(char *base, char *spath, char *pat, t_list **conds)
 {
 	char *slash;
+	char *tmp;
 
+	tmp = NULL;
 	if ((slash = ft_strchr_inv(pat, '/')))
-		*conds = sh_glob_scandir(base, ft_strndup(pat, slash++ - pat));
+	{
+		tmp = ft_strndup(pat, slash++ - pat);
+		*conds = sh_glob_scandir(base, tmp);
+	}
 	else
 		*conds = sh_glob_scandir(base, spath);
+	FT_MEMDEL(tmp);
 }
 
 int			rl_glob_indir_lin(char *base, char *spath, char *pat, t_dastr *res)

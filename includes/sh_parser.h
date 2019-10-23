@@ -22,46 +22,23 @@ static int g_p_lev = 0;
 # define DPTEST if (p && p->tlook)
 # define DP0_STR(dstr) dstr ? dstr->str : "."
 # define DPLEV(shift) (p->lev += shift)
-//# define SHP_CAST_INIT ft_btreeinit(&cast, NULL, 0, SH_GR_PROGRAM);
 # define SHP_CAST_INIT(gr) cast = ft_btreenew(NULL, 0); cast->op = gr;
 # define SHP_CAST_L &(cast->left)
 # define SHP_CAST_R &(cast->right)
 
-/*
-# define DP0 DPTEST {DPLEV(2); \
-ft_printf("%3d%*c %-24s : %2d :%s\n",p->lev, p->lev, '-', \
-__FUNCTION__, \
-((t_token*)p->tlook->content)->t, \
-DP0_STR(((t_token*)p->tlook->content)->val)); \
-} else return (0);
-*/
 # define DP0
 
-/*
-# define DPM0 DPTEST {DPLEV(2); ft_printf(C_YLW"%3d%*c %-24s : %2d :%s <%d>\n"T_END, p->lev, p->lev, '-', \
-__FUNCTION__, \
-((t_token*)p->tlook->content)->t, \
-DP0_STR(((t_token*)p->tlook->content)->val), target); \
-}
-*/
 # define DPM0
 
-/*
-# define DPM1 DPTEST {ft_printf(C_GRN"%3d%*c %-24s : %2d :%s <%d>\n"T_END, p->lev, p->lev, '-', \
-__FUNCTION__, \
-((t_token*)p->tlook->content)->t, \
-DP0_STR(((t_token*)p->tlook->content)->val), target); \
-}
-*/
 # define DPM1
 
-# define DPTOKPUT(tok) ft_printf(C_RED"Tok: %-4d - %-24s %3d\n"T_END, tok->t, tok->val ? tok->val->str : "", tok->assi);
-
-//# define PRET(ret) {*ast = (ret == 1 && ast) ? cast : NULL; DPLEV(-2); return (ret);}
+# define P1(tok) tok->t, tok->val ? tok->val->str : "", tok->assi
+# define DPTOKPUT(tok) ft_printf(C_RED"Tok: %-4d - %-24s %3d\n"T_END, P1(tok));
 
 # define FREE_CAST ft_btreefree(&cast, (t_free)&sh_lex_tok_tfree);
-//# define PRET(ret) {{if (ast && ret == 1) *ast = cast; else FREE_CAST} DPLEV(-2); return (ret);}
-# define PRET(ret) {{if (ast && ret == 1) *ast = cast;} DPLEV(-2); return (ret);}
+
+# define P2(r) DPLEV(-2); return (r);
+# define PRET(ret) {{if (ast && ret == 1) *ast = cast; else FREE_CAST} P2(ret)}
 
 # define PMRET(ret) {DPLEV(-2); return (ret);}
 
@@ -144,7 +121,7 @@ int				sh_p_seq_sep(t_parser *p, t_btree **ast);
 int				sh_p_lookshift(t_parser *p);
 int				sh_p_match(t_parser *p, t_btree **ast, int toktype);
 
-int 			sh_tok_getrw(char *tokval);
+int				sh_tok_getrw(char *tokval);
 int				sh_tok_distinct(t_token *token, int target);
 int				sh_tok_isname_till(char *val, char delim);
 

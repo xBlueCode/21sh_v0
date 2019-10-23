@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef SH_GRAMMAR_H
-#define SH_GRAMMAR_H
+# define SH_GRAMMAR_H
 
 # include "libft.h"
 # include "sh_lex.h"
@@ -19,15 +19,22 @@
 # include "sh_gram_type.h"
 
 # define SHG_CHECK_MALL(g) {if (!(g = ft_memalloc(sizeof(*g)))) return (NULL);};
-# define SHG_LSTADD(g, lst, ncont) ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));
-# define SHG_LSTADD_FREE(g, lst, ncont) {ft_lst_addlast(&(g->lst), ft_lstnew(ncont, sizeof(*ncont)));FT_MEMDEL(ncont);}
-# define SHG_LSTADDS(g, lst, nc, ns) ft_lst_addlast(&(g->lst), ft_lstnew(nc, ns));
+
+# define SHG_0(ncont) ft_lstnew(ncont, sizeof(*ncont))
+# define SHG_LSTADD(g, lst, ncont) ft_lst_addlast(&(g->lst), SHG_0(ncont));
+
+# define SHG_1(g, lst, c) ft_lst_addlast(&(g->lst), ft_lstnew(c, sizeof(*c)));
+# define SHG_LSTADD_FREE(g, lst, nc) {SHG_1(g, lst, nc) FT_MEMDEL(nc);}
+
+# define SHG_2(nc, ns) ft_lstnew(nc, ns)
+# define SHG_LSTADDS(g, lst, nc, ns) ft_lst_addlast(&(g->lst), SHG_2);
 
 # define SHG_CHECK_AST(node, gt) {if (!node || node->op != gt) return (NULL);};
 
 # define SHG_AST_TOK(ast) ((t_token*)(ast)->data)
 
-# define SHG_PUT_CASTVAR(v, g, t, op) v = op ? ((t)(((t_list*)g)->content)) : (t)g;
+# define SHG_3(g, t) ((t)(((t_list*)g)->content))
+# define SHG_PUT_CASTVAR(v, g, t, op) v = op ? SHG_3(g, t) : (t)g;
 
 # define SHG_PUT_CASTFUN(f) ((void(*)(t_list*, int))&f)
 
@@ -99,11 +106,6 @@ typedef enum	e_grammar_rules
 	SH_GR_SEQ_SEP
 }				t_grammar_rules;
 
-typedef void *(t_g_new)(void);
-typedef void *(t_g_seek)(t_btree*);
-typedef void (put)(void*, int);
-//typedef int (t_exec)(t_sh*, gr);
-
 typedef struct	s_gr
 {
 	int		t;
@@ -163,7 +165,7 @@ void			sh_g_redir_put(void*g, int op);
 
 void			sh_g_wordput(t_list *elem);
 
-int 			sh_g_cmd_core_type(int gr_enum);
+int				sh_g_cmd_core_type(int gr_enum);
 t_exec			*sh_g_cmd_core_get_exec(int grt);
 t_wait			*sh_g_cmd_core_get_wait(int grt);
 t_kill			*sh_g_cmd_core_get_kill(int grt);

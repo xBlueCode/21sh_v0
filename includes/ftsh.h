@@ -26,7 +26,6 @@
 # include "sh_term.h"
 # include "ft_rl.h"
 # include "sh_parser.h"
-# include "sh_jobc.h"
 # include "sh_sh.h"
 # include "sh_exec.h"
 # include "sh_expan.h"
@@ -34,6 +33,7 @@
 # include "sh_utils.h"
 # include "sh_alias.h"
 # include "sh_builtin.h"
+# include "sh_jobc.h"
 
 # define DF0
 
