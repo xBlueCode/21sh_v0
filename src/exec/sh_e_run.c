@@ -25,6 +25,7 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 	else if (!pid)
 	{
 		signal(SIGINT, SIG_DFL);
+		sh_termconfig_reset(&sh->term);
 		if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		{
 			ft_dup2(sh->sub_pipe[1], STDOUT_FILENO, 1);

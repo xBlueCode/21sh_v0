@@ -47,6 +47,7 @@ int		sh_e_simp_cmd_wait(t_sh *sh, void *gr, int op, int *state)
 		return (-1);
 	simp_cmd = (t_simp_cmd*)gr;
 	waitpid(simp_cmd->pid, &wstat, op);
+	sh_termconfig_init(&sh->term);
 	if (WIFEXITED(wstat) || WIFSIGNALED(wstat))
 		*state = SH_E_STATE_DONE;
 	simp_cmd->state = *state;
