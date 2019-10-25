@@ -18,7 +18,7 @@ extern t_hist	g_his;
 int				rl_hist_parse(char *str, int num)
 {
 	t_dastr		*ent;
-	char		*line;
+	char 		*line;
 	ssize_t		etx;
 
 	if (!str || num < 1)
@@ -27,27 +27,28 @@ int				rl_hist_parse(char *str, int num)
 	while (--num > -1)
 	{
 		if ((etx = ft_strichr(str, 0x03)) < 0)
-			break ;
+			break;
 		line = ft_strndup(str, etx);
 		str = str + etx + 1;
 		ft_dastrins_str(ent, -1, line);
 		ft_memdel((void**)&line);
 	}
-	g_his.cur = g_his.ent->len - 1;
+	g_his.cur = g_his.ent->len;
 	return (0);
 }
 
 t_dastr			*rl_hist_get_txt(int cur)
 {
 	t_dstr		*cmd;
-	char		*cmdstr;
+	char 		*cmdstr;
 	char		*nl;
-	char		*tmp;
+	char 		*tmp;
 	t_dastr		*txt;
 
-	if (cur < 0 && (txt = g_his.back))
+	if (cur == g_his.ent->len)
 	{
-		g_his.back = NULL;
+		txt = ft_dastrdup(g_his.back);
+		ft_dastrfree(&g_his.back);
 		return (txt);
 	}
 	if (!(cmd = g_his.ent->a[cur]))
@@ -65,7 +66,7 @@ t_dastr			*rl_hist_get_txt(int cur)
 	return (txt);
 }
 
-int				rl_hist_add(char *line)
+int 			rl_hist_add(char *line)
 {
 	if (!line)
 		return (-1);

@@ -7,8 +7,8 @@ LIBFT := $(addprefix $(LIBFT_DIR), libft.a)
 INC_DIR = $(LIBFT_DIR)includes/ ./includes/
 
 CC = gcc
-#CC_FLAGS = -W -Wall -Werror -Wextra -fsanitize="address"
-CC_FLAGS = -W -Wall -Werror -Wextra
+CC_FLAGS = -W -Wall -Werror -Wextra -fsanitize="address" -g
+#CC_FLAGS = -W -Wall -Werror -Wextra
 
 T_BLK = \033[5m
 T_NRM = \033[25m
@@ -33,7 +33,7 @@ TERM := term_config.c
 
 PROMPT := prompt.c
 
-READLINE := rl.c rl_read.c rl_scope_prompt.c rl_scope_prompt_ps.c \
+READLINE := rl.c rl_update.c rl_read.c rl_scope_prompt.c rl_scope_prompt_ps.c \
 	rl_ctrl.c rl_ctrl_move.c rl_ctrl_jump.c rl_ctrl_kill.c rl_ctrl_kill_w.c \
 	rl_ctrl_save.c rl_ctrl_paste.c rl_ctrl_reg.c rl_ctrl_sig.c \
 	rl_edit.c rl_edit_utils.c\
