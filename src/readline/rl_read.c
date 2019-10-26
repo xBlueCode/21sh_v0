@@ -20,7 +20,6 @@ void		xrl_read(void)
 	t_dstr	*rows;
 	t_lex	*lex;
 
-	//g_rl.txt->a[g_rl.cl] = ft_dstrnew_max(100);
 	ft_dastrins_str(g_rl.txt, -1, "");
 	if (*g_rl.scope->str == RL_SCP_START)
 		*g_rl.scope->str = '\0';

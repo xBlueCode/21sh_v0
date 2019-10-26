@@ -38,11 +38,8 @@ int			rl_hist_req_do(int c)
 	return (rl_hist_req_cur(++g_his.cur));
 }
 
-int 		rl_hist_req_cur(int cur)
+static void		rl_hist_req_prep(int cur)
 {
-	t_dstr	*rows;
-	t_lex	*lex;
-
 	if (!g_his.back)
 	{
 		g_his.back = ft_dastrdup(g_rl.txt);
@@ -53,6 +50,14 @@ int 		rl_hist_req_cur(int cur)
 	RL_TPUTS("cd");
 	ft_dstrdel_n(g_rl.scope, 0, g_rl.scope->len);
 	ft_dstrins_ch(g_rl.scope, -1, RL_SCP_START);
+}
+
+int				rl_hist_req_cur(int cur)
+{
+	t_dstr	*rows;
+	t_lex	*lex;
+
+	rl_hist_req_prep(cur);
 	while (g_rl.txt->a[++g_rl.cl])
 	{
 		rl_scope_prompt(g_rl.scope->str);

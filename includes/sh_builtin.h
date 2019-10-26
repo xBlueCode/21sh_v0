@@ -25,6 +25,7 @@ int			sh_blt_env(t_sh *sh, char **argv, char **envp);
 int			sh_blt_printenv(t_sh *sh, char **argv, char **envp);
 int			sh_blt_setenv(t_sh *sh, char **argv, char **envp);
 int			sh_blt_unsetenv(t_sh *sh, char **argv, char **envp);
+int			sh_blt_alias(t_sh *sh, char **argv, char **envp);
 
 t_sh_blt	sh_e_get_blt(char *bname);
 

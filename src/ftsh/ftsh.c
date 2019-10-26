@@ -95,14 +95,14 @@ int		sh_term_run(char **envp)
 	char	*line;
 	int		ret;
 
-	if (sh_valid_stdin() == KO) // override by jobc
+	if (sh_valid_stdin() == KO)
 		return (KO);
 	sh_sh_init(&g_sh, envp, SH_MODE_TER);
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
+	sh_als_init();
 	rl_hist_print();
 	line = NULL;
-	ret = 0;
 	while (1)
 	{
 		ret = 0;

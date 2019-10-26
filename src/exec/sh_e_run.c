@@ -14,7 +14,18 @@
 #include <fcntl.h>
 #include <signal.h>
 
-int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
+static void	sh_e_run_exec_redir_scmd(t_sh *sh)
+{
+	if (BIT_IS(sh->mode, SH_MODE_SCMD))
+	{
+		ft_dup2(sh->sub_pipe[1], STDOUT_FILENO, 1);
+		fcntl(sh->sub_pipe[1], F_SETFL, O_NONBLOCK);
+	}
+	else
+		sh_termconfig_reset(&sh->term);
+}
+
+int			sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 {
 	pid_t	pid;
 
@@ -24,14 +35,7 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 		return (ft_printf("fork error\n"));
 	else if (!pid)
 	{
-		//signal(SIGINT, SIG_DFL);
-		if (BIT_IS(sh->mode, SH_MODE_SCMD))
-		{
-			ft_dup2(sh->sub_pipe[1], STDOUT_FILENO, 1);
-			fcntl(sh->sub_pipe[1], F_SETFL, O_NONBLOCK);
-		}
-		else
-			sh_termconfig_reset(&sh->term);
+		sh_e_run_exec_redir_scmd(sh);
 		sh_e_redirect(simp_cmd->lst_redir);
 		if (!ft_strcmp(simp_cmd->argv[0], "env"))
 			exit(sh_e_run_env(sh, simp_cmd));
@@ -45,7 +49,7 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 	return (0);
 }
 
-int		sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd)
+int			sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd)
 {
 	int			ret;
 	t_sh_blt	bi;
@@ -68,7 +72,7 @@ int		sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd)
 	return (ret);
 }
 
-int		sh_e_run_env(t_sh *sh, t_simp_cmd *simp_cmd)
+int			sh_e_run_env(t_sh *sh, t_simp_cmd *simp_cmd)
 {
 	int		i;
 	int		ret;
