@@ -25,12 +25,13 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 	else if (!pid)
 	{
 		//signal(SIGINT, SIG_DFL);
-		sh_termconfig_reset(&sh->term);
 		if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		{
 			ft_dup2(sh->sub_pipe[1], STDOUT_FILENO, 1);
 			fcntl(sh->sub_pipe[1], F_SETFL, O_NONBLOCK);
 		}
+		else
+			sh_termconfig_reset(&sh->term);
 		sh_e_redirect(simp_cmd->lst_redir);
 		if (!ft_strcmp(simp_cmd->argv[0], "env"))
 			exit(sh_e_run_env(sh, simp_cmd));

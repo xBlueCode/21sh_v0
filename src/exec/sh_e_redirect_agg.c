@@ -32,7 +32,7 @@ int				sh_e_redirect_ga(t_redir *redir)
 	DF0;
 	if (!redir)
 		return (KO);
-	if (ft_strcmp("-", redir->word))
+	if (!ft_strcmp("-", redir->word))
 		fdf = -1;
 	else if (ft_isdigit(*redir->word) && !redir->word[1])
 		fdf = *redir->word - '0';
@@ -58,7 +58,7 @@ int				sh_e_redirect_la(t_redir *redir)
 	DF0;
 	if (!redir)
 		return (KO);
-	if (ft_strcmp("-", redir->word))
+	if (!ft_strcmp("-", redir->word))
 		fdf = -1;
 	else if (ft_isdigit(*redir->word) && !redir->word[1])
 		fdf = *redir->word - '0';
