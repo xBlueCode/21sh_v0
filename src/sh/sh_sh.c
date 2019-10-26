@@ -54,6 +54,7 @@ int			sh_sh_init(t_sh **sh, char **envp, int mode)
 		sh_sh_init_inter(*sh);
 	(*sh)->sub_pipe = NULL;
 	(*sh)->sub_out = NULL;
+	(*sh)->quit = 0;
 	return (OK);
 }
 

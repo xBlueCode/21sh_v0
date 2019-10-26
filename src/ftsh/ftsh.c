@@ -108,16 +108,19 @@ int		sh_term_run(char **envp)
 		ret = 0;
 		signal(SIGINT, &rl_sighand_parent);
 		sh_inter_read(&line);
-		if (!ft_strncmp("exit", line, 4))
-			break ;
 		rl_hist_add(line);
 		ret = sh_script_run(g_sh, line);
 		FT_MEMDEL(line);
+		if (g_sh->quit)
+			break ;
+		g_sh->exit = ret;
 	}
 	FT_MEMDEL(line);
 	rl_hist_save();
 	rl_hist_free();
-	return (ret);
+	if (g_sh->quit == 2)
+		return (g_sh->quit_st);
+	return (g_sh->exit);
 }
 
 /*

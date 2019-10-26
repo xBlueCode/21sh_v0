@@ -45,6 +45,8 @@ typedef struct	s_sh
 	int			*sub_pipe;
 	t_dstr		*sub_out;
 	uint8_t		exit;
+	char 		quit;
+	char 		quit_st;
 }				t_sh;
 
 t_sh			*sh_sh(void);
