@@ -30,6 +30,7 @@ char			*rl_autoc_xmenu(t_dastr *res)
 	if (!(picked = rl_autoc_xmenu_select(res)))
 		ft_dastrfree(&res);
 	RL_TPUTS("up");
+	dline = g_rl.txt->a[g_rl.cl];
 	slen = ft_strlenz(dline->str);
 	rl_cur_fromto(slen - slen % (g_rl.wc) - g_rl.plen, g_rl.cc);
 	return (picked);

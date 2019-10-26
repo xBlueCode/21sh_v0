@@ -24,7 +24,7 @@ int		sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 		return (ft_printf("fork error\n"));
 	else if (!pid)
 	{
-		signal(SIGINT, SIG_DFL);
+		//signal(SIGINT, SIG_DFL);
 		sh_termconfig_reset(&sh->term);
 		if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		{

@@ -19,6 +19,7 @@ void		rl_sighand_parent(int sn)
 	if (sn == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
+		RL_TPUTS("cd");
 		rl_sigint();
 	}
 }
