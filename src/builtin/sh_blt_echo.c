@@ -12,14 +12,26 @@
 
 #include "ftsh.h"
 
-int		sh_blt_echo(t_sh *sh, char **argv, char **envp)
+static int sh_blt_echo_check_std(void)
+{
+	int c;
+
+	if (read(STDOUT_FILENO, &c, 0) < 0)
+	{
+		ft_dprintf(2, "ftsh: echo: Impossible to write to stdout !\n");
+		return (KO);
+	}
+	return (OK);
+}
+
+int			sh_blt_echo(t_sh *sh, char **argv, char **envp)
 {
 	uint8_t op;
 	int		i;
 
 	(void)envp;
 	(void)sh;
-	if (!argv)
+	if (!argv || sh_blt_echo_check_std() != OK)
 		return (1);
 	op = 0;
 	i = 1;

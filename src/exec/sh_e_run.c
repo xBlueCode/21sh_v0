@@ -69,6 +69,7 @@ int			sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd)
 	ret = bi(sh, simp_cmd->argv, simp_cmd->envp);
 	if (BIT_IS(sh->mode, SH_MODE_SCMD))
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
+	simp_cmd->state = ret;
 	return (ret);
 }
 
