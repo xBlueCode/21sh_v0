@@ -18,6 +18,7 @@ int			sh_als_print(t_hset *als)
 	int i;
 
 	i = -1;
+	ft_putstr("Alias:\n");
 	while (++i < als->max)
 		ft_lstiter(als->arr[i], &sh_als_print_ent);
 	return (OK);
@@ -25,8 +26,7 @@ int			sh_als_print(t_hset *als)
 
 void		sh_als_print_ent(t_list *entlst)
 {
-	ft_putstr("Alias: ");
 	ft_putstr((char*)((t_htabent*)entlst->content)->key);
 	ft_putchar('=');
-	ft_putstr((char*)((t_htabent*)entlst->content)->val);
+	ft_putendl((char*)((t_htabent*)entlst->content)->val);
 }

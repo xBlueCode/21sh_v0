@@ -45,3 +45,9 @@ int			sh_als_rem(t_hset *als, char *key)
 		return (KO);
 	return (ft_htab_rem(als, key, ft_strlen(key) + 1));
 }
+
+int			sh_als_reset(void)
+{
+	ft_hset_free(&g_als);
+	return (sh_als_init());
+}

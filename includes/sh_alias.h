@@ -19,6 +19,7 @@
 
 t_hset		*sh_als(void);
 int			sh_als_init(void);
+int			sh_als_reset(void);
 
 int			sh_als_add(t_hset *als, char *key, char *val);
 int			sh_als_rem(t_hset *als, char *key);
