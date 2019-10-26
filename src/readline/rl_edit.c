@@ -49,8 +49,6 @@ int				rl_insert_ch(int c)
 		rl_putstr_wrap(line->str, g_rl.cc);
 		rl_cur_fromto(ft_strlenz(line->str), g_rl.cc);
 	}
-	if (g_his.back)
-		ft_dastrfree(&g_his.back);
 	return (0);
 }
 

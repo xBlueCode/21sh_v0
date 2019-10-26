@@ -36,7 +36,7 @@ t_hist		rl_hist_get(void)
 
 int			rl_hist_reset(void)
 {
-	g_his.back = NULL;
+	ft_dastrfree(&g_his.back);
 	g_his.cur = g_his.ent->len;
 	return (0);
 }
