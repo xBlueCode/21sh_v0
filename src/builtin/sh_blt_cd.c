@@ -13,6 +13,15 @@
 #include "ftsh.h"
 #include <sys/stat.h>
 
+static void	sh_blt_cd_env(t_sh *sh, char *oldpwd)
+{
+	char	pwd[FT_PATHNAME_MAX];
+
+	if ((getcwd(pwd, FT_PATHNAME_MAX)))
+		ft_tabins(sh->var, ft_tabrow_set(-1, "PWD", pwd, SH_VO_GLO), 1);
+	ft_tabins(sh->var, ft_tabrow_set(-1, "OLDPWD", oldpwd, SH_VO_GLO), 1);
+}
+
 int			sh_blt_cd_setwd(t_sh *sh, char *dir)
 {
 	char	cwd[FT_PATHNAME_MAX];
@@ -37,8 +46,7 @@ int			sh_blt_cd_setwd(t_sh *sh, char *dir)
 	else if (chdir(dir))
 		FT_INST_RET(1,
 			FT_STDEPF("ftsh: cd: %s: Unable to change dir !\n", dir));
-	ft_tabins(sh->var, ft_tabrow_set(-1, "PWD", dir, SH_VO_GLO), 1);
-	ft_tabins(sh->var, ft_tabrow_set(-1, "OLDPWD", cwd, SH_VO_GLO), 1);
+	sh_blt_cd_env(sh, cwd);
 	return (0);
 }
 
