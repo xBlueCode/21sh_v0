@@ -52,5 +52,6 @@
 # define SH_FILENAME_MAX 255
 
 int			sh_script_run(t_sh *sh, char *script);
+int			sh_valid_stdin(void);
 
 #endif
