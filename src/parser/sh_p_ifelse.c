@@ -17,9 +17,9 @@ int				sh_p_if_clause(t_parser *p, t_btree **ast)
 	t_btree *cast;
 
 	DP0;
+	SHP_CAST_INIT(SH_GR_IF_CLAUSE);
 	if (!sh_p_match(p, NULL, TSRW_IF))
 		PRET(0);
-	SHP_CAST_INIT(SH_GR_IF_CLAUSE);
 	if (!sh_p_comp_list(p, SHP_CAST_L))
 		PRET(0);
 	if (!sh_p_ifbody(p, SHP_CAST_R))
@@ -34,9 +34,9 @@ int				sh_p_else_part(t_parser *p, t_btree **ast)
 	t_btree *cast;
 
 	DP0;
+	SHP_CAST_INIT(SH_GR_ELSE_PART);
 	if (!sh_p_match(p, NULL, TSRW_ELIF) && !sh_p_match(p, NULL, TSRW_ELSE))
 		PRET(0);
-	SHP_CAST_INIT(SH_GR_ELSE_PART);
 	if (!sh_p_comp_list(p, SHP_CAST_L))
 		PRET(0);
 	sh_p_ifbody(p, SHP_CAST_R);
@@ -48,9 +48,9 @@ int				sh_p_ifbody(t_parser *p, t_btree **ast)
 	t_btree *cast;
 
 	DP0;
+	SHP_CAST_INIT(SH_GR_IFBODY);
 	if (!sh_p_match(p, NULL, TSRW_THEN))
 		PRET(0);
-	SHP_CAST_INIT(SH_GR_IFBODY);
 	if (!sh_p_comp_list(p, SHP_CAST_L))
 		PRET(0);
 	sh_p_else_part(p, SHP_CAST_R);

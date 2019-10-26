@@ -17,19 +17,24 @@
 static int	sh_lex_seek_als_prepare_lex(t_lex *lex, int op, int pos, char *word)
 {
 	t_list	*keys;
+	t_list	*hkeys;
 	t_lex	*alex;
 
 	sh_lex_init(&alex, ft_htab_getval(sh_als(), word, ft_strlen(word) + 1));
 	ft_hset_add(alex->alias_chain, word, ft_strlen(word) + 1);
-	keys = ft_hset_tolst(lex->alias_chain);
+	hkeys = ft_hset_tolst(lex->alias_chain);
+	keys = hkeys;
 	while (keys)
 	{
-		ft_hset_add(alex->alias_chain, keys->content,
-				ft_strlenz(keys->content) + 1);
+		ft_hset_add(alex->alias_chain, keys->content, keys->content_size);
 		keys = keys->next;
 	}
+	ft_lst_free(&hkeys, &ft_memdel);
 	if (sh_lex_seek_als_start(alex, op) < 0)
+	{
+		sh_lex_free(&alex);
 		return (0);
+	}
 	ft_dstrdel_n(lex->in, lex->i, pos);
 	ft_dstrins_str(lex->in, lex->i, alex->in->str);
 	lex->alias_off = lex->i + ft_strlen(alex->in->str);

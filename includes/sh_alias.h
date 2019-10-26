@@ -15,7 +15,7 @@
 
 # include <libft.h>
 
-# define SH_ALS_HTSIZE 48
+# define SH_ALS_HTSIZE 5
 
 t_hset		*sh_als(void);
 int			sh_als_init(void);
