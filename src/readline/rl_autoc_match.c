@@ -66,6 +66,7 @@ t_dastr			*rl_autoc_match_glob(char *w)
 		rl_glob_indir(base, "", w, res);
 		res_single = ft_dastrnew_max(2);
 		res_single->a[0] = ft_dstrjoin_all(res->a, " ");
+		res_single->len = res_single->a[0] ? 1 : 0;
 		ft_dastrfree(&res);
 		res = res_single;
 	}
