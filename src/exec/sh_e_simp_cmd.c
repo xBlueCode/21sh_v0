@@ -34,6 +34,7 @@ int		sh_e_simp_cmd(t_sh *sh, void *gr)
 		return (sh_e_run_built(sh, simp_cmd));
 	if ((ret = sh_e_check_exec(simp_cmd->argv[0])) == OK)
 		return (sh_e_run_exec(sh, simp_cmd));
+	simp_cmd->state = ret;
 	return (ret);
 }
 
@@ -46,6 +47,8 @@ int		sh_e_simp_cmd_wait(t_sh *sh, void *gr, int op, int *state)
 	if (!sh || !gr)
 		return (-1);
 	simp_cmd = (t_simp_cmd*)gr;
+	if (simp_cmd->pid < 0)
+		return (simp_cmd->state);
 	if (waitpid(simp_cmd->pid, &wstat, op) > -1)
 		sh_termconfig_init(&sh->term);
 	if (WIFEXITED(wstat) || WIFSIGNALED(wstat))

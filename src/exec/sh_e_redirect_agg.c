@@ -24,18 +24,31 @@ static void		aggregate(int ion, int fdf, int std)
 		ft_dup2(fdf, STDERR_FILENO, 1);
 }
 
+static int		sh_e_check_fildes(t_redir *redir, int *fdf)
+{
+	DF0;
+	if (!redir)
+		return (KO);
+	if (redir->ion > 2)
+		FT_INST_RET(KO, ft_printf("ftsh: redir: Bad fildes: %d\n", redir->ion));
+	if (!ft_strcmp("-", redir->word))
+		*fdf = -1;
+	else if (ft_isdigit(*redir->word) && !redir->word[1])
+	{
+		if ((*fdf = *redir->word - '0') > 2)
+			FT_INST_RET(KO, ft_printf("ftsh: redir: Bad fildes: %d\n", *fdf));
+	}
+	return (OK);
+}
+
 int				sh_e_redirect_ga(t_redir *redir)
 {
 	int fdo;
 	int fdf;
 
 	DF0;
-	if (!redir)
+	if (sh_e_check_fildes(redir, &fdf) == KO)
 		return (KO);
-	if (!ft_strcmp("-", redir->word))
-		fdf = -1;
-	else if (ft_isdigit(*redir->word) && !redir->word[1])
-		fdf = *redir->word - '0';
 	else
 	{
 		if (!access(redir->word, F_OK) && access(redir->word, W_OK))
@@ -56,12 +69,8 @@ int				sh_e_redirect_la(t_redir *redir)
 	int fdf;
 
 	DF0;
-	if (!redir)
+	if (sh_e_check_fildes(redir, &fdf) == KO)
 		return (KO);
-	if (!ft_strcmp("-", redir->word))
-		fdf = -1;
-	else if (ft_isdigit(*redir->word) && !redir->word[1])
-		fdf = *redir->word - '0';
 	else
 	{
 		if (access(redir->word, F_OK) || access(redir->word, R_OK))
