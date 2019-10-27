@@ -23,9 +23,6 @@ static int	sh_e_run_process_reset(t_sh *sh)
 	pid = getpid();
 	if (sh->jc->cjob->pgid == 0)
 		sh->jc->cjob->pgid = pid;
-//	setpgid(pid, sh->jc->cjob->pgid);
-	if (!sh->jc->cjob->bg)
-		tcsetpgrp(sh->term_std, sh->jc->cjob->pgid);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
@@ -69,13 +66,11 @@ int			sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 	}
 	if (BIT_IS(sh->mode, SH_MODE_SCMD) && !close(sh->sub_pipe[1]))
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
-	//sleep(2);
 	simp_cmd->pid = pid;
 	if (sh->inter)
 	{
 		if (sh->jc->cjob->pgid == 0)
 			sh->jc->cjob->pgid = pid;
-//		setpgid(pid, sh->jc->cjob->pgid);
 	}
 	sh_jc_add_proc(sh->jc, pid);
 	return (0);

@@ -25,7 +25,6 @@ void			sh_jcp_lstput(t_list *plist)
 {
 	if (!plist)
 		return ;
-	//ft_putchar('\n');
 	sh_jcp_print((t_process*)plist->content);
 }
 

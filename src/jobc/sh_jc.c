@@ -59,7 +59,6 @@ int 			sh_jc_add(t_jcon *jc, int bg)
 	else
 		jc->cind++;
 	new_job = sh_jc_new_job(jc->cind, bg);
-	ft_printf("--- > job added \n");
 	jlast = ft_lstnew(new_job, sizeof(t_job));
 	ft_lst_addlast(&(jc->jobs), jlast);
 	jc->cjob = (t_job*)jlast->content;
@@ -73,8 +72,6 @@ int 			sh_jc_wait(t_jcon *jc, t_job *job)
 	pid_t pid;
 
 	DF0;
-//	pid = waitpid (WAIT_ANY, &wstatus, WUNTRACED);
-//	ft_printf("----> pid got from wait: %d\n", pid);
 	pid = waitpid(WAIT_ANY, &wstatus, WUNTRACED); // TODO: WAIT_ANY
 	ft_printf("----> pid got from wait: %d\n", pid);
 	while (!sh_jc_mark_status(jc, pid, wstatus)

@@ -20,7 +20,6 @@ int 			sh_jc_notify(t_jcon *jc)
 	t_job	*cjob;
 
 	DF0;
-//	sh_jc_wait(jc, jc->cjob); // TODO: del
 	sh_jc_update_status(jc);
 	jlist = jc->jobs;
 	while (jlist)
@@ -32,8 +31,6 @@ int 			sh_jc_notify(t_jcon *jc)
 			if (cjob->bg)
 				sh_jc_inform(cjob, 2);
 			ft_lst_freeif(&jc->jobs, (int(*)(void*))&sh_jc_is_done, &sh_jc_free_job);
-		//	if (jnext && jnext->content)
-		//		((t_job*)jnext->content)->ind--;
 		}
 		else if (sh_jc_is_stop(cjob) && !cjob->notified)
 		{
