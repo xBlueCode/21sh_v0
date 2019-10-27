@@ -1,4 +1,4 @@
-NAME = 21sh
+NAME = 42sh
 
 TEST_LOG = test_log
 

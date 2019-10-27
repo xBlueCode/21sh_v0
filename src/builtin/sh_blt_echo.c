@@ -19,7 +19,7 @@ static int	sh_blt_echo_check_std(void)
 	if (read(STDOUT_FILENO, &c, 0) < 0)
 	{
 		ft_dprintf(2, "ftsh: echo: Impossible to write to stdout !\n");
-		return (KO);
+		return (OK);
 	}
 	return (OK);
 }

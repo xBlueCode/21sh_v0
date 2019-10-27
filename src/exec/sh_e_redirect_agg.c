@@ -47,9 +47,10 @@ int				sh_e_redirect_ga(t_redir *redir)
 	int fdf;
 
 	DF0;
+	fdf = -2;
 	if (sh_e_check_fildes(redir, &fdf) == KO)
 		return (KO);
-	else
+	else if (fdf == -2)
 	{
 		if (!access(redir->word, F_OK) && access(redir->word, W_OK))
 			return (KO);
@@ -69,9 +70,10 @@ int				sh_e_redirect_la(t_redir *redir)
 	int fdf;
 
 	DF0;
+	fdf = -2;
 	if (sh_e_check_fildes(redir, &fdf) == KO)
 		return (KO);
-	else
+	else if (fdf == -2)
 	{
 		if (access(redir->word, F_OK) || access(redir->word, R_OK))
 			return (KO);
