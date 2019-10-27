@@ -39,7 +39,7 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 	t_list	*cmd_lst;
 	int		fifo[2];
 	int		ret;
-	int		state;
+//	int		state;
 
 	DF0;
 	if ((ret = 0) || !sh || !gr)
@@ -51,7 +51,7 @@ int			sh_e_pipe(t_sh *sh, void *gr)
 		ret = sh_e_pipe_cmd(sh, cmd_lst, fifo);
 		cmd_lst = cmd_lst->next;
 	}
-	ret = sh_e_pipe_wait(sh, gr, WUNTRACED, &state);
+	//ret = sh_e_pipe_wait(sh, gr, WUNTRACED, &state);
 	return (ret);
 }
 

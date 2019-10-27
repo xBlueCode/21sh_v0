@@ -56,8 +56,8 @@ void			*sh_g_com_cmd(t_btree *ast)
 			SHG_LSTADD_FREE(com_cmd, lst_and_or, and_or);
 		if (list->data)
 			ft_dstrins_ch(com_cmd->sep, -1, SHG_AST_TOK(list)->t);
-		else
-			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);
+//		else
+//			ft_dstrins_ch(com_cmd->sep, -1, TSFAKE);
 		list = list->right;
 	}
 	if (!com_cmd->lst_and_or)

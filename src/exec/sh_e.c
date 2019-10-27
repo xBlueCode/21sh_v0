@@ -38,6 +38,7 @@ int		sh_e_com_cmd(t_sh *sh, void *gr)
 	t_com_cmd	*com_cmd;
 	t_sh		*nsh;
 	int			ret;
+	//int			jbg;
 
 	DF0;
 	if ((ret = 0) || !sh || !gr)
@@ -47,8 +48,18 @@ int		sh_e_com_cmd(t_sh *sh, void *gr)
 	nsh = (com_cmd->gr == SH_GR_SUBSH) ? sh_sh_clone(sh, SH_MODE_SSH) : NULL;
 	while (and_or_lst)
 	{
-		ft_dstrdel_n(com_cmd->sep, -1, 1);
+		if (!nsh)
+			sh_jc_add(sh->jc, ft_dstrget_ch(com_cmd->sep, 0) == TSA);
+		//ft_printf("separtors: %s\n", com_cmd->sep->str);
+		ft_dstrdel_n(com_cmd->sep, 0, 1);
 		ret = sh_e_and_or(nsh ? nsh : sh, and_or_lst->content);
+		sh_jcj_print(sh->jc->cjob);
+		if (!sh->inter)
+			sh_jc_wait(sh->jc, sh->jc->cjob);
+		else if (sh->jc->cjob->bg)
+			sh_jc_put_in_back(sh, 0);
+		else
+			sh_jc_put_in_forg(sh, 0);
 		and_or_lst = and_or_lst->next;
 	}
 	sh_sh_free(&nsh);

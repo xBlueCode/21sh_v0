@@ -97,7 +97,8 @@ int		sh_term_run(char **envp)
 
 	if (sh_valid_stdin() == KO)
 		return (KO);
-	sh_sh_init(&g_sh, envp, SH_MODE_TER);
+	if (sh_sh_init(&g_sh, envp, SH_MODE_TER) != OK)
+		exit(1);
 	rl_hist_init(RL_HIS_FILENAME);
 	rl_hist_upload();
 	sh_als_init();

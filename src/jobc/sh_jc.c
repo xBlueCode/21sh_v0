@@ -61,9 +61,9 @@ int 			sh_jc_add(t_jcon *jc, int bg)
 	new_job = sh_jc_new_job(jc->cind, bg);
 	ft_printf("--- > job added \n");
 	jlast = ft_lstnew(new_job, sizeof(t_job));
-	//ft_lst_addlast(&(jc->jobs), jlast);
-	ft_lstadd(&(jc->jobs), jlast);
+	ft_lst_addlast(&(jc->jobs), jlast);
 	jc->cjob = (t_job*)jlast->content;
+	FT_MEMDEL(new_job);
 	return (0);
 }
 

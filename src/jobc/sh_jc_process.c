@@ -25,6 +25,20 @@ void			sh_jcp_lstput(t_list *plist)
 {
 	if (!plist)
 		return ;
-	ft_putchar('\n');
+	//ft_putchar('\n');
 	sh_jcp_print((t_process*)plist->content);
+}
+
+int 			sh_jc_add_proc(t_jcon *jc, pid_t pid)
+{
+	t_process	proc;
+
+	if (!jc)
+		return (KO);
+	proc.pid = pid;
+	proc.done = 0;
+	proc.stopped = 0;
+	proc.status = 0;
+	ft_lst_addlast(&(jc->cjob->process), ft_lstnew(&proc, sizeof(t_process*)));
+	return (OK);
 }

@@ -20,10 +20,17 @@ t_sh		*sh_sh(void)
 	return (g_sh);
 }
 
+
 static int	sh_sh_init_inter(t_sh *sh)
 {
 	while (tcgetpgrp((sh)->term_std) != ((sh)->pgid = getpgrp()))
 		kill(-(sh)->pgid, SIGTTIN);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);
 	(sh)->pgid = getpid();
 	if (setpgid((sh)->pgid, (sh)->pgid) < 0)
 	{
@@ -34,16 +41,19 @@ static int	sh_sh_init_inter(t_sh *sh)
 	return (0);
 }
 
+
 int			sh_sh_init(t_sh **sh, char **envp, int mode)
 {
 	if (!sh)
 		return (KO);
 	DF0;
 	*sh = ft_memalloc(sizeof(t_sh));
+	//if (sh_termconfig_init(&(*sh)->term) != OK)
+	//	return (KO);
 	(*sh)->mode = mode;
-	(*sh)->jc = NULL;
-	(*sh)->pgid = -1;
-	(*sh)->term_std = STDIN_FILENO;
+	(*sh)->jc = sh_jc_new();
+	(*sh)->pgid = 0;
+	(*sh)->term_std = STDERR_FILENO;
 	(*sh)->inter = isatty((*sh)->term_std);
 	sh_var_start(&(*sh)->var, envp);
 	sh_bin_init(&(*sh)->bin_ht, &(*sh)->bin_nl);

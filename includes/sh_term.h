@@ -20,6 +20,9 @@ typedef struct	s_term
 	int					winw;
 	int					winh;
 	int					prompt_len;
+	int 				stdi;
+	int 				pgid;
+	int					inter;
 	struct termios		tconfig_def;
 }				t_term;
 

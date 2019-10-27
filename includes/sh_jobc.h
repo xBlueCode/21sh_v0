@@ -29,6 +29,8 @@ int				sh_jc_mark_as_running(t_job *job);
 
 int 			sh_jc_add(t_jcon *jc, int bg);
 
+int 			sh_jc_add_proc(t_jcon *jc, pid_t pid);
+
 int 			sh_jc_init(t_jcon *jc);
 t_jcon 			*sh_jc_new(void);
 
@@ -111,5 +113,6 @@ int				sh_jc_continue(t_sh *sh, t_job *job);
 
 void			sh_jcp_print(t_process *p);
 void			sh_jcp_lstput(t_list *plist);
+int				sh_jcj_print(t_job *job);
 
 #endif
