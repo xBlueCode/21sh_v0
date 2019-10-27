@@ -1,8 +1,0 @@
-for x in A B C
-do XXX=Y'YYY'Y echo $x > filefor 123> fileion | toPIPE ; (this is a subshell)
-done
-
-for for in for for
-do
-echo for for > for
-done

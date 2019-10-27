@@ -1,4 +1,0 @@
-while true
-do
-	echo while > while
-done

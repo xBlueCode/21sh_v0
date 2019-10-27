@@ -1,1 +1,0 @@
-! echo hello || ls root > rootfile  ; (cd subhsell world > out_sfile < in_sfile ) || {doo something in cbg < in_cbgfile > out_cbfile }
