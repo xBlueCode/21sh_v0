@@ -15,11 +15,10 @@
 void			sh_jcp_print(t_process *p)
 {
 	if (!p)
-		return;
+		return ;
 	ft_printf(C_YLW"-> process: pid=%d | stat=%d | d(%d) s(%d)\n"T_END,
 			p->pid, p->status, p->done, p->stopped);
 }
-
 
 void			sh_jcp_lstput(t_list *plist)
 {
@@ -28,7 +27,7 @@ void			sh_jcp_lstput(t_list *plist)
 	sh_jcp_print((t_process*)plist->content);
 }
 
-int 			sh_jc_add_proc(t_jcon *jc, pid_t pid)
+int				sh_jc_add_proc(t_jcon *jc, pid_t pid)
 {
 	t_process	proc;
 
@@ -38,6 +37,8 @@ int 			sh_jc_add_proc(t_jcon *jc, pid_t pid)
 	proc.done = 0;
 	proc.stopped = 0;
 	proc.status = 0;
+	if (jc->cjob->pgid == 0)
+		jc->cjob->pgid = pid;
 	ft_lst_addlast(&(jc->cjob->process), ft_lstnew(&proc, sizeof(t_process*)));
 	return (OK);
 }

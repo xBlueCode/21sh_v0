@@ -12,7 +12,7 @@
 
 #include "ftsh.h"
 
-static int sh_blt_echo_check_std(void)
+static int	sh_blt_echo_check_std(void)
 {
 	int c;
 

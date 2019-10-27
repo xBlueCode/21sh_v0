@@ -53,5 +53,6 @@
 
 int			sh_script_run(t_sh *sh, char *script);
 int			sh_valid_stdin(void);
+int			sh_term_run_prep(char **envp);
 
 #endif

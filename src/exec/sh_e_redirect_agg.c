@@ -20,7 +20,7 @@ static void		aggregate(int ion, int fdf, int std)
 		close(std);
 	else
 		ft_dup2(fdf, std, 1);
-	if (ion < 0)
+	if (ion < 0 && std != STDIN_FILENO)
 		ft_dup2(fdf, STDERR_FILENO, 1);
 }
 

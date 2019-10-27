@@ -43,39 +43,12 @@ static int	termconfig_attr(t_term *term)
 	return (0);
 }
 
-/*
-static int	sh_termconfig_jobc(t_term *term)
-{
-	term->stdi = STDIN_FILENO;
-	if (!(term->inter = isatty(term->stdi)))
-		return (KO);
-	while (tcgetpgrp(term->stdi) != (term->pgid = getpgrp()))
-		kill(-term->pgid, SIGTTIN);
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGCHLD, SIG_IGN);
-	term->pgid = getpid();
-	if (setpgid(term->pgid, term->pgid) < 0)
-	{
-		ft_dprintf(2, "Unable to put the shell in its own process group !");
-		exit(1);
-	}
-	tcsetpgrp(term->stdi, term->pgid);
-	return (OK);
-}
-*/
-
 int			sh_termconfig_init(t_term *term)
 {
 	char			*tname;
 	char			buff[2048];
 	int				r;
 
-	//if (sh_termconfig_jobc(term) != OK)
-	//	return (KO);
 	if (!(tname = getenv("TER")))
 	{
 		if (!(tname = TER_DEF) || !isatty(STDIN_FILENO))

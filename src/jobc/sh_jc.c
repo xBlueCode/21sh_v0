@@ -12,7 +12,7 @@
 
 #include "ftsh.h"
 
-t_jcon 			*sh_jc_new(void)
+t_jcon			*sh_jc_new(void)
 {
 	t_jcon *jc;
 
@@ -23,7 +23,7 @@ t_jcon 			*sh_jc_new(void)
 	return (jc);
 }
 
-t_job 			*sh_jc_new_job(int ind, int bg)
+t_job			*sh_jc_new_job(int ind, int bg)
 {
 	t_job *job;
 
@@ -40,13 +40,13 @@ t_job 			*sh_jc_new_job(int ind, int bg)
 	return (job);
 }
 
-void			sh_jc_free_job(void **pjob) // TODO: intern free
+void			sh_jc_free_job(void **pjob)
 {
 	DF0;
 	ft_memdel(pjob);
 }
 
-int 			sh_jc_add(t_jcon *jc, int bg)
+int				sh_jc_add(t_jcon *jc, int bg)
 {
 	t_job	*new_job;
 	t_list	*jlast;
@@ -64,19 +64,4 @@ int 			sh_jc_add(t_jcon *jc, int bg)
 	jc->cjob = (t_job*)jlast->content;
 	FT_MEMDEL(new_job);
 	return (0);
-}
-
-int 			sh_jc_wait(t_jcon *jc, t_job *job)
-{
-	int wstatus;
-	pid_t pid;
-
-	DF0;
-	pid = waitpid(WAIT_ANY, &wstatus, WUNTRACED); // TODO: WAIT_ANY
-	ft_printf("----> pid got from wait: %d\n", pid);
-	while (!sh_jc_mark_status(jc, pid, wstatus)
-		   && !sh_jc_is_stop(job)
-		   && !sh_jc_is_done(job))
-		pid = waitpid (WAIT_ANY, &wstatus, WUNTRACED);
-	return (OK);
 }

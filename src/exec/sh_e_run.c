@@ -68,11 +68,7 @@ int			sh_e_run_exec(t_sh *sh, t_simp_cmd *simp_cmd)
 		ft_read_fd_in(sh->sub_pipe[0], sh->sub_out);
 	simp_cmd->pid = pid;
 	if (sh->inter)
-	{
-		if (sh->jc->cjob->pgid == 0)
-			sh->jc->cjob->pgid = pid;
-	}
-	sh_jc_add_proc(sh->jc, pid);
+		sh_jc_add_proc(sh->jc, pid);
 	return (0);
 }
 

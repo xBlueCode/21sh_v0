@@ -20,7 +20,6 @@ t_sh		*sh_sh(void)
 	return (g_sh);
 }
 
-
 static int	sh_sh_init_inter(t_sh *sh)
 {
 	while (tcgetpgrp((sh)->term_std) != ((sh)->pgid = getpgrp()))
@@ -34,7 +33,6 @@ static int	sh_sh_init_inter(t_sh *sh)
 	sh_termconfig_init(&(sh)->term);
 	return (0);
 }
-
 
 int			sh_sh_init(t_sh **sh, char **envp, int mode)
 {

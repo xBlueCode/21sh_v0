@@ -27,7 +27,7 @@ int				rl_hist_req_up(int c)
 	return (rl_hist_req_cur(--g_his.cur));
 }
 
-int			rl_hist_req_do(int c)
+int				rl_hist_req_do(int c)
 {
 	(void)c;
 	if (g_his.cur >= g_his.ent->len || !g_his.ent->len)
