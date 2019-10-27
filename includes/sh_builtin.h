@@ -19,6 +19,7 @@ int			sh_e_run_built(t_sh *sh, t_simp_cmd *simp_cmd);
 
 typedef int	(*t_sh_blt)(t_sh *sh, char **argv, char **envp);
 
+int			sh_blt_history(t_sh *sh, char **argv, char **envp);
 int			sh_blt_echo(t_sh *sh, char **argv, char **envp);
 int			sh_blt_cd(t_sh *sh, char **argv, char **envp);
 int			sh_blt_env(t_sh *sh, char **argv, char **envp);

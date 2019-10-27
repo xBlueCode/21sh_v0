@@ -20,6 +20,7 @@ char		*g_bnames[] = {
 	"setenv",
 	"unsetenv",
 	"alias",
+	"history",
 	"exit",
 	NULL
 };
@@ -31,6 +32,7 @@ t_sh_blt	g_blts[] = {
 	&sh_blt_setenv,
 	&sh_blt_unsetenv,
 	&sh_blt_alias,
+	&sh_blt_history,
 	&sh_blt_exit,
 	NULL
 };
