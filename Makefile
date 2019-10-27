@@ -72,7 +72,7 @@ BUILTIN := sh_blt_echo.c sh_blt_cd.c sh_blt_env.c sh_blt_alias.c sh_blt_exit.c
 EXPAN := sh_xp.c sh_xp_scmd.c sh_xp_brace.c sh_xp_param.c sh_xp_q.c \
 	sh_xp_tilde.c sh_xp_split.c sh_xp_glob.c
 
-JOBC := sh_jc.c sh_jc_state.c sh_jc_put.c sh_jc_notify.c sh_jc_process.c \
+JOBC := sh_jc.c sh_jc_process.c \
     sh_jc_print.c
 
 SH := sh_sh.c
